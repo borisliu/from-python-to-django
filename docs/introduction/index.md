@@ -15,7 +15,7 @@ Python的开发环境是比较简单的，到[http://python.org/getit/]()去下�
 
 如果出现下面的提示，那么说明你已经安装成功了。
 
-![](https://raw.github.com/borisliu/from-python-to-django/master/docs/introduction/installpython.png)
+![](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/introduction/installpython.png)
 
 Python环境搭好之后首先要做的就是这个：
 
@@ -28,7 +28,7 @@ Python环境搭好之后首先要做的就是这个：
 ## 安装setuptools
 
 setuptools绝对是个好东西，它可以自动的安装模块，只需要你提供给它一个模块名字就可以了，并且自动帮你解决模块的依赖问题。
-你可以到[the Python Package Index](https://pypi.python.org/pypi)下载，如果你对E文看得不爽，可以直接点击[下载setuptools-2.0.2.tar.gz](https://raw.github.com/borisliu/from-python-to-django/master/docs/introduction/setuptools-2.0.2.tar.gz)，之后解压缩，在命令行窗口进入到解压缩之后的目录中，运行以下命令：
+你可以到[the Python Package Index](https://pypi.python.org/pypi)下载，如果你对E文看得不爽，可以直接点击[下载setuptools-2.0.2.tar.gz](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/introduction/setuptools-2.0.2.tar.gz)，之后解压缩，在命令行窗口进入到解压缩之后的目录中，运行以下命令：
 
 ```
     c:\python33\python setup.py install
@@ -38,7 +38,7 @@ setuptools绝对是个好东西，它可以自动的安装模块，只需要你�
 
 ## 安装pip
 
-pip可以很方便的安装、卸载和管理Python的包。直接[下载pip-1.5.tar.gz](https://raw.github.com/borisliu/from-python-to-django/master/docs/introduction/setuptools-2.0.2.tar.gz)，解压缩之后，在命令行窗口进入解压缩之后的目录中，运行以下命令：
+pip可以很方便的安装、卸载和管理Python的包。直接[下载pip-1.5.tar.gz](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/introduction/setuptools-2.0.2.tar.gz)，解压缩之后，在命令行窗口进入解压缩之后的目录中，运行以下命令：
 
 ```
     c:\python33\python setup.py install
@@ -49,7 +49,7 @@ pip可以很方便的安装、卸载和管理Python的包。直接[下载pip-1.5
 ## 安装virtualenv
 
 virtualenv可以建立多个独立的虚拟环境，各个环境中拥有自己的python解释器和各自的package包，互不影响。
-直接[下载virtualenv-1.11.tar.gz](https://raw.github.com/borisliu/from-python-to-django/master/docs/introduction/virtualenv-1.11.tar.gz)，解压缩之后，在命令行窗口进入解压缩之后的目录中，运行以下命令：
+直接[下载virtualenv-1.11.tar.gz](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/introduction/virtualenv-1.11.tar.gz)，解压缩之后，在命令行窗口进入解压缩之后的目录中，运行以下命令：
 
 ```
     c:\python33\python setup.py install
@@ -79,7 +79,7 @@ pip和virtualenv可以很好的协同工作，同时使用这两个工具非常�
 
 这个时候你应该可以看到提示符前面增加了“(django)”的字样，如下所示：
 
-![](https://raw.github.com/borisliu/from-python-to-django/master/docs/introduction/virtualenv.png)
+![](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/introduction/virtualenv.png)
 
 这个时候你的virtualenv就已经激活了，你再输入命令：
 

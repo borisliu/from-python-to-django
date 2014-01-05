@@ -13,13 +13,13 @@
 
 ## 在线浏览
 
-请到viewdocs在线浏览[《从Python到Django CMS入门教程》](http://borisliu.viewdocs.io/from-python-to-django-cms/) 。
+请到viewdocs在线浏览
+
+### [《从Python到Django CMS入门教程》](http://borisliu.viewdocs.io/from-python-to-django-cms/) 
 
 本文托管在[GitHub](https://github.com/borisliu/from-python-to-django-cms)，如果有问题请在线[提交](https://github.com/borisliu/from-python-to-django-cms/issues)。
 
-目前尚无离线下载的文档。
-
-## 参考资料
+## 附：参考资料
 
 本文介绍了从Python到Django再到Django-CMS的学习过程，范例采用最新的Python3、Django1.6、Django-CMS3，主要参考了以下这三个文档，对于中文的文档做了重新整理，对于英文的文档做了翻译的工作。
 
