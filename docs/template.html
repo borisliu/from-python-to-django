@@ -1,122 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>{{NAME}} :: viewdocs.io</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
     <meta charset="utf-8">
-
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.0.2/yeti/bootstrap.min.css">
-    <link rel="stylesheet" href="http://fgrehm.github.io/viewdocs-yeti/stylesheets/pygment_trac.css">
-
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        /* The html and body elements cannot have any padding or margin. */
-      }
-
-      /* Wrapper for page content to push down footer */
-      #wrap {
-        min-height: 100%;
-        height: auto;
-        /* Negative indent footer by its height */
-        margin: 0 auto -60px;
-        /* Pad bottom by footer height */
-        padding: 0 0 60px;
-      }
-
-      /* Set the fixed height of the footer here */
-      footer {
-        height: 60px;
-        background-color: #f5f5f5;
-        padding-top: 9px;
-      }
-
-      footer p {
-        clear: left;
-        margin-bottom: 0;
-      }
-
-      #wrap > .container {
-        padding-top: 60px;
-      }
-      .navbar-nav>li>iframe {
-        margin-top: 12px;
-      }
-    </style>
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div id="wrap">
-      <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-          <div class="navbar-header">
-            <a href="/{{NAME}}" class="navbar-brand">{{NAME}}</a>
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
-          <div class="navbar-collapse collapse" id="navbar-main">
-            <ul class="nav navbar-nav">
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Main Menu <span class="caret"></span></a>
-                <ul class="dropdown-menu" aria-labelledby="themes">
-                  <li><a tabindex="-1" href="/{{NAME}}/introduction/index">Introduction</a></li>
-                  <li class="divider"></li>
-                  <li><a tabindex="-1" href="/{{NAME}}/a-byte-of-python3/index">A byte of python</a></li>
-                  <li><a tabindex="-1" href="/{{NAME}}/django-step-by-step/index">Django step by step</a></li>
-                  <li><a tabindex="-1" href="/{{NAME}}/django-cms/index">Django CMS</a></li>
-                </ul>
-              </li>
-              <li>
-              <a href="https://github.com/{{USER}}/{{NAME}}">View on GitHub</a>
-              </li>
-              <li>
-                <a href="http://viewdocs.io" target="_blank">Viewdocs</a>
-              </li>
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Download <span class="caret"></span></a>
-                <ul class="dropdown-menu" aria-labelledby="download">
-                  <li><a tabindex="-1" href="https://github.com/{{USER}}/{{NAME}}/zipball/master">Zip File</a></li>
-                  <li><a tabindex="-1" href="https://github.com/{{USER}}/{{NAME}}/tarball/master">TAR Ball</a></li>
-                </ul>
-              </li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right visible-md visible-lg">
-              <li><iframe src="http://ghbtns.com/github-btn.html?user={{USER}}&repo={{NAME}}&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe></li>
-              <li><iframe src="http://ghbtns.com/github-btn.html?user={{USER}}&repo={{NAME}}&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe></li>
-              <li><iframe src="http://ghbtns.com/github-btn.html?user={{USER}}&type=follow&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="165" height="20"></iframe></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="container">
-        {{CONTENT}}
-      </div>
+    <title>{{NAME}} :: viewdocs.io</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="http://{{USER}}.github.io/{{NAME}}/docs/assets/css/demo.css" rel="stylesheet"/>
+</head>
+<body>
+    <div ng-controller="NavbarCtrl">
+        <navbar heading="Angular Pouch Model" name={{NAME}} user={{USER}} ></navbar>
     </div>
+    <div class="container"> 
+        <!-- Docs nav
+         ================================================== -->
+        <div class="row main-row" ng-controller="SidebarnavCtrl">
 
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <p>Hosted on <a href="http://viewdocs.io">http://viewdocs.io</a>.</p>
-            <p>Theme based on <a href="http://bootswatch.com/yeti/">Yeti</a> built by <a href="http://thomaspark.me">Thomas Park</a> and adapted to Viewdocs by <a href="http://fabiorehm.com/">Fábio Rehm</a>.</p>
-          </div>
+            <div class="col-md-3 sidebar list-group">
+                <div ng-repeat="item in items" class="list-group-item">
+                    <a scroll-to="{{item.id}}">{{item.text}}</a>
+                </div>
+            </div>
+
+            <!-- body block -->
+            <div class="col-md-9 main-content">
+                <!-- Main section
+                ================================================== -->
+                <section id="global" class="containerblock">
+                  <div sidebar-nav class="section">
+                      {{CONTENT}}
+                  </div>
+                </section>
+            </div>
         </div>
+    </div>
+    <!-- ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-route.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.7.0/ui-bootstrap-tpls.js"></script>
+    <script src="http://{{USER}}.github.io/{{NAME}}/docs/assets/js/app.js"></script>
+    
+    <script type="text/ng-template" id="navbar.html">
+        <div xmlns="http://www.w3.org/1999/html">
+            <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/{{NAME}}">{{heading}}</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar-main">
+                        <ul class="nav navbar-nav">
+                            <li ng-repeat="item in items" ng-class="{active: item.selected}">
+                                <a href="/{{NAME}}/{{item.link}}">{{item.title}}</a>
+                            </li>
+                        </ul>
+                                                
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                            <a href="http://github.com/{{USER}}/{{NAME}}" target="_blank">On Github</a>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
       </div>
-    </footer>
-
-    <script src="//oss.maxcdn.com/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-  </body>
+      
+  </script>
+</body>
 </html>
