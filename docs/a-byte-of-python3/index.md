@@ -18,7 +18,7 @@ Python3简明教程
 *   官方网站
 *   要思考的一些事情
 
-### 简介
+### [简介](a-byte-of-python3/introduction)
 
 *   Python的特点
 *   Python 2 与 3
