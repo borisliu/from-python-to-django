@@ -176,4 +176,6 @@ A Byte of Python
     -- C. W. Wendte
 ```
 
-继续阅读[简介](a-byte-of-python3/introduction)
+--------------------------------------------------
+
+### 继续阅读[简介](a-byte-of-python3/introduction)
