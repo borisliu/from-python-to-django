@@ -28,10 +28,10 @@ Python可能是为数不多的既简单又强大的几个编程语言之一。�
 
 根据自己的情况选择从哪里开始学习，如果你已经有了一定的基础，你可以选择跳过某些章节，对于大多数初学者来讲，学习的路径如下：
 
-### 1. [搭建Python开发环境](introduction/index)。
-### 2. [简明Python教程](a-byte-of-python3/index)。
-### 3. [Django step by step](django-step-by-step/index)。
-### 4. [Django-CMS官方文档中文翻译](django-cms/index)。
+### 1. [搭建Python开发环境](introduction/index)
+### 2. [简明Python教程](a-byte-of-python3/index)
+### 3. [Django step by step](django-step-by-step/index)
+### 4. [Django-CMS官方文档中文翻译](django-cms/index)
 
 本文托管在[GitHub](https://github.com/borisliu/from-python-to-django)，如果有问题请在线[提交](https://github.com/borisliu/from-python-to-django/issues)。
 
