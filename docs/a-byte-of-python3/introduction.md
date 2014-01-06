@@ -87,3 +87,7 @@ Python的确是一个激动人心的功能强大的语言。Python那种性能�
 > Bruce Eckel，是著名的《Thinking in Java》和《Thinking in C++》的作者。他说，没有什么语言能比Python更能令他高效。他说，Python或许是唯一让程序员工作更简单的一个语言。请看完整的采访。
 
 > Peter Norvig，是著名的Lisp的作者，Google搜索质量主管（感谢Guido van Rossum指出）。他说，Python一直是Google的主要部分。你可以通过查看Google Jobs验证这句话。这个页面上显示出，Python知识是招聘软件工程师的要求之一。
+
+--------------------------------------------------
+
+### 继续阅读[安装](a-byte-of-python3/install)
