@@ -39,7 +39,13 @@
 
 要打开Windows终端，点击开始按钮，点击“运行”。在对话框输入cmd，按下回车键。
 
-然后输入python3 -V，确保没有错误。
+然后输入
+
+```
+python3 -V
+```
+
+确保没有错误。
 
 ## 在Mac OS X上安装
 
@@ -47,10 +53,16 @@
 
 安装Homebrew时运行：
 
+```
 ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
+```
+
 然后安装Python 3 使用
 
+```
 brew install python3
+```
+
 现在，运行python3 -V，确保没有错误。
 
 ## 在Linux上安装
