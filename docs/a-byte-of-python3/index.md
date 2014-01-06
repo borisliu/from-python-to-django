@@ -24,14 +24,14 @@ Python3简明教程
 *   Python 2 与 3
 *   程序员说了些什么
 
-### 安装
+### [安装]（a-byte-of-python3/install)
 
 *   在Windows上安装
 *   在Mac OS X上安装
 *   在Linux上安装
 *   总结
 
-### 第一步
+### [第一步](a-byte-of-python3/firststep)
 
 *   使用解释器提示符
 *   选择一个编辑器
@@ -62,7 +62,7 @@ Python3简明教程
 *   continue语句
 *   小结
 
-### 函数
+### [函数](a-byte-of-python3/function)
 
 *   函数的参数
 *   局部变量
@@ -75,7 +75,7 @@ Python3简明教程
 *   文档字符串
 *   小结
 
-### 模块
+### [模块](a-byte-of-python3/module)
 
 *   字节编译的.pyc文件
 *   from ... import语句
@@ -111,7 +111,7 @@ Python3简明教程
 *   拾取
 *   小结
 
-### 异常处理
+### [异常处理](a-byte-of-python3/exception)
 
 *   错误
 *   异常
@@ -121,14 +121,14 @@ Python3简明教程
 *   with语句
 *   小结
 
-### 标准库
+### [标准库](a-byte-of-python3/stdlib)
 
 *   sys（系统）模块
 *   logging（日志）模块
 *   Week（周）系列模块
 *   小结
 
-### 更多
+### [更多](a-byte-of-python3/more)
 
 *   Passing tuples around
 *   特别的方法
@@ -153,16 +153,16 @@ Python3简明教程
 *   小结
 
 
-### 免费/自由和开放源码软件
+### [免费/自由和开放源码软件](a-byte-of-python3/oss)
 
 *   本书的诞生
 *   初长成
 *   现在
 *   关于作者
 
-### 修订历史
+### [修订历史](a-byte-of-python3/history)
 
-### 翻译
+### [翻译](a-byte-of-python3/translation)
 
 *   阿拉伯语
 *   巴西葡萄牙语
