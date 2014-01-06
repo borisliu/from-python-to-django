@@ -24,7 +24,7 @@ Python3简明教程
 *   Python 2 与 3
 *   程序员说了些什么
 
-### [安装]（a-byte-of-python3/install)
+### [安装](a-byte-of-python3/install)
 
 *   在Windows上安装
 *   在Mac OS X上安装
