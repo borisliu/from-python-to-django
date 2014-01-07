@@ -5,7 +5,7 @@
 
 随着学习，我们的例子也开始复杂了，下一步我想实现一个简单的 web 加法器。界面会是这样：
 
-![加法器](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/django-step-by-step/tut01_01.jpg)
+![加法器](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/django-step-by-step/tut02_01.jpg)
 
 很简单。通过本节的学习我们可以学习到：
 
@@ -84,3 +84,7 @@ http://localhost:8000/add
 Django 提供了 URL Dispatch 文档，专门讲解有关 url 映射的东西。其中有一部分是关于 url 的正则表达式解析的。原本我认为象 Karrigell 中一样，定义在 form 中的变量会自动映射为方法的参数，但是我错了。方法中的参数是从 url 中通过正则表达式解析出来的，或者是在 url_conf(即 urls.py 文件)中指定的。因此它与 Karrigell 一点也不一样。因此，如果你想从 POST 或 GET 数据中得到值，那么象我一样去做好了。使用 request.POST 或 request.GET 或还有一个可以“统吃”的方法 request.REQUEST ，它们是一个字典数据，使用起来也算方便。
 
 从这里我更想了解方法中参数的使用，当然这个例子并没有，有机会再使用吧。关于正则表达式解析参数在 blog 和 rss 中用得是非常多的。
+
+--------------------------------------------------
+
+### 继续阅读[第三讲](django-step-by-step/chapter3)
