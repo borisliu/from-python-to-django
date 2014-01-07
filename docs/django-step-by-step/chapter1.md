@@ -14,24 +14,28 @@ Django 是新近出来的 Rails 方式的 web 开发框架。Django 从我个人
 Django 是一个框架，它有特殊的配置要求，因此一般不需要手工创建目录之类的工作， Django 提供了 django-admin.py 可以做这件事。
 
 ```
-django-admin.py startproject newtest
+python \virtualenv\django\Scripts\django-admin.py startproject newtest
 ```
 
-这样就在当前目录下创建了一个 newtest 目录，进去入可以看到有四个文件：
+这样就在当前目录下创建了一个 newtest 目录，里面有一个文件和一个目录：
 
 > 这个 newtest 将是我们以后工作的目录，许多讲解都是基于这个目录的。
-
-> __init__.py
-> 表示这是一个 Python 的包
 
 > manage.py
 > 提供简单化的 django-admin.py 命令，特别是可以自动进行 DJANGO_SETTINGS_MODULES 和 PYTHONPATH 的处理，而没有这个命令，处理上面环境变量是件麻烦的事情
 
-> settings.py
+> newtest工程下面的newtest目录是你项目的实际上的Python包目录。目录名就是Python包的名字，如果你需要引入该目录下面的文件，就需要使用这个名字（例如newtest.urls）
+
+> newtest\__init__.py
+> 表示这是一个 Python 的包
+
+> newtest\settings.py
 > 它是django的配置文件
 
-> uls.py
+> newtest\uls.py
 > url映射处理文件，Django 的url映射是url对于某个模块方法的映射
+
+> newtest\wsgi.py: 如果你的项目要加载到一个WSGI的Web服务器中，这是一个入口文件
 
 虽然 django-admin.py 为我们生成了许多东西， 而且这些东西在以后的开发中你都需要熟悉，但现在我们的目标是最简单的体验，就认为我们不需要知道它们都有什么用吧。
 
@@ -49,11 +53,12 @@ python manage.py runserver
 
 ```
 Validating models...
-0 errors found.
 
-Starting server on port 8000 with settings module 'newtest.settings'.
-Go to http://127.0.0.1:8000/ for Django.
-Quit the server with CONTROL-C (Unix) or CTRL-BREAK (Windows).
+0 errors found
+January 07, 2014 - 14:59:55
+Django version 1.6, using settings 'newtest.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
 ```
 
 说明 Django 真的启来了。在浏览器中看一下，有一个祝贺页面，说明成功了。
