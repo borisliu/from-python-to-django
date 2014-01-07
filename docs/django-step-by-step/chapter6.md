@@ -17,7 +17,10 @@
 
 ## 2. 创建 wiki app
 
+```
 python manage.py startapp wiki
+```
+
 这样在 wiki 子目录下有以下文件:
 
 > __init__.py
@@ -107,7 +110,7 @@ python manage.py shell
 'Welcome to Easy Wiki'
 ```
 
-在 Django 中，对于数据库的记录有两种操纵方式，一种是集合方式，一种是对象方式。集合方式相当于表级操作，在新版的 0.92 中可以使用 model.objects 来处理。 objects 对象有一些集合方式的操作，如 all() 会返回全部记录， filter() 会根据条件返回部分记录。而象插入新记录则需要使用记录方式来操作，些时要直接使用 model 类。
+在 Django 中，对于数据库的记录有两种操纵方式，一种是集合方式，一种是对象方式。集合方式相当于表级操作，可以使用 model.objects 来处理。 objects 对象有一些集合方式的操作，如 all() 会返回全部记录， filter() 会根据条件返回部分记录。而插入新记录则需要使用记录方式来操作，这时要直接使用 model 类。
 
 ## 6. 修改 wiki/views.py
 
@@ -276,3 +279,7 @@ r'^wiki/(?P<pagename>\w+)/$'
 
 ![](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/django-step-by-step/tut06_05.jpg)
 好了，剩下的你来玩吧。点击 FrontPage 将回到首页。
+
+--------------------------------------------------
+
+### 继续阅读[第七讲](django-step-by-step/chapter7)

@@ -92,3 +92,7 @@ urlpatterns = patterns('',
 效果如这样：
 
 ![表格](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/django-step-by-step/tut03_01.jpg)
+
+--------------------------------------------------
+
+### 继续阅读[第四讲](django-step-by-step/chapter4)
