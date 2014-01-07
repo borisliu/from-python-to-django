@@ -40,7 +40,7 @@ address = [
 
 def output(request, filename):
     response = HttpResponse(mimetype='text/csv')
-    response['Content-Disposition'] = 'attachment; filename=%s.csv' % filename
+    response['Content-Disposition'] = 'attachment; filename={0}.csv'.format(filename)
 
     t = loader.get_template('csv.html')
     c = Context({
@@ -58,7 +58,7 @@ def output(request, filename):
 
 ```
 response = HttpResponse(mimetype='text/csv')
-response['Content-Disposition'] = 'attachment; filename=%s.csv' % filename
+response['Content-Disposition'] = 'attachment; filename={0}.csv'.format(filename)
 ```
 
 这两行是用来处理输出类型和附件的，以前我也没有用过，这回也学到了。它表明返回的是一个 csv 格式的文件。
@@ -89,18 +89,21 @@ Django 还允许你自定义 Tag ，在 The Django template language: For Python
 ## 5. 修改 urls.py
 
 ```
-from django.conf.urls.defaults import *
+from django.conf.urls import patterns, include, url
+
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^testit/', include('newtest.apps.foo.urls.foo')),
-    (r'^$', 'newtest.helloworld.index'),
-    (r'^add/$', 'newtest.add.index'),
-    (r'^list/$', 'newtest.list.index'),
-    (r'^csv/(?P<filename>\w+)/$', 'newtest.csv_test.output'),
+    # Examples:
+    # url(r'^$', 'newtest.views.home', name='home'),
+    # url(r'^blog/', include('blog.urls')),
+    (r'^$', 'helloworld.index'),
+    (r'^add/$', 'add.index'),
+    (r'^list/$', 'list.index'),
+    (r'^csv/(?P<filename>\w+)/$', 'csv_test.output'),
 
-    # Uncomment this for admin:
-#     (r'^admin/', include('django.contrib.admin.urls')),
+    url(r'^admin/', include(admin.site.urls)),
 )
 ```
 

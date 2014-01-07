@@ -71,7 +71,7 @@ Quit the server with CTRL-BREAK.
 
 因此根据 URL Dispatch 的机制，我们只要保证 Django 可以在正确的地方找到方法进行调用即可。那么我们就根本不去创建一个app了。
 
-在 newtest 目录下创建一个文件 helloworld.py 内容为:
+在 newtest 工程目录下（与manage.py同一个目录下）创建一个文件 helloworld.py 内容为:
 
 ```
 from django.http import HttpResponse
@@ -85,15 +85,18 @@ def index(request):
 没办法，不改不行啊，内容为:
 
 ```
-from django.conf.urls.defaults import *
+from django.conf.urls import patterns, include, url
+
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^newtest/', include('newtest.apps.foo.urls.foo')),
-    (r'^$', 'newtest.helloworld.index'),
+    # Examples:
+    # url(r'^$', 'newtest.views.home', name='home'),
+    # url(r'^blog/', include('blog.urls')),
+    (r'^$', 'helloworld.index'),
 
-    # Uncomment this for admin:
-#     (r'^admin/', include('django.contrib.admin.urls')),
+    url(r'^admin/', include(admin.site.urls)),
 )
 ```
 

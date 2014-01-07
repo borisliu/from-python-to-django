@@ -16,7 +16,9 @@
 ```
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def login(request):
     username = request.POST.get('username', None)
     if username:
@@ -27,6 +29,7 @@ def login(request):
     else:
         return render_to_response('login.html')
 
+@csrf_exempt
 def logout(request):
     try:
         del request.session['username']
@@ -69,20 +72,23 @@ def logout(request):
 ## 4. 修改 urls.py
 
 ```
-from django.conf.urls.defaults import *
+from django.conf.urls import patterns, include, url
+
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^testit/', include('newtest.apps.foo.urls.foo')),
-    (r'^$', 'newtest.helloworld.index'),
-    (r'^add/$', 'newtest.add.index'),
-    (r'^list/$', 'newtest.list.index'),
-    (r'^csv/(?P<filename>\w+)/$', 'newtest.csv_test.output'),
-    (r'^login/$', 'newtest.login.login'),
-    (r'^logout/$', 'newtest.login.logout'),
+    # Examples:
+    # url(r'^$', 'newtest.views.home', name='home'),
+    # url(r'^blog/', include('blog.urls')),
+    (r'^$', 'helloworld.index'),
+    (r'^add/$', 'add.index'),
+    (r'^list/$', 'list.index'),
+    (r'^csv/(?P<filename>\w+)/$', 'csv_test.output'),
+    (r'^login/$', 'login.login'),
+    (r'^logout/$', 'login.logout'),
 
-    # Uncomment this for admin:
-#     (r'^admin/', include('django.contrib.admin.urls')),
+    url(r'^admin/', include(admin.site.urls)),
 )
 ```
 
@@ -109,7 +115,7 @@ DATABASE_PORT = ''
 
 ## 7. 初始化数据库
 
-改了配置还不够，还要执行相应的建库、建表的操作，使用 django-admin.py 或 manage.py 都可以:
+改了配置还不够，还要执行相应的建库、建表的操作，使用 manage.py 就可以:
 
 ```
 python manage.py syncdb

@@ -17,21 +17,24 @@
 
 ```python
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 text = """<form method="post" action="/add/">
-    <input type="text" name="a" value="%d"> + <input type="text" name="b" value="%d">
-    <input type="submit" value="="> <input type="text" value="%d">
+    <input type="text" name="a" value="{0}"> + <input type="text" name="b" value="{1}">
+    <input type="submit" value="="> <input type="text" value="{2}">
 </form>"""
 
+@csrf_exempt
 def index(request):
-    if request.POST.has_key('a'):
+    if request.POST.get('a', None):
         a = int(request.POST['a'])
         b = int(request.POST['b'])
     else:
         a = 0
         b = 0
-    return HttpResponse(text % (a, b, a + b))
+    return HttpResponse(text.format(a, b, a + b))
 ```
+> 这里的@csrf_exempt是为了禁用Django的CSRF保护功能，具体的内容请参考[Django官方文档](https://docs.djangoproject.com/en/1.6/ref/contrib/csrf/)
 
 这里只有一个 index 方法。所有在 view 中的方法第一个参数都会由 Django 传入 request 对象，它就是请求数据对象，它是由 Django 自动生成。其中有 GET 和 POST 属性，分别保存两种不同的提交方式的数据，它们都可以象字典一样工作。
 
@@ -46,16 +49,19 @@ def index(request):
 ## 3. 修改urls.py
 
 ```
-from django.conf.urls.defaults import *
+from django.conf.urls import patterns, include, url
+
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^testit/', include('newtest.apps.foo.urls.foo')),
-    (r'^$', 'newtest.helloworld.index'),
-    (r'^add/$', 'newtest.add.index'),
+    # Examples:
+    # url(r'^$', 'newtest.views.home', name='home'),
+    # url(r'^blog/', include('blog.urls')),
+    (r'^$', 'helloworld.index'),
+    (r'^add/$', 'add.index'),
 
-    # Uncomment this for admin:
-#     (r'^admin/', include('django.contrib.admin.urls')),
+    url(r'^admin/', include(admin.site.urls)),
 )
 ```
 

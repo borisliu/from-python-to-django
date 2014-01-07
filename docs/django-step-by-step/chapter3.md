@@ -68,17 +68,20 @@ TEMPLATE_DIRS = (
 ## 6. 修改 urls.py
 
 ```
-from django.conf.urls.defaults import *
+from django.conf.urls import patterns, include, url
+
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^testit/', include('newtest.apps.foo.urls.foo')),
-    (r'^$', 'newtest.helloworld.index'),
-    (r'^add/$', 'newtest.add.index'),
-    (r'^list/$', 'newtest.list.index'),
+    # Examples:
+    # url(r'^$', 'newtest.views.home', name='home'),
+    # url(r'^blog/', include('blog.urls')),
+    (r'^$', 'helloworld.index'),
+    (r'^add/$', 'add.index'),
+    (r'^list/$', 'list.index'),
 
-    # Uncomment this for admin:
-#     (r'^admin/', include('django.contrib.admin.urls')),
+    url(r'^admin/', include(admin.site.urls)),
 )
 ```
 

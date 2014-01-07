@@ -22,10 +22,18 @@ python manage.py startapp wiki
 
 > __init__.py
 >   表示 wiki 目录是一个包。
+>   
 > views.py
 >   用来放它的 view 的代码。
+>   
 > models.py
 >   用来放 model 代码。
+>
+> tests.py
+>   用来放测试的代码
+> 
+> admin.py
+>   用来注册使用admin管理的model
 
 ## 3. 编辑 wiki/models.py
 
@@ -34,7 +42,7 @@ from django.db import models
 
 # Create your models here.
 class Wiki(models.Model):
-    pagename = models.CharField(maxlength=20, unique=True)
+    pagename = models.CharField(max_length=20, unique=True)
     content = models.TextField()
 ```
 
@@ -54,11 +62,13 @@ Wiki 是 model 的名字，它需要从 models.Model 派生而来。它定义了
 
 ```
 INSTALLED_APPS = (
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
-    'newtest.wiki',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'wiki',
 )
 ```
 
@@ -85,7 +95,7 @@ python manage.py shell
 进入 python
 
 ```
->>> from newtest.wiki.models import Wiki
+>>> from wiki.models import Wiki
 >>> page = Wiki(pagename='FrontPage', content='Welcome to Easy Wiki')
 >>> page.save()
 >>> Wiki.objects.all()
@@ -102,11 +112,13 @@ python manage.py shell
 ## 6. 修改 wiki/views.py
 
 ```
-from newtest.wiki.models import Wiki
+from wiki.models import Wiki
 from django.template import loader, Context
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def index(request, pagename=""):
     """显示正常页面，对页面的文字做特殊的链接处理"""
     if pagename:
@@ -125,12 +137,14 @@ def index(request, pagename=""):
         page = Wiki.objects.get(pagename='FrontPage')
         return process('wiki/page.html', page)
 
+@csrf_exempt
 def edit(request, pagename):
     """显示编辑存在页面"""
 #    page = Wiki.objects.get_object(pagename__exact=pagename)
     page = Wiki.objects.get(pagename=pagename)
     return render_to_response('wiki/edit.html', {'pagename':pagename, 'content':page.content})
 
+@csrf_exempt
 def save(request, pagename):
     """保存页面内容，老页面进行内容替换，新页面生成新记录"""
     content = request.POST['content']
@@ -202,24 +216,27 @@ def process(template, page):
 ## 10. 修改 urls.py
 
 ```
-from django.conf.urls.defaults import *
+from django.conf.urls import patterns, include, url
+
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^testit/', include('newtest.apps.foo.urls.foo')),
-    (r'^$', 'newtest.helloworld.index'),
-    (r'^add/$', 'newtest.add.index'),
-    (r'^list/$', 'newtest.list.index'),
-    (r'^csv/(?P<filename>\w+)/$', 'newtest.csv_test.output'),
-    (r'^login/$', 'newtest.login.login'),
-    (r'^logout/$', 'newtest.login.logout'),
-    (r'^wiki/$', 'newtest.wiki.views.index'),
-    (r'^wiki/(?P<pagename>\w+)/$', 'newtest.wiki.views.index'),
-    (r'^wiki/(?P<pagename>\w+)/edit/$', 'newtest.wiki.views.edit'),
-    (r'^wiki/(?P<pagename>\w+)/save/$', 'newtest.wiki.views.save'),
+    # Examples:
+    # url(r'^$', 'newtest.views.home', name='home'),
+    # url(r'^blog/', include('blog.urls')),
+    (r'^$', 'helloworld.index'),
+    (r'^add/$', 'add.index'),
+    (r'^list/$', 'list.index'),
+    (r'^csv/(?P<filename>\w+)/$', 'csv_test.output'),
+    (r'^login/$', 'login.login'),
+    (r'^logout/$', 'login.logout'),
+    (r'^wiki/$', 'wiki.views.index'),
+    (r'^wiki/(?P<pagename>\w+)/$', 'wiki.views.index'),
+    (r'^wiki/(?P<pagename>\w+)/edit/$', 'wiki.views.edit'),
+    (r'^wiki/(?P<pagename>\w+)/save/$', 'wiki.views.save'),
 
-    # Uncomment this for admin:
-#     (r'^admin/', include('django.contrib.admin.urls')),
+    url(r'^admin/', include(admin.site.urls)),
 )
 ```
 
