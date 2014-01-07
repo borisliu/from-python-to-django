@@ -245,17 +245,17 @@ r'^wiki/(?P<pagename>\w+)/$'
 
 首先进入这个页面：
 
-![](https://raw.github.com/borisliu/from-python-to-django-cms/docs/django-step-by-step/tut06_01.jpg)
+![](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/django-step-by-step/tut06_01.jpg)
 然后你点编辑，则进入FrontPage的编辑界面：
 
-![](https://raw.github.com/borisliu/from-python-to-django-cms/docs/django-step-by-step/tut06_02.jpg)
+![](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/django-step-by-step/tut06_02.jpg)
 然后我们加上一个 TestPage ，它符合 wiki 的名字要求，两个首字母大写的单词连在一起。然后点击保存。
 
-![](https://raw.github.com/borisliu/from-python-to-django-cms/docs/django-step-by-step/tut06_03.jpg)
+![](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/django-step-by-step/tut06_03.jpg)
 看见了吧。页面上的 TestPage 有了链接。点击它将进入：
 
-![](https://raw.github.com/borisliu/from-python-to-django-cms/docs/django-step-by-step/tut06_04.jpg)
+![](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/django-step-by-step/tut06_04.jpg)
 这是 TestPage 的编辑页面。让我们输入中文，然后输入 FrontPage 。然后保存。
 
-![](https://raw.github.com/borisliu/from-python-to-django-cms/docs/django-step-by-step/tut06_05.jpg)
+![](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/django-step-by-step/tut06_05.jpg)
 好了，剩下的你来玩吧。点击 FrontPage 将回到首页。

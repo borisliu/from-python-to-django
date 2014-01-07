@@ -58,7 +58,7 @@ Quit the server with CONTROL-C (Unix) or CTRL-BREAK (Windows).
 
 说明 Django 真的启来了。在浏览器中看一下，有一个祝贺页面，说明成功了。
 
-![祝贺页面](https://raw.github.com/borisliu/from-python-to-django-cms/docs/django-step-by-step/welcome.png)
+![祝贺页面](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/django-step-by-step/welcome.png)
 
 ### 2.3 增加一个helloworld的app吗？
 

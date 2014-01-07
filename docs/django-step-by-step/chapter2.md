@@ -5,7 +5,7 @@
 
 随着学习，我们的例子也开始复杂了，下一步我想实现一个简单的 web 加法器。界面会是这样：
 
-![加法器](https://raw.github.com/borisliu/from-python-to-django-cms/docs/django-step-by-step/tut01_01.jpg)
+![加法器](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/django-step-by-step/tut01_01.jpg)
 
 很简单。通过本节的学习我们可以学习到：
 
