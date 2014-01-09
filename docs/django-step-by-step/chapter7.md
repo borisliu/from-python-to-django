@@ -245,7 +245,7 @@ views.py可以简化，但是模板却无法简化， Django 在这点上认为�
 
 对于目前我这个简单的应用来说，我只需要一个简单的列表显示功能即可，好在联系人的信息并不多可以在一行显示下。
 
-## 14. 增加 address/urls.py
+## 15. 增加 address/urls.py
 
 对，我们为 address 应用增加了自已的 urls.py。
 
@@ -258,15 +258,15 @@ urlpatterns = patterns('',
 )
 ```
 
-在第二句我们从 address.views 中导入了 AddressList 。并且使用 AddressList.as_view() 来得到view的模块名 。"r'^$'"表示我们匹配的url路径是"http://localhost:8000/addresses/"，由于我们这里的address/urls.py是从newtest/urls.py中包含进来的，所以前面会有newtest/urls.py种匹配的url路径。
+在第二句我们从 address.views 中导入了 AddressList 。并且使用 AddressList.as_view() 来得到view的模块名 。"r'^$'"表示我们匹配的url路径是"http://localhost:8000/addresses/"，由于我们这里的address/urls.py是从newtest/urls.py中包含进来的，在newtest/urls.py中我们已经匹配了“addresses”的路径，这里不需要增加任何内容。
 
 前面已经谈到：使用 generic view 只是减少了 view 的代码量，但对于模板仍然是必不可少的。因此要创建符合 generic view 要求的模板。主要是模板存放的位置和模板文件的名字。
 
 需要的模板文件名为： app_label/model_name_list.html ，这是缺省要查找的模板名。
 
-## 15. 创建 templates/address 目录
+## 16. 创建 templates/address 目录
 
-## 16. 创建 templates/address/address_list.html
+## 17. 创建 templates/address/address_list.html
 
 ```
 <h1>通讯录</h1>
@@ -291,7 +291,7 @@ urlpatterns = patterns('',
 </table>
 ```
 
-## 17. 修改 newtest/urls.py
+## 18. 修改 newtest/urls.py
 
 将我们的应用的 urls.py include 进去。
 
@@ -321,9 +321,9 @@ urlpatterns = patterns('',
 )
 ```
 
-可以看到 r'^address/' 没有使用 $ ，因为它只匹配前部分，后面的留给 address 中的 urls.py 来处理。
+可以看到 r'^addresses/' 没有使用 $ ，因为它只匹配前部分，后面的留给 address 中的 urls.py 来处理。
 
-18   启动 server 看效果
+## 18. 启动 server 看效果
 
 ![](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/django-step-by-step/tut07_07.jpg)
 
