@@ -86,7 +86,7 @@ response.write(t.render(c))
 
 Django 还允许你自定义 Tag ，在 The Django template language: For Python programmers 文档中有描述，其实是很简单的。
 
-## 5. 修改 urls.py
+## 5. 修改 newtest/urls.py
 
 ```
 from django.conf.urls import patterns, include, url

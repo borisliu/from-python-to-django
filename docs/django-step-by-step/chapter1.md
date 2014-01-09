@@ -80,7 +80,7 @@ def index(request):
     return HttpResponse("Hello, Django.")
 ```
 
-### 2.4 修改urls.py
+### 2.4 修改newtest/urls.py
 
 没办法，不改不行啊，内容为:
 

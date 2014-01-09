@@ -30,11 +30,11 @@ def index(request):
 
 第二个参数是一个字典，这里只有一个 Key ，名字是 address ，它的值是一个字典的列表。只要注意模板所接收的就是这样的字典和包含字典的列表就行了。
 
-## 3. 在 newtest 中创建 templates 目录
+## 3. 创建 templates 目录
 
 用来存放模板文件
 
-## 4. 修改 settings.py
+## 4. 修改 newtest/settings.py
 
 ```
 TEMPLATE_DIRS = (
@@ -65,7 +65,7 @@ TEMPLATE_DIRS = (
 
 这里使用 for .. in 的模板 Tag 处理。因此 address 需要是一个集合。在我们的 View 代码中， address 为一个 list 值。每个 list 又是一个字典。因此 {{ user.name }} 和 {{ user.address }} 就是将这个字典中的元素取出来。
 
-## 6. 修改 urls.py
+## 6. 修改 newtest/urls.py
 
 ```
 from django.conf.urls import patterns, include, url

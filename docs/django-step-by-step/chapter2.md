@@ -46,7 +46,7 @@ def index(request):
 
 其实这里面有许多可以细说的东西，那么我把它们放在后面陈述。
 
-## 3. 修改urls.py
+## 3. 修改newtest/urls.py
 
 ```
 from django.conf.urls import patterns, include, url

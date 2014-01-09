@@ -11,7 +11,7 @@
 
 下面我们做一个非常简单的功能：首先当用户进入某个页面，这个页面会显示一个登录页面，上面有一个文本框用来输入用户名，还有一个提交按钮用来提交数据。当用户输入用户名，然后点提交，则显示显示用户已经登录，并且打印出用户的姓名来，同时还提供一个“注销”按钮。然后如果用户再次进入这个页面，则显示同登录成功后的页面。如果点击注销则重新进入未登录的页面。
 
-## 2. 在newtest下创建 login.py
+## 2. 创建 login.py
 
 ```
 from django.http import HttpResponseRedirect
@@ -69,7 +69,7 @@ def logout(request):
 
 上面的逻辑表示，如果 username 不存在，则显示一个表单，显示用户名输入文本框。如果存在，则显示已经登录信息，同时显示用户名和注销按钮。而这个注销铵钮对应于 logout() 方法。
 
-## 4. 修改 urls.py
+## 4. 修改 nestest/urls.py
 
 ```
 from django.conf.urls import patterns, include, url
@@ -98,20 +98,20 @@ urlpatterns = patterns('',
 
 但我要说，你一定会报错。而且我的也在报错。为什么，因为从这一刻起，我们就要进入有数据库的环境了。因为在 django 中 session 是存放在数据库中的。所以在这里要进行数据库的初始化了。
 
-## 6. 修改 settings.py
+## 6. 检查 settings.py
 
 主要修改以下地方:
 
 ```
-DATABASE_ENGINE = 'sqlite3'
-DATABASE_NAME = './data.db'
-DATABASE_USER = ''
-DATABASE_PASSWORD = ''
-DATABASE_HOST = ''
-DATABASE_PORT = ''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 ```
 
-这里我使用 sqlite3 。在使用数据库时，你同时需要自已去安装相应的数据库处理模块。对于 sqlite3 只需要修改两项： DATABASE_ENGINE 和 DATABASE_NAME 。这里数据文件名我使用了相对路径，我想在实际情况下可能使用绝对路径为好。
+可以看到Django已经配置了默认的数据库： sqlite3 ，默认的数据库名为db.sqlite3 。我们不做修改，直接初始化数据库即可。
 
 ## 7. 初始化数据库
 
@@ -120,6 +120,15 @@ DATABASE_PORT = ''
 ```
 python manage.py syncdb
 ```
+
+主意：创建数据库的最后，会提示用户是否需要创建一个超级用户。
+
+```
+You just installed Django's auth system, which means you don't have any superusers defined.
+Would you like to create one now? (yes/no):
+```
+
+在这里选择no，我们在第七讲中再来创建这个超级用户。
 
 ## 8. 启动 server
 
