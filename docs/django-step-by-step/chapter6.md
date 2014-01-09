@@ -180,9 +180,7 @@ def process(template, page):
 * 从对模板的使用 (wiki/edit.html) 可以猜到在后面我们要在 templates 中创建子目录了。的确，对于不同的 app ，我们可以考虑将所有的模板都放在统一的 templates 目录下，但为了区分方便，一般都会针对 app 创建不同的子目录。当然也可以不这样，可以放在其它的地方，只要修改 settings.py ，将新的模板目录加进去就行了。
 因为我们在设计 model 时已经设置了 pagename 必须是唯一的，因此一旦 filter() 有返回值，那它只能有一个元素，而 pages[0] 就是我们想要的对象。
 
-* page = wikis.get(pagename='FrontPage')
-
-是表示取出 pagename 为 FrontPage 的页面。你可能要说，为什么没有异常保护，是的，这也就是为什么我们要在前面先要插条记录在里面的原因。这样就不会出错了。再加上我要做的 wiki 不提供删除功能，因此不用担心会出现异常。
+* page = wikis.get(pagename='FrontPage') 是表示取出 pagename 为 FrontPage 的页面。你可能要说，为什么没有异常保护，是的，这也就是为什么我们要在前面先要插条记录在里面的原因。这样就不会出错了。再加上我要做的 wiki 不提供删除功能，因此不用担心会出现异常。
 
 * edit() 用来显示一个编辑页面，它直接取出一个页面对象，然后调用 wiki/edit.html 模板进行显示。也许你还是要问，为什么不考虑异常，因为这里不会出现。为什么？因为 edit() 只用在已经存在的页面上，它将用于存在页面的修改。而对于不存在的页面是在 index() 中直接调用模板来处理，并没有直接使用这个 edit() 来处理。也许你认为这样可能不好，但由于在 edit() 要重新检索数据库，而在 index() 已经检索过一次了，没有必要再次检索，因此象我这样处理也没什么不好，效率可能要高一些。当然这只是个人意见。
 
@@ -266,18 +264,23 @@ r'^wiki/(?P<pagename>\w+)/$'
 首先进入这个页面：
 
 ![](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/django-step-by-step/tut06_01.jpg)
+
 然后你点编辑，则进入FrontPage的编辑界面：
 
 ![](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/django-step-by-step/tut06_02.jpg)
+
 然后我们加上一个 TestPage ，它符合 wiki 的名字要求，两个首字母大写的单词连在一起。然后点击保存。
 
 ![](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/django-step-by-step/tut06_03.jpg)
+
 看见了吧。页面上的 TestPage 有了链接。点击它将进入：
 
 ![](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/django-step-by-step/tut06_04.jpg)
+
 这是 TestPage 的编辑页面。让我们输入中文，然后输入 FrontPage 。然后保存。
 
 ![](https://raw.github.com/borisliu/from-python-to-django-cms/master/docs/django-step-by-step/tut06_05.jpg)
+
 好了，剩下的你来玩吧。点击 FrontPage 将回到首页。
 
 --------------------------------------------------
