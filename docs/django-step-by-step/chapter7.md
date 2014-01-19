@@ -315,7 +315,7 @@ urlpatterns = patterns('',
     (r'^wiki/(?P<pagename>\w+)/$', 'wiki.views.index'),
     (r'^wiki/(?P<pagename>\w+)/edit/$', 'wiki.views.edit'),
     (r'^wiki/(?P<pagename>\w+)/save/$', 'wiki.views.save'),
-    (r'^addresses/', include('address.urls')),
+    (r'^address/', include('address.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
 )
