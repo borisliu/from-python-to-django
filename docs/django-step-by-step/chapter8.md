@@ -56,24 +56,29 @@ sfas,F,11,11,11,
 ## 3. 修改 address/views.py
 
 ```
-# Create your views here.
+from django.views.generic import ListView
 from address.models import Address
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
+from django.views.decorators.csrf import csrf_exempt
+import csv
+import io
+import sys
 
+class AddressList(ListView):
+    model = Address
+
+@csrf_exempt
 def upload(request):
     file_obj = request.FILES.get('file', None)
     if file_obj:
-        import csv
-        import StringIO
-        buf = StringIO.StringIO(file_obj['content'])
+        buf = io.StringIO(file_obj.read().decode(sys.getfilesystemencoding()), newline = None)
         try:
             reader = csv.reader(buf)
         except:
             return render_to_response('address/error.html',
                 {'message':'你需要上传一个csv格式的文件！'})
         for row in reader:
-#            objs = Address.objects.get_list(name__exact=row[0])
             objs = Address.objects.filter(name=row[0])
             if not objs:
                 obj = Address(name=row[0], gender=row[1],
@@ -96,7 +101,7 @@ def upload(request):
 
 报造错误使用了一个名为 error 的模板，我们马上要创建。
 
-## 4. 创建 templates/error.html
+## 4. 创建 templates/address/error.html
 
 ```
 <h2>出错</h2>
@@ -110,15 +115,11 @@ def upload(request):
 ## 5. 修改 address/urls.py
 
 ```
-from django.conf.urls.defaults import *
-from newtest.address.models import Address
+from django.conf.urls import patterns, url
+from address.views import AddressList
 
-info_dict = {
-#    'model': Address,
-    'queryset': Address.objects.all(),
-}
 urlpatterns = patterns('',
-    (r'^/?$', 'django.views.generic.list_detail.object_list', info_dict),
+    url(r'^$', AddressList.as_view()),
     (r'^upload/$', 'address.views.upload'),
 )
 ```
@@ -174,25 +175,30 @@ urlpatterns = patterns('',
 ## 9. 修改 apps/address/views.py
 
 ```
-# Create your views here.
-from newtest.address.models import Address
-from django.http import HttpResponse, HttpResponseRedirect
+from django.views.generic import ListView
+from address.models import Address
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template import loader, Context
+from django.views.decorators.csrf import csrf_exempt
+import csv
+import io
+import sys
 
+class AddressList(ListView):
+    model = Address
+
+@csrf_exempt
 def upload(request):
     file_obj = request.FILES.get('file', None)
     if file_obj:
-        import csv
-        import StringIO
-        buf = StringIO.StringIO(file_obj['content'])
+        buf = io.StringIO(file_obj.read().decode(sys.getfilesystemencoding()), newline = None)
         try:
             reader = csv.reader(buf)
         except:
             return render_to_response('address/error.html',
                 {'message':'你需要上传一个csv格式的文件！'})
         for row in reader:
-#            objs = Address.objects.get_list(name__exact=row[0])
             objs = Address.objects.filter(name=row[0])
             if not objs:
                 obj = Address(name=row[0], gender=row[1],
@@ -213,33 +219,25 @@ def upload(request):
 def output(request):
     response = HttpResponse(mimetype='text/csv')
     response['Content-Disposition'] = 'attachment; filename=%s' % 'address.csv'
-    t = loader.get_template('csv.html')
-#    objs = Address.objects.get_list()
-    objs = Address.objects.all()
-    d = []
-    for o in objs:
-        d.append((o.name, o.gender, o.telphone, o.mobile, o.room))
-    c = Context({
-        'data': d,
-    })
-    response.write(t.render(c))
+    writer = csv.writer(response)    
+    writer.writerow(['姓名', '性别', '电话', '手机', '房间'])  
+    objs = Address.objects.all()  
+    for obj in objs:  
+        writer.writerow([obj.name, obj.gender, obj.telphone,    
+                         obj.mobile, obj.room])  
     return response
 ```
 
-在开始处增加了对 HttpResponse, loader, Context 的导入。然后增加了用于输出处理的 output() 方法。
+在这里我们使用csv的writer函数构造了一个writer，然后利用writerow函数输出每一样数据到csv文件。最后返回response对象。
 
 ## 10. 修改 address/urls.py
 
 ```
-from django.conf.urls.defaults import *
-from newtest.address.models import Address
+from django.conf.urls import patterns, url
+from address.views import AddressList
 
-info_dict = {
-#    'model': Address,
-    'queryset': Address.objects.all(),
-}
 urlpatterns = patterns('',
-    (r'^/?$', 'django.views.generic.list_detail.object_list', info_dict),
+    url(r'^$', AddressList.as_view()),
     (r'^upload/$', 'address.views.upload'),
     (r'^output/$', 'address.views.output'),
 )
@@ -248,3 +246,32 @@ urlpatterns = patterns('',
 增加了对 output 方法的 url 映射。
 
 ## 11. 启动 server 测试
+
+下载的address.csv有乱码？嗯，我这里也有。这是由于Python3内码为utf-8，而HttpResponse函数默认输出也是utf-8编码的。而Windows默认的文件编码为GB18030，所以你会看到乱码。解决这个问题有两个途径：
+
+* 让Excel可以识别UTF-8编码的CSV
+* 直接输出GB18030编码的CSV
+
+这里我们采用第二种方法，我们需要继承一下HttpResponse类，然后修改内置的_charset，最后使用我们自己定制的GbkHttpResponse类来完成输出即可。
+
+在output函数前面增加GbkHttpResponse类的定义。
+
+```
+class GbkHttpResponse(HttpResponse):
+    def __init__(self,content=b'',*args,**kwargs):
+        super(GbkHttpResponse,self).__init__(content=content,*args,**kwargs)
+        self._charset = "GBK"
+
+```
+
+然后修改output函数的第一行，改为：
+
+```
+    response = GbkHttpResponse(mimetype='text/csv')
+```
+
+再次启动server测试，是不是看到中文了？
+
+--------------------------------------------------
+
+### 继续阅读[第九讲](django-step-by-step/chapter9)
