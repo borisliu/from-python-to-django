@@ -1,12 +1,13 @@
-第一步
+# 第一步
+=======
 
 现在,我们将看到在Python中如何运行一个传统的“Hello World”程序。这将教你如何写、保存和运行Python程序。
 
 使用Python运行你的程序有两种方法——使用交互式解释器提示符或使用一个源文件。现在,我们将看到如何使用这两种方法。
 
-使用解释器提示符
+## 使用解释器提示符
 
-在您的操作系统中打开终端(如前面安装章节所述),然后，输入“python3”按回车键，打开Python提示符。
+在您的操作系统中打开终端(如前面[安装章节](install)所述),然后，输入“python3”按回车键，打开Python提示符。
 
 一旦你启动python 3,您应该看到'>>>”,这被称为* Python解释器提示符*，你可以开始输入的东西。
 
@@ -14,18 +15,22 @@
 
 当使用一个Mac OS X计算机，下面是你将看到的一个例子。Python软件的细节会根据你的电脑不同而有所不同，但从提示符(即从“>>>”开始)与操作系统无关，应该是相同。
 
+```
 $ python3
 Python 3.3.0 (default, Oct 22 2012, 12:20:36)
 [GCC 4.2.1 Compatible Apple Clang 4.0 ((tags/Apple/clang-421.0.60))] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
 >>> print('hello world')
 hello world
->>> 
+>>>
+```
+
 注意,Python让你的代码行立即输出了!你刚才输入的是一个Python 语句。我们使用print打印出(不出所料)你提供给它的任何值。在这里,我们提供的是文本“Hello World”,并立即打印到屏幕上。
 
 如何解释器提示符
-如果你正在使用一个Linux或Unix shell,您可以通过按下“ctrl - d’或输入“exit()“(注意:记得包含括号,“()”)，然后输入回车 键。如果您使用的是Windows命令行提示符,按“ctrl - z”键再按“回车”键，退出解释器提示符。
-选择一个编辑器
+> 如果你正在使用一个Linux或Unix shell,您可以通过按下“ctrl - d’或输入“exit()“(注意:记得包含括号,“()”)，然后输入回车 键。如果您使用的是Windows命令行提示符,按“ctrl - z”键再按“回车”键，退出解释器提示符。
+
+## 选择一个编辑器
 
 我们不能在每次想要运行一些东西的时候都要在解释器提示符下输入我们的程序，所以我们必须把它们保存为文件，这样我们可以任意次地运行我们的程序。
 
@@ -33,21 +38,21 @@ hello world
 
 一个非常基本的需求是语法高亮显示，分别以不同的彩色显示你的Python程序所有的不同部分，以便您可以看到你的程序且使其运行可视化。
 
-如果你不知道从哪里开始，我推荐可以在Windows、Mac OS X和Linux上使用的Komodo Edit软件。
+如果你不知道从哪里开始，我推荐可以在Windows、Mac OS X和Linux上使用的[Komodo Edit](http://www.activestate.com/komodo-edit/downloads)软件。
 
-如果您使用的是Windows，不要使用记事本——这是一个糟糕的选择，因为它不做语法高亮显示，而且更重要的是它不支持文字的缩进——之后我们在我们的例子中会看到，缩进是非常重要的。好的编辑器如Komodo Edit会自动地做到这一点。
+如果您使用的是Windows，**不要使用记事本**——这是一个糟糕的选择，因为它不做语法高亮显示，而且更重要的是它不支持文字的缩进——之后我们在我们的例子中会看到，缩进是非常重要的。好的编辑器如Komodo Edit会自动地做到这一点。
 
-如果你是一名有经验的程序员，那么你一定已经使用Vim或(Emacs)(http://www.gnu.org/software/emacs/)了。不用说，这是两个最强大的编辑器，使用它们来写你的Python程序，你会从中受益。就我自己而言，在我的大多数项目,甚至写一整本书都在用Vim。,从长远来看Vim或者Emacs是非常有用的，如果你愿意花时间去学习，那么我强烈建议你使用它们。然而,正如我之前提到的,初学者在这一刻，可以从 Komodo Edit开始集中学习Python而不是编辑器。
+如果你是一名有经验的程序员，那么你一定已经使用[Vim](http://www.vim.org/)或[Emacs](http://www.gnu.org/software/emacs/)了。不用说，这是两个最强大的编辑器，使用它们来写你的Python程序，你会从中受益。就我自己而言，在我的大多数项目,甚至写一[整本书都在用Vim](http://www.swaroopch.com/notes/vim)。,从长远来看Vim或者Emacs是非常有用的，如果你愿意花时间去学习，那么我强烈建议你使用它们。然而,正如我之前提到的,初学者在这一刻，可以从 Komodo Edit开始集中学习Python而不是编辑器。
 
 再次重申，请选择一个适当的编辑器，它可以使编写Python程序更有趣和更容易。
 
 对Vim用户
-John M Anderson有一个很好的如何[使Vim成为强大的Python IDE)(http://blog.sontek.net/blog/detail/turning-vim-into-a-modern-python-ide)的介绍。还推荐jedi-vim插件和我自己的dotvim配置。
+> John M Anderson有一个很好的如何[使Vim成为强大的Python IDE](http://blog.sontek.net/blog/detail/turning-vim-into-a-modern-python-ide)的介绍。还推荐[jedi-vim插件](https://github.com/davidhalter/jedi-vim)和[我自己的dotvim配置](https://github.com/swaroopch/dotvim)。
 
 对Emacs用户
-Pedro Kroger有一个很好的如何使Emacs成为强大的Python IDE的介绍。还建议BG的dotemacs配置。
+> Pedro Kroger有一个很好的如何[使Emacs成为强大的Python IDE](http://pedrokroger.net/2010/07/configuring-emacs-as-a-python-ide-2/)的介绍。还建议[BG的dotemacs配置](https://github.com/ghoseb/dotemacs)。
 
-使用一个源文件
+## 使用一个源文件
 
 现在让我们回到编程。每当你学习一种新的编程语言时，有一个传统，你编写和运行的第一个程序是“Hello World”程序——当你运行它时，它所做的只是说“Hello World”。正如Simon Cozens(神奇的"Beginning Perl"的作者)所说，这是“向编程神祈求帮你更好学习语言的传统咒语。”
 
@@ -55,18 +60,23 @@ Pedro Kroger有一个很好的如何使Emacs成为强大的Python IDE的介绍�
 
 如果你使用Komodo编辑器，点击File --- New --- New File,输入下行:
 
+```
 print('Hello World')
+```
+
 在Komodo编辑器，选File --- Save保存文件。
 
 你应将文件保存在哪里？你知道位置的任何文件夹。如果你不明白这是什么意思，创建一个新文件夹，并使用该位置保存和运行你所有的Python程序:
 
-C:\\py 在Windows上
-/tmp/py 在Linux上
-/tmp/py 在Mac OS X上
+* C:\\py 在Windows上
+* /tmp/py 在Linux上
+* /tmp/py 在Mac OS X上
+
 使用'mkdir'命令在命令行创建一个文件夹，例如,“mkdir/tmp/py”。
 
 重要的
-总要确保你给它的文件扩展名是.py，例如，“foo.py”。
+> 总要确保你给它的文件扩展名是.py，例如，“foo.py”。
+
 在Komodo Edit，请单击“Tools”---“Run Command”，输入"python3 hello.py",单击“Run”,你应该看到像下面截图的打印输出。
 
 “Hello world”程序在Komodo编辑器中的截图
