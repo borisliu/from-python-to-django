@@ -91,7 +91,7 @@ print('Hello World')
 输出如下所示：
 
 ```
-c:\python33\python hello.py
+D:> c:\python33\python hello.py
 Hello World
 ```
 
@@ -367,7 +367,7 @@ print(s)
 输出结果为:
 
 ```
-python var.py
+D:> python var.py
 5
 6
 这是一个多行字符串。
@@ -800,7 +800,7 @@ print('Perimeter is', 2 * (length + breadth))
 输出:
 
 ```
-python expression.py
+D:> python expression.py
 Area is 10
 Perimeter is 14
 ```
@@ -848,17 +848,17 @@ print('完成')
 输出:
 
 ```
-python if.py
+D:> python if.py
 请输入一个整数: 50
 不对，你猜的有点儿大
 完成
 
-python if.py
+D:> python if.py
 请输入一个整数: 22
 不对，你猜的有点儿小
 完成
 
-python if.py
+D:> python if.py
 请输入一个整数: 23
 恭喜，你猜对了。
  (但你没有获得任何奖品！)
@@ -924,7 +924,7 @@ print('完成')
 输出:
 
 ```
-python while.py
+D:> python while.py
 输入一个整数 : 50
 不对，你猜的有点儿大。
 输入一个整数 : 22
@@ -964,7 +964,7 @@ else:
 输出：
 
 ```
-python3 for.py
+D:> python for.py
 1
 2
 3
@@ -1011,7 +1011,7 @@ print('完成')
 输出：
 
 ```
-python break.py
+D:> python break.py
 输入一些东西: Programming is fun
 字符串的长度是 18
 输入一些东西: When the work is done
@@ -1064,7 +1064,7 @@ while True:
 输出:
 
 ```
-python continue.py
+D:> python continue.py
 输入一些东西: a
 太小
 输入一些东西: 12
