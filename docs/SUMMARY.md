@@ -2,7 +2,7 @@
 
 ### 简明Python教程
 
-* [简明Python教程](a-byte-of-python3/README.md)
+* [简明Python教程](a-byte-of-python3/index.md)
     * [简介](a-byte-of-python3/introduction.md)
     * [安装](a-byte-of-python3/install.md)
     * [第一步](a-byte-of-python3/firststep.md)
