@@ -3,7 +3,7 @@
 
 ## 安装Python
 
-Python的开发环境是比较简单的，到[http://python.org/getit/]()去下载对应的Python3安装包，本文使用的是Python 3.3.3，然后保留默认选项完成安装就是了。
+Python的开发环境是比较简单的，到[https://www.python.org/downloads/](https://www.python.org/downloads/)去下载对应的Python3安装包，然后保留默认选项完成安装就是了本文使用的是Python 3.3.3，。
 
 我的开发环境不会修改操作系统的PATH路径，原因是我的电脑上安装了好几个版本的Python，使用的时候我会用绝对路径引用Python程序。一般情况下使用virtualenv会把PATH路径自动设置好。
 
