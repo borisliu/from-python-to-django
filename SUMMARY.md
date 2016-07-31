@@ -1,16 +1,20 @@
 # Summary
 
-### Part I
+### 简明Python教程
 
-* [Part I](part1/README.md)
-    * [Writing is nice](part1/README.md#writing)
-    * [GitBook is nice](part1/README.md#gitbook)
+* [简明Python教程](a-byte-of-python3/introduction.md)
+    * [安装](a-byte-of-python3/install.md)
+    * [第一步](a-byte-of-python3/firststep.md)
 
-### Part II
+### Django step by step
 
-* [Part II](part2/README.md)
-    * [We love feedback](part2/README.md#feedback)
-    * [Better tools for authors](part2/README.md#tools)
+* [Django step by step](django-step-by-step/index.md)
+    * [第一讲](django-step-by-step/chapter1.md)
+    * [第二讲](django-step-by-step/chapter2.md)
+
+### Django CMS教程
+
+* [Django CMS教程](django-cms/index.md)
+
 ----
 
-* [Last part without title](part3/title.md)
