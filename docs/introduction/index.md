@@ -100,4 +100,4 @@ pip和virtualenv可以很好的协同工作，同时使用这两个工具非常�
 
 --------------------------------------------------
 
-### 继续阅读[简明Python教程](a-byte-of-python3/index.md)
+### 继续阅读[简明Python教程](../a-byte-of-python3/index.md)
