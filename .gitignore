@@ -1,0 +1,18 @@
+# This is a comment
+
+# Ignore the file test.md
+test.md
+
+# Ignore everything in the directory "bin"
+bin/*
+
+# Book build output
+_book
+
+# eBook build output
+*.epub
+*.mobi
+*.pdf
+
+# Visual Studio Code
+.vscode
