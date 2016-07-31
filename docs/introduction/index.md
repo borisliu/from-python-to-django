@@ -63,7 +63,7 @@ pip和virtualenv可以很好的协同工作，同时使用这两个工具非常�
 这个时候你的virtualenv就已经激活了，你再输入命令：
 
 ```
-    python
+     (env) $ python
 ```
 
 的时候，就会使用这个虚拟环境下面的Python。请注意，下面的教程我么都是在这个环境下面运行的，每一次你开始学习的时候都要首先“激活”这个虚拟环境。
@@ -77,9 +77,9 @@ pip和virtualenv可以很好的协同工作，同时使用这两个工具非常�
 会自动联网下载并安装django，让我们检查一下django是否已经正确安装，输入下面的命令创建第一个django工程：
 
 ```
-    django-admin startproject helloworld
-    cd helloworld
-    python manage.py runserver
+    (env) $ django-admin startproject helloworld
+    (env) $ cd helloworld
+    (env) $ python manage.py runserver
 ```
 然后使用浏览器打开这个地址[http://127.0.0.1:8000/](http://127.0.0.1:8000/)就可以看到一个欢迎页面了。
 
