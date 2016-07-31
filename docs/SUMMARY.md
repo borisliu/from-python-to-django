@@ -1,5 +1,7 @@
 # Summary
 
+* [搭建Python开发环境](introduction/index.md)
+
 * [简明Python教程](a-byte-of-python3/index.md)
     * [简介](a-byte-of-python3/introduction.md)
     * [安装](a-byte-of-python3/install.md)
