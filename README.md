@@ -25,7 +25,7 @@ Django-CMS是基于Django的CMS（内容管理系统），最新的第3版支持
 
 本文介绍了从Python到Django再到Django-CMS的学习过程，范例采用最新的Python3、Django1.9、Django-CMS3，主要参考了以下这三个文档，对于中文的文档做了重新整理，对于英文的文档做了翻译的工作。
 
-* [简明Python教程](http://www.cnblogs.com/txw1958/archive/2012/12/10/A_Byte_of_Python3.html)
+* [简明Python教程](http://python.swaroopch.com/)
 
 * [Django step by step](http://www.lhelper.org/dev/django_step_by_step/newtest/doc/)
 

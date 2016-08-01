@@ -33,7 +33,7 @@ Python可能是为数不多的既简单又强大的几个编程语言之一。�
 ### 1. [搭建Python开发环境](introduction/index.md)
 ### 2. [简明Python教程](a-byte-of-python3/index.md)
 ### 3. [Django step by step](django-step-by-step/index.md)
-### 4. [Django-CMS官方文档中文翻译](django-cms/index.md)
+### 4. [Django-CMS教程](django-cms/index.md)
 
 本文托管在[GitHub](https://github.com/borisliu/from-python-to-django)，
 如果有问题请在线[提交](https://github.com/borisliu/from-python-to-django/issues)。

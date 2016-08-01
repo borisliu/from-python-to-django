@@ -69,3 +69,7 @@ i18n 的一个简单实现。
 ### [第十七讲](django-step-by-step/chapter17)
 
 View, Template, Tag之间的关系
+
+--------------------------------------------------
+
+### 继续阅读[Django CMS教程](../django-cms/index)
