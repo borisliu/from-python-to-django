@@ -1,10 +1,11 @@
-A Byte of Python
-================
+# A Byte of Python
 
 《A Byte of Python》是一本介绍用Python语言编写程序的免费书。它为Python初学者提供指导或指南。
 如果你对计算机的知识仅限于知道如何保存文本文件，那么这本书非常适合你。
 
-尽管当今Python 2仍被普遍使用,本书还是依据最新版Python 3编写的(更多请看Python 2 ＆ 3 一节)。
+## 使用Python 3完成 
+
+本书介绍了如何使用Python 3进行编程。如果你仍然使用Python 2，本文经过改写后也可以作为Python 2的一本指南。
 
 ## 《A Byte of Python》的读者对象?
 

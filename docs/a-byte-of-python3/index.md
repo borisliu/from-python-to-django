@@ -1,4 +1,4 @@
-# Python3简明教程
+# 简明Python教程
 ==============
 
 ## 目录
@@ -30,4 +30,4 @@
 ### [Feedback](feedback.md)
 --------------------------------------------------
 
-### 继续阅读[A Byte of Python](a-byte-of-python.md)
+### 继续阅读[简介](introduction.md)
