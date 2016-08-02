@@ -2,13 +2,13 @@
 
 Python is probably one of the few programming languages which is both simple and powerful. This is good for beginners as well as for experts, and more importantly, is fun to program with. This book aims to help you learn this wonderful language and show how to get things done quickly and painlessly - in effect 'The Anti-venom to your programming problems'.
 
-## Who This Book Is For
+## 读者对象
 
-This book serves as a guide or tutorial to the Python programming language. It is mainly targeted at newbies. It is useful for experienced programmers as well.
+本书作为Python编程语言的指南或教程，主要面向初学者，同时对有经验的程序员也有帮助。
 
-The aim is that if all you know about computers is how to save text files, then you can learn Python from this book. If you have previous programming experience, then you can also learn Python from this book.
+本书目的是，如果对于计算机，你只知道如何保存文本文件，那么你可以从本书学习Python。如果之前你有编程经验，那么你同样可以从本书学习Python。
 
-If you do have previous programming experience, you will be interested in the differences between Python and your favorite programming language - I have highlighted many such differences. A little warning though, Python is soon going to become your favorite programming language!
+如果您之前有过编程经验，你将对Python和你喜欢的编程语言之间的区别感兴趣——我高亮显示了这些区别。然而要提醒一点，Python将很快成为你最喜爱的编程语言！
 
 ## Official Website
 

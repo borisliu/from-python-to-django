@@ -61,87 +61,192 @@
 
 <!-- -->
 
-> 我发现的最好的事，是我发现了《A Byte of Python》, 它是为初学者编写的一本杰出的书，它写的很好，通过不言而喻的例子对概念作了很好的解释。
+> 感谢你写了这本《A Byte Of Python》。我刚开始通过它学习编程，大概两天后就可以写一些简单的小游戏了。你的这本指南非常棒，我想让你知道他很有价值。
+> -- Franklin
 
-> -- Syed Talal (19岁)
-> 
-> 
-> 
+<!-- -->
+
+> 我来自印度Dayanandasagar工程学院。首先我想说"The byte of python"对于像我这样的初学者来说真是一本不错的入门指南。这本书讲述概念非常清晰，还附带有很多的小范例帮助我学习Python语言。太感谢了！
+> -- Madhura
+
+<!-- -->
+
+> 我是一名18岁的在校学生，目前在爱尔兰的大学学习计算机。我非常感谢您写了这本 "A Byte of Python"，我已经学习过3门编程语言 - C, Java and Javascript, 由于你写的这本非常棒的入门教程，使得Python成为了我学习过的最简单的编程语言。这是我读过的最好的编程语言入门教材之一。感谢你，希望你继续这项伟大的工作。
+> -- Matt
+
+<!-- -->
+
 > 嗨，我来自多米尼加共和国，我叫Pavel。最近，我读了你的《A Byte of Python》，我认为它是极好的!! :)。从例子中我学到了很多，你的书对像我这样的初学者有很大帮助...
-> 
-> -- Pavel Simo (pavel-dot-simo-at-gmail-dot-com)
-> 
+> -- [Pavel Simo](mailto:pavel.simo@gmail.com)
+
+<!-- -->
+
+> 我来自中国，是一名在校生。我看完了你的这本《A byte of Python》，写的太好了！这本书如此之浅显易懂，非常适合于初学者。我之前对于Java和云计算非常感兴趣，经常在服务器端进行编程，现在我觉得Python对于我这样的情况来说非常适合。看完你的书之后，我觉得应该马上开始Python语言编程的实践。我的英语不太好，写这封邮件只想感谢你的辛勤工作。
+> -- Roy Lau
+
+<!-- -->
+
 > 我读完了《A Byte of Python》，我想我真的应该感谢你，当我读到最后，我感到非常难过，因为我不得不再回到无趣的、乏味的学习笔记等中去。不论如何，作为Python学习手册，我欣赏你的书。
-> 
-> -- Samuel Young (sy-one-three-seven-at-gmail-dot-com)
-> 
+> [Samuel Young](mailto:sy137@gmail.com)
+
+<!-- -->
+
 > 亲爱的Swaroop，我正跟着一个对教学没兴趣的老师上课。我们使用的是 O'Reilly 的《Python学习手册（第二版）》，它不是没有任何编程知识的初学者学习的教材，而且我们的老师也应该以另外一种方式教学。非常感谢您的书籍，如果没有它，我就不能学会Python和编程。一百万次地感谢！您把知识“掰开揉碎”到初学者能够理解的水平，这不是所有人都能做到的。
-> 
-> -- Joseph Duarte (jduarte1-at-cfl-dot-rr-dot-com)
-> 
+> -- [Joseph Duarte](mailto:jduarte1@cfl.rr.com)
+
+<!-- -->
+
 > 我喜欢你的书！这是最好的Python教程，非常有用的参考手册，才华横溢，真正的杰作！请继续这种好的工作！
-> 
 > -- Chris-André Sommerseth
-> 
+
+<!-- -->
+
+> 首先，我要感谢你写了这本书。我想对于那些想要Python初学者指南的人来说这本书再适合不过了。
+> 我大概2-3年前第一次听说这本书。当时我还没有办法阅读英文版本的书籍，所以我找到了一本中文翻译的版本，它带领我进入了Python编程的世界。
+> 现在，我重新读这本书的英文版。我不敢相信我居然不用查字典就看完了所有的章节。当然了这归功于您使用非常浅显易懂的方式完成这本书。
+> -- [myd7349](https://github.com/swaroopch/byte_of_python/pull/13)
+
+<!-- -->
+
 > 我给你发邮件，就是为了感谢你在线编写的《A Byte of Python 》。在偶然发现你的书之前，我已经尝试学习Python有几个月了。虽然我对pyGame取得了有限的成绩，但我从来没有完成过一个程序。
-> 
 > 感谢你对分类的简单化，Python看起来确实是一个能够达到的目标。看起来我已经学会了基础知识，并能够继续我的真正目标——游戏开发。
-> 
 > ...
-> 
 > 再一次，非常感谢你将如此结构良好而且有用的编程基础教程放到网上，它帮助我彻底理解了OOP，这之前两本书都没行。
-> 
-> -- Matt Gallivan (m-underscore-gallivan12-at-hotmail-dot-com)
-> 
+> -- [Matt Gallivan](mailto:m_gallivan12@hotmail.com)
+
+<!-- -->
+
 > 我感谢你以及你的《A Byte of Python》，我发现这是学习Python最好的途径。我现在15岁，住在埃及，我的名字叫Ahmed。Python是我学习的第二个编程语言，我在学校学习了Visual Basic 6，但我并不喜欢它，可是我真的喜欢学习Python。我成功地编写了地址簿程序。我打算尝试编写、阅读更多Python程序（如果你有意给我推荐一些有帮助的源代码）。我也将开始学习Java，如果你能告诉我在哪里可以找到向你的教程一样好的Java教程，那将对我有很大帮助。多谢。
-> 
-> -- Ahmed Mohammed (sedo-underscore-91-at-hotmail-dot-com)
-> 
+> -- [Ahmed Mohammed](mailto:sedo_91@hotmail.com)
+
+<!-- -->
+
 > 初学者想更多的学习Python编程的最好的资源是Swaroop C H编写的110页的PDF教程《A Byte of Python》。这本书写得很好，跟随它学习很容易，或许是当前可以得到的最好的Python入门教程。
-> 
-> -- Drew Ames 在Linux.com上发表的文章Scripting Scribus中写道
-> 
+> -- [Drew Ames](http://www.linux.com/feature/126522)
+
+<!-- -->
+
 > 昨天，我在Nokia N800上浏览了《A Byte of Python》的大部分内容，这是我至今遇到的最简明扼要的Python教程,极力推荐作为学习Python的一个起点。
-> 
-> -- Jason Delport 发表在博客
-> 
+> -- [Jason Delport](http://paxmodept.com/telesto/blogitem.htm?id=627)
+
+<!-- -->
+
 > 对我而言，@swaroopch 编写的《A Byte of Vim》和《A Byte of Python》是最棒的技术作品，读起来非常棒。#FeelGoodFactor
-> 
-> -- Surendran 在其微博上说
-> 
+> -- [Surendran](http://twitter.com/suren/status/12840485454)
+
+<!-- -->
+
 > 《A Byte of python》至今最好
-> 
 > （在回答“谁能推荐一个又好又便宜的学习Python基础的资源？”中答道）
-> 
-> -- Justin LoveTrue 在其Facebook 社区页面说
-> 
+> -- [Justin LoveTrue](http://www.facebook.com/pythonlang/posts/406873916788)
+
+<!-- -->
+
 > “《A Byte of Python》非常有用，多谢 :)”
-> 
-> -- Chinmay
-> 
-> 永远是对新手和有经验的程序员都适合的《A BYte of Python》的爱好者。
-> 
-> -- Patrick Harrington, 在StackOverflow回答
-> 
-> 甚至 NASA 也这么说：
-> NASA甚至也使用这本书！在他们的喷气推进实验室的深空网项目中使用。
+> [Chinmay](https://twitter.com/a_chinmay/status/258822633741762560)
+
+<!-- -->
+
+> 永远是对新手和有经验的程序员都适合的《A Byte of Python》的爱好者。
+> -- [Patrick Harrington](http://stackoverflow.com/a/457785/4869)
+
+<!-- -->
+
+> I started learning python few days ago from your book..thanks for such a nice book. it is so well written, you made my life easy..so you found a new fan of yours..thats me :) tons of thanks.
+> -- [Gadadhari Bheem](https://twitter.com/Pagal_e_azam/statuses/242865885256232960)
+
+<!-- -->
+
+> Before I started to learn Python, I've acquired basic programming skills in Assembly, C, C++, C# and Java. The very reason I wanted to learn Python is it's popular (people are talking about it) and powerful (reality). This book written by Mr. Swaroop is a very good guide for both brand-new programmers and new python programmers. Took 10 half days to go through it. Great Help!
+> -- [Fang Biyi (PhD Candidate ECE, Michigan State University)](mailto:fangbiyi@gmail.com)
+
+<!-- -->
+
+> Thank you ever so much for this book!!
+> This book cleared up many questions I had about certain aspects of Python such as object oriented programming.
+> I do not feel like an expert at OO but I know this book helped me on a first step or two.
+> I have now written several python programs that actually do real things for me as a system administrator. They are all procedural oriented but they are small by most peoples standards.
+> Again, thanks for this book. Thank you for having it on the web.
+> -- Bob
+
+<!-- -->
+
+> I just want to thank you for writing the first book on programming I've ever really read. Python is now my first language, and I can just imagine all the possibilities. So thank you for giving me the tools to create things I never would have imagined I could do before.
+> -- "The Walrus"
+
+<!-- -->
+
+> I wanted to thank you for writing _A Byte Of Python_ (2 & 3 Versions).  It has been invaluable to my learning experience in Python & Programming in general.
+> Needless to say, I am a beginner in the programming world, a couple of months of self study up to this point. I had been using youtube tutorials & some other online tutorials including other free books. I decided to dig into your book yesterday, & I've learned more on the first few pages than any other book or tutorial. A few things I had been confused about, were cleared right up with a GREAT example & explanation. Can't wait to read (and learn) more!!
+> Thank you so much for not only writing the book, but for putting it under the creative commons license (free). Thank goodness there are unselfish people like you out there to help & teach the rest of us.
+> -- Chris
+
+<!-- -->
+
+> I wrote you back in 2011 and I was just getting into Python and wanted to thank you for your tutorial "A Byte of Python".  Without it, I would have fallen by the wayside.  Since then I have gone on to program a number of functions in my organization with this language with yet more on the horizon.  I would not call myself an advanced programmer by any stretch but I notice the occasional request for assistance now from others since I started using it.  I discovered, while reading "Byte" why I had ceased studying C and C\++ and it was because the book given to me started out with an example containing an augmented assignment.  Of course, there was no explanation for this arrangement of operators and I fell on my head trying to make sense of what was on the written page.  As I recall it was a most frustrating exercise which I eventually abandoned. Doesn't mean C or C++ is impossible to learn, or even that I am stupid, but it does mean that the documentation I worked my way through did not define the symbols and words which is an essential part of any instruction. Just as computers will not be able to understand a computer word or computer symbol that is outside the syntax for the language being used, a student new to any field will not grasp his subject if he encounters words or symbols for which there are no definitions.  You get a "blue screen" as it were in either case.  The solution is simple, though: find the word or symbol and get the proper definition or symbol and lo and behold,the computer or student can proceed.  Your book was so well put together that I found very little in it I couldn't grasp.  So, thank you.  I encourage you to continue to include full definitions of terms.  The documentation with Python is good, once you know, (the examples are its strength from what I see) but in many cases it seems that you have to know in order to understand the documentation which to my mind is not what should be.  Third party tutorials express the need for clarification of the documentation and their success largely depends on the words that are used to describe the terminology.  I have recommended your book to many others. Some in Australia, some in the Caribbean and yet others in the US. It fills a niche no others do.  I hope you are doing well and wish you all the success in the future.
+> -- Nick
+
+<!-- -->
+
+> hey, this is ankush(19). I was facing a great difficulty to start with python. I tried a lot of books but all were bulkier and not target oriented; and then i found this lovely one, which made me love python in no time. Thanks a lot for this "beautiful piece of book".
+> -- Ankush
+
+<!-- -->
+
+> I would like to thank you for your excellent guide on Python. I am a molecular biologist (with little programming background) and for my work I need to handle big datasets of DNA sequences and to analyse microscope images. For both things, programming in python has been useful, if not essential to complete and publish a 6-years project.
+> That such a guide is freely available is a clear sign that the forces of evil are not yet ruling the world! :)
+> -- Luca
+
+<!-- -->
+
+> Since this is going to be the first language you learn, you should use A Byte of Python. It really gives a proper introduction into programming in Python and it is paced well enough for the average beginner. The most important thing from then on will be actually starting to practice making your own little programs.
+> -- ["{Unregistered}"](http://www.overclock.net/t/1177951/want-to-learn-programming-where-do-i-start#post_15837176)
+
+<!-- -->
+
+> Just to say a loud and happy _thank you very much_ for publishing "A Byte of Python" and "A Byte of Vim". Those books were very useful to me four or five years ago when I starting learning programming. Right now I'm developing a project that was a dream for a long, long time and just want to say _thank you_. Keep walking. You are a source of motivation. All the best.
+> -- Jocimar
+
+<!-- -->
+
+> Finished reading A byte of Python in 3 days. It is thoroughly interesting. Not a single page was boring. I want to understand the Orca screen reader code. Your book has hopefully equipped me for it.
+> -- Dattatray
+
+<!-- -->
+
+> Hi, 'A byte of python' is really a good reading for python beginners. So, again, NICE WORK!
+> i'm a 4 years experienced Java&C developer from China. Recently, i want to do some work on zim-wiki note project which uses pygtk to implement.
+> i read your book in 6 days, and i can read and write python code examples now.
+> thx for your contribution.
+> plz keep your enthusiasm to make this world better, this is just a little encourage from China.
+> -- Lee
+
+<!-- -->
+
+> I am Isen from Taiwan, who is a graduating PhD student in Electrical Engineering Department of National Taiwan University. I would like to thank you for your great book. I think it is not only just easy to read but also comprehensive and complete for a new comer of Python. The reason I read your book is that I am starting to work on the GNU Radio framework. Your book let me catch most of important core ideas and skill of Python with a minimum time.
+> I also saw that you do not mind that readers send you a thank note in your book. So I really like your book and appreciate it. Thanks.
+> -- [Isen I-Chun Chao](mailto:chao926@gmail.com)
+
+> NASA甚至也使用这本书！在他们的喷气推进实验室[Jet Propulsion Laboratory](http://dsnra.jpl.nasa.gov/software/Python/byte-of-python/output/byteofpython_html/)的深空网项目中使用。
 
 ## 学术课程
 
 本书正在或曾经在多个院校作为教材使用：
 
-*   '编程语言原理'，课程在自由大学, 阿姆斯特丹
-*   '计算的基本概念'课程在加州大学戴维斯分校
-*   '使用Python编程'课程在哈佛大学
-*   '编程导论'课程在英国利兹大学
-*   '应用程序编程导论'课程在波士顿大学
-*   '气象学信息技术'课程在奥克拉荷马大学
-*   '地理数据处理'课程在密歇根州立大学
-*   '多代理语义网络系统'课程在英国爱丁堡大学
+*   '编程语言原理'，课程在自由大学, 阿姆斯特丹[Vrije Universiteit, Amsterdam](http://www.few.vu.nl/~nsilvis/PPL/2007/index.html)
+*   '计算的基本概念'课程在加州大学戴维斯分校[University of California, Davis](http://www.cs.ucdavis.edu/courses/exp_course_desc/10.html)
+*   '使用Python编程'课程在哈佛大学[Harvard University](http://www.people.fas.harvard.edu/~preshman/python_winter.html)
+*   '编程导论'课程在英国利兹大学[University of Leeds](http://www.comp.leeds.ac.uk/acom1900/)
+*   '应用程序编程导论'课程在波士顿大学[Boston University](http://www.cs.bu.edu/courses/cs108/materials.html)
+*   '气象学信息技术'课程在奥克拉荷马大学[University of Oklahoma](http://gentry.metr.ou.edu/byteofpython/)
+*   '地理数据处理'课程在密歇根州立大学[Michigan State University](http://www.msu.edu/~ashton/classes/825/index.html)
+*   '多代理语义网络系统'课程在英国爱丁堡大学[University of Edinburgh](http://homepages.inf.ed.ac.uk/ewan/masws/)
+- 'Introduction to Computer Science and Programming' at [MIT OpenCourseWare](http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00sc-introduction-to-computer-science-and-programming-spring-2011/references/)
+- 'Basic programming at the Faculty of Social Sciences, University of Ljubljana, Slovenia' -- [Aleš Žiberna](mailto:ales.ziberna@fdv.uni-lj.si) says _"I (and my predecessor) have been using your book as the main literature for this course"_
 
 ## 协议
 
-本书基于[Creative Commons Attribution-Share Alike 3.0 Unported](http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)协议。
+本书基于[Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/)协议。
 
 这意味着：
 
@@ -165,56 +270,26 @@
 
 下载
 
-*   [PDF](http://files.swaroopch.com/python/byte_of_python.pdf)
-*   [完整源码](https://github.com/swaroopch/byte_of_python)
->   如果您想支持本书的持续发展，请考虑[购买本书](http://www.swaroopch.com/buybook)。
+- [PDF (for desktop reading, etc.)](https://www.gitbook.com/download/pdf/book/swaroopch/byte-of-python)
+- [EPUB (for iPhone/iPad, ebook readers, etc.)](https://www.gitbook.com/download/epub/book/swaroopch/byte-of-python)
+- [Mobi (for Kindle)](https://www.gitbook.com/download/mobi/book/swaroopch/byte-of-python)
 
-## 阅读本书的母语版
+你可以访问(https://github.com/swaroopch/byte-of-python)查看原始的内容以便于更正、修订、翻译等等。
 
-如果您对阅读或参与本书的翻译感兴趣，请看[翻译](http://zhgdg.gitcafe.com/static/doc/byte_of_python.html#翻译)。
+## 阅读本书的翻译
 
-## 读者对象
-
-本书作为Python编程语言的指南或教程，主要面向初学者，同时对有经验的程序员也有帮助。
-
-本书目的是，如果对于计算机，你只知道如何保存文本文件，那么你可以从本书学习Python。如果之前你有编程经验，那么你同样可以从本书学习Python。
-
-如果您之前有过编程经验，你将对Python和你喜欢的编程语言之间的区别感兴趣——我高亮显示了这些区别。然而要提醒一点，Python将很快成为你最喜爱的编程语言！
-
-## 教材历史
-
-我为我编写的“Diamond”软件编写简化安装过程的安装程序时，我第一次开始使用Python。我不得不在Python还是Perl上绑定Qt库进行选择。我在网上做了一些研究，偶然发现了[Eric S. Raymond的一篇文章] (http://pythonology.org/success&story=esr), Raymond是一个著名的、值得尊敬的黑客。其中他谈道，Python是如何成为他最喜爱的编程语言的。我也发现PyQt的绑定比Perl-QT更加成熟。所以我决定选择Python。
-
-然后，我开始搜索Python的优秀书籍。我没能找到一本！我确实找到了一些O'Reilly的书，但是它们要么太贵，要么更像是参考手册而不是教程。于是，我免强接受了Python的随机文档。但是它过于简单和小巧。它的确给出了关于Python的妙计，但是不完整。由于我有编程经验，因此我能够对付它，但它并不适合于初学者。
-
-在我第一次使用Python六个月后，我安装了当时最新的Red Hat 9.0 Linux，开始使用KWord。我对它很兴奋，突然冒出一个想法，用它写一些关于Python的东西。我开始写了几页，但是很快就有30页之多。然后我认真地将其变成书的形式，使它更有用。经过几次重写，它已经达到了作为学习Python语言有用教程的水准。我将这本书作为我的贡献捐赠给开源社区。
-
-本书开始于我在Python上的学习笔记，尽管为满足他人的口味，我做出了大量的努力，但直到现在我依然这么认为:
-
-在开源的真正精神中，我收到了很多热心读者的建设性意见、批评和反馈，这些帮助我改进了本书。
-
-## 本书的状态
-
-应许多读者的要求，本书在2012年10月使用Pandoc重新编排，以便生成电子书文档，同时进行了错误修正以及更新。
-
-2008年12月版本（从以前2005年3月的大修改）的修改是更新到Python 3.0。
-
-本书需要像您这样的读者的帮助，指出任何不足、难以理解或者错误之处。请写信给主要作者 或者各个译者留下您的意见和建议。
-
-## 官方网站
-
-本书官方站点是，您可以在线阅读整本书、下载最新版本、购买纸质版本以及给我反馈。
+如果您对阅读或参与本书的翻译感兴趣，请看[翻译](translations.md#translations)。
 
 ## 要思考的一些事情
 
 > 构建软件设计有两种途径：一种是足够简单以致明显没有缺陷，另一种是足够复杂以致没有明显缺陷。
-> 
+
 > -- C. A. R. Hoare
-> 
+
 > 人生的成功，专注和坚持比天才和机会更重要。
-> 
+
 > -- C. W. Wendte
 
 --------------------------------------------------
 
-### 继续阅读[简介](introduction)
+### 继续阅读[致敬](dedication.md)
