@@ -11,21 +11,61 @@
 
 下面是一些人对本书的评价:
 
+> 这是我见到的最好的初学者指南！感谢你的努力。
+> -- [Walt Michalik](mailto:wmich50@theramp.net)
+
+<!-- -->
+
+> 你做了我在网上发现的最好的Python指南，伟大的工作，谢谢！ 
+> -- Joshua Robin (mailto:joshrob@poczta.onet.pl)
+
+<!-- -->
+
+> 为初学者做了Python编程的卓越介绍。
+> -- [Shan Rajasekaran](https://twitter.com/ShanRajasekaran/status/268910645842423809)
+
+<!-- -->
+
+> Python初学者最好的入门指南。
+> -- [Nickson Kaigi](https://twitter.com/nickaigi/status/175508815729541120)
+
+<!-- -->
+
+> 这本指南的每一页都让我愈发爱上这门编程语言。
+> -- [Herbert Feutl](https://twitter.com/HerbertFeutl/status/11901471389913088)
+
+<!-- -->
+
+> Python初学者的一本完美的入门教程，为你打开Python的神秘之门。
+> -- [Dilip](https://twitter.com/Dili_mathilakam/status/220033783066411008)
+
+<!-- -->
+
+> 我正在全神贯注于我的工作，然后发现了这本"A Byte of Python"，一本非常棒的入门指南，有着非常棒的范例。
+> -- [Biologist John](https://twitter.com/BiologistJohn/statuses/194726001803132928)
+
+<!-- -->
+
+> 最近我开始阅读a Byte of python。非常棒的一部教程。我推荐给所有的Python程序员。
+> -- [Mangesh](https://twitter.com/mangeshnanoti/status/225680668867321857)
+
+<!-- -->
+
+> 我正在阅读Swaroop写的《A Byte of Python》,我觉得对于初学者来说这是最好的入门指南，对于有经验的开发者也很有帮助。
+> -- [Apostolos](http://apas.gr/2010/04/27/learning-python/)
+
+<!-- -->
+
+> 很喜欢阅读Swaroop写的《A Byte Of Python》，这是我最喜欢的一本书了。
+> -- [Yuvraj Sharma](https://twitter.com/YuvrajPoudyal/status/448050415356346368)
+
+<!-- -->
+
 > 我发现的最好的事，是我发现了《A Byte of Python》, 它是为初学者编写的一本杰出的书，它写的很好，通过不言而喻的例子对概念作了很好的解释。
-> 
+
 > -- Syed Talal (19岁)
 > 
-> 这是我见到的最好的初学者指南！感谢你的努力。
 > 
-> -- Walt Michalik (wmich50-at-theramp-dot-net)
-> 
-> 你做了我在网上发现的最好的Python指南，伟大的工作，谢谢！
-> 
-> -- Joshua Robin (joshrob-at-poczta-dot-onet-dot-pl)
-> 
-> 为初学者做了Python编程的卓越介绍。
-> 
-> -- Shan Rajasekaran
 > 
 > 嗨，我来自多米尼加共和国，我叫Pavel。最近，我读了你的《A Byte of Python》，我认为它是极好的!! :)。从例子中我学到了很多，你的书对像我这样的初学者有很大帮助...
 > 
