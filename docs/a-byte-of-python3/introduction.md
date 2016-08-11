@@ -188,43 +188,43 @@
 
 <!-- -->
 
-> hey, this is ankush(19). I was facing a great difficulty to start with python. I tried a lot of books but all were bulkier and not target oriented; and then i found this lovely one, which made me love python in no time. Thanks a lot for this "beautiful piece of book".
+> 我是ankush，今年19岁。我刚开始学习Python遇到了很大的困难，我翻了很多的书，但是都无法解决我的问题。直到我发现了你写的这本书，它让我爱上了Python，谢谢你！
 > -- Ankush
 
 <!-- -->
 
-> I would like to thank you for your excellent guide on Python. I am a molecular biologist (with little programming background) and for my work I need to handle big datasets of DNA sequences and to analyse microscope images. For both things, programming in python has been useful, if not essential to complete and publish a 6-years project.
-> That such a guide is freely available is a clear sign that the forces of evil are not yet ruling the world! :)
+> 感谢你写了这么一本如此棒的Python入门教材。我是一名分子生物学的研究人员，编程的知识了解不多，但是我的工作需要处理大量的DNA测序的数据以及分析微观世界的图像。对于这两件事情来说，用Python编程非常有用，没有他我就无法完成这项为期6年的项目。
+> 这么棒的教材居然免费提供，这说明世界上还是有好心人的啊！ :)
 > -- Luca
 
 <!-- -->
 
-> Since this is going to be the first language you learn, you should use A Byte of Python. It really gives a proper introduction into programming in Python and it is paced well enough for the average beginner. The most important thing from then on will be actually starting to practice making your own little programs.
+> 如果这是你第一次学习编程语言，你应该看《A Byte of Python》。它确实从适当的角度介绍了Python程序设计，并且后续的深入教程也不是很难。最重要的是要动手写程序！
 > -- ["{Unregistered}"](http://www.overclock.net/t/1177951/want-to-learn-programming-where-do-i-start#post_15837176)
 
 <!-- -->
 
-> Just to say a loud and happy _thank you very much_ for publishing "A Byte of Python" and "A Byte of Vim". Those books were very useful to me four or five years ago when I starting learning programming. Right now I'm developing a project that was a dream for a long, long time and just want to say _thank you_. Keep walking. You are a source of motivation. All the best.
+> 感谢你出版的这两本书：《A Byte of Python》和《A Byte of Vim》。在四五年前我刚开始学习编程的时候非常有用。现在我正在开发一个项目，这是我梦想中要实现的项目，我想说一声：“谢谢你！”，希望你继续走下去，你是我前进的动力！
 > -- Jocimar
 
 <!-- -->
 
-> Finished reading A byte of Python in 3 days. It is thoroughly interesting. Not a single page was boring. I want to understand the Orca screen reader code. Your book has hopefully equipped me for it.
+> 我三天前看完了《A byte of Python》，写的太好了！没有一个字的废话。我想要阅读屏幕识别的代码，你的书提供了非常大的帮助！
 > -- Dattatray
 
 <!-- -->
 
-> Hi, 'A byte of python' is really a good reading for python beginners. So, again, NICE WORK!
-> i'm a 4 years experienced Java&C developer from China. Recently, i want to do some work on zim-wiki note project which uses pygtk to implement.
-> i read your book in 6 days, and i can read and write python code examples now.
-> thx for your contribution.
-> plz keep your enthusiasm to make this world better, this is just a little encourage from China.
+> Hi, 《A byte of python》对于Python初学者来说真是一本不错的教材，你干得非常棒！
+> 我来自中国，是一名有4年的Java和C的经验的程序员。现在我想用pygtk做一些zim-wiki note project方面的事情。
+> 我用6天的时间看完了这本书，现在我可以写Python的程序了。
+> 谢谢你的贡献！
+> 请继续保持你的热情，并收下来自中国的祝愿！
 > -- Lee
 
 <!-- -->
 
-> I am Isen from Taiwan, who is a graduating PhD student in Electrical Engineering Department of National Taiwan University. I would like to thank you for your great book. I think it is not only just easy to read but also comprehensive and complete for a new comer of Python. The reason I read your book is that I am starting to work on the GNU Radio framework. Your book let me catch most of important core ideas and skill of Python with a minimum time.
-> I also saw that you do not mind that readers send you a thank note in your book. So I really like your book and appreciate it. Thanks.
+> 我叫Isen，来自中国台湾, 是台湾国立大学电子工程系博士班的学生。我要谢谢你写了这么好的一本书。他不仅仅非常容易理解，而且对于Python初学者来说也足够完整。我阅读这本书是因为我要从事GNU Radio framework这方面的工作。你的书让我迅速的抓住了Python的核心思想，并且学会了Python编程。
+> 我注意到了你并不介意读者给你发信息表示感谢，所以我再次谢谢你写了这么好的一本书。
 > -- [Isen I-Chun Chao](mailto:chao926@gmail.com)
 
 > NASA甚至也使用这本书！在他们的喷气推进实验室[Jet Propulsion Laboratory](http://dsnra.jpl.nasa.gov/software/Python/byte-of-python/output/byteofpython_html/)的深空网项目中使用。
@@ -241,8 +241,8 @@
 *   '气象学信息技术'课程在奥克拉荷马大学[University of Oklahoma](http://gentry.metr.ou.edu/byteofpython/)
 *   '地理数据处理'课程在密歇根州立大学[Michigan State University](http://www.msu.edu/~ashton/classes/825/index.html)
 *   '多代理语义网络系统'课程在英国爱丁堡大学[University of Edinburgh](http://homepages.inf.ed.ac.uk/ewan/masws/)
-- 'Introduction to Computer Science and Programming' at [MIT OpenCourseWare](http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00sc-introduction-to-computer-science-and-programming-spring-2011/references/)
-- 'Basic programming at the Faculty of Social Sciences, University of Ljubljana, Slovenia' -- [Aleš Žiberna](mailto:ales.ziberna@fdv.uni-lj.si) says _"I (and my predecessor) have been using your book as the main literature for this course"_
+*   '计算机科学与程序设计导论' at [MIT OpenCourseWare](http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00sc-introduction-to-computer-science-and-programming-spring-2011/references/)
+*   '程序设计基础课程，利久不加纳大学, 斯洛文尼亚' -- [Aleš Žiberna](mailto:ales.ziberna@fdv.uni-lj.si) 
 
 ## 协议
 
