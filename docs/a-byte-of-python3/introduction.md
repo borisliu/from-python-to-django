@@ -152,33 +152,33 @@
 
 <!-- -->
 
-> I started learning python few days ago from your book..thanks for such a nice book. it is so well written, you made my life easy..so you found a new fan of yours..thats me :) tons of thanks.
+> 我几天前开始通过你的书学习Python，这是一本非常好的书。写得如此之好，让我的生活非常美好。现在我已经是你的一个粉丝了，太感谢了！
 > -- [Gadadhari Bheem](https://twitter.com/Pagal_e_azam/statuses/242865885256232960)
 
 <!-- -->
 
-> Before I started to learn Python, I've acquired basic programming skills in Assembly, C, C++, C# and Java. The very reason I wanted to learn Python is it's popular (people are talking about it) and powerful (reality). This book written by Mr. Swaroop is a very good guide for both brand-new programmers and new python programmers. Took 10 half days to go through it. Great Help!
+> 我在学习Python语言之前了解一些汇编、C、C++、C#和Java。我学习Python语言的原因是他非常流行而且强大。这本书对于有经验和无经验的程序员都是一本很好的教材，我花了10个半天看完了这本书，非常有启发！
 > -- [Fang Biyi (PhD Candidate ECE, Michigan State University)](mailto:fangbiyi@gmail.com)
 
 <!-- -->
 
-> Thank you ever so much for this book!!
-> This book cleared up many questions I had about certain aspects of Python such as object oriented programming.
-> I do not feel like an expert at OO but I know this book helped me on a first step or two.
-> I have now written several python programs that actually do real things for me as a system administrator. They are all procedural oriented but they are small by most peoples standards.
-> Again, thanks for this book. Thank you for having it on the web.
+> 感谢作者写了这本书！
+> 这本书解答了我关于Python语言的很多问题，比如面向对象编程等。
+> 看完之后我不觉得自己就成了面向对象的专家了，但是这本书领我入了门。
+> 我现在已经写了很多的Python程序作为系统管理员的工具，他们都是面向过程的小程序。
+> 最后再次感谢这本书的帮助。
 > -- Bob
 
 <!-- -->
 
-> I just want to thank you for writing the first book on programming I've ever really read. Python is now my first language, and I can just imagine all the possibilities. So thank you for giving me the tools to create things I never would have imagined I could do before.
+> 我想感谢你写了这本书，我是从这本书开始学习编程的。Python现在是我的首选开发语言了。感谢你让我能够开发出很多有用的小工具，在学习Python编程之前这是我难以想象的。
 > -- "The Walrus"
 
 <!-- -->
 
-> I wanted to thank you for writing _A Byte Of Python_ (2 & 3 Versions).  It has been invaluable to my learning experience in Python & Programming in general.
-> Needless to say, I am a beginner in the programming world, a couple of months of self study up to this point. I had been using youtube tutorials & some other online tutorials including other free books. I decided to dig into your book yesterday, & I've learned more on the first few pages than any other book or tutorial. A few things I had been confused about, were cleared right up with a GREAT example & explanation. Can't wait to read (and learn) more!!
-> Thank you so much for not only writing the book, but for putting it under the creative commons license (free). Thank goodness there are unselfish people like you out there to help & teach the rest of us.
+> 我想谢谢你写了这本 _A Byte Of Python_ 。这本书对于我学习Python语言编程来说是无价之宝。
+> 我是一名刚刚入门的程序员，几个月前刚刚开始学习。之前我都是通过youtube的视频教程或者其他的在线免费教程学习。昨天我决定从你写的这本书开始入手学习。开始几页我就学习到了之前从来无法企及的编程知识。我有一个小问题，能不能给出一些最新的例子和解释，我非常期待继续更新。
+> 感谢你不仅仅写了这本书，而且免费发布。感谢有你们这些无私的人能够帮助我们这些芸芸众生。
 > -- Chris
 
 <!-- -->
