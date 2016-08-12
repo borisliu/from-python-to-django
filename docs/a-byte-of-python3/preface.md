@@ -12,7 +12,7 @@ Python可能是少数的几个既简单易学又功能强大的编程语言之�
 
 ## 官方网站
 
-本书的官方网站为(http://python.swaroopch.com/)，你可以在线阅读全部的内容，下载最新的版本，或者[购买纸质印刷书籍](http://www.swaroopch.com/buybook)，也可以给我反馈。
+本书的官方网站为[http://python.swaroopch.com/](http://python.swaroopch.com/)，你可以在线阅读全部的内容，下载最新的版本，或者[购买纸质印刷书籍](http://www.swaroopch.com/buybook)，也可以给我反馈。
 
 ## 要思考的一些事情
 
