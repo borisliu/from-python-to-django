@@ -62,7 +62,7 @@ Hello World
 
 下载安装之后，在菜单中选择“查看”->“扩展”，然后输入`python`，选择由`Don Jayamanne`开发的Python扩展安装即可。
 
-<!-- TODO: 增加控件的截图 -->
+![VSCode安装Python扩展](./firststep01.png)
 
 在VSCode中，新建项目就是新建一个文件夹，你可以使用操作系统的资源管理器新建文件夹，然后在当前文件夹下使用命令行`code .`启动VSCode。也可以在VSCode中使用“文件”->"打开...“打开这个文件夹。
 
@@ -76,11 +76,11 @@ print("hello world!")
 
 点击`[Ctrl+S]`保存文件之后，选择最左侧的`调试`视图，然后点击上面的绿色小三角，运行`helloworld.py`程序。此时VSCode会弹出一个列表让你选择环境，在这里选择`Python`即可。
 
-<!-- TODO: 增加选择执行环境的截图 -->
+![VSCode选择执行环境](./firststep02.png)
 
 再次点击绿色的小三角按钮，会看到程序没有立即运行，而是进入了调试状态，在中间出现了调试的对话框，点击那个绿色的小三角按钮即可运行程序，看到`hello world!`的输出。
 
-<!-- TODO: 增加程序输出的截图 -->
+![VSCode选择执行环境](./firststep03.png)
 
 之所以要再点击一次，是因为VSCode的Python插件默认的启动配置为：
 
@@ -142,7 +142,7 @@ $ python hello.py
 hello world
 ```
 
-<!-- TODO: 增加程序输出的截图 -->
+![命令行执行Python程序](./firststep04.png)
 
 如果你得到了如上所示有输出，祝贺你!——你已经成功地运行了你的第一个Python程序。您已经成功地越过学习编程最难的部分－－开始你的第一个程序!
 
