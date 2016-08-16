@@ -9,10 +9,10 @@
     * [关于Python](a-byte-of-python3/about_python.md)
     * [安装](a-byte-of-python3/install.md)
     * [第一步](a-byte-of-python3/firststep.md)
+    * [基础](a-byte-of-python3/basics.md)
+    * [操作符和表达式](a-byte-of-python3/op_exp.md)
+    * [控制流](a-byte-of-python3/control_flow.md)
 
-    * [Basics](basics.md)
-    * [Operators and Expressions](op_exp.md)
-    * [Control flow](control_flow.md)
     * [Functions](functions.md)
     * [Modules](modules.md)
     * [Data Structures](data_structures.md)
