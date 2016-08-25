@@ -96,4 +96,4 @@ python3 -V
 
 --------------------------------------------------
 
-### 继续阅读[第一步](a-byte-of-python3/firststep.md)
+### 继续阅读[第一步](a-byte-of-python3/first_steps.md)
