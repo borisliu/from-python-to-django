@@ -145,4 +145,4 @@ D:> python pickling.py
 
 --------------------------------------------------
 
-### 继续阅读[异常](a-byte-of-python3/exception)
+### 继续阅读[异常](exception.md)
