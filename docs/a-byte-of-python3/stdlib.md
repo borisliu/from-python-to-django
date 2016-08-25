@@ -33,11 +33,9 @@ What if you wanted to have some debugging messages or important messages to be s
 
 Save as `stdlib_logging.py`:
 
-<pre><code class="lang-python">{% include "./programs/stdlib_logging.py" %}</code></pre>
 
 Output:
 
-<pre><code>{% include "./programs/stdlib_logging.txt" %}</code></pre>
 
 If you do not have the `cat` command, then you can just open the `test.log` file in a text editor.
 
