@@ -144,11 +144,9 @@ The `assert` statement should be used judiciously. Most of the time, it is bette
 
 Decorators are a shortcut to applying wrapper functions. This is helpful to "wrap" functionality with the same code over and over again. For example, I created a `retry` decorator for myself that I can just apply to any function and if any exception is thrown during a run, it is retried again, till a maximum of 5 times and with a delay between each retry. This is especially useful for situations where you are trying to make a network call to a remote computer:
 
-<pre><code class="lang-python">{% include "./programs/more_decorator.py" %}</code></pre>
 
 Output:
 
-<pre><code>{% include "./programs/more_decorator.txt" %}</code></pre>
 
 **How It Works**
 
