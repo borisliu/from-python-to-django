@@ -16,3 +16,6 @@ _book
 
 # Visual Studio Code
 .vscode
+
+# MAC OS files
+.DS_Store
