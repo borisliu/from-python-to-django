@@ -1,5 +1,4 @@
 # 安装
-=======
 
 本书所描述的"Python 3"，指的是[Python 3.5.2](https://www.python.org/downloads/)或更高的版本。
 
