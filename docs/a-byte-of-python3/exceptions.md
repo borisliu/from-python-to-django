@@ -38,11 +38,9 @@ We can handle exceptions using the `try..except` statement.  We basically put ou
 
 Example (save as `exceptions_handle.py`):
 
-<pre><code class="lang-python">{% include "./programs/exceptions_handle.py" %}</code></pre>
 
 Output:
 
-<pre><code>{% include "./programs/exceptions_handle.txt" %}</code></pre>
 
 **How It Works**
 
@@ -64,11 +62,9 @@ The error or exception that you can raise should be a class which directly or in
 
 Example (save as `exceptions_raise.py`):
 
-<pre><code class="lang-python">{% include "./programs/exceptions_raise.py" %}</code></pre>
 
 Output:
 
-<pre><code>{% include "./programs/exceptions_raise.txt" %}</code></pre>
 
 **How It Works**
 
@@ -82,11 +78,9 @@ Suppose you are reading a file in your program. How do you ensure that the file 
 
 Save this program as `exceptions_finally.py`:
 
-<pre><code class="lang-python">{% include "./programs/exceptions_finally.py" %}</code></pre>
 
 Output:
 
-<pre><code>{% include "./programs/exceptions_finally.txt" %}</code></pre>
 
 **How It Works**
 
@@ -102,7 +96,6 @@ Acquiring a resource in the `try` block and subsequently releasing the resource 
 
 Save as `exceptions_using_with.py`:
 
-<pre><code class="lang-python">{% include "./programs/exceptions_using_with.py" %}</code></pre>
 
 **How It Works**
 
