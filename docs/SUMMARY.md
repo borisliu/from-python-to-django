@@ -1,7 +1,9 @@
 # Summary
 
 * [前言](README.md)
+
 * [搭建Python开发环境](introduction/index.md)
+
 * [简明Python教程](a-byte-of-python3/index.md)
     * [简介](a-byte-of-python3/introduction.md)
     * [致敬](a-byte-of-python3/dedication.md)
@@ -32,7 +34,15 @@
 * [Django step by step](django-step-by-step/index.md)
     * [第一讲](django-step-by-step/chapter1.md)
     * [第二讲](django-step-by-step/chapter2.md)
+
 * [Django CMS教程](django-cms/index.md)
+
+* [使用PyQt5进行快速GUI应用开发](pyqt5/index.md)
+    * [简介](pyqt5/introduction.md)
+    * [对话框](pyqt5/dialogs.md)
+    * [主窗口](pyqt5/main_windows.md)
+    * [Qt Designer](pyqt5/qt_designer.md)
+    * [文件数据处理](pyqt5/data_file.md)
 
 ----
 
