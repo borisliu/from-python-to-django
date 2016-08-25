@@ -1,7 +1,5 @@
-In Chapter 5 we created dialogs purely by writing code. In our initializers we
-created the widgets we needed and set their initial properties. Then we created
-one or more layout managers to which we added the widgets to get the
-appearance we wanted. In some cases, when working with vertical or horizontal
-layouts we added a “stretch” which would expand to fill unwanted space.
-And after laying out the widgets we connected the signals we were interested
-in to the methods we wanted to handle them.
+# 使用Qt Designer
+
+在第二章我们使用代码生成了对话框。我们先创建一系列的UI控件，并且设置他们的初始属性。为了让UI控件按照我们的要求进行显示，我们创建了一个或多个布局管理器，并将UI控件加入。我们可能会使用水平或者垂直的布局，我们还会加入一个“拉伸”来充满空白的地方。在完成UI控件的布局之后我们将信号连接到对应的处理函数。
+
+![Qt Designer](img/qt_designer01.png)
