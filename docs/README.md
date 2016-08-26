@@ -13,7 +13,7 @@ Python可能是为数不多的既简单又强大的几个编程语言之一。�
 基于上述这些问题，本人整理了这些文档，给那些零起点的程序员一个完整的入门文档，学习路径是这样的：
 
 ```
-  	Python3--->Django1.9--->Django-CMS3--->PyQt5
+  	Python3--->Django1.9--->Django-CMS3
 ```
 
 ## 开发环境
@@ -26,8 +26,6 @@ Python可能是为数不多的既简单又强大的几个编程语言之一。�
 
 * 用virtualenv搭建Django和Django-CMS的开发环境，后文会详细描述。
 
-* [PyQt5的安装文件](https://sourceforge.net/projects/pyqt/)，根据你自己的操作系统安装X32或者X64
-
 ## 开始学习
 
 根据自己的情况选择从哪里开始学习，如果你已经有了一定的基础，你可以选择跳过某些章节，对于大多数初学者来讲，学习的路径如下：
@@ -36,7 +34,6 @@ Python可能是为数不多的既简单又强大的几个编程语言之一。�
 ### 2. [简明Python教程](a-byte-of-python3/index.md)
 ### 3. [Django step by step](django-step-by-step/index.md)
 ### 4. [Django-CMS教程](django-cms/index.md)
-### 5. [使用PyQt5进行快速GUI应用开发](pyqt5/index.md)
 
 本文托管在[GitHub](https://github.com/borisliu/from-python-to-django)，
 如果有问题请在线[提交](https://github.com/borisliu/from-python-to-django/issues)。
