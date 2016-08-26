@@ -37,12 +37,5 @@
 
 * [Django CMS教程](django-cms/index.md)
 
-* [使用PyQt5进行快速GUI应用开发](pyqt5/index.md)
-    * [简介](pyqt5/introduction.md)
-    * [对话框](pyqt5/dialogs.md)
-    * [主窗口](pyqt5/main_windows.md)
-    * [Qt Designer](pyqt5/qt_designer.md)
-    * [文件数据处理](pyqt5/data_file.md)
-
 ----
 
