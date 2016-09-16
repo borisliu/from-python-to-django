@@ -4,7 +4,9 @@
 
 ## 问题
 
-我们想要解决的问题是"*我需要一个为我所有重要的程序创建备份的一个程序*"。
+我们想要解决的问题是：
+
+> 我需要一个为我所有重要的程序创建备份的一个程序。
 
 尽管这是一个简单的问题，但是我们没有着手解决这个问题的足够的信息。多一点的分析是必需的，例如，我们如何指定哪一个文件需要备份？他们是怎样存储的？
 
@@ -14,7 +16,13 @@
 * 备份必须存储在一个主备份目录中。
 * 备份的文件压缩到一个压缩文件中。
 * 压缩文件的名称是当前的日期和时间。
-* 在标准的 Linux/Unix 发行版上，我们默认使用标准的zip命令，Windows用户可以从GnuWin32项目页 安装，并向你的系统环境变量 PATH追加C:\Program Files\GnuWin32\bin，这和为识别Python命令我们所做的类似。注意，只要它有一个命令行，你可以使用任何你想要归档的命令。
+* 在标准的 Linux/Unix 发行版上，我们默认使用标准的zip命令。注意，只要它有一个命令行，你可以使用任何你想要归档的命令。
+
+，Windows用户可以从GnuWin32项目页 安装，并向你的系统环境变量 PATH追加C:\Program Files\GnuWin32\bin，这和为识别Python命令我们所做的类似
+
+> **Windows用户**
+> 
+> Windows用户可以[安装](http://gnuwin32.sourceforge.net/downlinks/zip.php)在[GnuWin32项目主页](http://gnuwin32.sourceforge.net/packages/zip.htm)安装 `zip`命令并且将`C:\Program Files\GnuWin32\bin`添加到你的环境变量`PATH`中，就好像我们配置python命令行一样。
 
 ## 解决方案
 
@@ -22,25 +30,41 @@
 
 保存为backup_ver1.py:
 
-```
+```python
 import os
 import time
 
 # 1. 在列表中指出需要备份的文件和目录。
+# 在Windows中的例子:
+# source = ['"C:\\My Documents"', 'C:\\Code']
+# 在Mac OS X和Linux中的列子:
 source = ['"C:\\My Documents"', 'C:\\Code']
 # 注意我们在有空格的名字的字符串内不得不使用双引号。
 
 # 2. 备份必须存储在一个主备份目录中。
-target_dir = 'E:\\Backup' # 记住把它改为你要使用的目录
+# 在Windows中的例子:
+# target_dir = 'E:\\Backup'
+# 在Mac OS X和Linux中的例子:
+target_dir = 'E:\\Backup' 
+# 记住把它改为你要使用的目录
 
 # 3. 备份的文件压缩到一个压缩文件中。
 # 4. 压缩文件的名称是当前的日期和时间。
-target = target_dir + os.sep + time.strftime('%Y%m%d%H%M%S') + '.zip'
+target = target_dir + os.sep + \
+         time.strftime('%Y%m%d%H%M%S') + '.zip'
+
+# 如果目录不存在就创建
+if not os.path.exists(target_dir):
+    os.mkdir(target_dir)  # 创建目录
 
 # 5. 我们使用zip命令把文件压缩到一个压缩文件中
-zip_command = "zip -qr {0} {1}".format(target, ' '.join(source))
+zip_command = "zip -qr {0} {1}".format(target, 
+                                       ' '.join(source))
 
 # 运行备份
+print("Zip命令为:")
+print(zip_command)
+print("运行:")
 if os.system(zip_command) == 0:
     print('成功备份到', target)
 else:
@@ -50,37 +74,46 @@ else:
 输出:
 
 ```
-D:> python backup_ver1.py
+$ python backup_ver1.py
+Zip命令为:
+zip -r /Users/swa/backup/20140328084844.zip /Users/swa/notes
+运行:
+  adding: Users/swa/notes/ (stored 0%)
+  adding: Users/swa/notes/blah1.txt (stored 0%)
+  adding: Users/swa/notes/blah2.txt (stored 0%)
+  adding: Users/swa/notes/blah3.txt (stored 0%)
 成功备份到 E:\Backup\20080702185040.zip
 ```
 
-现在，我们是在测试我们的程序能否正常工作的**测试**阶段。如果它不像预期的那样,则我们必须**调试**我们的程序，也就是从程序中去掉bug(错误)。
+现在，我们是在测试我们的程序能否正常工作的*测试*阶段。如果它不像预期的那样,则我们必须*调试*我们的程序，也就是从程序中去掉*bug*(错误)。
 
-如果上面的程序不为你工作，在os.system调用之前放置一个print(zip_command)，然后运行程序。 现在复制/粘贴print(zip_command)到shell提示符，看看它自己是否正常运行。如果这个命令失败,检查压缩命令手册，是什么可能是错的。如果这个命令成功，然后检查Python程序是否和上面的程序完全匹配。
+如果上面的程序不为你工作，将打印出来的`Zip命令为:`下面那一行拷贝一下，然后在shell(GNU/Linux和Mac OS X中)/`cmd`(Windows中)里面粘贴，看看有哪些报错，然后尝试修复它。如果这个命令失败,检查压缩命令手册，是什么可能是错的。如果这个命令成功，然后检查Python程序是否和上面的程序完全匹配。
 
-它是如何工作的：
+**它是如何工作的：**
 
-你会注意到，我们是如何以一个循序渐进的方式将我们的**设计**转换成**代码**的。
+你会注意到，我们是如何以一个循序渐进的方式将我们的*设计*转换成*代码*的。
 
-我们通过先导入和使用os和time模块，然后，我们在source清单中指定要备份的文件和目录，目标目录存储在变量 target_dir中，是我们要存储的所有的备份文件的地方，我们将要创建的压缩文件的名称是使用 time.strftime() 函数由当前日期和时间生成的。它也包含 .zip扩展名，将存储在target_dir目录中。
+我们通过先导入和使用`os`和`time`模块，然后，我们在`source`清单中指定要备份的文件和目录，目标目录存储在变量`target_dir`中，这是我们要存储的所有的备份文件的地方，我们将要创建的压缩文件的名称是使用 `time.strftime()` 函数由当前日期和时间生成的。它也包含 `.zip`扩展名，将存储在`target_dir`目录中。
 
-注意，变量os.sep的使用--目录的分隔符依你的操作系统而定，即，在Linux和 Unix中是'/'，在Windows中是'\\'，在Mac OS中是':'。使用os.sep而不是直接使用这些字符将使我们的程序更具可移植性，在所有这些系统上都能工作。
+注意，变量`os.sep`的使用--目录的分隔符依你的操作系统而定，在GNU/Linux和Unix中是`'/'`，在Windows中是`'\\'`，在Mac OS中是`':'`。使用`os.sep`而不是直接使用这些字符将使我们的程序更具可移植性，在所有这些系统上都能工作。
 
-time.strftime()函数获取一个技术参数，像在上面的程序中我们已经使用过的。%Y参数将被替换为带着世纪的年份数字。%m参数将被一个位于01到12的数字替换，如此等等。这种参数的完整列表可[Python参考手册](http://docs.python.org/3/library/time.html)中找到。
+`time.strftime()`函数获取一个技术参数，像在上面的程序中我们已经使用过的。`%Y`参数将被替换为带着世纪的年份数字。`%m`参数将被一个位于`01`到`12`的数字替换，如此等等。这种参数的完整列表可[Python参考手册](http://docs.python.org/3/library/time.html#time.strftime)中找到。
 
-我们创建目标文件的名称zip文件使用了加法操作符。加法操作符连接字符串，也就是，它将两个字符串连接在一起，并返回一个新的。然后,我们创建一个包含我们要执行的命令的字符串zip_command。你可以通过在shell(Linux终端或DOS提示符)运行来检查这个命令的工作。
+我们创建目标文件的名称zip文件使用了加法操作符连接字符串，它将两个字符串连接在了一起，并返回一个新的字符串。然后,我们创建一个包含我们要执行的命令的字符串`zip_command`。你可以通过在shell(GNU/Linux终端或DOS提示符)运行来检查这个命令的工作。
 
-我们使用了有一些选项并传递参数的zip命令。-q选项用于表明zip命令应该**quietly(默默地)**工作，-r选项指定zip命令应该**recursively(递归地)**工作，即它应该包括所有的子目录和文件。这两个选项组合在一起可缩写为-qr。要创建的压缩文件名后的选项后面紧跟要备份的文件和目录列表，我们使用字符串的join方法，这种方法我们已经知道如何使用，将source列表转换成一个字符串。
+我们使用的`zip`命令有一些选项和参数。`-q`选项用于表明zip命令应该**quietly(默默地)**工作，`-r`选项指定zip命令应该**recursively(递归地)**工作，即它应该包括所有的子目录和文件。这两个选项组合在一起可缩写为`-qr`。要创建的压缩文件名后的选项后面紧跟要备份的文件和目录列表，我们使用字符串的`join`方法，这种方法我们已经知道如何使用，将`source`列表转换成一个字符串。
 
-然后，我们终于使用os.system函数运行命令。os.system函数运行命令就仿佛在系统上也就是shell上运行它，如果命令运行成功，它返回0，否则返回一个错误号。
+然后，我们终于使用`os.system`函数*运行*命令。os.system函数运行命令就仿佛在系统上也就是shell上运行它，如果命令运行成功，它返回`0`，否则返回一个错误号。
 
 根据命令的结果，我们打印相应的消息，备份失败或成功。
 
 就是这样，我们已经创建了一个备份我们重要文件的一个脚本!
 
-Windows用户应注意
-> 您还可以使用原始字符串，而不是双反斜杠转义序列，例如，使用'C:\\Documents'或r'C:\Documents'。然而，**不要**使用'C:\Documents'，因为你最终用一个未知的转义序列\D。
-现在，我们有一个能够工作的备份脚本，当我们想要备份文件时，我们可以用它。正如前面所讨论的，建议Linux/Unix用户使用(可执行方式)(#可执行的python程序)，这样他们可以随时随地运行备份脚本。这被称为软件的**操作**阶段或**部署**阶段。
+> **Windows用户应注意**
+>
+> 您还可以使用原始字符串，而不是双反斜杠转义序列，例如，使用`'C:\\Documents'`或`r'C:\Documents'`。然而，*不要*使用`'C:\Documents'`，因为你最终用一个未知的转义序列`\D`。
+
+现在，我们有一个能够工作的备份脚本，当我们想要备份文件时，我们可以用它。这被称为软件的*操作*阶段或*部署*阶段。
 
 上面的程序正常工作，但(通常)第一个程序不会像你期望的那么样工作。例如，如果没有正确地设计程序或当键入代码时如果你犯了一个错误等，可能出现问题。相应地，你将不得不回到设计阶段或你需要调试您的程序。
 
