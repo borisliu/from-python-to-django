@@ -125,35 +125,50 @@ zip -r /Users/swa/backup/20140328084844.zip /Users/swa/notes
 
 保存为 backup_ver2.py:
 
-```
+```python
 import os
 import time
 
 # 1. 在列表中指出需要备份的文件和目录。
+# 在Windows中的例子:
+# source = ['"C:\\My Documents"', 'C:\\Code']
+# 在Mac OS X和Linux中的列子:
 source = ['"C:\\My Documents"', 'C:\\Code']
-# 注意，因为名字字符串中有空格，我们不得不使用双引号。
+# 注意我们在有空格的名字的字符串内不得不使用双引号。
 
 # 2. 备份必须存储在一个主备份目录中。
-target_dir = 'E:\\Backup' # 记住把它改为你要使用的目录
+# 在Windows中的例子:
+# target_dir = 'E:\\Backup'
+# 在Mac OS X和Linux中的例子:
+target_dir = 'E:\\Backup' 
+# 记住把它改为你要使用的目录
+
+# 如果目录不存在就创建
+if not os.path.exists(target_dir):
+    os.mkdir(target_dir)  # 创建目录
 
 # 3. 备份的文件压缩到一个压缩文件中。
-# 4. 当前日期是主备份目录中子目录的名字
+# 4. 在主备份目录中创建一个子目录，名字是当前的日期。
 today = target_dir + os.sep + time.strftime('%Y%m%d')
-# 当前时间是压缩文件的名字
+# zip文件的名字是当前的时间。
 now = time.strftime('%H%M%S')
 
-# 如果子目录不存在，创建它
-if not os.path.exists(today):
-    os.mkdir(today) # 建立目录
-    print('成功创建目录', today)
-
-# 压缩文件的名字
+# zip文件的完整路径
 target = today + os.sep + now + '.zip'
 
+# 如果子目录不存在就创建它
+if not os.path.exists(today):
+    os.mkdir(today)
+    print('成功创建子目录：', today)
+
 # 5. 我们使用zip命令把文件压缩到一个压缩文件中
-zip_command = "zip -qr {0} {1}".format(target, ' '.join(source))
+zip_command = "zip -qr {0} {1}".format(target, 
+                                       ' '.join(source))
 
 # 运行备份
+print("Zip命令为:")
+print(zip_command)
+print("运行:")
 if os.system(zip_command) == 0:
     print('成功备份到', target)
 else:
@@ -163,17 +178,21 @@ else:
 输出：
 
 ```
-D:> python backup_ver2.py
-成功创建目录 E:\Backup\20080702
-成功备份到 E:\Backup\20080702\202311.zip
-
-D:> python backup_ver2.py
-成功备份到 E:\Backup\20080702\202325.zip
+$ python backup_ver2.py
+成功创建子目录：/Users/swa/backup/20140329
+Zip命令为:
+zip -r /Users/swa/backup/20140328084844.zip /Users/swa/notes
+运行:
+  adding: Users/swa/notes/ (stored 0%)
+  adding: Users/swa/notes/blah1.txt (stored 0%)
+  adding: Users/swa/notes/blah2.txt (stored 0%)
+  adding: Users/swa/notes/blah3.txt (stored 0%)
+成功备份到 E:\Backup\20080702185040.zip
 ```
 
-它是如何工作的:
+**它是如何工作的:**
 
-大部分程序还保留了原样，变化是，我们使用os.path.exists函数检查在主备份目录中是否存在以当前日期为名字的目录，如果不存在，我们使用os.mkdir函数创建它。
+大部分程序还保留了原样，变化是，我们使用`os.path.exists`函数检查在主备份目录中是否存在以当前日期为名字的目录，如果不存在，我们使用`os.mkdir`函数创建它。
 
 ## 第三版
 
