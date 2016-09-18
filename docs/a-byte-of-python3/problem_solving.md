@@ -230,7 +230,7 @@ today = target_dir + os.sep + time.strftime('%Y%m%d')
 now = time.strftime('%H%M%S')
 
 # 提示用户输入zip文件名中附加的注释
-comment = input('输入附加的注释 --> ')
+comment = input('输入注释 --> ')
 # Check if a comment was entered
 if len(comment) == 0:
     target = today + os.sep + now + '.zip'
@@ -277,42 +277,58 @@ SyntaxError: invalid syntax
 
 保存为 backup_ver4.py:
 
-```
+```python
 import os
 import time
 
 # 1. 在列表中指出需要备份的文件和目录。
+# 在Windows中的例子:
+# source = ['"C:\\My Documents"', 'C:\\Code']
+# 在Mac OS X和Linux中的列子:
 source = ['"C:\\My Documents"', 'C:\\Code']
-# 注意，因为名字字符串中有空格，我们不得不使用双引号。
+# 注意我们在有空格的名字的字符串内不得不使用双引号。
 
 # 2. 备份必须存储在一个主备份目录中。
-target_dir = 'E:\\Backup' #记住把它改为你要使用的目录
+# 在Windows中的例子:
+# target_dir = 'E:\\Backup'
+# 在Mac OS X和Linux中的例子:
+target_dir = 'E:\\Backup' 
+# 记住把它改为你要使用的目录
+
+# 如果目录不存在就创建
+if not os.path.exists(target_dir):
+    os.mkdir(target_dir)  # 创建目录
 
 # 3. 备份的文件压缩到一个压缩文件中。
-# 4. 当前日期是主备份目录中子目录的名字
+# 4. 在主备份目录中创建一个子目录，名字是当前的日期。
 today = target_dir + os.sep + time.strftime('%Y%m%d')
-# 当前时间是压缩文件的名字
+# zip文件的名字是当前的时间。
 now = time.strftime('%H%M%S')
 
-# 为创建一个压缩文件的名字从用户取得一个注释
-comment = input('输入注释--> ')
-if len(comment) == 0: # 检查是否输入注释
+# 提示用户输入zip文件名中附加的注释
+comment = input('输入注释 --> ')
+# Check if a comment was entered
+if len(comment) == 0:
     target = today + os.sep + now + '.zip'
 else:
     target = today + os.sep + now + '_' + \
         comment.replace(' ', '_') + '.zip'
 
-# 如果子目录不存在，创建它
+# 如果子目录不存在就创建它
 if not os.path.exists(today):
-    os.mkdir(today) #  建立目录
-    print('成功创建目录', today)
+    os.mkdir(today)
+    print('成功创建子目录：', today)
 
 # 5. 我们使用zip命令把文件压缩到一个压缩文件中
-zip_command = "zip -qr {0} {1}".format(target, ' '.join(source))
+zip_command = "zip -qr {0} {1}".format(target, 
+                                       ' '.join(source))
 
 # 运行备份
+print("Zip命令为:")
+print(zip_command)
+print("运行:")
 if os.system(zip_command) == 0:
-    print('成功备份到 ', target)
+    print('成功备份到', target)
 else:
     print('备份失败')
 ```
@@ -320,32 +336,32 @@ else:
 输出：
 
 ```
-D:> python3 backup_ver4.py
+$ python3 backup_ver4.py
 输入注释--> added new examples
 成功备份到 E:\Backup\20080702\202836_added_new_examples.zip
 
-D:> python3 backup_ver4.py
+$ python3 backup_ver4.py
 输入注释-->
 成功备份到 E:\Backup\20080702\202839.zip
 ```
 
-它是如何工作的：
+**它是如何工作的：**
 
-这个程序现在工作了！让我们仔细检查第三版的实际增强，我们使用input函数获取 用户的注解，然后通过使用len函数找到输入的长度检查用户确实输入了一些东西。如果用户只是按enter（回车键），没有输入任何东西(也许这只是一个常规备份或没有特殊的改变)，那么，我们按照我们之前所做的处理。
+这个程序现在工作了！让我们仔细检查第三版的实际增强，我们使用`input`函数获取 用户的注解，然后通过使用`len`函数找到输入的长度检查用户确实输入了一些东西。如果用户只是按`enter`（回车键），没有输入任何东西(也许这只是一个常规备份或没有特殊的改变)，那么，我们按照我们之前所做的处理。
 
-然而，如果提供了一个注释，那么，它将附加到压缩文档名字中、 .zip扩展名前。请注意，我们将注释中的空格用开线正在取代空间在评论中用下划线——这是因为管理没有空格的文件名容易得多。
+然而，如果提供了一个注释，那么，它将附加到压缩文档名字中、 `.zip`扩展名前。请注意，我们将注释中的空格用开线正在取代空间在评论中用下划线——这是因为管理没有空格的文件名容易得多。
 
 ## 更细化
 
-第四版对于大多数用户来说是一个令人满意的工作脚本，但总有改进的余地。例如，您可以为程序包括一个冗长级别，在那里你可以指定一个-v选项，从而使你的程序变得更加健谈。
+第四版对于大多数用户来说是一个令人满意的工作脚本，但总有改进的余地。例如，您可以为程序包括一个冗长级别，在那里你可以指定一个`-v`选项，从而使你的程序变得更加健谈。
 
-另一个可能的优化处理是将允许额外的文件和目录被传递给该脚本的命令行。我们可从sys.argv列表得到这些文件名，我们可以使用list类提供的extend方法将它们添加到我们的source列表中。
+另一个可能的优化处理是将允许额外的文件和目录被传递给该脚本的命令行。我们可从`sys.argv`列表得到这些文件名，我们可以使用`list`类提供的`extend`方法将它们添加到我们的`source`列表中。
 
-最重要的改进是不使用的创建文档的os.system 方式，而是使用转而使用内建的 zipfile 或 tarfile模块创建文档。他们是标准库的一部分，在你的计算机上已经为您提供使用没有外部依赖的压缩程序。
+最重要的改进是不使用的创建文档的`os.system` 方式，而是使用转而使用内建的 [zipfile](http://docs.python.org/3/library/zipfile.html) 或 [tarfile](http://docs.python.org/3/library/tarfile.html)模块创建文档。他们是标准库的一部分，在你的计算机上已经为您提供使用没有外部依赖的压缩程序。
 
-然而，在上面的例子中，纯粹是为教学的目的，我一直使用 os.system的方式创建一个备份，这样的例子对每个人的理解足够简单，但不是真正足够的有效。
+然而，在上面的例子中，纯粹是为教学的目的，我一直使用 `os.system`的方式创建一个备份，这样的例子对每个人的理解足够简单，但不是真正足够的有效。
 
-你能使用[zipfile(压缩文件)](http://docs.python.org/3/library/zipfile.html)模块，而不是os.system调用尝试写第五版吗？
+你能使用[zipfile](http://docs.python.org/3/library/zipfile.html)模块，而不是`os.system`调用尝试写第五版吗？
 
 ## 软件开发过程
 
@@ -357,7 +373,12 @@ D:> python3 backup_ver4.py
 4. 测试 (测试和调试)
 5. 使用 (操作和部署)
 6. 维护 (优化)
-编写程序的推荐方法是我们创建备份脚本的过程：做了分析和设计，开始实现用一个简单的版本，测试和调试它，来确保它能按预期工作。现在，添加你想要的任何功能，继续重复需要次数的做－试验循环。记住，**软件是在成长，而不是建立**。
+编写程序的推荐方法是我们创建备份脚本的过程：做了分析和设计，开始实现用一个简单的版本，测试和调试它，来确保它能按预期工作。现在，添加你想要的任何功能，继续重复需要次数的做－试验循环。
+
+记住：
+
+> 软件是在成长，而不是建立。
+> -- [Bill de hÓra](http://97things.oreilly.com/wiki/index.php/Great_software_is_not_built,_it_is_grown)
 
 ## 小结
 
@@ -365,3 +386,6 @@ D:> python3 backup_ver4.py
 
 接下来，我们将讨论面向对象编程。 
 
+--------------------------------------------------
+
+### 继续阅读[面向对象编程](oop.md)
