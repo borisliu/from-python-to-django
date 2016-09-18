@@ -198,44 +198,59 @@ zip -r /Users/swa/backup/20140328084844.zip /Users/swa/notes
 
 当我们做一些备份时，第二版工作起来很好了。但当有许多备份时，我发现区分为什么备份是很困难的。例如，对一个程序或描述做一些重要的改变，然后我想知道这些变化与压缩文件的名字有什么联系。这个可以通过为压缩文件的名字附加上一个用户提供的注释而轻易实现。
 
-注意
-> 下面的程序不工作，所以不要惊慌，请继续，因为在这里有一个教训。
+注意：下面的程序不工作，所以不要惊慌，请继续，因为在这里有一个教训。
 保存为 backup_ver3.py:
 
-```
+```python
 import os
 import time
 
-# 1.  在列表中指出需要备份的文件和目录。
+# 1. 在列表中指出需要备份的文件和目录。
+# 在Windows中的例子:
+# source = ['"C:\\My Documents"', 'C:\\Code']
+# 在Mac OS X和Linux中的列子:
 source = ['"C:\\My Documents"', 'C:\\Code']
-# 注意，因为名字字符串中有空格，我们不得不使用双引号。
+# 注意我们在有空格的名字的字符串内不得不使用双引号。
 
 # 2. 备份必须存储在一个主备份目录中。
-target_dir = 'E:\\Backup' # 记住把它改为你要使用的目录
+# 在Windows中的例子:
+# target_dir = 'E:\\Backup'
+# 在Mac OS X和Linux中的例子:
+target_dir = 'E:\\Backup' 
+# 记住把它改为你要使用的目录
+
+# 如果目录不存在就创建
+if not os.path.exists(target_dir):
+    os.mkdir(target_dir)  # 创建目录
 
 # 3. 备份的文件压缩到一个压缩文件中。
-# 4. 当前日期是主备份目录中子目录的名字
+# 4. 在主备份目录中创建一个子目录，名字是当前的日期。
 today = target_dir + os.sep + time.strftime('%Y%m%d')
-# 当前时间是压缩文件的名字
+# zip文件的名字是当前的时间。
 now = time.strftime('%H%M%S')
 
-# 为创建一个压缩文件的名字从用户取得一个注释
-comment = input('Enter a comment --> ')
-if len(comment) == 0: # 检查是否输入注释
+# 提示用户输入zip文件名中附加的注释
+comment = input('输入附加的注释 --> ')
+# Check if a comment was entered
+if len(comment) == 0:
     target = today + os.sep + now + '.zip'
 else:
-    target = today + os.sep + now + '_' +
+    target = today + os.sep + now + '_' + 
         comment.replace(' ', '_') + '.zip'
 
-# 如果子目录不存在，创建它
+# 如果子目录不存在就创建它
 if not os.path.exists(today):
-    os.mkdir(today) # 建立目录
-    print('成功创建目录', today)
+    os.mkdir(today)
+    print('成功创建子目录：', today)
 
 # 5. 我们使用zip命令把文件压缩到一个压缩文件中
-zip_command = "zip -qr {0} {1}".format(target, ' '.join(source))
+zip_command = "zip -qr {0} {1}".format(target, 
+                                       ' '.join(source))
 
 # 运行备份
+print("Zip命令为:")
+print(zip_command)
+print("运行:")
 if os.system(zip_command) == 0:
     print('成功备份到', target)
 else:
@@ -245,14 +260,14 @@ else:
 输出：
 
 ```
-D:> python backup_ver3.py
+$ python backup_ver3.py
   File "backup_ver3.py", line 25
     target = today + os.sep + now + '_' +
                                         ^
 SyntaxError: invalid syntax
 ```
 
-这怎么（不）工作：
+**这怎么（不）工作：**
 
 **这个程序不工作！**Python说有语法错误这意味着脚本不满足Python预计的结构。当我们观察Python给出的错误，它还告诉我们它检测到错误的地方。所以我们从那一行开始调试我们的程序。
 
