@@ -124,73 +124,72 @@ $ python class_init.py
 
 ## 类和对象的变量
 
-我们已经讨论了类与对象的部分功能(即方法)，现在让我们了解一下数据部分。数据部分，即字段，只不过是被绑定到对象和类的空间名字的普通变量。这意味着，这些名字只有在类和对象的环境内有效。这就是为什么他们被叫做空间名字的原因。
+我们已经讨论了类与对象的部分功能(即方法)，现在让我们了解一下数据部分。数据部分，即字段，只不过是被_绑定_到对象和类的**命名空间**名字的普通变量。这意味着，这些名字只有在类和对象的环境内有效。这就是为什么他们被叫做_命名空间_的原因。
 
-有两种类型的字段--类变量和对象变量，它们的分类取决于类和对象分别属于哪种变量。
+有两种类型的_字段_--类变量和对象变量，它们的分类取决于类和对象分别属于哪种变量。
 
-*类变量*是共享的——他们可以被该类的所有实例访问。类变量只是一个拷贝，当任何一个对象改变一个类变量时，所有的其它实例都将改变。
+**类变量**是共享的——他们可以被该类的所有实例访问。类变量只是一个拷贝，当任何一个对象改变一个类变量时，所有的其它实例都将改变。
 
-*对象变量*是类的每个对象或实例所特有的。既然这样，每个对象都有自己的字段拷贝，也就是说，在不同的实例中，它们不共享，同名的字段没有任何联系。一个例子能使你容易理解（保存为objvar.py):
+*对象变量*是类的每个对象或实例所特有的。既然这样，每个对象都有自己的字段拷贝，也就是说，在不同的实例中，它们不共享，同名的字段没有任何联系。一个例子能使你容易理解（保存为oop_objvar.py):
 
-```
+```python
 class Robot:
-    '''表示人一机器人，有一个名字。'''
+    """表示人一机器人，有一个名字。"""
 
     # 一个类变量，数机器人的数量
     population = 0
  
     def __init__(self, name):
-        '''初始化数据。'''
+        """初始化数据。"""
         self.name = name
-        print('(初始化 {0})'.format(self.name))
+        print("(初始化 {})".format(self.name))
  
-        # 当创建一个人时，机器人
-        # 人口加1
+        # 当创建一个人时，机器人人口加1
         Robot.population += 1
  
     def __del__(self):
-        '''我将要死了。'''
-        print('{0} 正在被毁！'.format(self.name))
+        """我将要死了。"""
+        print("{0} 正在被毁！".format(self.name))
  
         Robot.population -= 1
  
         if Robot.population == 0:
-            print('{0}是最后一个。'.format(self.name))
+            print("{}是最后一个。".format(self.name))
         else:
-            print('还有{0:d}机器人在工作。'.format(Robot.population))
+            print("还有{:d}机器人在工作。".format(Robot.population))
  
-    def sayHi(self):
-        '''机器人问候。
+    def say_hi(self):
+        """机器人问候。
  
-        是的，它们能做作那个。'''
-        print('你好，我的主人叫我'.format(self.name))
+        是的，它们能做作那个。"""
+        print("你好，我的主人叫我".format(self.name))
 
-    def howMany():
-        '''打印当前人口。'''
-        print('我们有{0:d}个机器人。'.format(Robot.population))
-    howMany = staticmethod(howMany)
+    @classmethod
+    def how_many(cls):
+        """打印当前人口。"""
+        print("我们有{:d}个机器人。".format(cls.population))
  
 droid1 = Robot('R2-D2')
-droid1.sayHi()
-Robot.howMany()
+droid1.say_hi()
+Robot.how_many()
  
 droid2 = Robot('C-3PO')
-droid2.sayHi()
-Robot.howMany()
+droid2.say_hi()
+Robot.how_many()
  
 print("\n机器人在这能做一些工作。\n")
 
 print("机器人已经完成了它们的工作，因此，让我们销毁它们。")
-del droid1
-del droid2
+droid1.die()
+droid2.die()
 
-Robot.howMany()
+Robot.how_many()
 ```
 
 输出：
 
 ```
-D:> python objvar.py
+$ python objvar.py
 (初始化 R2-D2)
 你好，我的主人叫我
 我们有1个机器人。
@@ -208,30 +207,29 @@ C-3PO是最后一个。
 我们有0个机器人。
 ```
 
-它是如何工作的：
+**它是如何工作的：**
 
-这是一个很长的例子，但有助于展示类和对象变量的特性。在这里，population 属于Robot类，因此是一个类变量。name变量属于对象(使用self分配)，因此是一个对象变量。
+这是一个很长的例子，但有助于展示类和对象变量的特性。在这里，`population` 属于`Robot`类，因此是一个类变量。`name`变量属于对象(使用`self`分配)，因此是一个对象变量。
 
-因此，我们提到population类变量使用Robot.population 而不是self.population。我们在那个对象的中提到对象变量name使用self.name符号。记住对象和类变量的简单区别。还请注意，一个对象变量与一个类变量名字相同时，类变量将被隐藏！
+因此，我们提到`population`类变量使用`Robot.population`而不是`self.population`。我们在那个对象的中提到对象变量`name`使用`self.name`符号。记住对象和类变量的简单区别。还请注意，一个对象变量与一个类变量名字相同时，类变量将被隐藏！
 
-howMany实际上是一个属于类而不是对象的方法，这意味着我们可以将其定义成 classmethod 或staticmethod中的任何一个，这取决于我们是否需要知道是哪个类。因为，我们不需要这样的信息，我们主张staticmethod 。
+除了使用`Robot.population`,我们还可以使用`self.__class__.population`访问类变量，因为每一个对象都可以通过`self.__class__`属性访问他的类。
 
-我们也可以使用(decorator)(http://www.ibm.com/developerworks/linux/library/l-cpdecor.html)达到同样的目的：
+`how_many`实际上是一个属于类而不是对象的方法，这意味着我们可以将其定义成 `classmethod` 或`staticmethod`中的任何一个，这取决于我们是否需要知道是哪个类。因为，我们不需要这样的信息，我们主张`staticmethod` 。
 
+我们使用[修饰符](./more.md)将`how_many`方法标识为类方法。
+
+我们可以把修饰符想象成为一个包装函数的快捷方式，所以使用`@classmethod`修饰符和下面的调用是一样的：
+
+```python
+how_many = classmethod(how_many)
 ```
-@staticmethod
-def howMany():
-    '''打印当前人口。'''
-    print('我们有{0:d}个机器人。'.format(Robot.population))
-```
 
-修饰符可以被想象为一个调用显式声明的捷径，正如我们在这个例子中已经看到的。
+我们注意到`__init__`方法使用一个`name`变量初始化`Robot`实例。在这个方法中，因为还有一个机器人被添加,我们为`population`计数加1。还发现，`self.name`的值是针对每一个对象的，这表明对象变量的特性。
 
-注意到，__init__方法用于使用一个名字初始化 Robot 实例。在这个方法中，因为还有一个机器人被添加,我们为population计数加了1。还发现，self.name的值是针对每一个对象的，这表明对象变量的特性。
+记住,你必须只有使用`self`引用同一对象的变量和方法，这就是所谓的*属性引用*。
 
-记住,你必须只有使用self引用同一对象的变量和方法，这就是所谓的属性引用。
-
-在这个程序中,我们也看到了类和方法的**文档字符串**的用法。在运行时我们可能通过使用Robot.__doc__访问类的文档字符串，使用 Robot.sayHi.__doc__ 访问方法的为文档字符串。
+在这个程序中,我们也看到了类和方法的*文档字符串*的用法。在运行时我们可能通过使用`Robot.__doc__`访问类的文档字符串，使用 `Robot.say_hi.__doc__` 访问方法的为文档字符串。
 
 就像__init__方法一样，还有一个特殊的方法__del__ ，该方法是在当对象将要毁灭时被调用，也就是说它不再被使用、能够为计算机系统释放出被它使用的内存。在这个方法中，我们简单地给 Robot.population 减1。
 
