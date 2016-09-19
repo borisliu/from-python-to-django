@@ -231,83 +231,83 @@ how_many = classmethod(how_many)
 
 在这个程序中,我们也看到了类和方法的*文档字符串*的用法。在运行时我们可能通过使用`Robot.__doc__`访问类的文档字符串，使用 `Robot.say_hi.__doc__` 访问方法的为文档字符串。
 
-就像__init__方法一样，还有一个特殊的方法__del__ ，该方法是在当对象将要毁灭时被调用，也就是说它不再被使用、能够为计算机系统释放出被它使用的内存。在这个方法中，我们简单地给 Robot.population 减1。
+在`die`方法中，我们简单的将`Robot.population`计数减1。
 
-del`方法在对象不再使用时使用，当这个方法被运行时没有保证。如果你想明确地看到它在起作用，我们所能做的是必须使用del语句。
-
-所有的类成员是公共的，一个例外是：如果你使用的数据成员的名字使用了双下划线前缀如__privatevar, Python使用名称改编来有效地使它成为一个私有变量。
+所有的类成员是公共的，一个例外是：如果你使用的数据成员的名字使用了`双下划线前缀`如`__privatevar`, Python使用命名修饰来有效地使它成为一个私有变量。
 
 因此,下面的惯例是，只在对象和类中使用的任何变量，首先应该以一个下划线开始，其他所有的名字都是公共的，且可以被用于其他的类/对象使用。记住，这只是一个惯例和不是被Python强制执行的(除了双下划线前缀)。
 
-C++/Java/C#程序员要注意
+> **C++/Java/C#程序员要注意**
 > 在Python中，所有类成员(包括数据成员)是公共有和所有的方法是虚拟。
 
 ## 继承
 
-面向对象编程的一个好处是代码的重用，一种方式是通过继承机制实现，继承可以被想像为实现类之间的一种类型和子类型的关系。
+面向对象编程的一个好处是代码的**重用**，一种方式是通过**继承**机制实现，继承可以被想像为实现类之间的一种**类型和子类型**的关系。
 
 假设您想编写一个大学里教师和学生记录的程序，他们有一些共同的特性，如姓名、年龄和地址。他们也有特定的特性，如老师的工资、课程和树叶和学生的学费、分数。
 
 您可以为每个类型创建两个独立的类，并且处理它们，但要添加一个新的共同特征意味着要在这两种独立的类中都要添加，很快就会变得难以处理。
 
-一个更好的方法是创建一个共同的类称为 SchoolMember ，然后从这个类继承老师类和学生类，也就是说它们成为这个类的子类，可以对这些子类添加特定的特征。
+一个更好的方法是创建一个共同的类称为`SchoolMember`，然后从这个类_继承_老师类和学生类，也就是说它们成为这个类的子类，可以对这些子类添加特定的特征。
 
-这种方式有很多优点，如果我们在SchoolMember中添加/更改任何功能，在子类中会自动反映出来。例如，您可以为学生和老师添加一个新的身份证字段，可能通过直接把它们添加到SchoolMember类中来实现。然而，子类中的变化不影响其他子类。另一个优点是，如果你引用SchoolMember类的一个老师或学生对象，在某些情况下如计算学校成员的数量时会很有用。这就是所谓的**多态性**，如果父类是预期的，子类在任何情况下可以被取代，即对象可以当做父类的一个实例。
+这种方式有很多优点，如果我们在`SchoolMember`中添加/更改任何功能，在子类中会自动反映出来。例如，您可以为学生和老师添加一个新的身份证字段，可能通过直接把它们添加到SchoolMember类中来实现。然而，子类中的变化不影响其他子类。另一个优点是，如果你引用SchoolMember类的一个老师或学生对象，在某些情况下如计算学校成员的数量时会很有用。这就是所谓的**多态性**，如果父类是预期的，子类在任何情况下可以被取代，即对象可以当做父类的一个实例。
 
 还观察到，我们重用父类的代码，在不同的类中我们不需要重复，而在使用独立的类的情况下我们不得不重复。
 
-在这种情况下，SchoolMember类被称为*基类*或*超类*。Teacher和Student类被称为*派生类*或*子类*。
+在这种情况下，`SchoolMember`类被称为**基类**或**超类**。`Teacher`和`Student`类被称为**派生类**或**子类**。
 
-现在，我们将看到作为程序的这个例子(保存为 inherit.py)：
+现在，我们将看到作为程序的这个例子(保存为 oop_subclass.py)：
 
-···
+```python
 class SchoolMember:
     '''代表任何学校成员。'''
     def __init__(self, name, age):
         self.name = name
         self.age = age
-        print('(初始化学校成员： {0})'.format(self.name))
+        print("(初始化学校成员： {})".format(self.name))
     
     def tell(self):
         '''告诉我细节。'''
-        print('Name:"{0}" Age:"{1}"'.format(self.name, self.age), end=" ")
+        print("Name:'{}' Age:'{}'".format(self.name, self.age), end=" ")
 
 class Teacher(SchoolMember):
     '''代表老师。'''
     def __init__(self, name, age, salary):
         SchoolMember.__init__(self, name, age)
         self.salary = salary
-        print('(初始化老师： {0})'.format(self.name))
+        print("(初始化老师： {})".format(self.name))
 
     def tell(self):
         SchoolMember.tell(self)
-        print('Salary: "{0:d}"'.format(self.salary))
+        print("Salary: '{0:d}'".format(self.salary))
 
 class Student(SchoolMember):
     '''代表学生。'''
     def __init__(self, name, age, marks):
         SchoolMember.__init__(self, name, age)
         self.marks = marks
-        print('(初始化学生： {0})'.format(self.name))
+        print("(初始化学生： {})".format(self.name))
     
     def tell(self):
         SchoolMember.tell(self)
-        print('Marks: "{0:d}"'.format(self.marks))
+        print("Marks: '{:d}'".format(self.marks))
 
-t = Teacher('Mrs. Shrividya', 40, 30000)
-s = Student('Swaroop', 25, 75)
+t = Teacher("Mrs. Shrividya", 40, 30000)
+s = Student("Swaroop", 25, 75)
 
-print() # 打印一个空行
+# 打印一个空行
+print() 
 
 members = [t, s]
 for member in members:
-    member.tell() # 为Teachers和Students工作
-···
+    # 为Teachers和Students工作
+    member.tell() 
+```
 
 输出：
 
 ```
-D:> python inherit.py
+$ python inherit.py
 (初始化学校成员： Mrs. Shrividya)
 (初始化老师： Mrs. Shrividya)
 (初始化学校成员： Swaroop)
@@ -316,19 +316,19 @@ D:> python inherit.py
 Name:"Mrs. Shrividya" Age:"40" Salary: "30000" Name:"Swaroop" Age:"25" Marks: "75"~
 ```
 
-它是如何工作的：
+**它是如何工作的：**
 
-使用继承，在类定义中，在类的名称后，我们在元组中指定基类名称，接下来，我们观察到使用 self变量，显式地调用基类的 __init__方法，这样我们可以初始化对象的基类部分。这是非常重要的，记住——Python不会自动调用基类的构造函数，您自己必须显式地调用它。
+使用继承，在类定义中，在类的名称后，我们在元组中指定基类名称，接下来，我们观察到使用`self`变量，显式地调用基类的`__init__`方法，这样我们可以初始化对象的基类部分。这是非常重要的，记住——Python不会自动调用基类的构造函数，您自己必须显式地调用它。
 
-我们还观察到，我们可以在类名前加前缀调用基类的方法，然后和其它参数一道传递给 self变量值。
+我们还观察到，我们可以在类名前加前缀调用基类的方法，然后和其它参数一道传递给 `self`变量值。
 
-注意，当我们使用SchoolMember类的tell方法时，我们可以把Teacher或Student的实例作为SchoolMember的实例。
+注意，当我们使用`SchoolMember`类的`tell`方法时，我们可以把`Teacher`或`Student`的实例作为`SchoolMember`的实例。
 
-同时，观察到子类的tell方法的调用，不是SchoolMember类的tell方法。要理解这一点的一种方法是，Python 总是在实际的类型中开始寻找方法，如本例。如果它不能找到方法，它开始按在类定义中元组中指定的顺序一个接一个地查找属于它的基类的方法。
+同时，观察到子类的tell方法的调用，不是`SchoolMember`类的`tell`方法。要理解这一点的一种方法是，Python 总是在实际的类型中开始寻找方法，如本例。如果它不能找到方法，它开始按在类定义中元组中指定的顺序一个接一个地查找属于它的基类的方法。
 
-术语提示--如果在继承元组中不止列出一个类，那么它被称为*多重继承*。
+术语提示--如果在继承元组中不止列出一个类，那么它被称为**多重继承**。
 
-在tell()方法中，end参数是用于来将换行变为在 print()调用结束后以空格开始。
+在`tell()`方法中，`end`参数是用于来将换行变为在 `print()`调用结束后以空格开始。
 
 ## 小结
 
@@ -336,3 +336,6 @@ Name:"Mrs. Shrividya" Age:"40" Salary: "30000" Name:"Swaroop" Age:"25" Marks: "7
 
 接下，我们将学习如何处理输入/输出和如何在Python中访问文件。
 
+--------------------------------------------------
+
+### 继续阅读[输入/输出](io.md)
