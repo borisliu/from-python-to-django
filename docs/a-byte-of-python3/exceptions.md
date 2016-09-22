@@ -67,17 +67,17 @@ $ python exceptions_handle.py
 
 **它是如何工作的：**
 
-我们将所有的可能会抛出异常/错误的语句写在`try`块中，然后将对应的处理程序写在`except`块中。The `except` clause can handle a single specified error or exception, or a parenthesized list of errors/exceptions. If no names of errors or exceptions are supplied, it will handle _all_ errors and exceptions.
+我们将所有的可能会抛出异常/错误的语句写在`try`块中，然后将对应的处理程序写在`except`块中。每个`except`语句可以处理一个特定的异常/错误，或者是一个异常/错误的列表（用括号表示）。如果没有指明异常/错误的名字，那么他会处理_所有的_错误/异常。
 
-Note that there has to be at least one `except` clause associated with every `try` clause. Otherwise, what's the point of having a try block?
+注意，每一个`try`语句至少应该有一个与之匹配的`except`语句，否则try语句就没有意义了。
 
-If any error or exception is not handled, then the default Python handler is called which just stops the execution of the program and prints an error message. We have already seen this in action above.
+如果你的程序发生了异常/错误，但是没有被处理，那么Python语言就会启动默认的异常处理程序，它会中止程序的运行，打印出错误的信息，这些内容我们已经看到了。
 
-You can also have an `else` clause associated with a `try..except` block. The `else` clause is executed if no exception occurs.
+你也可以给你的`try..except`写上一个`else`语句块，当没有任何异常发生的时候就会执行`else`语句的内容。
 
-In the next example, we will also see how to get the exception object so that we can retrieve additional information.
+在下面的例子中，我们将会学习如何获得异常对象，以便于我们能够得到关于异常的更多的信息。
 
-## Raising Exceptions
+## 抛出异常
 
 You can _raise_ exceptions using the `raise` statement by providing the name of the error/exception and the exception object that is to be _thrown_.
 
