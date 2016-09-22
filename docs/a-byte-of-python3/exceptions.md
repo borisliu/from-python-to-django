@@ -126,11 +126,11 @@ No exception was raised.
 
 在`except`语句中，我们制定由`as`变量保存弹出的异常/错误的对象。这很类似函数参数在函数调用中的作用。在这个特殊的`except`语句中，我们使用异常对象的`length`和`atleast`字段构造了一个异常提示信息，让用户了解为什么会抛出这个异常。
 
-## Try ... Finally {#try-finally}
+## Try ... Finally
 
-Suppose you are reading a file in your program. How do you ensure that the file object is closed properly whether or not an exception was raised? This can be done using the `finally` block.
+设想一下你的程序需要读取一个文件，你怎样保证无论是否有异常抛出，文件对象都被正确的关闭呢？我们可以使用`finally`语句块做到这一点。
 
-Save this program as `exceptions_finally.py`:
+例如：（保存为`exceptions_finally.py`）
 
 ```python
 import sys
@@ -159,7 +159,7 @@ finally:
     print("(Cleaning up: Closed the file)")
 ```
 
-Output:
+输出为：
 
 ```
 $ python exceptions_finally.py
@@ -169,15 +169,15 @@ Press ctrl+c now
 (Cleaning up: Closed the file)
 ```
 
-**How It Works**
+**它是如何工作的：**
 
-We do the usual file-reading stuff, but we have arbitrarily introduced sleeping for 2 seconds after printing each line using the `time.sleep` function so that the program runs slowly (Python is very fast by nature). When the program is still running, press `ctrl + c` to interrupt/cancel the program.
+我们读取文件的内容，只是每读一行就让系统休息2秒，我们使用`time.sleep`函数让程序运行慢一点（正常情况下Python程序运行的飞快）。当程序还在运行的时候，按下`ctrl + c`键中止程序的运行。
 
-Observe that the `KeyboardInterrupt` exception is thrown and the program quits. However, before the program exits, the finally clause is executed and the file object is always closed.
+我们注意到当程序退出的时候抛出了`KeyboardInterrupt`异常。然而，在程序退出之前，执行了finally语句块，并且文件对象被正确的关闭了。
 
-Note that we use `sys.stdout.flush()` after `print` so that it prints to the screen immediately.
+注意，我们在`print`函数后面调用`sys.stdout.flush()`函数，这样可以及时输出结果。
 
-## The with statement {#with}
+## with语句
 
 Acquiring a resource in the `try` block and subsequently releasing the resource in the `finally` block is a common pattern. Hence, there is also a `with` statement that enables this to be done in a clean manner:
 
