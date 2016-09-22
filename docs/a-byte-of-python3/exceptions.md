@@ -79,21 +79,52 @@ $ python exceptions_handle.py
 
 ## 抛出异常
 
-You can _raise_ exceptions using the `raise` statement by providing the name of the error/exception and the exception object that is to be _thrown_.
+你可以使用`raise`语句_抛出_一个异常，在语句中你需要提供异常/错误的名称以及抛出的异常对象。
 
-The error or exception that you can raise should be a class which directly or indirectly must be a derived class of the `Exception` class.
+你抛出的异常/错误必须是一个从`Exception`派生的类。
 
-Example (save as `exceptions_raise.py`):
+例如： (保存为`exceptions_raise.py`)：
 
+```python
+class ShortInputException(Exception):
+    '''用户自定义的异常类。'''
+    def __init__(self, length, atleast):
+        Exception.__init__(self)
+        self.length = length
+        self.atleast = atleast
 
-Output:
+try:
+    text = input('请输入 --> ')
+    if len(text) < 3:
+        raise ShortInputException(len(text), 3)
+    # Other work can continue as usual here
+except EOFError:
+    print('Why did you do an EOF on me?')
+except ShortInputException as ex:
+    print(('ShortInputException: The input was ' +
+           '{0} long, expected at least {1}')
+          .format(ex.length, ex.atleast))
+else:
+    print('No exception was raised.')
+```
 
+输出为：
 
-**How It Works**
+```
+$ python exceptions_raise.py
+请输入 --> a
+ShortInputException: The input was 1 long, expected at least 3
 
-Here, we are creating our own exception type. This new exception type is called `ShortInputException`. It has two fields - `length` which is the length of the given input, and `atleast` which is the minimum length that the program was expecting.
+$ python exceptions_raise.py
+请输入 --> abc
+No exception was raised.
+```
 
-In the `except` clause, we mention the class of error which will be stored `as` the variable name to hold the corresponding error/exception object. This is analogous to parameters and arguments in a function call. Within this particular `except` clause, we use the `length` and `atleast` fields of the exception object to print an appropriate message to the user.
+**它是如何工作的：**
+
+在这里我们创建了我们自己的异常类。新的异常类为`ShortInputException`。他有两个字段：`length`表示输入内容的长度，`atleast`表示程序期望的最小长度。
+
+在`except`语句中，我们制定由`as`变量保存弹出的异常/错误的对象。这很类似函数参数在函数调用中的作用。在这个特殊的`except`语句中，我们使用异常对象的`length`和`atleast`字段构造了一个异常提示信息，让用户了解为什么会抛出这个异常。
 
 ## Try ... Finally {#try-finally}
 
@@ -101,9 +132,42 @@ Suppose you are reading a file in your program. How do you ensure that the file 
 
 Save this program as `exceptions_finally.py`:
 
+```python
+import sys
+import time
+
+f = None
+try:
+    f = open("poem.txt")
+    # Our usual file-reading idiom
+    while True:
+        line = f.readline()
+        if len(line) == 0:
+            break
+        print(line, end='')
+        sys.stdout.flush()
+        print("Press ctrl+c now")
+        # To make sure it runs for a while
+        time.sleep(2)
+except IOError:
+    print("Could not find file poem.txt")
+except KeyboardInterrupt:
+    print("!! You cancelled the reading from the file.")
+finally:
+    if f:
+        f.close()
+    print("(Cleaning up: Closed the file)")
+```
 
 Output:
 
+```
+$ python exceptions_finally.py
+Programming is fun
+Press ctrl+c now
+^C!! You cancelled the reading from the file.
+(Cleaning up: Closed the file)
+```
 
 **How It Works**
 
@@ -119,6 +183,11 @@ Acquiring a resource in the `try` block and subsequently releasing the resource 
 
 Save as `exceptions_using_with.py`:
 
+```python
+with open("poem.txt") as f:
+    for line in f:
+        print(line, end='')
+```
 
 **How It Works**
 
