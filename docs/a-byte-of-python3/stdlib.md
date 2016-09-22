@@ -1,4 +1,4 @@
-# Standard Library {#stdlib}
+# 标准库 {#stdlib}
 
 The Python Standard Library contains a huge number of useful modules and is part of every standard Python installation. It is important to become familiar with the Python Standard Library since many problems can be solved quickly if you are familiar with the range of things that these libraries can do.
 
@@ -33,9 +33,45 @@ What if you wanted to have some debugging messages or important messages to be s
 
 Save as `stdlib_logging.py`:
 
+```python
+import os
+import platform
+import logging
+
+if platform.platform().startswith('Windows'):
+    logging_file = os.path.join(os.getenv('HOMEDRIVE'),
+                                os.getenv('HOMEPATH'),
+                                'test.log')
+else:
+    logging_file = os.path.join(os.getenv('HOME'),
+                                'test.log')
+
+print("Logging to", logging_file)
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s : %(levelname)s : %(message)s',
+    filename=logging_file,
+    filemode='w',
+)
+
+logging.debug("Start of the program")
+logging.info("Doing something")
+logging.warning("Dying now")
+
+```
 
 Output:
 
+```
+$ python stdlib_logging.py
+Logging to /Users/swa/test.log
+
+$ cat /Users/swa/test.log
+2014-03-29 09:27:36,660 : DEBUG : Start of the program
+2014-03-29 09:27:36,660 : INFO : Doing something
+2014-03-29 09:27:36,660 : WARNING : Dying now
+```
 
 If you do not have the `cat` command, then you can just open the `test.log` file in a text editor.
 
