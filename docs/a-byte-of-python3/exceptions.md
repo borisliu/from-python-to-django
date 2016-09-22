@@ -179,9 +179,9 @@ Press ctrl+c now
 
 ## with语句
 
-Acquiring a resource in the `try` block and subsequently releasing the resource in the `finally` block is a common pattern. Hence, there is also a `with` statement that enables this to be done in a clean manner:
+在`try`语句块中获取资源，然后再`finally`语句块中释放资源是一个非常常用的程序段，我们可以使用`with`简化一下程序的书写。
 
-Save as `exceptions_using_with.py`:
+例如：（保存为`exceptions_using_with.py`）
 
 ```python
 with open("poem.txt") as f:
@@ -189,23 +189,23 @@ with open("poem.txt") as f:
         print(line, end='')
 ```
 
-**How It Works**
+**它是如何工作的：**
 
-The output should be same as the previous example. The difference here is that we are using the `open` function with the `with` statement - we leave the closing of the file to be done automatically by `with open`.
+这段程序的输出应该和之前的例子是一模一样的。唯一的区别在与我们在`with`语句中使用`open`函数打开文件，这样的话系统会自动关闭这个文件。
 
-What happens behind the scenes is that there is a protocol used by the `with` statement. It fetches the object returned by the `open` statement, let's call it "thefile" in this case.
+实际的处理过程是这样的，`with`语句会获取`open`函数返回的对象，我们假定这个对象名称是"thefile"。
 
-It _always_ calls the `thefile.__enter__` function before starting the block of code under it and _always_ calls `thefile.__exit__` after finishing the block of code.
+它_总是会_在进入`with`语句块之前调用`thefile.__enter__`函数，并且_总是会_在语句块的最后调用`thefile.__exit__`函数。
 
-So the code that we would have written in a `finally` block should be taken care of automatically by the `__exit__` method. This is what helps us to avoid having to use explicit `try..finally` statements repeatedly.
+这样的话我们之前在`finally`语句块中写的程序就会自动的在`__exit__`方法中被执行，这种方式可以防止我们频繁使用`try..finally`语句。
 
-More discussion on this topic is beyond scope of this book, so please refer [PEP 343](http://www.python.org/dev/peps/pep-0343/) for a comprehensive explanation.
+关于这个主题更多的讨论已经超出了本书的范畴，请参考[PEP 343](http://www.python.org/dev/peps/pep-0343/)。
 
-## Summary
+## 总结
 
-We have discussed the usage of the `try..except` and `try..finally` statements. We have seen how to create our own exception types and how to raise exceptions as well.
+本章我们讨论了`try..except`和`try..finally`语句，我们还自己定义了一个我们自己的异常类型，并且在程序中将其抛出。
 
-Next, we will explore the Python Standard Library.
+下一步，我们将会浏览一下Python标准库。
 
 --------------------------------------------------
 
