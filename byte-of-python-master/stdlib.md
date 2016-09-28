@@ -1,14 +1,14 @@
 # Python标准库
 
-Python标准库y contains a huge number of useful modules and is part of every standard Python installation. It is important to become familiar with the Python Standard Library since many problems can be solved quickly if you are familiar with the range of things that these libraries can do.
+Python标准库包括大量有用的模块，安装完Python之后就随之安装了。Python标准库能够帮助你快速解决很多问题，如果你非常熟悉这些库可以做什么。因此熟练掌握Python标准库非常重要。
 
-We will explore some of the commonly used modules in this library. You can find complete details for all of the modules in the Python Standard Library in the ['Library Reference' section](http://docs.python.org/3/library/) of the documentation that comes with your Python installation.
+我们会快速浏览一下最常用的标准库模块，如果你想查看Python标准库的完整文档，请访问[标准库参考](http://docs.python.org/3/library/)，这份文档随着Python安装包也安装在你的电脑上。
 
-Let us explore a few useful modules.
+让我们开始浏览一些有用的库模块。
 
-> CAUTION: If you find the topics in this chapter too advanced, you may skip this chapter. However, I highly recommend coming back to this chapter when you are more comfortable with programming using Python.
+> 注意：如果你发现本章讨论的问题太过深奥，你可以略过本章。然而，我强烈建议你在熟练掌握Python编程技能之后再返回头过来看看本章的内容。
 
-## `sys` module {#sys}
+## `sys`模块
 
 The `sys` module contains system-specific functionality. We have already seen that the `sys.argv` list contains the command-line arguments.
 
