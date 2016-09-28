@@ -1,6 +1,6 @@
-# Standard Library {#stdlib}
+# Python标准库
 
-The Python Standard Library contains a huge number of useful modules and is part of every standard Python installation. It is important to become familiar with the Python Standard Library since many problems can be solved quickly if you are familiar with the range of things that these libraries can do.
+Python标准库y contains a huge number of useful modules and is part of every standard Python installation. It is important to become familiar with the Python Standard Library since many problems can be solved quickly if you are familiar with the range of things that these libraries can do.
 
 We will explore some of the commonly used modules in this library. You can find complete details for all of the modules in the Python Standard Library in the ['Library Reference' section](http://docs.python.org/3/library/) of the documentation that comes with your Python installation.
 
