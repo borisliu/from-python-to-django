@@ -31,9 +31,9 @@
     * [附录: 参与翻译工作](a-byte-of-python3/translation_howto.md)
     * [反馈](a-byte-of-python3/feedback.md)
 
-* [Flask入门教程](flask-tutorial/index.md)
-    * [第一讲](flask-tutorial/chapter1.md)
-    * [第二讲](flask-tutorial/chapter2.md)
+* [Django step by step](django-step-by-step/index.md)
+    * [第一讲](django-step-by-step/chapter1.md)
+    * [第二讲](django-step-by-step/chapter2.md)
 
 ----
 
