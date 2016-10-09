@@ -1,10 +1,10 @@
 # 更多
 
-我们已经从各个方面学习Python语言的编程。So far we have covered a majority of the various aspects of Python that you will use. In this chapter, we will cover some more aspects that will make our knowledge of Python more well-rounded.
+我们已经从各个方面学习了Python语言的编程。这一章我们看一下另外几个知识点，这些知识能够让我们对于Python语言的学习更加完整。
 
-## Passing tuples around
+## 传递元组
 
-Ever wished you could return two different values from a function? You can. All you have to do is use a tuple.
+想要一个函数返回两个值？你可以使用元组。
 
 ```python
 >>> def get_error_details():
@@ -17,9 +17,9 @@ Ever wished you could return two different values from a function? You can. All 
 'details'
 ```
 
-Notice that the usage of `a, b = <some expression>` interprets the result of the expression as a tuple with two values.
+注意，我们使用`a, b = <some expression>`这个表达式把元组的两个字段分别赋给两个变量。
 
-This also means the fastest way to swap two variables in Python is:
+这也意味着在Python中最快速的交换两个变量的值得方法是：
 
 ```python
 >>> a = 5; b = 8
@@ -30,9 +30,9 @@ This also means the fastest way to swap two variables in Python is:
 (8, 5)
 ```
 
-## Special Methods
+## 特殊方法
 
-There are certain methods such as the `__init__` and `__del__` methods which have special significance in classes.
+类中有一些特殊的方法，诸如`__init__`和`__del__`等，有一些特殊的用途。
 
 Special methods are used to mimic certain behaviors of built-in types. For example, if you want to use the `x[key]` indexing operation for your class (just like you use it for lists and tuples), then all you have to do is implement the `__getitem__()` method and your job is done. If you think about it, this is what Python does for the `list` class itself!
 
