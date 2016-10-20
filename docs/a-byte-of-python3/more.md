@@ -1,10 +1,10 @@
 # 更多
 
-我们已经从各个方面学习了Python语言的编程。这一章我们看一下另外几个知识点，这些知识能够让我们对于Python语言的学习更加完整。
+迄今为止我们已经学习了Python中的大多数常用知识。本章中我们会接触到更多的知识，使得我们更全面的掌握Python。
 
 ## 传递元组
 
-想要一个函数返回两个值？你可以使用元组。
+你是否希望过从函数返回两个不同的值？做到这点使用元组即可。
 
 ```python
 >>> def get_error_details():
@@ -32,33 +32,33 @@
 
 ## 特殊方法
 
-类中有一些特殊的方法，诸如`__init__`和`__del__`等，有一些特殊的用途。
+有一些诸如__intit__和__del__的方法在类中拥有特殊的含义。
 
-Special methods are used to mimic certain behaviors of built-in types. For example, if you want to use the `x[key]` indexing operation for your class (just like you use it for lists and tuples), then all you have to do is implement the `__getitem__()` method and your job is done. If you think about it, this is what Python does for the `list` class itself!
+特殊方法用于模拟某些内建类型的行为。例如，你希望为你的类使用`x[key]`索引操作(就像在列表和元组中那样)，那么你仅仅需要实现`__getitem__`方法就可以了。顺便提一句，Python正是这样实现`list`类的！
 
-Some useful special methods are listed in the following table. If you want to know about all the special methods, [see the manual](http://docs.python.org/3/reference/datamodel.html#special-method-names).
+一些有用的特殊方法列在下表中。如果你想了解所有的特殊方法，详见[帮助文档](http://docs.python.org/3/reference/datamodel.html#special-method-names).
 
 - `__init__(self, ...)`
-    - This method is called just before the newly created object is returned for usage.
+    - 在对象第一次被创建后，返回之前调用。
 
 - `__del__(self)`
-    - Called just before the object is destroyed (which has unpredictable timing, so avoid using this)
+    - 在对象被销毁前调用（我们无法预期这个函数什么时候被调用，因此尽量避免使用它）。
 
 - `__str__(self)`
-    - Called when we use the `print` function or when `str()` is used.
+    - 在使用`print`函数或`str()`时调用。
 
 - `__lt__(self, other)`
-    - Called when the _less than_ operator (<) is used. Similarly, there are special methods for all the operators (+, >, etc.)
+    - 在使用_小于_运算符时(<)调用。类似的其它运算符也存在对象的特殊方法(+, >等)。
 
 - `__getitem__(self, key)`
-    - Called when `x[key]` indexing operation is used.
+    - 当使用`x[key]`索引操作时调用。
 
 - `__len__(self)`
-    - Called when the built-in `len()` function is used for the sequence object.
+    - 当使用内建`len()`函数时调用，一般用于序列的对象。
 
-## Single Statement Blocks
+## 单语句块
 
-We have seen that each block of statements is set apart from the rest by its own indentation level. Well, there is one caveat. If your block of statements contains only one single statement, then you can specify it on the same line of, say, a conditional statement or looping statement. The following example should make this clear:
+我们已经看到每个语句块都根据它的缩进级别将彼此区分开。不过有一个例外，如果某语句块只包含单条语句，你可以把它放到同一行，例如条件语句或循环语句。下面的例子清楚的说明了这点：
 
 ```python
 >>> flag = True
@@ -67,7 +67,7 @@ We have seen that each block of statements is set apart from the rest by its own
 Yes
 ```
 
-Notice that the single statement is used in-place and not as a separate block.  Although, you can use this for making your program _smaller_, I strongly recommend avoiding this short-cut method, except for error checking, mainly because it will be much easier to add an extra statement if you are using proper indentation.
+注意上面的单条语句被放置到同一行而没有作为单独的块。虽然你利用这点可以让程序变的_更短_，但我强烈建议你避免使用这个快捷方式(除了错误检测)，主要原因是使用适当的缩进可以更方便的添加额外的语句。
 
 ## Lambda Forms
 
