@@ -160,7 +160,7 @@ AssertionError
 
 ## 装饰器(decorator)
 
-Decorators are a shortcut to applying wrapper functions. This is helpful to "wrap" functionality with the same code over and over again. For example, I created a `retry` decorator for myself that I can just apply to any function and if any exception is thrown during a run, it is retried again, till a maximum of 5 times and with a delay between each retry. This is especially useful for situations where you are trying to make a network call to a remote computer:
+装饰器是包装函数的一种快捷方式。如果你有很多函数使用了同样的一段代码，使用装饰器对函数进行包装会非常方便。例如，我创建了一个`retry`装饰器，可以用在任何函数中，当触发任何异常的时候，他会让这个函数不断重复执行，每次执行之间有一个固定的间隔，最多执行5次。这种设计在需要通过网络进行远程调用的时候非常有用：
 
 ```python
 from time import sleep
@@ -227,14 +227,14 @@ This will be automatically retried if exception is thrown.
 
 **它是如何工作的：**
 
-See:
+请参考:
 
 - http://www.ibm.com/developerworks/linux/library/l-cpdecor.html
 - http://toumorokoshi.github.io/dry-principles-through-python-decorators.html
 
-## Differences between Python 2 and Python 3 {#two-vs-three}
+## Python 2 与Python 3的区别
 
-See:
+请参考:
 
 - ["Six" library](http://pythonhosted.org/six/)
 - [Porting to Python 3 Redux by Armin](http://lucumr.pocoo.org/2013/5/21/porting-to-python-3-redux/)
@@ -244,6 +244,10 @@ See:
 
 ## Summary
 
-We have covered some more features of Python in this chapter and yet we haven't covered all the features of Python. However, at this stage, we have covered most of what you are ever going to use in practice. This is sufficient for you to get started with whatever programs you are going to create.
+本章我们探讨了Python语言更多的特性。虽然我们仍然没有覆盖到Python语言的全部特性，但基本上已经可以应付在实践中的绝大多数情况。对于你即将创建的任何应用程序来说这就已经足够了。
 
-Next, we will discuss how to explore Python further.
+接下来，我们来看看阅读完本书之后怎样继续学习Python。
+
+--------------------------------------------------
+
+### 继续阅读[继续学习](what_next.md)
