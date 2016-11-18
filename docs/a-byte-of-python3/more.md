@@ -95,7 +95,7 @@ $ python more_lambda.py
 
 ## 列表解析
 
-列表解析用于从一个现有的列表派生出一个新的列表。 假设你有一个数字列表，你想让其中所有大于2的元素乘以2并组成一个新的列表。 类似问题正是使用列表解析的理想场合。
+列表解析用于从一个现有的列表派生出一个新的列表。 假设你有一个数字列表，你想让其中所有大于2的元素乘以2并组成一个新的列表。类似问题正是使用列表解析的理想场合。
 
 例子 (保存为`more_list_comprehension.py`):
 
@@ -114,13 +114,14 @@ $ python more_list_comprehension.py
 
 **它是如何工作的：**
 
-Here, we derive a new list by specifying the manipulation to be done (`2*i`) when some condition is satisfied (`if i > 2`). Note that the original list remains unmodified.
+当某些条件满足时(`if i > 2`)我们执行某些操作(`2 * i`)，由此产生一个新列表。注意原始列表并不会被改变。
 
-The advantage of using list comprehensions is that it reduces the amount of boilerplate code required when we use loops to process each element of a list and store it in a new list.
+使用列表解析的好处在于，当我们使用循环遍历元素并将其存储到新列表时可以减少样板代码量。
 
-## Receiving Tuples and Dictionaries in Functions
+## 函数接收元组和列表
 
-There is a special way of receiving parameters to a function as a tuple or a dictionary using the `*` or `**` prefix respectively. This is useful when taking variable number of arguments in the function.
+这里有一种特殊的方法可以将函数的形参当做元组或字典，那就是分别使用`*`和`**`前缀。
+当需要在函数内得到可变数量的实参时这个方法很有用。
 
 ```python
 >>> def powersum(power, *args):
@@ -136,11 +137,13 @@ There is a special way of receiving parameters to a function as a tuple or a dic
 100
 ```
 
-Because we have a `*` prefix on the `args` variable, all extra arguments passed to the function are stored in `args` as a tuple.  If a `**` prefix had been used instead, the extra parameters would be considered to be key/value pairs of a dictionary.
+因为`args`变量带有`*`前缀，因此所有额外的实参都会被当做一个元组存入`args`中并传给函数。
+如果把这里的`*`换成`**`，则所有额外的形参都会被当做一个字典的键/值对。
 
-## The assert statement {#assert}
+## assert语句
 
-The `assert` statement is used to assert that something is true. For example, if you are very sure that you will have at least one element in a list you are using and want to check this, and raise an error if it is not true, then `assert` statement is ideal in this situation. When the assert statement fails, an `AssertionError` is raised.
+`assert`用于断言一个表达式为真。例如，你需要确保正在使用的列表至少有一个元素，否则引发一个错误，这种情况很适合使用`assert`语句。
+当assert语句断言失败，则引发一个`AssertError`。
 
 ```python
 >>> mylist = ['item']
@@ -153,17 +156,76 @@ Traceback (most recent call last):
 AssertionError
 ```
 
-The `assert` statement should be used judiciously. Most of the time, it is better to catch exceptions, either handle the problem or display an error message to the user and then quit.
+`assert`应当慎重使用。多数时候用于捕获异常，处理问题或是向用户显示错误后随即终止程序。
 
-## Decorators {#decorator}
+## 装饰器(decorator)
 
 Decorators are a shortcut to applying wrapper functions. This is helpful to "wrap" functionality with the same code over and over again. For example, I created a `retry` decorator for myself that I can just apply to any function and if any exception is thrown during a run, it is retried again, till a maximum of 5 times and with a delay between each retry. This is especially useful for situations where you are trying to make a network call to a remote computer:
 
+```python
+from time import sleep
+from functools import wraps
+import logging
+logging.basicConfig()
+log = logging.getLogger("retry")
 
-Output:
+
+def retry(f):
+    @wraps(f)
+    def wrapped_f(*args, **kwargs):
+        MAX_ATTEMPTS = 5
+        for attempt in range(1, MAX_ATTEMPTS + 1):
+            try:
+                return f(*args, **kwargs)
+            except:
+                log.exception("Attempt %s/%s failed : %s",
+                              attempt,
+                              MAX_ATTEMPTS,
+                              (args, kwargs))
+                sleep(10 * attempt)
+        log.critical("All %s attempts failed : %s",
+                     MAX_ATTEMPTS,
+                     (args, kwargs))
+    return wrapped_f
 
 
-**How It Works**
+counter = 0
+
+
+@retry
+def save_to_database(arg):
+    print("Write to a database or make a network call or etc.")
+    print("This will be automatically retried if exception is thrown.")
+    global counter
+    counter += 1
+    # This will throw an exception in the first call
+    # And will work fine in the second call (i.e. a retry)
+    if counter < 2:
+        raise ValueError(arg)
+
+
+if __name__ == '__main__':
+    save_to_database("Some bad value")
+```
+
+输出:
+
+```
+$ python more_decorator.py
+Write to a database or make a network call or etc.
+This will be automatically retried if exception is thrown.
+ERROR:retry:Attempt 1/5 failed : (('Some bad value',), {})
+Traceback (most recent call last):
+  File "more_decorator.py", line 14, in wrapped_f
+    return f(*args, **kwargs)
+  File "more_decorator.py", line 39, in save_to_database
+    raise ValueError(arg)
+ValueError: Some bad value
+Write to a database or make a network call or etc.
+This will be automatically retried if exception is thrown.
+```
+
+**它是如何工作的：**
 
 See:
 
