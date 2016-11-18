@@ -274,7 +274,7 @@
 - [EPUB (for iPhone/iPad, ebook readers, etc.)](https://www.gitbook.com/download/epub/book/swaroopch/byte-of-python)
 - [Mobi (for Kindle)](https://www.gitbook.com/download/mobi/book/swaroopch/byte-of-python)
 
-你可以访问(https://github.com/swaroopch/byte-of-python)查看原始的内容以便于更正、修订、翻译等等。
+你可以阅读[原文](https://github.com/swaroopch/byte-of-python)查看原始的内容以便于更正、修订、翻译等等。
 
 ## 阅读本书的翻译
 
