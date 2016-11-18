@@ -69,35 +69,50 @@ Yes
 
 注意上面的单条语句被放置到同一行而没有作为单独的块。虽然你利用这点可以让程序变的_更短_，但我强烈建议你避免使用这个快捷方式(除了错误检测)，主要原因是使用适当的缩进可以更方便的添加额外的语句。
 
-## Lambda Forms
+## Lambda表达式
 
-A `lambda` statement is used to create new function objects. Essentially, the `lambda` takes a parameter followed by a single expression only which becomes the body of the function and the value of this expression is returned by the new function.
+`lambda`语句用于在运行时创建新的函数对象。通常情况下`lambda`语句带有一个参数，后面跟着一个简单的表达式作为函数体，把参数代入函数得到的返回值就是新的函数的返回值。
 
-Example (save as `more_lambda.py`):
+例如 (保存为`more_lambda.py`):
 
-<pre><code class="lang-python">{% include "./programs/more_lambda.py" %}</code></pre>
+```python
+points = [{'x': 2, 'y': 3},
+          {'x': 4, 'y': 1}]
+points.sort(key=lambda i: i['y'])
+print(points)
+```
 
-Output:
+输出:
 
-<pre><code>{% include "./programs/more_lambda.txt" %}</code></pre>
+```
+$ python more_lambda.py
+[{'y': 1, 'x': 4}, {'y': 3, 'x': 2}]
+```
 
-**How It Works**
+**它是如何工作的：**
 
-Notice that the `sort` method of a `list` can take a `key` parameter which determines how the list is sorted (usually we know only about ascending or descending order). In our case, we want to do a custom sort, and for that we need to write a function but instead of writing a separate `def` block for a function that will get used in only this one place, we use a lambda expression to create a new function.
+注意，`list`对象的`sort`函数有一个名为`key`的参数决定了这个列表是怎样被排序的（通常情况下为升序或者降序）。在我们的例子中，我们想要有一个自己的排序规则，我们需要写一个比较函数，而不是使用`def`定义一个只在这里使用一次的函数，因此我们使用lambda表达式创建一个新的函数。
 
-## List Comprehension
+## 列表解析
 
-List comprehensions are used to derive a new list from an existing list. Suppose you have a list of numbers and you want to get a corresponding list with all the numbers multiplied by 2 only when the number itself is greater than 2. List comprehensions are ideal for such situations.
+列表解析用于从一个现有的列表派生出一个新的列表。 假设你有一个数字列表，你想让其中所有大于2的元素乘以2并组成一个新的列表。 类似问题正是使用列表解析的理想场合。
 
-Example (save as `more_list_comprehension.py`):
+例子 (保存为`more_list_comprehension.py`):
 
-<pre><code class="lang-python">{% include "./programs/more_list_comprehension.py" %}</code></pre>
+```python
+listone = [2, 3, 4]
+listtwo = [2*i for i in listone if i > 2]
+print(listtwo)
+```
 
-Output:
+输出:
 
-<pre><code>{% include "./programs/more_list_comprehension.txt" %}</code></pre>
+```
+$ python more_list_comprehension.py
+[6, 8]
+```
 
-**How It Works**
+**它是如何工作的：**
 
 Here, we derive a new list by specifying the manipulation to be done (`2*i`) when some condition is satisfied (`if i > 2`). Note that the original list remains unmodified.
 
