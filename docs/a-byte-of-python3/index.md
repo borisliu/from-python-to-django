@@ -22,11 +22,11 @@
 ### [标准库](stdlib.md)
 ### [更多](more.md)
 ### [继续学习](what_next.md)
-### [附录：免费/自由和开放源码软件](floss.md)
-### [附录: 关于](about.md)
-### [附录: 版本历史](revision_history.md)
-### [附录: 翻译](translations.md)
-### [附录: 参与翻译工作](translation_howto.md)
+### [附录:免费/自由和开放源码软件](floss.md)
+### [附录:关于](about.md)
+### [附录:版本历史](revision_history.md)
+### [附录:翻译](translations.md)
+### [附录:参与翻译工作](translation_howto.md)
 ### [反馈](feedback.md)
 
 --------------------------------------------------
