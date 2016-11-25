@@ -1,5 +1,7 @@
 # Summary
 
+* [封面](README.md)
+
 * [开始学习](introduction/cover.md)
     * [搭建Python开发环境](introduction/index.md)
 
