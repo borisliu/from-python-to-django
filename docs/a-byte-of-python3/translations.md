@@ -1,4 +1,4 @@
-# Translations
+# 翻译
 
 There are many translations of the book available in different human languages, thanks to many tireless volunteers!
 
@@ -199,3 +199,7 @@ Mikael Jacobsson (leochingkwake@gmail.com) has volunteered to translate the book
 ## Turkish
 
 Türker SEZER (tsezer@btturk.net) and Bugra Cakir (bugracakir@gmail.com) have volunteered to translate the book to Turkish. "Where is Turkish version? Bitse de okusak."
+
+--------------------------------------------------
+
+### 继续阅读[附录: 参与翻译工作](translation_howto.md)

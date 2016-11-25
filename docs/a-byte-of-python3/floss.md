@@ -1,6 +1,6 @@
-# Appendix: FLOSS {#floss}
+# 附录：免费/自由和开放源码软件
 
-> NOTE: Please note that this section was written in 2003, so some of this will sound quaint to you :-)
+> 注意：本章节是在2003年完成的，所以有些内容看起来可能有些奇怪 :-)
 
 "Free/Libre and Open Source Software", in short, [FLOSS](http://en.wikipedia.org/wiki/FLOSS) is based on the concept of a community, which itself is based on the concept of sharing, and particularly the sharing of knowledge. FLOSS are free for usage, modification and redistribution.
 
@@ -39,3 +39,7 @@ Visit the following websites for more information on FLOSS:
 - [FreshMeat](http://www.freshmeat.net)
 
 So, go ahead and explore the vast, free and open world of FLOSS!
+
+--------------------------------------------------
+
+### 继续阅读[附录: 版本历史](revision_history.md)

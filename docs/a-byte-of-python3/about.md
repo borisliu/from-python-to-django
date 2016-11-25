@@ -1,4 +1,4 @@
-# Appendix: Colophon {#colophon}
+# 附录: 关于
 
 Almost all of the software that I have used in the creation of this book are [FLOSS](./floss.md#floss).
 
@@ -33,3 +33,7 @@ For the tenth draft, I switched to writing in Markdown + [GitBook](https://www.g
 ## About the Author
 
 See {{ book.authorUrl }}
+
+--------------------------------------------------
+
+### 继续阅读[附录: 关于](about.md)

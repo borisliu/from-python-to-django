@@ -1,4 +1,4 @@
-# 附录：教材历史 {#history-lesson}
+# 附录：版本历史
 
 我为我编写的“Diamond”软件编写简化安装过程的安装程序时，我第一次开始使用Python。我不得不在Python还是Perl上绑定Qt库进行选择。我在网上做了一些研究，偶然发现了[Eric S. Raymond的一篇文章] (http://www.python.org/about/success/esr/), Raymond是一个著名的、值得尊敬的黑客。其中他谈道，Python是如何成为他最喜爱的编程语言的。我也发现PyQt的绑定比Perl-QT更加成熟。所以我决定选择Python。
 
@@ -104,3 +104,7 @@
 - 0.10
     - 14 Nov 2003
     - Initial draft using [KWord](https://en.wikipedia.org/wiki/Kword).
+
+--------------------------------------------------
+
+### 继续阅读[附录: 翻译](translations.md)
