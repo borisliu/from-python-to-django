@@ -1,8 +1,7 @@
 # Summary
 
-* [前言](README.md)
-
-* [搭建Python开发环境](introduction/index.md)
+* [开始学习](introduction/cover.md)
+    * [搭建Python开发环境](introduction/index.md)
 
 * [简明Python教程](a-byte-of-python3/index.md)
     * [简介](a-byte-of-python3/introduction.md)
