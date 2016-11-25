@@ -2,6 +2,8 @@
 
 # 从Python到Django入门教程
 
-### by boris_cn@263.net
+---
+
+### by <boris_cn@263.net>
 
 ### 废话少说，开始吧！
