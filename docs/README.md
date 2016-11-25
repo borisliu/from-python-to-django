@@ -1,4 +1,4 @@
-![人生苦短，我用Python](./using_python.jpg)
+![人生苦短，我用Python](./introduction/using_python.jpg)
 
 # 从Python到Django入门教程
 
