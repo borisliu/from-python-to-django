@@ -1,6 +1,5 @@
 # Summary
 
-* [Introduction](introduction.md)
 * [Dedication](dedication.md)
 * [Preface](preface.md)
 * [About Python](about_python.md)
