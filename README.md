@@ -34,7 +34,7 @@ Django的主要目标是使得开发复杂的、数据库驱动的网站变得�
 
 ### 1. [搭建Python开发环境](https://borisliu.gitbooks.io/from-python-to-django/content/introduction/)
 ### 2. [简明Python教程](https://borisliu.gitbooks.io/from-python-to-django/content/a-byte-of-python3/)
-### 3. [Django step by step](https://borisliu.gitbooks.io/from-python-to-django/content/django-step-by-step/)
+### 3. [Django Step By Step](https://borisliu.gitbooks.io/from-python-to-django/content/django-step-by-step/)
 
 本书托管在[GitHub](https://github.com/borisliu/from-python-to-django)，
 如果有问题请在线[提交](https://github.com/borisliu/from-python-to-django/issues)。
