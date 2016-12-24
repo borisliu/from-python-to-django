@@ -1,0 +1,10 @@
+<h2>通讯录</h2>
+<table border="1">
+  <tr><th>姓名</th><th>地址</th></tr>
+  {% for user in address %}
+  <tr>
+  <td>{{ user.name }}</td>
+  <td>{{ user.address }}</td>
+  </tr>
+{% endfor %}
+</table>

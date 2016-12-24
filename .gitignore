@@ -14,3 +14,7 @@ _book
 
 # MAC OS files
 .DS_Store
+
+# Python Virtualenv
+venv
+*.pyc
