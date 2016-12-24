@@ -35,6 +35,7 @@
 * [Django Step Sy Step](django-step-by-step/index.md)
     * [第一讲](django-step-by-step/chapter01.md)
     * [第二讲](django-step-by-step/chapter02.md)
+    * [第三讲](django-step-by-step/chapter03.md)
 
 ----
 
