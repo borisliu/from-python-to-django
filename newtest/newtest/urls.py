@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from . import helloworld, add, list
+from . import helloworld, add, list, csv_test
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', helloworld.index),
     url(r'^add/$', add.index),
     url(r'^list/$', list.index),
+    url(r'^csv/(?P<filename>\w+)/$', csv_test.output),
 ]
