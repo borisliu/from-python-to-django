@@ -12,7 +12,7 @@
 
 在 Django 中我看到了一个生成 csv 格式的文档(Outputting CSV dynamically)，非常好，它没有数据库，正好用来做演示。
 
-现在我的需求就是提供 csv 格式文件的下载。
+更进一步，现在我的需求就是提供 excel 格式文件的下载。
 
 我们会在原来 list(表格) 例子基础上进行演示，步骤就是上面的流程。
 
@@ -21,12 +21,12 @@
 在文件最后增加:
 
 ```html
-<p><a href="/csv/address/">csv格式下载</a></p>
+<p><a href="/xls/address/">Excel格式下载</a></p>
 ```
 
-它将显示为一个链接，它所指向的链接将用来生成 csv 文件。
+它将显示为一个链接，它所指向的链接将用来生成 Excel 文件。
 
-## 3   在newtest下增加 csv_test.py
+## 3   在newtest下增加 xls_test.py
 
 ```python
 from django.http import HttpResponse
@@ -38,10 +38,10 @@ address = [
     ]
 
 def output(request, filename):
-    response = HttpResponse(mimetype='text/csv')
-    response['Content-Disposition'] = 'attachment; filename=%s.csv' % filename
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename=%s.xls' % filename
 
-    t = loader.get_template('csv.html')
+    t = loader.get_template('xls.html')
     c = Context({
         'data': address,
     })
@@ -56,14 +56,14 @@ def output(request, filename):
 这里 `output()` 是我们希望 Django 调用的方法，不再是 `index()` 了。(不能老是一样的呀。)而且它与前面的 `index()` 不同，它带了一个参数。这里主要是想演示 url 的参数解析。因此你要注意，这个参数一定是放在 url 上的。它表示输出文件名。
 
 ```python
-response = HttpResponse(mimetype='text/csv')
-response['Content-Disposition'] = 'attachment; filename=%s.csv' % filename
+response = HttpResponse(mimetype='application/ms-excel')
+response['Content-Disposition'] = 'attachment; filename=%s.xls' % filename
 ```
 
-这两行是用来处理输出类型和附件的，以前我也没有用过，这回也学到了。它表明返回的是一个 csv 格式的文件。
+这两行是用来处理输出类型和附件的，以前我也没有用过，这回也学到了。它表明返回的是一个Excel格式的文件。
 
 ```python
-t = loader.get_template('csv.html')
+t = loader.get_template('xls.html')
 c = Context({
     'data': address,
 })
@@ -72,12 +72,24 @@ response.write(t.render(c))
 
 这几行就是最原始的模板使用方法。先通过 `loader` 来找到需要的模板，然后生成一个 template 对象，再生成一个 `Context` 对象，它就是一个字典集。然后 `t.render(c)` 这个用来对模板和提供的变量进行合并处理，生成最终的结果。最后调用 `response.write()` 将内容写入。
 
-## 4   增加 templates/csv.html
+## 4   增加 templates/xls.html
 
-```python
-{% for row in data %}"{{ row.0|addslashes}}", "{{ row.1|addslashes}}",
-{% endfor %}
-```
+```html
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+      <table>
+        {% for row in data %}
+        <tr>
+            <td>{{ row.0|addslashes}}</td>
+            <td>{{ row.1|addslashes}}</td>
+        </tr>
+        {% endfor %}
+  </body>
+</html>```
 
 使用了一个 for 循环。这里 `data` 与上面的 `Context` 的 `data` 相对应。因为 `data` 是一个列表，它的每行是一个 tuple ，因此 `row.0`, `row.1` 就是取 tuple 的第一个和第二个元素。`|` 是一个过滤符，它表示将前一个的处理结果作为输入传入下一个处理。因此 Django 的模板很强大，使用起来也非常直观和方便。 `addslashes` 是 Django 模板内置的过滤 Tag ，它用来将结果中的特殊字符加上反斜线。
 
@@ -90,23 +102,22 @@ Django 还允许你自定义 Tag ，在 The Django template language: For Python
 ```python
 from django.conf.urls import url
 from django.contrib import admin
-from . import helloworld, add, list, csv_test
+from . import helloworld, add, list, xls_test
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', helloworld.index),
     url(r'^add/$', add.index),
     url(r'^list/$', list.index),
-    url(r'^csv/(?P<filename>\w+)/$', csv_test.output),
+    url(r'^xls/(?P<filename>\w+)/$', xls_test.output),
 ]
-
 ```
 
-增加了 csv 的 url 映射。
+增加了 xls 的 url 映射。
 
 上面的正则表达式有些复杂了，因为有参数的处理在里面。 `(?P<filename>\w+)` 这是一个将解析结果起名为 `filename` 的正则表达式，它完全符合 Python 正则表达式的用法。在最新的 Django 中，还可以简化一下： `(\w+)` 。但这样需要你的参数是按顺序传入的，在一个方法有多个参数时一定要注意顺序。
 
-还记得吗？我们的链接是写成 `/csv/address/` ，因此上面实际上会变成对 `csv.output(filename='address')` 的调用。
+还记得吗？我们的链接是写成 `/xls/address/` ，因此上面实际上会变成对 `xls.output(filename='address')` 的调用。
 
 ## 6   启动 server
 

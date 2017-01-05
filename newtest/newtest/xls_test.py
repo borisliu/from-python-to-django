@@ -7,10 +7,10 @@ address = [
     ]
 
 def output(request, filename):
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename=%s.csv' % filename
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename=%s.xls' % filename
 
-    t = loader.get_template('csv.html')
+    t = loader.get_template('xls.html')
     c = Context({
         'data': address,
     })
