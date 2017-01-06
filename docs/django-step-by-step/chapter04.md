@@ -89,7 +89,8 @@ response.write(t.render(c))
         </tr>
         {% endfor %}
   </body>
-</html>```
+</html>
+```
 
 使用了一个 for 循环。这里 `data` 与上面的 `Context` 的 `data` 相对应。因为 `data` 是一个列表，它的每行是一个 tuple ，因此 `row.0`, `row.1` 就是取 tuple 的第一个和第二个元素。`|` 是一个过滤符，它表示将前一个的处理结果作为输入传入下一个处理。因此 Django 的模板很强大，使用起来也非常直观和方便。 `addslashes` 是 Django 模板内置的过滤 Tag ，它用来将结果中的特殊字符加上反斜线。
 
@@ -117,7 +118,7 @@ urlpatterns = [
 
 上面的正则表达式有些复杂了，因为有参数的处理在里面。 `(?P<filename>\w+)` 这是一个将解析结果起名为 `filename` 的正则表达式，它完全符合 Python 正则表达式的用法。在最新的 Django 中，还可以简化一下： `(\w+)` 。但这样需要你的参数是按顺序传入的，在一个方法有多个参数时一定要注意顺序。
 
-还记得吗？我们的链接是写成 `/xls/address/` ，因此上面实际上会变成对 `xls.output(filename='address')` 的调用。
+还记得吗？我们的链接是写成 `/xls/address/` ，因此上面实际上会变成对 `xls_test.output(filename='address')` 的调用。
 
 ## 6   启动 server
 

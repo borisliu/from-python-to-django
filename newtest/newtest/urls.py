@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from . import helloworld, add, list, xls_test
+from . import helloworld, add, list, xls_test, login
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^add/$', add.index),
     url(r'^list/$', list.index),
     url(r'^xls/(?P<filename>\w+)/$', xls_test.output),
+    url(r'^login/$', login.login),
+    url(r'^logout/$', login.logout),
 ]
