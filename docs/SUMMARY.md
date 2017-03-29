@@ -36,6 +36,9 @@
     * [第一讲](django-step-by-step/chapter01.md)
     * [第二讲](django-step-by-step/chapter02.md)
     * [第三讲](django-step-by-step/chapter03.md)
+    * [第四讲](django-step-by-step/chapter04.md)
+    * [第五讲](django-step-by-step/chapter05.md)
+    * [第六讲](django-step-by-step/chapter06.md)
 
 ----
 
