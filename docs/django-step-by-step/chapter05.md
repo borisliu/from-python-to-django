@@ -111,7 +111,7 @@ DATABASES = {
 
 配置不需要做什么修改，下一步我们进行数据库的初始化工作，包括建库、建表等:
 
-```python
+```shell
 python manage.py migrate
 ```
 
