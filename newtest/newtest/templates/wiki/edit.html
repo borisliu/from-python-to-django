@@ -1,0 +1,5 @@
+<h2>编辑:{{ pagename }}</h2>
+<form method="POST" action="/wiki/{{pagename}}/save/">
+<textarea name="content" rows="10" cols="50">{{ content }}</textarea><br/>
+<input type="submit" value="保存">
+</form>

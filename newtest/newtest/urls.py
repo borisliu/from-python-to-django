@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import include, url
 from django.contrib import admin
 from . import helloworld, add, list, xls_test, login
 
@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^xls/(?P<filename>\w+)/$', xls_test.output),
     url(r'^login/$', login.login),
     url(r'^logout/$', login.logout),
+    url(r'^wiki/', include('wiki.urls')),
 ]

@@ -12,12 +12,12 @@
 
 下面我们将开始创建 Django 中的 app 了。
 
-先说一下。如果你看过官方版的教程，它就是讲述了一个 Poll 的 app 的生成过程。那么一个 app 就是一个功能的集合，它有自已的 model ，view 和相应的模板，还可以带自已的 urls.py 。那么它也是一个独立的目录，这样一个 app 就可以独立地进行安装，你可以把它安装到其它的 Django 服务器中去。因此采用 app 的组织形式非常有意义。而且 adango-admin.py 也提供了一个针对 app 的命令，一会我们就会看到。而且 Django 提供一些自动功能也完全是针对于 app 这种结构的。Model, Template, View 就合成了 MTV 这几个字母。 Model 是用来针对数据库，同时它可以用来自动生成管理界面， View 在前面我们一直都用它，用来处理请求和响应的相当于MVC框架中的 Controller 的作用， Template 用来生成界面。
+先说一下。如果你看过官方版的教程，它就是讲述了一个 Poll 的 app 的生成过程。那么一个 app 就是一个功能的集合，它有自已的 model ，view 和相应的模板，还可以带自已的 urls.py 。那么它也是一个独立的目录，这样一个 app 就可以独立地进行安装，你可以把它安装到其它的 Django 服务器中去。因此采用 app 的组织形式非常有意义。而且 `adango-admin.py` 也提供了一个针对 app 的命令，一会我们就会看到。而且 Django 提供一些自动功能也完全是针对于 app 这种结构的。Model, Template, View 就合成了 MTV 这几个字母。 Model 是用来针对数据库，同时它可以用来自动生成管理界面， View 在前面我们一直都用它，用来处理请求和响应的相当于MVC框架中的 Controller 的作用， Template 用来生成界面。
 
 ## 2 创建 wiki app
 
 ```Shell
-manage.py startapp wiki
+python manage.py startapp wiki
 ```
 
 
@@ -32,6 +32,18 @@ manage.py startapp wiki
 * models.py 
 用来放 model 代码。 
 
+* apps.py
+用来放配置代码
+
+* admin.py
+用来配置当前的wiki如何使用Django Admin功能
+
+* tests.py
+用来放测试代码
+
+* migrations目录
+用来放每一次数据库变化后需要对数据库做的变化
+
 ## 3 编辑 wiki/models.py
 
 ```Python
@@ -39,7 +51,7 @@ from django.db import models
 
 # Create your models here.
 class Wiki(models.Model):
-    pagename = models.CharField(maxlength=20, unique=True)
+    pagename = models.CharField(max_length=20, unique=True)
     content = models.TextField()
 ```
 
@@ -58,21 +70,25 @@ Wiki 是 model 的名字，它需要从 models.Model 派生而来。它定义了
 ### 4.1 修改settings.py
 
 ```Python 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
+    'wiki.apps.WikiConfig',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
-    'newtest.wiki',
-)
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'newtest',
+]
 ```
 
-这个在文件的最后，前4个是缺省定义的。给出指定 wiki 包的引用名来。这一步是为了以后方便地导入所必须的。因为我们的目录都是包的形式，因此这里就是与目录相对应的。
+这个在文件的最后，django开头的是缺省定义的。给出指定 wiki 包的引用名来。这一步是为了以后方便地导入所必须的。因为我们的目录都是包的形式，因此这里就是与目录相对应的。
 
 ### 4.2 执行(在newtest目录下) 
 
 ```Shell
-manage.py syncdb
+python manage.py makemigrations
+python manage.py migrate
 ```
 
 如果没有报错就是成功了。这一步 Django 将根据 model 的信息在数据库中创建相应的表。表就是这样创建出来的。
@@ -84,13 +100,13 @@ manage.py syncdb
 进入 newtest 目录，然后:
 
 ```Shell
-manage.py shell
+python manage.py shell
 ```
 
 进入 python
 
 ```Python
->>> from newtest.wiki.models import Wiki
+>>> from wiki.models import Wiki
 >>> page = Wiki(pagename='FrontPage', content='Welcome to Easy Wiki')
 >>> page.save()
 >>> Wiki.objects.all()
@@ -102,16 +118,16 @@ manage.py shell
 'Welcome to Easy Wiki'
 ```
 
-在 Django 中，对于数据库的记录有两种操纵方式，一种是集合方式，一种是对象方式。集合方式相当于表级操作，在新版的 0.92 中可以使用 model.objects 来处理。 objects 对象有一些集合方式的操作，如 all() 会返回全部记录， filter() 会根据条件返回部分记录。而象插入新记录则需要使用记录方式来操作，些时要直接使用 model 类。
+在 Django 中，对于数据库的记录有两种操纵方式，一种是集合方式，一种是对象方式。集合方式相当于表级操作，可以使用 model.objects 来处理。 objects 对象有一些集合方式的操作，如 all() 会返回全部记录， filter() 会根据条件返回部分记录。而象插入新记录则需要使用记录方式来操作，些时要直接使用 model 类。
 
 ## 6   修改 wiki/views.py
 
 ```Python
-#coding=utf-8
-from newtest.wiki.models import Wiki
+from .models import Wiki
 from django.template import loader, Context
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request, pagename=""):
     """显示正常页面，对页面的文字做特殊的链接处理"""
@@ -131,12 +147,14 @@ def index(request, pagename=""):
         page = Wiki.objects.get(pagename='FrontPage')
         return process('wiki/page.html', page)
 
+@csrf_exempt
 def edit(request, pagename):
     """显示编辑存在页面"""
 #    page = Wiki.objects.get_object(pagename__exact=pagename)
     page = Wiki.objects.get(pagename=pagename)
     return render_to_response('wiki/edit.html', {'pagename':pagename, 'content':page.content})
 
+@csrf_exempt
 def save(request, pagename):
     """保存页面内容，老页面进行内容替换，新页面生成新记录"""
     content = request.POST['content']
@@ -221,28 +239,36 @@ def process(template, page):
 ## 10   修改 urls.py
 
 ```Python
-from django.conf.urls.defaults import *
+from django.conf.urls import include, url
+from django.contrib import admin
+from . import helloworld, add, list, xls_test, login
 
-urlpatterns = patterns('',
-    # Example:
-    # (r'^testit/', include('newtest.apps.foo.urls.foo')),
-    (r'^$', 'newtest.helloworld.index'),
-    (r'^add/$', 'newtest.add.index'),
-    (r'^list/$', 'newtest.list.index'),
-    (r'^csv/(?P<filename>\w+)/$', 'newtest.csv_test.output'),
-    (r'^login/$', 'newtest.login.login'),
-    (r'^logout/$', 'newtest.login.logout'),
-    (r'^wiki/$', 'newtest.wiki.views.index'),
-    (r'^wiki/(?P<pagename>\w+)/$', 'newtest.wiki.views.index'),
-    (r'^wiki/(?P<pagename>\w+)/edit/$', 'newtest.wiki.views.edit'),
-    (r'^wiki/(?P<pagename>\w+)/save/$', 'newtest.wiki.views.save'),
-
-    # Uncomment this for admin:
-#     (r'^admin/', include('django.contrib.admin.urls')),
-)
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^$', helloworld.index),
+    url(r'^add/$', add.index),
+    url(r'^list/$', list.index),
+    url(r'^xls/(?P<filename>\w+)/$', xls_test.output),
+    url(r'^login/$', login.login),
+    url(r'^logout/$', login.logout),
+    url(r'^wiki/', include('wiki.urls')),
+]
 ```
 
-增加了 wiki 等4个 url 映射。
+在wiki目录下增加一个urls.py的文件，然后编辑内容增加了 wiki 等4个 url 映射。
+
+```Python
+from django.conf.urls import url
+
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.index),
+    url(r'^(?P<pagename>\w+)/$', views.index),
+    url(r'^(?P<pagename>\w+)/edit/$', views.edit),
+    url(r'^(?P<pagename>\w+)/save/$', views.save),
+]
+```
 
 这里要好好讲一讲 URL 的设计(个人所见)。
 
