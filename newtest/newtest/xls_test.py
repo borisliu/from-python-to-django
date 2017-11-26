@@ -11,8 +11,8 @@ def output(request, filename):
     response['Content-Disposition'] = 'attachment; filename=%s.xls' % filename
 
     t = loader.get_template('xls.html')
-    c = Context({
+    c = {
         'data': address,
-    })
+    }
     response.write(t.render(c))
     return response

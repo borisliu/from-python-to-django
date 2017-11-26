@@ -3,7 +3,7 @@
 
 ## 安装Python
 
-Python的开发环境是比较简单的，到[https://www.python.org/downloads/](https://www.python.org/downloads/)去下载对应的Python3安装包，安装的时候勾选上修改PATH的选项，然后完成安装就是了。本文使用的是Python 3.5.2。
+Python的开发环境是比较简单的，到[https://www.python.org/downloads/](https://www.python.org/downloads/)去下载对应的Python3安装包，安装的时候勾选上修改PATH的选项，然后完成安装就是了。本文使用的是Python 3.6.3。
 
 调出你的终端（cmd），输入
 
@@ -36,7 +36,7 @@ pip和virtualenv可以很好的协同工作，同时使用这两个工具非常�
 用virtualenv env1就可以创建一个名为env1的虚拟环境了，进入这个虚拟环境后，再使用pip install安装其它的package就只会安装到这个虚拟环境里，不会影响其它虚拟环境或系统环境。
 接下来我们要用这个工具创建我们自己的开发环境。
 
-## 安装Django1.10
+## 安装Django1.11
 
 为了能够使用Django的命令行，我们把Django安装到系统的环境中，在命令行中输入：
 

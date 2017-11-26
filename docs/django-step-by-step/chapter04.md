@@ -64,9 +64,9 @@ response['Content-Disposition'] = 'attachment; filename=%s.xls' % filename
 
 ```python
 t = loader.get_template('xls.html')
-c = Context({
+c = {
     'data': address,
-})
+}
 response.write(t.render(c))
 ```
 
