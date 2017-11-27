@@ -71,7 +71,6 @@ Wiki 是 model 的名字，它需要从 models.Model 派生而来。它定义了
 
 ```Python 
 INSTALLED_APPS = [
-    'wiki.apps.WikiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -79,6 +78,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'newtest',
+    'wiki.apps.WikiConfig',
 ]
 ```
 
@@ -176,7 +176,7 @@ def process(template, page):
     t = loader.get_template(template)
     content = r.sub(r'<a href="/wiki/\1">\1</a>', page.content)
     content = re.sub(r'[\n\r]+', '<br>', content)
-    c = Context({'pagename':page.pagename, 'content':content})
+    c = {'pagename':page.pagename, 'content':content}
     return HttpResponse(t.render(c))
 ```
 

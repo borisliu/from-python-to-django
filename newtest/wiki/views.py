@@ -51,5 +51,5 @@ def process(template, page):
     t = loader.get_template(template)
     content = r.sub(r'<a href="/wiki/\1">\1</a>', page.content)
     content = re.sub(r'[\n\r]+', '<br>', content)
-    c = Context({'pagename':page.pagename, 'content':content})
+    c = {'pagename':page.pagename, 'content':content}
     return HttpResponse(t.render(c))
