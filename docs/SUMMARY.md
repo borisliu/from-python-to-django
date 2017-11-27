@@ -49,7 +49,7 @@
     * [第十四讲 Ajax的实现(二)](chapter14.md)
     * [第十五讲 i18n的一个简单实现](chapter15.md)
     * [第十六讲 自定义Calendar Tag](chapter16.md)
-    * [第十七讲 View,Template,Tag之间的关系](chapter17.md)
+    * [第十七讲 View,Template和Tag](chapter17.md)
 
 ----
 
