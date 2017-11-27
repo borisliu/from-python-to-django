@@ -103,7 +103,7 @@ python manage.py createsuperuser
 
 >因此是否启用 admin 管理取决于你。只要在 address/admin.py 中增加 admin 相关的部分，我们的应用才可以在 admin 中被管理。
 
-## 8 修改 address/admin.py
+## 7 修改 address/admin.py
 
 ```python
 from django.contrib import admin
@@ -129,7 +129,7 @@ admin.site.register(Address)
 
 怎么新增的记录叫 <Address object> 这样看上去很别扭。为什么会这样，因为没有定义特殊的方法。下面就让我们定义一下。
 
-## 9 修改 address/models.py
+## 8 修改 address/models.py
 
 ```python
 from django.db import models
@@ -153,7 +153,7 @@ class Address(models.Model):
 
 你记得吗？Model 是与数据库中的表对应的，为什么我们改了 model 代码，不需要重新对数据库进行处理呢？因为只要不涉及到表结构的调整是不用对表进行特殊处理的。不过，我们马上要修改表结构了。
 
-## 10 修改 address/models.py
+## 9 修改 address/models.py
 
 姓名留短了真是不方便，另外我突然发现需要再增加一个房间字段。
 
@@ -168,7 +168,7 @@ class Address(models.Model):
         max_length=1)
     telphone = models.CharField('电话', max_length=20)
     mobile = models.CharField('手机', max_length=11)
-    room = models.CharField('房间', max_length=10)
+    room = models.CharField('房间', max_length=10, default='')
 
     def __str__(self):
         return self.name
@@ -176,64 +176,96 @@ class Address(models.Model):
 
 这回表结构要改变了，怎么做呢？
 
-## 11 修改表结构
+## 10 修改表结构
 
-目前 Django 没有一个特别的命令可以直接更新表结构。为什么呢？在 Django 看来修改表结构并不是件很容易的事情，主要的问题是数据库中现有的数据怎么办，因此为了使旧的数据可以平滑迁移到新的表结构中，这步操作还是手工来做好一些。但现在我们正在开发中，因此很有可能表结构要经常发生变化，每次手工做多麻烦呀。 Django 有一个命令行命令： sqlreset 可以生成 drop 表，然后创建新表的 SQL 语句，因此我们可以先调用这个命令，然后通过管道直接导入数据库的命令行工具中。这里我使用的是 sqlite3 ，因此我这样做:
+我们可以使用Django提供的数据迁移功能，在不影响原有数据的情况下，更新表结构。主要包括下面的命令：
+
+* migrate，负责应用迁移，以及取消应用并列出其状态。
+* makemigrations, 负责基于你的模型修改创建一个新的迁移
+* sqlmigrate, 展示迁移的sql语句
+
+大家一定已经注意到了，我们增加的字段`room`多了一个默认值空字符串，这是为了在增加一个新的字段中之后，可以使用这个默认值填充已有的记录。下面我们创建一个新的迁移
 
 ```shell
-manage.py sqlreset address|sqlite3 data.db
+python manage.py makemigrations
 ```
 
-sqlreset 后面是要处理的 app 的名字，因此它只会对指定的 app 有影响。但这样，这个 app 的所有数据都丢失了。如果想保留原有数据，你需要手工做数据切换的工作。
+然后我们就在address/migrations目录下得到了一个新的`0002_auto_XXXXXXXX_XXXX.py`的文件，这个文件由Django自动生成，用于迁移数据库使用，我们不用管它，使用下面的命令执行迁移：
 
-对于其它的数据库，在数据库命令行可能是不同的，这个你自已去掌握吧。同时对于 sqlite3 ，有人可能想：直接把数据库文件删除了不就行了。但是你一定要清楚，如果存在其它的 app 的话，它们的数据是否还有用，如果没用删除当然可以，不过相应的 app 都要再重新 install 一遍以便初始化相应的表。如果数据有用，这样做是非常危险的，因此还是象上面的处理为好，只影响当前的 app 。
+```shell
+python manage.py migrate
+```
 
-## 12 进入 admin
+现在数据库中已经是新的表结构了，我们可以对数据继续进行操作。
+
+## 11 进入 admin
 
 我们可以再次进入 admin 了，增加，删除，修改数据了。
 
 用了一会，也许你会希望：能不能有汉化版本的界面呢？答案是肯定的，而且已做好了。
 
-## 13 修改 settings.py
+## 12 修改 settings.py
 
-把 `LANGUAGE_CODE` 由 `'en'` 改为 `'zh-cn'` ， TIME_ZONE 建议改为 `'CCT'`
+在`MIDDLEWARE`部分，增加`django.middleware.locale.LocaleMiddleware`，代码如下：
+
+```python
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+]
+```
 
 刷新下界面，是不是变成汉字了。
 
 国际化支持在 Django 中做得是非常的出色，程序可以国际化，模板可以国际化，甚至js都可以国际化。这一点其它的类似框架都还做不到。而国际化的支持更是 RoR 的一个弱项，甚至在 [Snakes and Rubies](http://snakesandrubies.com/event) 的会议上，RoR 的作者都不想支持国际化。但 Django 却做得非常出色，目前已经有二十多种语言译文。
 
-在增加，删除，修改都做完了，其实还剩下什么呢？显示和查询。那么实现它则需要写 view 和使用模板了。这个其实也没什么，最简单的，从数据库里查询出所有的数据，然后调用模板，通过循环一条条地显示。不错是简单。但是在做之前，先让我们想一想，这种处理是不是最常见的处理方法呢？也许我们换成其它的应用也是相似的处理。如果很多这样的处理，是不是我们需要每次都做一遍呢？有没有通用的方便的方法。答案是：有！ Django 已经为我们想到了，这就是 [Generic views](http://www.djangoproject.com/documentation/generic_views/) 所做的。它把最常见的显示列表，显示详细信息，增加，修改，删除对象这些处理都已经做好了一个通用的方法，一旦有类似的处理，可以直接使用，不用再重新开发了。但在配置上有特殊的要求。具体的可以看 Generic views 文档。
+在增加，删除，修改都做完了，其实还剩下什么呢？显示和查询。那么实现它则需要写 view 和使用模板了。这个其实也没什么，最简单的，从数据库里查询出所有的数据，然后调用模板，通过循环一条条地显示。不错是简单。但是在做之前，先让我们想一想，这种处理是不是最常见的处理方法呢？也许我们换成其它的应用也是相似的处理。如果很多这样的处理，是不是我们需要每次都做一遍呢？有没有通用的方便的方法。答案是：有！ Django 已经为我们想到了，这就是 [Generic views](https://docs.djangoproject.com/en/1.11/topics/class-based-views/generic-display/) 所做的。它把最常见的显示列表，显示详细信息，增加，修改，删除对象这些处理都已经做好了一个通用的方法，一旦有类似的处理，可以直接使用，不用再重新开发了。但在配置上有特殊的要求。具体的可以看 Generic views 文档。
 
 从这里我有一点想法，我认为 view 这个名称特别容易让人产生误解，为什么呢？因为 view 可以译为视图，给人一种与展示有关的什么东西。但实际上 Django 中的 view 相当于一个 Controller 的作用，它是用来收集数据，调用模板，真正的显示是在模板中处理的。因此我倒认为使用 Controller 可能更合适，这样就称为 MTC 了。呵呵，只是个人想法。
 
-另外， Generic views 产生的意义在于 Django 的哲学理含 DRY (Don't repeat yourself, 不要自已重复)，目的是重用，减少重复劳动。还有其它的哲学理含参见 [Design philosophies](http://www.djangoproject.com/documentation/design_philosophies/) 文档。
+另外， Generic views 产生的意义在于 Django 的哲学理含 DRY (Don't repeat yourself, 不要自已重复)，目的是重用，减少重复劳动。还有其它的哲学理含参见 [Design philosophies](https://docs.djangoproject.com/en/1.11/misc/design-philosophies/) 文档。
 
-因此可以知道 view 可以省掉，但模板却不能省， Django 在这点上认为：每个应用的显示都可能是不同的，因此这件事需要用户来处理。但如果有最简单的封装，对于开发人员在测试时会更方便，但目前没有，因此模板我们还是要准备，而且还有特殊的要求，一会就看到了。
+因此可以知道 view 可以极大地简化， Django 在这点上认为：每个应用的显示都可能是不同的，因此这件事需要用户来处理。但如果有最简单的封装，对于开发人员在测试时会更方便，但目前没有，因此模板我们还是要准备，而且还有特殊的要求，一会就看到了。
 
-对于目前我这个简单的应用来说，我只需要一个简单的列表显示功能即可，好在联系人的信息并不多可以在一行显示下。因此我要使用 `django.views.generic.list_detail` 模块来处理。
+对于目前我这个简单的应用来说，我只需要一个简单的列表显示功能即可，好在联系人的信息并不多可以在一行显示下。因此我要使用 `django.views.generic` 模块来处理。
 
-## 14   增加 address/urls.py
+## 13   增加 address/urls.py
 
 对，我们为 address 应用增加了自已的 urls.py。
 
 ```python
-from django.conf.urls.defaults import *
-from newtest.address.models import Address
+from django.conf.urls import url
 
-info_dict = {
-#    'model': Address,
-    'queryset': Address.objects.all(),
-}
-urlpatterns = patterns('',
-    (r'^/?$', 'django.views.generic.list_detail.object_list', info_dict),
-)
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.IndexView.as_view(), name='index'),
+]
 ```
 
-`info_dict` 存放着 `object_list` 需要的参数，它是一个字典。不同的 generic view 方法需要不同的 `info_dict` 字典(这个变量你可以随便起名)。对于我们要调用的 `object_list` 它只要一个 queryset 值即可。但这个值需要是一个 queryset 对象。因此在第二句我们从 `newtest.address.models` 中导入了 `Address` 。并且使用 `Address.objects.all()` 来得到一个全部记录的 queryset 。
+我们使用`as_view`这个generic view的方法显示默认的列表界面，可以大大的简化views.py的编码工作，现在我们的views.py代码如下：
+
+```python
+from django.views import generic
+
+from .models import Address
+
+class IndexView(generic.ListView):
+    model = Address
+    template_name = 'address/index.html'
+```
+
+我们只需要从`generic.ListView`继承，并创建一个基于类的View，命名为`IndexView`，然后为这个类设置两个成员变量，一个为`model = Address`，指定我们的generic view需要显示哪一个模型的数据；再设置`template_name = 'address/index.html'`，指定显示的模板。
 
 前面已经谈到：使用 generic view 只是减少了 view 的代码量，但对于模板仍然是必不可少的。因此要创建符合 generic view 要求的模板。主要是模板存放的位置和模板文件的名字。
 
-使用 `object_list()` 需要的模板文件名为： `app_label/model_name_list.html` ，这是缺省要查找的模板名。
+缺省需要的模板文件名为： `app_label/model_name_list.html` ，在这个模板中可以使用 `object_list`变量访问模型的列表 。
 
 ## 15   创建 templates/address 目录
 
@@ -250,7 +282,7 @@ urlpatterns = patterns('',
   <th>手机</th>
   <th>房间</th>
 </tr>
-{% for person in object_list %}
+{% for person in address_list %}
 <tr>
   <td>{{ person.name }}</td>
   <td>{{ person.gender }}</td>
@@ -267,26 +299,21 @@ urlpatterns = patterns('',
 将我们的应用的 urls.py include 进去。
 
 ```python
-from django.conf.urls.defaults import *
+from django.conf.urls import include, url
+from django.contrib import admin
+from . import helloworld, add, list, xls_test, login
 
-urlpatterns = patterns('',
-    # Example:
-    # (r'^testit/', include('newtest.apps.foo.urls.foo')),
-    (r'^$', 'newtest.helloworld.index'),
-    (r'^add/$', 'newtest.add.index'),
-    (r'^list/$', 'newtest.list.index'),
-    (r'^csv/(?P<filename>\w+)/$', 'newtest.csv_test.output'),
-    (r'^login/$', 'newtest.login.login'),
-    (r'^logout/$', 'newtest.login.logout'),
-    (r'^wiki/$', 'newtest.wiki.views.index'),
-    (r'^wiki/(?P<pagename>\w+)/$', 'newtest.wiki.views.index'),
-    (r'^wiki/(?P<pagename>\w+)/edit/$', 'newtest.wiki.views.edit'),
-    (r'^wiki/(?P<pagename>\w+)/save/$', 'newtest.wiki.views.save'),
-    (r'^address/', include('newtest.address.urls')),
-
-    # Uncomment this for admin:
-     (r'^admin/', include('django.contrib.admin.urls')),
-)
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^$', helloworld.index),
+    url(r'^add/$', add.index),
+    url(r'^list/$', list.index),
+    url(r'^xls/(?P<filename>\w+)/$', xls_test.output),
+    url(r'^login/$', login.login),
+    url(r'^logout/$', login.logout),
+    url(r'^wiki/', include('wiki.urls')),
+    url(r'^address/', include('address.urls')),
+]
 ```
 
 可以看到 `r'^address/'` 没有使用 `$` ，因为它只匹配前部分，后面的留给 address 中的 `urls.py` 来处理。

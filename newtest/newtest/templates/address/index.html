@@ -1,0 +1,20 @@
+<h1>通讯录</h1>
+<hr>
+<table border="1">
+<tr>
+  <th>姓名</th>
+  <th>性别</th>
+  <th>电话</th>
+  <th>手机</th>
+  <th>房间</th>
+</tr>
+{% for person in object_list %}
+<tr>
+  <td>{{ person.name }}</td>
+  <td>{{ person.gender }}</td>
+  <td>{{ person.telphone }}</td>
+  <td>{{ person.mobile }}</td>
+  <td>{{ person.room }}</td>
+</tr>
+{% endfor %}
+</table>

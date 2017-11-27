@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.views import generic
 
-# Create your views here.
+from .models import Address
+
+class IndexView(generic.ListView):
+    model = Address
+    template_name = 'address/index.html'

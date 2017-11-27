@@ -8,7 +8,7 @@ class Address(models.Model):
         max_length=1)
     telphone = models.CharField('电话', max_length=20)
     mobile = models.CharField('手机', max_length=11)
-    room = models.CharField('房间', max_length=10)
+    room = models.CharField('房间', max_length=10, default='')
 
     def __str__(self):
         return self.name

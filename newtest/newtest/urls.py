@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^login/$', login.login),
     url(r'^logout/$', login.logout),
     url(r'^wiki/', include('wiki.urls')),
+    url(r'^address/', include('address.urls')),
 ]
