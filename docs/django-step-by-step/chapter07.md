@@ -33,11 +33,11 @@ from django.db import models
 # Create your models here.
 
 class Address(models.Model):
-    name = models.CharField('姓名', maxlength=6, unique=True)
+    name = models.CharField('姓名', max_length=6, unique=True)
     gender = models.CharField('性别', choices=(('M', '男'), ('F', '女')),
-        maxlength=1, radio_admin=True)
-    telphone = models.CharField('电话', maxlength=20)
-    mobile = models.CharField('手机', maxlength=11)
+        max_length=1)
+    telphone = models.CharField('电话', max_length=20)
+    mobile = models.CharField('手机', max_length=11)
 ```
 
 这回 model 复杂多了。在上面你可以看到我定义了四个字段： name , gender , telpnone , mobile 。其中 gender 表示性别，它可以从一个 tuple 数据中进行选取。并且在后面的 radio_admin=True 表示在 admin 的管理界面中将使用 radio 按钮来处理。
@@ -68,43 +68,18 @@ INSTALLED_APPS = (
 )
 ```
 
-这里我们加入了两个 app ，一个是 address ，还有一个是 django.contrib.admin 。 admin 也是一个应用，需要加入才行，后面还要按添加 app 的方式来修改 url 映射和安装 admin app。这些与标准的app的安装没有什么不同。
+这里我们加入了Address的app ，我们注意到系统默认就已经添加了admin的应用，就是django.contrib.admin 。 admin 也是一个应用，需要加入INSTALLED_APPS才可以使用，这些与标准的app的安装没有什么不同。
 
-## 5 安装 admin app
+## 5 安装 address app
 
 ```shell
-manage.py syncdb
+python manage.py makemigrations
+python manage.py migrate
 ```
 
-这样将在数据库中创建 admin 相关的表。
+这样将在数据库中创建 address 相关的表。
 
-## 6 修改 urls.py
-
-```python
-from django.conf.urls.defaults import *
-
-urlpatterns = patterns('',
-    # Example:
-    # (r'^testit/', include('newtest.apps.foo.urls.foo')),
-    (r'^$', 'newtest.helloworld.index'),
-    (r'^add/$', 'newtest.add.index'),
-    (r'^list/$', 'newtest.list.index'),
-    (r'^csv/(?P<filename>\w+)/$', 'newtest.csv_test.output'),
-    (r'^login/$', 'newtest.login.login'),
-    (r'^logout/$', 'newtest.login.logout'),
-    (r'^wiki/$', 'newtest.wiki.views.index'),
-    (r'^wiki/(?P<pagename>\w+)/$', 'newtest.wiki.views.index'),
-    (r'^wiki/(?P<pagename>\w+)/edit/$', 'newtest.wiki.views.edit'),
-    (r'^wiki/(?P<pagename>\w+)/save/$', 'newtest.wiki.views.save'),
-
-    # Uncomment this for admin:
-     (r'^admin/', include('django.contrib.admin.urls')),
-)
-```
-
-缺省的 urls.py 中在最后已经加上了 admin 的映射，不过是一个注释，把注释去掉就好了。这里要注意，它使用了一个 include 方式。对于这种URL的解析 Django 是分段的，先按 r'^admin/' 解析(这里没有 $)，匹配了则把剩下的部分丢给 django.contrib.admin.urls.admin 去进行进一步的解析。使用 include 可以方便移植，每个 app 都可以有独立的 urls.py ，然后可以与主 urls.py 合在一起使用。配置起来相对简单。而且可以自由地在主 urls.py 中修改应用URL的前缀，很方便。
-
-## 7 增加超级用户
+## 6 增加超级用户
 
 进入 (http://localhost:8000/admin)
 
@@ -113,47 +88,31 @@ urlpatterns = patterns('',
 进入看一看吧。咦，要用户。对，admin 功能是有用户权限管理的，因此一个 admin 替你完成了大量的工作：用户的管理和信息的增加、删除、修改这类功能类似，开发繁琐的东西。那么我们目前还没有一个用户，因此可以在命令下创建一个超级用户，有了这个用户，以后就可以直接在 admin 界面中去管理了。
 
 ```shell
-manage.py shell
->>> from django.contrib.auth.create_superuser import createsuperuser
->>> createsuperuser()
+python manage.py createsuperuser
 ```
 
 它会让你输入用户名，邮件地址和口令。
-
-**Note**
-
->如果你使用了 syncdb 的话，应该在运行的最后，当没有超级用户时会提示你创建的。因此这一步可能会省略掉。如果想直接创建可以使用这种方法。
-
-**Note**
-
->这种方法与 authentication 所讲述的不完全一致，原因就是这种方法不用设置 PYTHONPATH 和 DJANGO_SETTING_MODULE 环境变量，所以要简单一些。
 
 这回再进去看一下吧。
 
 ![](./chapter0702.png)
 
-上面已经有一些东西了，其中就有用户管理。但如何通过 admin 增加通讯录呢？别急，我们需要在 model 文件中增加一些与 admin 相关的东西才可以使用 admin 来管理我们的 app 。
+上面已经有一些东西了，其中就有用户管理。但如何通过 admin 增加通讯录呢？别急，我们需要编辑一下address/admin.py，告诉admin应用我们的Address对象可以被admin管理。
 
 **Note**
 
->因此是否启用 admin 管理取决于你。只要在 model 中增加 admin 相关的部分，我们的应用才可以在 admin 中被管理。
+>因此是否启用 admin 管理取决于你。只要在 address/admin.py 中增加 admin 相关的部分，我们的应用才可以在 admin 中被管理。
 
-## 8 修改 address/models.py
+## 8 修改 address/admin.py
 
 ```python
-#coding=utf-8
-from django.db import models
+from django.contrib import admin
 
-# Create your models here.
+# Register your models here.
 
-class Address(models.Model):
-    name = models.CharField('姓名', maxlength=6, unique=True)
-    gender = models.CharField('性别', choices=(('M', '男'), ('F', '女')),
-        maxlength=1, radio_admin=True)
-    telphone = models.CharField('电话', maxlength=20)
-    mobile = models.CharField('手机', maxlength=11)
+from .models import Address
 
-    class Admin: pass
+admin.site.register(Address)
 ```
 
 有了这个东西，你就可以在 admin 中看到 adress 这个 app 了。再到浏览器中看一下是什么样子了。
@@ -173,25 +132,22 @@ class Address(models.Model):
 ## 9 修改 address/models.py
 
 ```python
-#coding=utf-8
 from django.db import models
 
 # Create your models here.
 
 class Address(models.Model):
-    name = models.CharField('姓名', maxlength=6, unique=True)
+    name = models.CharField('姓名', max_length=6, unique=True)
     gender = models.CharField('性别', choices=(('M', '男'), ('F', '女')),
-        maxlength=1, radio_admin=True)
-    telphone = models.CharField('电话', maxlength=20)
-    mobile = models.CharField('手机', maxlength=11)
+        max_length=1)
+    telphone = models.CharField('电话', max_length=20)
+    mobile = models.CharField('手机', max_length=11)
 
-    def __repr__(self):
+    def __str__(self):
         return self.name
-
-    class Admin: pass
 ```
 
-改好了，再刷新下页面。这次看见了吗？增加了一个 __repr__ 方法。好象使用 __str__ 也可以，不过我也懒得去研究应该使用哪个了。这个方法将在显示 Address 实例的时候起作用。我们就使用某个联系人的姓名就行了。
+改好了，再刷新下页面。这次看见了吗？增加了一个 __str__ 方法。这个方法将在显示 Address 实例的时候起作用。我们就使用某个联系人的姓名就行了。
 
 ![](./chapter0706.png)
 
@@ -202,23 +158,20 @@ class Address(models.Model):
 姓名留短了真是不方便，另外我突然发现需要再增加一个房间字段。
 
 ```python
-#coding=utf-8
 from django.db import models
 
 # Create your models here.
 
 class Address(models.Model):
-    name = models.CharField('姓名', maxlength=20, unique=True)
+    name = models.CharField('姓名', max_length=20, unique=True)
     gender = models.CharField('性别', choices=(('M', '男'), ('F', '女')),
-        maxlength=1, radio_admin=True)
-    telphone = models.CharField('电话', maxlength=20)
-    mobile = models.CharField('手机', maxlength=11)
-    room = models.CharField('房间', maxlength=10)
+        max_length=1)
+    telphone = models.CharField('电话', max_length=20)
+    mobile = models.CharField('手机', max_length=11)
+    room = models.CharField('房间', max_length=10)
 
-    def __repr__(self):
+    def __str__(self):
         return self.name
-
-    class Admin: pass
 ```
 
 这回表结构要改变了，怎么做呢？
