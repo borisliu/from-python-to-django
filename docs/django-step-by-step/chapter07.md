@@ -1,4 +1,4 @@
-# Django Step by Step (六)
+# Django Step by Step (七)
 
 ## 1 引言
 
