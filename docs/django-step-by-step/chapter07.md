@@ -267,9 +267,9 @@ class IndexView(generic.ListView):
 
 缺省需要的模板文件名为： `app_label/model_name_list.html` ，在这个模板中可以使用 `object_list`变量访问模型的列表 。
 
-## 15   创建 templates/address 目录
+## 14   创建 templates/address 目录
 
-## 16   创建 templates/address/address_list.html
+## 15   创建 templates/address/address_list.html
 
 ```html
 <h1>通讯录</h1>
@@ -294,7 +294,7 @@ class IndexView(generic.ListView):
 </table>
 ```
 
-## 17 修改 urls.py
+## 16 修改 urls.py
 
 将我们的应用的 urls.py include 进去。
 
@@ -318,6 +318,6 @@ urlpatterns = [
 
 可以看到 `r'^address/'` 没有使用 `$` ，因为它只匹配前部分，后面的留给 address 中的 `urls.py` 来处理。
 
-## 18 启动 server 看效果
+## 17 启动 server 看效果
 
 ![](./chapter0707.png)
