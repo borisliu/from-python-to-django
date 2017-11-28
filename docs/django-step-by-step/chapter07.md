@@ -258,18 +258,18 @@ from .models import Address
 
 class IndexView(generic.ListView):
     model = Address
-    template_name = 'address/index.html'
+    template_name = 'index.html'
 ```
 
-我们只需要从`generic.ListView`继承，并创建一个基于类的View，命名为`IndexView`，然后为这个类设置两个成员变量，一个为`model = Address`，指定我们的generic view需要显示哪一个模型的数据；再设置`template_name = 'address/index.html'`，指定显示的模板。
+我们只需要从`generic.ListView`继承，并创建一个基于类的View，命名为`IndexView`，然后为这个类设置两个成员变量，一个为`model = Address`，指定我们的generic view需要显示哪一个模型的数据；再设置`template_name = 'index.html'`，指定显示的模板。
 
 前面已经谈到：使用 generic view 只是减少了 view 的代码量，但对于模板仍然是必不可少的。因此要创建符合 generic view 要求的模板。主要是模板存放的位置和模板文件的名字。
 
 缺省需要的模板文件名为： `app_label/model_name_list.html` ，在这个模板中可以使用 `object_list`变量访问模型的列表 。
 
-## 14   创建 templates/address 目录
+## 14   在 address 中创建 templates 子目录
 
-## 15   创建 templates/address/address_list.html
+## 15   创建 address/templates/address_list.html
 
 ```html
 <h1>通讯录</h1>

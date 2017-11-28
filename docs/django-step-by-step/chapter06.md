@@ -137,22 +137,22 @@ def index(request, pagename=""):
         pages = Wiki.objects.filter(pagename=pagename)
         if pages:
             #存在则调用页面模板进行显示
-            return process('wiki/page.html', pages[0])
+            return process('page.html', pages[0])
         else:
             #不存在则进入编辑画面
-            return render_to_response('wiki/edit.html', {'pagename':pagename})
+            return render_to_response('edit.html', {'pagename':pagename})
 
     else:
 #        page = Wiki.objects.get_object(pagename__exact='FrontPage')
         page = Wiki.objects.get(pagename='FrontPage')
-        return process('wiki/page.html', page)
+        return process('page.html', page)
 
 @csrf_exempt
 def edit(request, pagename):
     """显示编辑存在页面"""
 #    page = Wiki.objects.get_object(pagename__exact=pagename)
     page = Wiki.objects.get(pagename=pagename)
-    return render_to_response('wiki/edit.html', {'pagename':pagename, 'content':page.content})
+    return render_to_response('edit.html', {'pagename':pagename, 'content':page.content})
 
 @csrf_exempt
 def save(request, pagename):
@@ -166,7 +166,7 @@ def save(request, pagename):
     else:
         page = Wiki(pagename=pagename, content=content)
         page.save()
-    return HttpResponseRedirect("/wiki/%s" % pagename)
+    return HttpResponseRedirect("/%s" % pagename)
 
 import re
 
@@ -174,7 +174,7 @@ r = re.compile(r'\b(([A-Z]+[a-z]+){2,})\b')
 def process(template, page):
     """处理页面链接，并且将回车符转为<br>"""
     t = loader.get_template(template)
-    content = r.sub(r'<a href="/wiki/\1">\1</a>', page.content)
+    content = r.sub(r'<a href="/\1">\1</a>', page.content)
     content = re.sub(r'[\n\r]+', '<br>', content)
     c = {'pagename':page.pagename, 'content':content}
     return HttpResponse(t.render(c))
@@ -196,7 +196,7 @@ def process(template, page):
 
 >回车转换的工作其实可以在模板中使用 filter 来完成。
 
-* 从对模板的使用 (wiki/edit.html) 可以猜到在后面我们要在 `templates` 中创建子目录了。的确，对于不同的 app ，我们可以考虑将所有的模板都放在统一的 `templates` 目录下，但为了区分方便，一般都会针对 app 创建不同的子目录。当然也可以不这样，可以放在其它的地方，只要修改 `settings.py` ，将新的模板目录加进去就行了。
+* 在上一章我们将所有的模板都放在了`newtest/templates`目录下，从本章开始，为了区分方便，我们会针对每一个app创建`templates`子目录，将模板文件(edit.html)放在app目录下统一管理。由于Django针对TEMPLATES的默认的设置有`'APP_DIRS': True`，会自动到每一个app的`templates`目录下寻找模板文件。
 
 因为我们在设计 model 时已经设置了 pagename 必须是唯一的，因此一旦 filter() 有返回值，那它只能有一个元素，而 pages[0] 就是我们想要的对象。
 
@@ -208,9 +208,9 @@ def process(template, page):
 
 * save() 用来在编辑页面时用来保存内容的。它先检查页面是否在数据库中存在，如果不存在则创建一个新的对象，并且保存。注意，在 Django 中，对对象处理之后只有调用它的 save() 方法才可以真正保存到数据库中去。如果页面已经存在，则更新页面的内容。处理之后再重定向到 index() 去显示这个页面。
 
-## 7   在 templates 中创建 wiki 子目录
+## 7   在 wiki 中创建 templates 子目录
 
-## 8   编辑 templates/wiki/page.html
+## 8   编辑 wiki/templates/page.html
 
 ```html
 <h2>{{ pagename }}</h2>
