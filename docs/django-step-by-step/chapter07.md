@@ -269,7 +269,7 @@ class IndexView(generic.ListView):
 
 ## 14   在 address 中创建 templates 子目录
 
-## 15   创建 address/templates/address_list.html
+## 15   创建 address/templates/address/list.html
 
 ```html
 <h1>通讯录</h1>

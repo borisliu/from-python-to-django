@@ -15,19 +15,19 @@ def index(request, pagename=""):
             return process('page.html', pages[0])
         else:
             #不存在则进入编辑画面
-            return render_to_response('edit.html', {'pagename':pagename})
+            return render_to_response('wiki/edit.html', {'pagename':pagename})
 
     else:
 #        page = Wiki.objects.get_object(pagename__exact='FrontPage')
         page = Wiki.objects.get(pagename='FrontPage')
-        return process('page.html', page)
+        return process('wiki/page.html', page)
 
 @csrf_exempt
 def edit(request, pagename):
     """显示编辑存在页面"""
 #    page = Wiki.objects.get_object(pagename__exact=pagename)
     page = Wiki.objects.get(pagename=pagename)
-    return render_to_response('edit.html', {'pagename':pagename, 'content':page.content})
+    return render_to_response('wiki/edit.html', {'pagename':pagename, 'content':page.content})
 
 @csrf_exempt
 def save(request, pagename):

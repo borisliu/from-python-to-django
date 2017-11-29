@@ -23,7 +23,7 @@ sfas,F,11,11,11,
 ...
 ```
 
-## 2 修改 address/templates/address_list.html
+## 2 修改 address/templates/address/list.html
 
 ```html
 <h1 id="title">通讯录</h1>
@@ -69,7 +69,7 @@ def upload(request):
             csvfile = StringIO(file_obj.read().decode())
             reader = csv.reader(csvfile)
         except:
-            return render_to_response('error.html',
+            return render_to_response('address/error.html',
                 {'message':'你需要上传一个csv格式的文件！'})
         for row in reader:
             objs = Address.objects.filter(name=row[0])
@@ -86,7 +86,7 @@ def upload(request):
 
         return HttpResponseRedirect('/address/')
     else:
-        return render_to_response('error.html',
+        return render_to_response('address/error.html',
             {'message':'你需要上传一个文件！'})
 ```
 
@@ -94,7 +94,7 @@ def upload(request):
 
 报造错误使用了一个名为 error 的模板，我们马上要创建。
 
-## 4 创建 address/templates/address_error.html
+## 4 创建 address/templates/address/error.html
 
 ```html
 <h2>出错</h2>
@@ -124,7 +124,7 @@ urlpatterns = [
 
 这样导入功能就做完了。那导出呢？很简单了，参考 csv 的例子去做就可以了。不过，并不全是这样，仍然有要修改的地方，比如 csv.html 模板，它因为写死了处理几个元素，因此需要改成一个循环处理。
 
-## 7 修改 address/templates/address_csv.html
+## 7 修改 address/templates/address/csv.html
 
 ```python
 {% for row in data %}{% for i in row %}"{{ i|addslashes }}",{% endfor %}
@@ -133,7 +133,7 @@ urlpatterns = [
 
 将原来固定个数的输出改为循环处理。
 
-## 8 修改 address/templates/address_list.html
+## 8 修改 address/templates/address/list.html
 
 增加一个生成导出的 csv 文件的链接
 
@@ -175,7 +175,7 @@ from django.template import loader, Context
 def output(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename=%s' % 'address.csv'
-    t = loader.get_template('address_csv.html')
+    t = loader.get_template('address/csv.html')
     objs = Address.objects.all()
     d = []
     for o in objs:

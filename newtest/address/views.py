@@ -16,7 +16,7 @@ def upload(request):
             csvfile = StringIO(file_obj.read().decode())
             reader = csv.reader(csvfile)
         except:
-            return render_to_response('error.html',
+            return render_to_response('address/error.html',
                 {'message':'你需要上传一个csv格式的文件！'})
         for row in reader:
             objs = Address.objects.filter(name=row[0])
@@ -33,7 +33,7 @@ def upload(request):
 
         return HttpResponseRedirect('/address/')
     else:
-        return render_to_response('address_error.html',
+        return render_to_response('address/error.html',
             {'message':'你需要上传一个文件！'})
 
 from django.http import HttpResponse
@@ -53,4 +53,4 @@ def output(request):
 
 class IndexView(generic.ListView):
     model = Address
-    template_name = 'address_list.html'
+    template_name = 'address/list.html'

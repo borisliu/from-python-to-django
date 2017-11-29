@@ -137,22 +137,22 @@ def index(request, pagename=""):
         pages = Wiki.objects.filter(pagename=pagename)
         if pages:
             #存在则调用页面模板进行显示
-            return process('page.html', pages[0])
+            return process('wiki/page.html', pages[0])
         else:
             #不存在则进入编辑画面
-            return render_to_response('edit.html', {'pagename':pagename})
+            return render_to_response('wiki/edit.html', {'pagename':pagename})
 
     else:
 #        page = Wiki.objects.get_object(pagename__exact='FrontPage')
         page = Wiki.objects.get(pagename='FrontPage')
-        return process('page.html', page)
+        return process('wiki/page.html', page)
 
 @csrf_exempt
 def edit(request, pagename):
     """显示编辑存在页面"""
 #    page = Wiki.objects.get_object(pagename__exact=pagename)
     page = Wiki.objects.get(pagename=pagename)
-    return render_to_response('edit.html', {'pagename':pagename, 'content':page.content})
+    return render_to_response('wiki/edit.html', {'pagename':pagename, 'content':page.content})
 
 @csrf_exempt
 def save(request, pagename):
@@ -196,7 +196,7 @@ def process(template, page):
 
 >回车转换的工作其实可以在模板中使用 filter 来完成。
 
-* 在上一章我们将所有的模板都放在了`newtest/templates`目录下，从本章开始，为了区分方便，我们会针对每一个app创建`templates`子目录，将模板文件(edit.html)放在app目录下统一管理。由于Django针对TEMPLATES的默认的设置有`'APP_DIRS': True`，会自动到每一个app的`templates`目录下寻找模板文件。
+* 在上一章我们将所有的模板都放在了`newtest/templates`目录下，从本章开始，为了区分方便，我们会针对每一个app创建`templates/app`的子目录，将模板文件(edit.html)放在app目录下统一管理。由于Django针对TEMPLATES的默认的设置有`'APP_DIRS': True`，会自动到每一个app的`templates`目录下寻找模板文件。
 
 因为我们在设计 model 时已经设置了 pagename 必须是唯一的，因此一旦 filter() 有返回值，那它只能有一个元素，而 pages[0] 就是我们想要的对象。
 
@@ -210,7 +210,7 @@ def process(template, page):
 
 ## 7   在 wiki 中创建 templates 子目录
 
-## 8   编辑 wiki/templates/page.html
+## 8   编辑 wiki/templates/wiki/page.html
 
 ```html
 <h2>{{ pagename }}</h2>
@@ -224,7 +224,7 @@ def process(template, page):
 
 它用来显示页面，同时提供一个“编辑”按钮。当点击这个按钮时将调用 view 中的 edit() 方法。
 
-## 9   编辑 templates/wiki/edit.html
+## 9   编辑 wiki/templates/wiki/edit.html
 
 ```html
 <h2>编辑:{{ pagename }}</h2>
