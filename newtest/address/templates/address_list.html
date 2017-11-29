@@ -1,0 +1,25 @@
+<h1 id="title">通讯录</h1>
+<hr>
+<p><a href="/address/output/">导出为csv格式文件</a></p>
+<form enctype="multipart/form-data" method="POST" action="/address/upload/">
+上传通讯录文件： <input type="file" name="file"/><br/>
+<input type="submit" value="上传文件"/>
+</form>
+<table border="1">
+<tr>
+  <th>姓名</th>
+  <th>性别</th>
+  <th>电话</th>
+  <th>手机</th>
+  <th>房间</th>
+</tr>
+{% for person in address_list %}
+<tr>
+  <td>{{ person.name }}</td>
+  <td>{{ person.gender }}</td>
+  <td>{{ person.telphone }}</td>
+  <td>{{ person.mobile }}</td>
+  <td>{{ person.room }}</td>
+</tr>
+{% endfor %}
+</table>
