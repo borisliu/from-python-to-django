@@ -1,57 +1,60 @@
-<html>
-<head>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
+<style type="text/css">
+  h1#title {
+    color: black;
+  }
+</style>
+<div id="header">
   <h1 id="title">通讯录</h1>
-  <hr>
-  <div>
-    {% if is_paginated %}
-    <table border="0" width="500">
-      <tr align="right">
-        <td>{% if page_obj.has_previous %}
-          <a href="/address?page={{ page_obj.previous_page_number }}">上一页</a>
-          {% endif %} 
-          {% if page_obj.has_next %}
-          <a href="/address?page={{ page_obj.next_page_number }}">下一页</a>
-          {% endif %}</td>
-      </tr>
-    </table>
-    {% endif %}
-    <table border="1" width="500">
-      <tr>
-        <th>姓名</th>
-        <th>性别</th>
-        <th>电话</th>
-        <th>手机</th>
-        <th>房间</th>
-      </tr>
-      {% for person in address_list %}
-      <tr>
-        <td>{{ person.name }}</td>
-        <td>{{ person.gender }}</td>
-        <td>{{ person.telphone }}</td>
-        <td>{{ person.mobile }}</td>
-        <td>{{ person.room }}</td>
-      </tr>
-      {% endfor %}
-    </table>
-  </div>
+</div>
+<hr>
+<div>
+  {% if is_paginated %}
   <table border="0" width="500">
-    <tr>
-      <td>
-        <form enctype="multipart/form-data" method="POST" action="/address/upload/">
-          文件导入：
-          <input type="file" name="file" />
-          <br/>
-          <input type="submit" value="上传文件" />
-        </form>
-      </td>
-      <td>
-        <p>
-          <a href="/address/output/">导出为csv文件</a>
-        </p>
-      </td>
+    <tr align="right">
+      <td>{% if page_obj.has_previous %}
+        <a href="/address?page={{ page_obj.previous_page_number }}">上一页</a>
+        {% endif %} {% if page_obj.has_next %}
+        <a href="/address?page={{ page_obj.next_page_number }}">下一页</a>
+        {% endif %}</td>
     </tr>
   </table>
-</body>
-</html>
+  {% endif %}
+  <table border="1" width="500">
+    <tr>
+      <th>姓名</th>
+      <th>性别</th>
+      <th>电话</th>
+      <th>手机</th>
+      <th>房间</th>
+    </tr>
+    {% for person in address_list %}
+    <tr>
+      <td>{{ person.name }}</td>
+      <td>{{ person.gender }}</td>
+      <td>{{ person.telphone }}</td>
+      <td>{{ person.mobile }}</td>
+      <td>{{ person.room }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+<table border="0" width="500">
+  <tr>
+    <td>
+      <form enctype="multipart/form-data" method="POST" action="/address/upload/">
+        文件导入：
+        <input type="file" name="file" />
+        <br/>
+        <input type="submit" value="上传文件" />
+      </form>
+    </td>
+    <td>
+      <p>
+        <a href="/address/output/">导出为csv文件</a>
+      </p>
+    </td>
+  </tr>
+</table>
+{% endblock %}

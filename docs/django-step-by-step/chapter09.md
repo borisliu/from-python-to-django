@@ -133,37 +133,20 @@ class IndexView(generic.ListView):
 
 下面让我们为它添加一些CSS和图片，让它变得好看一些。
 
-首先要说明一下，我们一直处于开发和测试阶段，因此我们一直使用的都是 Django 自带的 server(其实我个人感觉这个 server 的速度也挺快的)，但最终我们的目的是把它部署到 Apache 上去。现在我们打算增加 CSS 和添加一些图片， Django 提供了这个能力，这就是对静态文件的支持，但是它只是建议在开发过程中使用。真正到了实际环境下，还是让专门的 web server 如 Apache 来做这些事情。只要改一下链接设置就好了。更详细的说明要参见 [Managing static files](https://docs.djangoproject.com/en/2.0/howto/static-files/) 的文档。同时在 Django 中为了不让你依赖这个功能，特别在文档的开始有强烈的声明：使用这个方法是低效和不安全的。同时当 `DEBUG` 设置(在 `settings.py` 中有这个选项， `True` 表示处于调试期，会有一些特殊的功能)为 `False` 时，这个功能就自动无效了，除非你修改代码让它生效。
+首先要说明一下，我们一直处于开发和测试阶段，因此我们一直使用的都是 Django 自带的 server(其实我个人感觉这个 server 的速度也挺快的)，但最终我们的目的是把它部署到 Apache 上去。现在我们打算增加 CSS 和添加一些图片， Django 提供了这个能力，这就是对静态文件的支持，但是它只是建议在开发过程中使用。真正到了实际环境下，还是让专门的 web server 如 Apache 来做这些事情。只要改一下链接设置就好了。更详细的说明要参见 [Managing static files](https://docs.djangoproject.com/en/1.11/howto/static-files/) 的文档。同时在 Django 中为了不让你依赖这个功能，特别在文档的开始有强烈的声明：使用这个方法是低效和不安全的。同时当 `DEBUG` 设置(在 `settings.py` 中有这个选项， `True` 表示处于调试期，会有一些特殊的功能)为 `False` 时，这个功能就自动无效了，除非你修改代码让它生效。
 
 ## 6 修改 urls.py
 
 ```python
-from django.conf.urls.defaults import *
 from django.conf import settings
+from django.conf.urls.static import static
 
-urlpatterns = patterns('',
-    # Example:
-    # (r'^testit/', include('newtest.apps.foo.urls.foo')),
-    (r'^$', 'newtest.helloworld.index'),
-    (r'^add/$', 'newtest.add.index'),
-    (r'^list/$', 'newtest.list.index'),
-    (r'^csv/(?P<filename>\w+)/$', 'newtest.csv_test.output'),
-    (r'^login/$', 'newtest.login.login'),
-    (r'^logout/$', 'newtest.login.logout'),
-    (r'^wiki/$', 'newtest.wiki.views.index'),
-    (r'^wiki/(?P<pagename>\w+)/$', 'newtest.wiki.views.index'),
-    (r'^wiki/(?P<pagename>\w+)/edit/$', 'newtest.wiki.views.edit'),
-    (r'^wiki/(?P<pagename>\w+)/save/$', 'newtest.wiki.views.save'),
-    (r'^address/', include('newtest.address.urls')),
-    (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
-        {'document_root': settings.STATIC_PATH}),
-
-    # Uncomment this for admin:
-     (r'^admin/', include('django.contrib.admin.urls')),
-)
+urlpatterns = [
+    # ... 其他的URL Pattern ...
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 ```
 
-你会看到 `site_media` 就是我将用来存放 CSS 和图片的地方。 `django.views.static.serve` 需要一个 `document_root` 的参数，这里我使用了一个 `STATIC_PATH` ，它从哪里来呢？它是我自已在 `settings.py` 中定义的。在前面有一个导入语句:
+我们使用static函数，它需要两个参数。第一个参数是通过URL访问静态文件时的相对路径，在`settings.py`文件中默认设置为`STATIC_URL = '/static/'`，也就是通过`http://yourhost/static/`访问静态文件；第二个参数是静态文件在服务器上存放的路径，`STATIC_ROOT` 就是我将用来存放 CSS 和图片的地方，这里我使用了一个 `STATIC_PATH` ，它从哪里来呢？它是我自已在 `settings.py` 中定义的。在前面有一个导入语句:
 
 ```python
 from django.conf import settings
@@ -176,22 +159,31 @@ from django.conf import settings
 在最后增加:
 
 ```python
-STATIC_PATH = './media'
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "media"),
+]
 ```
 
-那么我需要在 `newtest` 目录下创建一个 `media` 的目录。
+STATIC_ROOT这个字段的的目录路径是用来为部署而收集静态文件的地方。
+更具体的说呢，当我们执行`python manage.py collectstatic`命令的时候，系统会帮我们把所有的静态文件都收集到该目录下。
+STATICFILES_DIRS默认是一个空列表，那么这个设置定义了staticfiles app将会遍历的一个附加的位置信息。该值应该设置为一个字符串的列表形式，每个元素都是附加文件目录的绝对路径。
+> 注意：这些路径都应该使用unix风格的斜杠，即便是在windows平台上("C:/Users/user/mysite/extra_static_content")
+
+那么我需要在 `newtest` 目录下创建一个 `media`和`static` 的目录。
 
 ## 8 创建 newtest/media 目录
 
-这样根据上面 `urls.py` 的设置，我们以后将通过 `/site_media/XXX` 来使用某些静态文件。
+这样根据上面 `urls.py` 的设置，我们以后将通过 `/static/XXX` 来使用某些静态文件。
 
 为了美化，我想需要一个 CSS 文件来定义一些样式，同时我还想提供一个 Django Powered 的图片。 [在这里有官方提供的图标](http://www.djangoproject.com/community/badges/) 。 于是我下了一个放在了 `media` 目录下。同时 CSS 怎么办，自已重头写，太麻烦，反正只是一个测试。于是我下载了 Django 站点用的 css 叫 `base.css` 也放在了 `media` 下面。下面就是对模板的改造。
 
 > 在 SVN 中我放了一个 css 和 gif 图片大家可以使用，不然可能看不出效果。
 
-为了通用化，我新增了一个 `base.html` 它是一个框架，而以前的 `address_list.html` 是它的一个子模板。这样我们就可以了解如何使用模板间的嵌套了。
+为了通用化，我新增了一个 `base.html` 它是一个框架，而以前的 `address/list.html` 是它的一个子模板。这样我们就可以了解如何使用模板间的嵌套了。
 
-## 9 创建 templates/base.html
+## 9 创建 newtest/templates/base.html
 
 ```html
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -211,7 +203,7 @@ STATIC_PATH = './media'
         <meta name="keywords" content="Python, Django, framework, open-source" />
         <meta name="description" content="Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design." />
 
-        <link href="/site_media/base.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/static/base.css" rel="stylesheet" type="text/css" media="screen" />
 
     </head>
 
@@ -221,7 +213,7 @@ STATIC_PATH = './media'
         </div>
         <div id="footer">
             <div>
-            <img src="/site_media/djangopowered.gif"/>
+            <img src="/static/djangopowered.gif"/>
             </div>
             <p>&copy; 2005 Limodou. Django is a registered trademark of Lawrence Journal-World.</p>
         </div>
@@ -235,37 +227,42 @@ STATIC_PATH = './media'
 {% block content %}content{% endblock %}
 ```
 
-这样就是定了一个可以扩展的模块变量块，我们将在 address_list.html 中扩展它。同时对 CSS 和 Django-Powered 的图片引用的代码是:
+这样就是定了一个可以扩展的模块变量块，我们将在 `address/list.html` 中扩展它。同时对 CSS 和 Django-Powered 的图片引用的代码是:
 
 ```html
-<link href="/site_media/base.css" rel="stylesheet" type="text/css" media="screen" />
-<img src="/site_media/djangopowered.gif"/>
+<link href="/static/base.css" rel="stylesheet" type="text/css" media="screen" />
+<img src="/static/djangopowered.gif"/>
 ```
 
-前面都是从 `site_media` 开始的。这样就将使用我们前面在 `urls.py` 中的设置了。
+前面都是从 `static` 开始的。这样就将使用我们前面在 `urls.py` 中的设置了。
 
-## 10 修改 templates/address/address_list.html
+## 10 修改 templates/address/address/list.html
 
 ```html
 {% extends "base.html" %}
 {% block content %}
 <style type="text/css">
-h1#title {color:white;}
+  h1#title {
+    color: black;
+  }
 </style>
 <div id="header">
-<h1 id="title">通讯录</h1>
+  <h1 id="title">通讯录</h1>
 </div>
 <hr>
-<div id="content-main">
-    <table border="0" width="500">
+<div>
+  {% if is_paginated %}
+  <table border="0" width="500">
     <tr align="right">
-      <td>{% if has_previous %}
-        <a href="/address?page={{ previous }}">上一页</a>
-        {% endif %} {% if has_next %}
-        <a href="/address?page={{ next }}">下一页</a>
-        {% endif %}</td></tr>
-    </table>
-    <table border="1" width="500">
+      <td>{% if page_obj.has_previous %}
+        <a href="/address?page={{ page_obj.previous_page_number }}">上一页</a>
+        {% endif %} {% if page_obj.has_next %}
+        <a href="/address?page={{ page_obj.next_page_number }}">下一页</a>
+        {% endif %}</td>
+    </tr>
+  </table>
+  {% endif %}
+  <table border="1" width="500">
     <tr>
       <th>姓名</th>
       <th>性别</th>
@@ -273,7 +270,7 @@ h1#title {color:white;}
       <th>手机</th>
       <th>房间</th>
     </tr>
-    {% for person in object_list %}
+    {% for person in address_list %}
     <tr>
       <td>{{ person.name }}</td>
       <td>{{ person.gender }}</td>
@@ -282,19 +279,25 @@ h1#title {color:white;}
       <td>{{ person.room }}</td>
     </tr>
     {% endfor %}
-    </table>
-    <table border="0" width="500">
-    <tr>
-    <td>
-    <form enctype="multipart/form-data" method="POST" action="/address/upload/">
-    文件导入：<input type="file" name="file"/><br/>
-    <input type="submit" value="上传文件"/>
-    </form>
-    </td>
-    <td><p><a href="/address/output/">导出为csv文件</a></p></td>
-    </tr>
-    </table>
+  </table>
 </div>
+<table border="0" width="500">
+  <tr>
+    <td>
+      <form enctype="multipart/form-data" method="POST" action="/address/upload/">
+        文件导入：
+        <input type="file" name="file" />
+        <br/>
+        <input type="submit" value="上传文件" />
+      </form>
+    </td>
+    <td>
+      <p>
+        <a href="/address/output/">导出为csv文件</a>
+      </p>
+    </td>
+  </tr>
+</table>
 {% endblock %}
 ```
 

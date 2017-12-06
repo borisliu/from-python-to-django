@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls import include, url
+from django.conf.urls.static import static
 from django.contrib import admin
 from . import helloworld, add, list, xls_test, login
 
@@ -28,7 +29,7 @@ urlpatterns = [
     url(r'^logout/$', login.logout),
     url(r'^wiki/', include('wiki.urls')),
     url(r'^address/', include('address.urls')),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar
