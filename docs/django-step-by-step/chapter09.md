@@ -37,56 +37,75 @@ class Address(models.Model):
 ## 3 修改 templates/address/address/list.html 实现分页显示
 
 ```html
-<h1 id="title">通讯录</h1>
-<hr>
-<div>
-<table border="0" width="500">
-<tr align="right">
-  <td>{% if has_previous %}
-    <a href="/address?page={{ previous }}">上一页</a>
-    {% endif %} {% if has_next %}
-    <a href="/address?page={{ next }}">下一页</a>
-    {% endif %}</td></tr>
-</table>
-<table border="1" width="500">
-<tr>
-  <th>姓名</th>
-  <th>性别</th>
-  <th>电话</th>
-  <th>手机</th>
-  <th>房间</th>
-</tr>
-{% for person in object_list %}
-<tr>
-  <td>{{ person.name }}</td>
-  <td>{{ person.gender }}</td>
-  <td>{{ person.telphone }}</td>
-  <td>{{ person.mobile }}</td>
-  <td>{{ person.room }}</td>
-</tr>
-{% endfor %}
-</table>
-</div>
-<table border="0" width="500">
-<tr>
-<td>
-<form enctype="multipart/form-data" method="POST" action="/address/upload/">
-文件导入：<input type="file" name="file"/><br/>
-<input type="submit" value="上传文件"/>
-</form>
-</td>
-<td><p><a href="/address/output/">导出为csv文件</a></p></td>
-</tr>
-</table>
+<html>
+<head>
+</head>
+<body>
+  <h1 id="title">通讯录</h1>
+  <hr>
+  <div>
+    {% if is_paginated %}
+    <table border="0" width="500">
+      <tr align="right">
+        <td>
+          {% if page_obj.has_previous %}
+          <a href="/address?page={{ page_obj.previous_page_number }}">上一页</a>
+          {% endif %} 
+          {% if page_obj.has_next %}
+          <a href="/address?page={{ page_obj.next_page_number }}">下一页</a>
+          {% endif %}
+        </td>
+      </tr>
+    </table>
+    {% endif %}
+    <table border="1" width="500">
+      <tr>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>电话</th>
+        <th>手机</th>
+        <th>房间</th>
+      </tr>
+      {% for person in address_list %}
+      <tr>
+        <td>{{ person.name }}</td>
+        <td>{{ person.gender }}</td>
+        <td>{{ person.telphone }}</td>
+        <td>{{ person.mobile }}</td>
+        <td>{{ person.room }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  <table border="0" width="500">
+    <tr>
+      <td>
+        <form enctype="multipart/form-data" method="POST" action="/address/upload/">
+          文件导入：
+          <input type="file" name="file" />
+          <br/>
+          <input type="submit" value="上传文件" />
+        </form>
+      </td>
+      <td>
+        <p>
+          <a href="/address/output/">导出为csv文件</a>
+        </p>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
 ```
 
 这时我仍然使用的是 generic view 来处理。但对布局作了简单的调整，将导入和导出的内容移到下面去了。同时增加了对分页的支持:
 
 ```html
-{% if has_previous %}
-<a href="/address?page={{ previous }}">上一页</a>
-{% endif %} {% if has_next %}
-<a href="/address?page={{ next }}">下一页</a>
+{% if page_obj.has_previous %}
+<a href="/address?page={{ page_obj.previous_page_number }}">上一页</a>
+{% endif %} 
+{% if page_obj.has_next %}
+<a href="/address?page={{ page_obj.next_page_number }}">下一页</a>
 {% endif %}
 ```
 
@@ -94,31 +113,17 @@ class Address(models.Model):
 
 这里是根据是否有前一页和下一页来分别生成相应的链接。对于分页的链接，需要在url中增加一个 Query 关键字 `page` 。因此我的模板中会使用 `page={{ previous }}` 和 `page={{ next }}` 分别指向前一页和下一页的页码。
 
-## 4 修改 address/urls.py
+## 4 修改address/views.py
 
 ```python
-from django.conf.urls.defaults import *
-from newtest.address.models import Address
-
-info_dict = {
-#    'model': Address,
-    'queryset': Address.objects.all(),
-}
-urlpatterns = patterns('',
-    (r'^/?$', 'django.views.generic.list_detail.object_list',
-        dict(paginate_by=10, **info_dict)),
-    (r'^upload/$', 'address.views.upload'),
-    (r'^output/$', 'address.views.output'),
-)
+class IndexView(generic.ListView):
+    model = Address
+    template_name = 'address/list.html'
+    paginate_by = 2
 ```
 
-修改了原来传给的 `object_list` 的 `info_dict` 参数，这里设置每页的条数为 10 条:
+我们为`IndexView`类增加一个成员变量：`paginate_by`，指定每一页显示2条记录。
 
-```python
-dict(paginate_by=10, **info_dict)
-```
-
-这是将新的参数与原来的参数合成一个新的字典。
 
 ## 5 启动 server 测试
 
@@ -128,7 +133,7 @@ dict(paginate_by=10, **info_dict)
 
 下面让我们为它添加一些CSS和图片，让它变得好看一些。
 
-首先要说明一下，我们一直处于开发和测试阶段，因此我们一直使用的都是 Django 自带的 server(其实我个人感觉这个 server 的速度也挺快的)，但最终我们的目的是把它部署到 Apache 上去。现在我们打算增加 CSS 和添加一些图片， Django 提供了这个能力，这就是对静态文件的支持，但是它只是建议在开发过程中使用。真正到了实际环境下，还是让专门的 web server 如 Apache 来做这些事情。只要改一下链接设置就好了。更详细的说明要参见 Serving static/media files 的文档。同时在 Django 中为了不让你依赖这个功能，特别在文档的开始有强烈的声明：使用这个方法是低效和不安全的。同时当 `DEBUG` 设置(在 `settings.py` 中有这个选项， `True` 表示处于调试期，会有一些特殊的功能)为 `False` 时，这个功能就自动无效了，除非你修改代码让它生效。
+首先要说明一下，我们一直处于开发和测试阶段，因此我们一直使用的都是 Django 自带的 server(其实我个人感觉这个 server 的速度也挺快的)，但最终我们的目的是把它部署到 Apache 上去。现在我们打算增加 CSS 和添加一些图片， Django 提供了这个能力，这就是对静态文件的支持，但是它只是建议在开发过程中使用。真正到了实际环境下，还是让专门的 web server 如 Apache 来做这些事情。只要改一下链接设置就好了。更详细的说明要参见 [Managing static files](https://docs.djangoproject.com/en/2.0/howto/static-files/) 的文档。同时在 Django 中为了不让你依赖这个功能，特别在文档的开始有强烈的声明：使用这个方法是低效和不安全的。同时当 `DEBUG` 设置(在 `settings.py` 中有这个选项， `True` 表示处于调试期，会有一些特殊的功能)为 `False` 时，这个功能就自动无效了，除非你修改代码让它生效。
 
 ## 6 修改 urls.py
 
