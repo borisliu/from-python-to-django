@@ -42,7 +42,7 @@ from django.template import loader, Context
 def output(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename=%s' % 'address.csv'
-    t = loader.get_template('address_csv.html')
+    t = loader.get_template('address/csv.html')
     objs = Address.objects.all()
     d = []
     for o in objs:
@@ -54,3 +54,4 @@ def output(request):
 class IndexView(generic.ListView):
     model = Address
     template_name = 'address/list.html'
+    paginate_by = 2

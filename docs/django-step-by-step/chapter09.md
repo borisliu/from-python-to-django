@@ -12,7 +12,27 @@
 
 ## 2 修改 address/models.py 实现排序
 
-可以在 model 中增加一个叫 `Meta` 的内类，然后通过对其设置类属性可以用来控制 model 的模型属性。如我们想实现表的排序，可以在 `Meta` 中增加一个 `ordering = ['name']` 的属性即可。它表示按 `name` 进行排序。它可以有多个字段。如果在字段前加'-'表示倒序。修改完毕在浏览器中看一下效果就知道了。
+可以在 model 中增加一个叫 `Meta` 的内类，然后通过对其设置类属性可以用来控制 model 的模型属性。如我们想实现表的排序，可以在 `Meta` 中增加一个 `ordering = ['name']` 的属性即可。它表示按 `name` 进行排序。它可以有多个字段。如果在字段前加'-'表示倒序。修改完毕在浏览器中看一下效果就知道了。models.py的代码如下：
+
+```python
+from django.db import models
+
+# Create your models here.
+
+class Address(models.Model):
+    name = models.CharField('姓名', max_length=20, unique=True)
+    gender = models.CharField('性别', choices=(('M', '男'), ('F', '女')),
+        max_length=1)
+    telphone = models.CharField('电话', max_length=20)
+    mobile = models.CharField('手机', max_length=11)
+    room = models.CharField('房间', max_length=10, default='')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ["name"]
+```
 
 ## 3 修改 templates/address/address/list.html 实现分页显示
 
