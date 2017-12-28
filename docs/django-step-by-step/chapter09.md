@@ -159,10 +159,10 @@ from django.conf import settings
 在最后增加:
 
 ```python
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+STATIC_ROOT = os.path.join(BASE_DIR, "collect_static/")
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "media"),
+    os.path.join(BASE_DIR, "static"),
 ]
 ```
 
@@ -171,13 +171,13 @@ STATIC_ROOT这个字段的的目录路径是用来为部署而收集静态文件
 STATICFILES_DIRS默认是一个空列表，那么这个设置定义了staticfiles app将会遍历的一个附加的位置信息。该值应该设置为一个字符串的列表形式，每个元素都是附加文件目录的绝对路径。
 > 注意：这些路径都应该使用unix风格的斜杠，即便是在windows平台上("C:/Users/user/mysite/extra_static_content")
 
-那么我需要在 `newtest` 目录下创建一个 `media`和`static` 的目录。
+那么我需要在 `newtest` 目录下创建一个 `static`和`collect_static` 的目录。
 
-## 8 创建 newtest/media 目录
+## 8 创建 newtest/static 目录
 
 这样根据上面 `urls.py` 的设置，我们以后将通过 `/static/XXX` 来使用某些静态文件。
 
-为了美化，我想需要一个 CSS 文件来定义一些样式，同时我还想提供一个 Django Powered 的图片。 [在这里有官方提供的图标](http://www.djangoproject.com/community/badges/) 。 于是我下了一个放在了 `media` 目录下。同时 CSS 怎么办，自已重头写，太麻烦，反正只是一个测试。于是我下载了 Django 站点用的 css 叫 `base.css` 也放在了 `media` 下面。下面就是对模板的改造。
+为了美化，我想需要一个 CSS 文件来定义一些样式，同时我还想提供一个 Django Powered 的图片。 [在这里有官方提供的图标](http://www.djangoproject.com/community/badges/) 。 于是我下了一个放在了 `static` 目录下。同时 CSS 怎么办，自已重头写，太麻烦，反正只是一个测试。于是我下载了 Django 站点用的 css 叫 `base.css` 也放在了 `static` 下面。下面就是对模板的改造。
 
 > 在 SVN 中我放了一个 css 和 gif 图片大家可以使用，不然可能看不出效果。
 

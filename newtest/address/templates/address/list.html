@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
+{% load change_gender %}
 <style type="text/css">
-  h1#title {
-    color: black;
-  }
+h1#title {color:white;}
+.mytr1 {background:#D9F9D0}
+.mytr2 {background:#C1F8BA}
+.myth {background:#003333}
+.th_text {color:#ffffff}
 </style>
 <div id="header">
   <h1 id="title">通讯录</h1>
@@ -21,18 +24,18 @@
     </tr>
   </table>
   {% endif %}
-  <table border="1" width="500">
-    <tr>
-      <th>姓名</th>
-      <th>性别</th>
-      <th>电话</th>
-      <th>手机</th>
-      <th>房间</th>
+  <table border="0" width="500" cellspacing="2">
+    <tr class="myth">
+      <th><span class="th_text">姓名</span></th>
+      <th><span class="th_text">性别</span></th>
+      <th><span class="th_text">电话</span></th>
+      <th><span class="th_text">手机</span></th>
+      <th><span class="th_text">房间</span></th>
     </tr>
     {% for person in address_list %}
-    <tr>
+    <tr class="{% cycle 'mytr1' 'mytr2' %}">
       <td>{{ person.name }}</td>
-      <td>{{ person.gender }}</td>
+      <td>{{ person.gender|change_gender }}</td>
       <td>{{ person.telphone }}</td>
       <td>{{ person.mobile }}</td>
       <td>{{ person.room }}</td>
