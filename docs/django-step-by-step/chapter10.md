@@ -149,7 +149,11 @@ h1#title {color:white;}
 
 使用了 cycle Tag 来处理表格行的样式切换。注意： cycle 处理的是字符串。
 
-6. 修改 `{{ person.gender }}` 为 `{{ person.gender|change_gender }}`
+6. 修改 `{{ person.gender }}` 为 
+
+{% raw %}```Python
+{{ person.gender|change_gender }}
+```
 
 ## 7 启动 server 进行测试
 
