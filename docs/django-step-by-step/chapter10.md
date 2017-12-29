@@ -140,7 +140,7 @@ h1#title {color:white;}
 ```html
 <tr class="{% cycle 'mytr1' 'mytr2' %}">
 ```
-{% end raw %}
+{% endraw %}
 
 使用了 cycle Tag 来处理表格行的样式切换。注意： cycle 处理的是字符串。
 
