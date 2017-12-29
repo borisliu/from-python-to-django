@@ -136,9 +136,11 @@ h1#title {color:white;}
 
 5. 数据显示的 tr 标签改为:
 
+{% raw %}
 ```html
 <tr class="{% cycle 'mytr1' 'mytr2' %}">
 ```
+{% end raw %}
 
 使用了 cycle Tag 来处理表格行的样式切换。注意： cycle 处理的是字符串。
 
