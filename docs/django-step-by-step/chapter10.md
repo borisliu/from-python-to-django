@@ -110,7 +110,7 @@ h1#title {color:white;}
 
 1. 增加了  
 
-```python
+```Python
 {% load change_gender %}
 ```
 
