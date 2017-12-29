@@ -112,10 +112,9 @@ h1#title {color:white;}
 
 1. 增加了  
 
-{% raw %}```Python
+```Python
 {% load change_gender %}
 ```
-{% endraw %}
 
 来导入自定义的 filter 。
 
