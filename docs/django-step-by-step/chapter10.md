@@ -18,7 +18,7 @@
 
 文件名为你想要装入到模板中的名字。如文件起名为 `change_gender.py` ，那么你将可以在模板中使用:
 
-{% raw %}```python
+{% raw %}```Python
 {% load change_gender %}
 ```
 {% endraw %}
@@ -27,7 +27,7 @@
 
 ## 5 编辑 change_gender.py
 
-```python
+```Python
 from django import template
 
 register = template.Library()
@@ -50,7 +50,7 @@ def change_gender(value):
 
 ## 6 修改 templates/address/address_list.html
 
-```HTML
+{% raw %}```HTML
 {% extends "base.html" %}
 {% block content %}
 {% load change_gender %}
@@ -106,14 +106,16 @@ h1#title {color:white;}
 </div>
 {% endblock %}
 ```
+{% endraw %}
 
 改动了以下几个地方：
 
 1. 增加了  
 
-```Python
-{% change_gender %}
+{% raw %}```Python
+{% load change_gender %}
 ```
+{% endraw %}
 
 来导入自定义的 filter 。
 
