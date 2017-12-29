@@ -18,9 +18,10 @@
 
 文件名为你想要装入到模板中的名字。如文件起名为 `change_gender.py` ，那么你将可以在模板中使用:
 
-```python
+{% raw %}```python
 {% load change_gender %}
 ```
+{% endraw %}
 
 来导入。
 
@@ -49,7 +50,7 @@ def change_gender(value):
 
 ## 6 修改 templates/address/address_list.html
 
-```html
+```HTML
 {% extends "base.html" %}
 {% block content %}
 {% load change_gender %}
