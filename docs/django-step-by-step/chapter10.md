@@ -111,7 +111,7 @@ h1#title {color:white;}
 1. 增加了  
 
 ```Python
-{% load change_gender %}
+{% change_gender %}
 ```
 
 来导入自定义的 filter 。
