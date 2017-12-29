@@ -108,7 +108,7 @@ h1#title {color:white;}
 
 改动了以下几个地方：
 
-1. 增加了  {% raw %}`{% load change_gender %}`{% endraw %} 来导入自定义的 filter 。
+1. 增加了  {% load change_gender %} 来导入自定义的 filter 。
 
 2. 增加了几个样式，象 `mytr1`, `mytr2` 等。
 
