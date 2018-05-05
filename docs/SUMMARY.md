@@ -51,5 +51,14 @@
     * [第十六讲 自定义Calendar Tag](django-step-by-step/chapter16.md)
     * [第十七讲 View,Template和Tag](django-step-by-step/chapter17.md)
 
-----
+* [Django开发经验汇总](django-tips/index.md)
+    * [Python开发规范](django-tips/vue.md)
+    * [Django项目的gitignore](django-tips/gitignore.md)
+    * [怎样配置开发环境的settings](django-tips/settings.md)
+    * [如何使用Django和Vue.js构建项目](django-tips/vue.md)
+    * [使用WebSocket开发网页聊天室](django-tips/vue.md)
+    * [怎样使Django Admin显示中文](django-tips/admin.md)
+    * [怎样使Model在Admin界面中显示中文](django-tips/admin.md)
+    * [使用Django Admin怎样上传并显示图片](django-tips/upload_img.md)
 
+----
