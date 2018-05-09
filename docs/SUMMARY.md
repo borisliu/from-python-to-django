@@ -60,5 +60,6 @@
     * [怎样使Django Admin显示中文](django-tips/admin.md)
     * [怎样使Model在Admin界面中显示中文](django-tips/admin.md)
     * [使用Django Admin怎样上传并显示图片](django-tips/upload_img.md)
+    * [解决Django模板和Vue指令花括号冲突的问题](django-tips/braces_conflict.md)
 
 ----
