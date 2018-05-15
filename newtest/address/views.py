@@ -5,9 +5,15 @@ from .models import Address
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
+from django.contrib.admin.views.decorators import staff_member_required
 
+@staff_member_required
 @csrf_exempt
 def upload(request):
+    if request.user.username != settings.UPLOAD_USER:
+        return render_to_response('address/error.html',
+            {'message':'你需要使用 %s 来登录！' % settings.UPLOAD_USER})
     file_obj = request.FILES.get('file', None)
     if file_obj:
         import csv
