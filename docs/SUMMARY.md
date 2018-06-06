@@ -61,5 +61,7 @@
     * [怎样使Model在Admin界面中显示中文](django-tips/admin.md)
     * [使用Django Admin怎样上传并显示图片](django-tips/upload_img.md)
     * [解决Django模板和Vue指令花括号冲突的问题](django-tips/braces_conflict.md)
+    * [使用Django和Vue开发微信公众号](django-tips/wechat_h5.md)
+    * [使用Django和Vue调用微信JSSDK开发微信支付](django-tips/wechat_pay.md)
 
 ----
