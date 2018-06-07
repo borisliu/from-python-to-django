@@ -68,14 +68,16 @@ class SearchView(generic.ListView):
     paginate_by = 2
 
     def get_queryset(self):
-        self.name = self.request.GET['search']
-        if self.name:
+        if self.request.GET.get('search'):
+            self.name = self.request.GET['search']
             return Address.objects.filter(name = self.name)
         else:
-            return redirect('index')
+            self.name = None
+            return Address.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['searchvalue'] = self.name
+        if self.name:
+            context['searchvalue'] = self.name
         return context
 

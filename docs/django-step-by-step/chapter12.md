@@ -50,15 +50,17 @@ class SearchView(generic.ListView):
     paginate_by = 2
 
     def get_queryset(self):
-        self.name = self.request.GET['search']
-        if self.name:
+        if self.request.GET.get('search'):
+            self.name = self.request.GET['search']
             return Address.objects.filter(name = self.name)
         else:
-            return redirect('index')
+            self.name = None
+            return Address.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['searchvalue'] = self.name
+        if self.name:
+            context['searchvalue'] = self.name
         return context
 ```
 
@@ -66,29 +68,23 @@ class SearchView(generic.ListView):
 
 我们使用`get_context_data`指定了可以传入到模板中的上下文字典。
 
-`self.request.GET['search']` 从 GET 中得到数据，是一个方便的用法。它将得到提交的查询姓名条件，然后我们使用`filter`函数对结果进行过滤。如果存在，则生成 `extra_lookup_kwargs` 和 `extra_context` 参数，然后按 `object_list` 的要求传入。如果没有提交，则回到 address 的起始页面
+`self.request.GET['search']` 从 GET 中得到数据，是一个方便的用法。它将得到提交的查询姓名条件，如果有这个参数，那么我们使用`filter`函数对结果进行过滤。如果没有提交，则显示全部数据。
 
-
-
-因此我决定自定义一个新的 view 方法。
 
 ## 4 修改 address/urls.py
 
 ```python
-from django.conf.urls.defaults import *
-from newtest.address.models import Address
-
-info_dict = {
-#    'model': Address,
-    'queryset': Address.objects.all(),
-}
-urlpatterns = patterns('',
-    (r'^/?$', 'django.views.generic.list_detail.object_list',
-        dict(paginate_by=10, **info_dict)),
-    (r'^upload/$', 'address.views.upload'),
-    (r'^output/$', 'address.views.output'),
-    (r'^search/$', 'address.views.search'),
-)
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^$', helloworld.index),
+    url(r'^add/$', add.index),
+    url(r'^list/$', list.index),
+    url(r'^xls/(?P<filename>\w+)/$', xls_test.output),
+    url(r'^login/$', login.login),
+    url(r'^logout/$', login.logout),
+    url(r'^wiki/', include('wiki.urls')),
+    url(r'^address/', include('address.urls')),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 ```
 
 增加了一个 search 的 url 链接映射。
@@ -111,9 +107,9 @@ urlpatterns = patterns('',
 
 ## 6 部署到 Apache 上的体验
 
-只能说是体验了，因为我不是 Apache 的专家，也不是 mod_python 的专家，因此下面的内容只能算是我个人的配置记录，希望对大家有所帮助。
+只能说是体验了，因为我不是 Apache 的专家，也不是 mod_wsgi 的专家，因此下面的内容只能算是我个人的配置记录，希望对大家有所帮助。
 
-### 6.1 安装 mod_python 模块
+### 6.1 安装 mod_wsgi 模块
 
 Django 对于 Apache 使用 2.X ，对于 mod_python 使用 3.X。安装 mod_python(在windows下)倒是不麻烦。但在 Django 的邮件列表中却有人对于 mod_python 和 Apache 有所讨论，主要的问题是这些改动相对较大，比如说复载，安装需要 root 权限，要重启 Apache 等。这的确是一个要注意的问题，因此有人建议使用 FastCGI 或 SCGI 来处理(这两个都不懂啊)。
 
