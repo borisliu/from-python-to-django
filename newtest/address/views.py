@@ -61,3 +61,21 @@ class IndexView(generic.ListView):
     model = Address
     template_name = 'address/list.html'
     paginate_by = 2
+
+class SearchView(generic.ListView):
+    
+    template_name = 'address/list.html'
+    paginate_by = 2
+
+    def get_queryset(self):
+        self.name = self.request.GET['search']
+        if self.name:
+            return Address.objects.filter(name = self.name)
+        else:
+            return redirect('index')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['searchvalue'] = self.name
+        return context
+

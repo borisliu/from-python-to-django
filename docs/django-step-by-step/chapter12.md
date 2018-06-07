@@ -4,7 +4,7 @@
 
 如果通讯录中的记录很多，我希望有一种搜索的方法，下面就让我们加一个搜索功能吧。当然，这个搜索功能是很简单的。在 [Django](https://www.djangoproject.com) 邮件列表中看到 WorldOnline(好象是它)有一个搜索的框架，可以定义哪些模块的哪些字段要参加搜索。这样在处理时会自动将相应的信息加入到搜索数据库中进行预处理。现在这个框架并没有开放源码，而且它底层使用的搜索的东西并不是 Django 本身的。这里我只是对姓名字段进行查找。
 
-## 2 修改 templates/address/address_list.html
+## 2 修改 templates/address/list.html
 
 ```html
 [...]
@@ -28,37 +28,49 @@
 
 从上面可以看到，条件输入处我增加了一个 `searchvalue` 的变量，希望在提交一个搜索后，显示页面的同时显示当前显示时使用的条件。
 
-这里存在一个困难：如何把搜索条件，搜索字符串与通用 view 相关联呢？只要我们生成正确的 queryset(结果集) 即可。但这个结果集需要查询姓名为指定名称的记录，如何实现呢？
+由于搜索结果页面也是一个列表页面，我们希望能够用[第九讲](./chapter09.md)介绍过的`generic view`来显示结果，因为列表页面的处理非常简单：
 
-通过 `urls.py` 我想是不行的，因为它只从 url 解析，而且对于 QUERY_STRING 是不进行解析的(QUERY_STRING 是指： `http://example.com/add/?name=test` 中 `?` 后面的东西，也就是 `name=test` )。对于搜索条件，我会使用一个 form 来处理， `method` 会设为 `GET` ，因此生成的 url 中，查询条件正如这个例子，如： `http://localhost:8000/address/search/?search=limodou` 。这样无法变成上面所要用到的参数。
+```python
+class IndexView(generic.ListView):
+    model = Address
+    template_name = 'address/list.html'
+    paginate_by = 2
+```
 
-因此我决定自定义一个新的 view 方法。
+但是这里存在一个困难：如何把搜索条件，搜索字符串与generic view 相关联呢？通过 `urls.py` 我想是不行的，因为它只从 url 解析，而且对于 QUERY_STRING 是不进行解析的(QUERY_STRING 是指： `http://example.com/add/?name=test` 中 `?` 后面的东西，也就是 `name=test` )。对于搜索条件，我会使用一个 form 来处理， `method` 会设为 `GET` ，因此生成的 url 中，查询条件正如这个例子，如： `http://localhost:8000/address/search/?search=limodou` 。这样无法变成上面所要用到的参数。
+
+这里我们需要对generic view进行一下扩充，我们需要实现`get_queryset`和`get_context_data`这两个方法。分别用来指定结果集和模板渲染的参数，我们先来看看新的view方法怎么写：
 
 ## 3 修改 address/views.py
 
 ```python
-from django.views.generic.list_detail import object_list
-def search(request):
-    name = request.REQUEST['search']
-    if name:
-        extra_lookup_kwargs = {'name__icontains':name}
-        extra_context = {'searchvalue':name}
-#        return object_list(request, Address,
-#            paginate_by=10, extra_context=extra_context,
-#            extra_lookup_kwargs=extra_lookup_kwargs)
-        return object_list(request, Address.objects.filter(name__icontains=name),
-            paginate_by=10, extra_context=extra_context)
-    else:
-        return HttpResponseRedirect('/address/')
+class SearchView(generic.ListView):
+    
+    template_name = 'address/list.html'
+    paginate_by = 2
+
+    def get_queryset(self):
+        self.name = self.request.GET['search']
+        if self.name:
+            return Address.objects.filter(name = self.name)
+        else:
+            return redirect('index')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['searchvalue'] = self.name
+        return context
 ```
 
-上述代码加到最后去。这里并没有完全重写，而是在 object_list 外面封装了一层，主要是生成要用在 object_list 的中参数。
+我们使用`get_queryset`方法代替了`model = Address`，这样可以更加灵活的定义返回的结果集。
 
-> extra_context 是可以传入到模板中的上下文字典。
+我们使用`get_context_data`指定了可以传入到模板中的上下文字典。
 
-> name_icontains 是 Django 中过滤条件的写法。这里是说只要包含指定的字符的即可，而且不区分大小写。详细地要看 Django 的 DB-API 文档。
+`self.request.GET['search']` 从 GET 中得到数据，是一个方便的用法。它将得到提交的查询姓名条件，然后我们使用`filter`函数对结果进行过滤。如果存在，则生成 `extra_lookup_kwargs` 和 `extra_context` 参数，然后按 `object_list` 的要求传入。如果没有提交，则回到 address 的起始页面
 
-`request.REQUEST ['search']` 或者从 GET 或者从 POST 中得到数据，是一个方便的用法。它将得到提交的查询姓名条件，如果存在，则生成 `extra_lookup_kwargs` 和 `extra_context` 参数，然后按 `object_list` 的要求传入。如果没有提交，则回到 address 的起始页面
+
+
+因此我决定自定义一个新的 view 方法。
 
 ## 4 修改 address/urls.py
 

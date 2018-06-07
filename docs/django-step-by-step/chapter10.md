@@ -49,9 +49,8 @@ def change_gender(value):
 
 它自动将函数名认为是filter的名字。
 
-## 6 修改 templates/address/address_list.html
+## 6 修改 templates/address/list.html
 
-{% raw %}
 ```HTML
 {% extends "base.html" %}
 {% block content %}
@@ -108,11 +107,10 @@ h1#title {color:white;}
 </div>
 {% endblock %}
 ```
-{% endraw %}
 
 改动了以下几个地方：
 
-1. 增加了 `{% raw %}{% load change_gender %}{% endraw %}`来导入自定义的 filter 。
+1. 增加了 `{% load change_gender %}`来导入自定义的 filter 。
 
 2. 增加了几个样式，象 `mytr1`, `mytr2` 等。
 
