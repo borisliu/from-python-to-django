@@ -95,9 +95,9 @@ urlpatterns = [
 
 但部署到 apache 时才知道，问题很多啊。主要问题如下：
 
-- 模块名不全
+- CentOS 7服务器默认自带的Python版本太低
 
-   比如许多例子我都是从当前目录(newtest)下开始计算，因为在 Windows 下，Python_ 会自动将当前目录加入到 sys.path 中，因此直接使用 address.* 之类的不会出错，但在 Apache 下需要使用 newtest.address.* 这样的方式。必须按教程的方式处理。主要修改 urls.py 文件。
+CentOS 7自带的Python版本为Python2.7，我们希望能够使用最新的Python 3.6
 
 - 相对路径的问题
 
@@ -109,56 +109,88 @@ urlpatterns = [
 
 只能说是体验了，因为我不是 Apache 的专家，也不是 mod_wsgi 的专家，因此下面的内容只能算是我个人的配置记录，希望对大家有所帮助。
 
-### 6.1 安装 mod_wsgi 模块
+### 6.1 服务器安装Python 3.6
 
-Django 对于 Apache 使用 2.X ，对于 mod_python 使用 3.X。安装 mod_python(在windows下)倒是不麻烦。但在 Django 的邮件列表中却有人对于 mod_python 和 Apache 有所讨论，主要的问题是这些改动相对较大，比如说复载，安装需要 root 权限，要重启 Apache 等。这的确是一个要注意的问题，因此有人建议使用 FastCGI 或 SCGI 来处理(这两个都不懂啊)。
+下面的操作我们都假定环境是CentOS 7的环境，您可以在阿里云、腾讯云等公有云服务商购买ECS服务器，会自动给你安装好相应的操作系统，最后给你一个root的用户名和密码。
 
-### 6.2 修改 httpd.conf 文件
+使用你自己熟悉的SSH环境，用root用户登录即可，首先安装Python 3.6，执行下面的命令。
 
 ```bash
-Listen 127.0.0.1:8888
-<VirtualHost 127.0.0.1:8888>
-    <Location "/">
-        SetHandler python-program
-        PythonPath "['D:/project/svn/limodou/django-stepbystep/newtest'] + sys.path"
-        PythonHandler django.core.handlers.modpython
-        SetEnv DJANGO_SETTINGS_MODULE newtest.settings_apache
-        PythonAutoReload Off
-        PythonDebug On
-    </Location>
-    Alias /site_media d:/project/svn/limodou/django-stepbystep/newtest/newtest/media
-    Alias /media C:/Python24/Lib/site-packages/Django-0.91-py2.4.egg/django/contrib/admin/media
-    <Location "/site_media">
-        SetHandler None
-    </Location>
-    <Location "/media">
-        SetHandler None
-    </Location>
-</VirtualHost>
+yum install -y python36
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python36 get-pip.py
+pip install virtualenv
 ```
 
-这里我使用了虚拟主机([参考文档](http://www.uplinux.com/download/doc/apache/ApacheManual/vhosts/examples.html)) 来设置。即使用一台机器，不同的端口来对应不同的服务。主要原因是我希望 Django 的服务可以从 / 开始，但我还有其它的一些东西要处理。因此不希望对其它的东西有所影响。我没有两个域名，或两个 IP ，因此采用了两个不同的端口。这只是我的一种方式。因为我在本机处理，因此 IP 是 `127.0.0.1` 。实际中你应该进行修改。
+这样的话你安装的pip会默认使用Python3.6，我们顺手安装好了virtualenv环境。操作系统的Python环境不要安装太多的库文件，都放到自己应用的venv环境中，创建一个虚拟的环境。
 
-`PythonPath` 是绝对路径。 `PythonDebug` 和 `PythonAutoReload` 建议在生产时设为 Off 。这里我还设了两个别名，用来指向 `site_media` 和 `media` 目录。在 `site_media` 和 `media` 的 `Location` 中设置不进行脚本的解析。
+### 6.2 安装 mod_wsgi 模块
+
+mod_wsgi的安装有很多种方法，这里介绍的是官方推荐的办法，使用pip安装，首先需要安装http的开发包，然后使用pip安装mod_wsgi到系统的lib库中，执行下面的命令。
+
+```bash
+yum install -y http-devel python36-devel
+pip install mod_wsgi
+```
+
+然后我们需要将mod_wsgi安装到apache服务器module中去。
+
+```bash
+cd /etc/httpd/modules
+ln -s /usr/lib64/python3.6/site-packages/mod_wsgi/server/mod_wsgi-py36.cpython-36m-x86_64-linux-gnu.so mod_wsgi.so
+```
+
+我们通过在`/etc/httpd/modules`下面创建符号链接的方式，让apache在启动的时候自动加载mod_wsgi.so。
+
+然后我们需要在`/etc/httpd/conf.modules.d`中创建一个文件，加载mod_wsgi.so，使用`vi /etc/httpd/conf.modules.d/10-wsgi.conf`命令创建配置文件，然后录入下面的内容：
+
+```
+LoadModule wsgi_module modules/mod_wsgi.so
+```
+
+之后使用`systemctl restart httpd`重启apache服务即可。
+
+### 6.2 创建配置文件
+
+假定我们的django工程在/var/www/proc/newtest，那么我们应该创建`/etc/httpd/conf.d/wsgi.conf`
+```bash
+WSGIScriptAlias /newtest /var/www/proc/newtest/newtest/wsgi.py process-group=newtest
+WSGIPythonHome /var/www/proc/newtest/venv
+WSGIPythonPath /var/www/proc/newtest
+
+<Directory /var/www/proc/newtest/newtest>
+    <Files wsgi.py>
+        Require all granted
+    </Files>
+</Directory>
+
+#Deamon模式设置
+WSGIDaemonProcess newtest python-home=/var/www/proc/newtest/venv python-path=/var/www/proc/newtest
+WSGIProcessGroup newtest
+
+#静态文件
+Alias /newtest/robots.txt /var/www/proc/newtest/static/robots.txt
+Alias /newtest/favicon.ico /var/www/proc/newtest/static/favicon.ico
+
+Alias /newtest/media/ /var/www/proc/newtest/media/
+Alias /newtest/static/ /var/www/proc/newtest/static/
+
+<Directory /var/www/proc/newtest/static>
+Require all granted
+</Directory>
+
+<Directory /var/www/proc/newtest/media>
+Require all granted
+</Directory>
+```
+
+`WSGIPythonHome` 是Python运行环境的绝对路径，这里指向我们virtualenv的目录
+
+这里我还设了两个别名，用来指向 `media` 和 `static` 目录。在 `media` 和 `static` 的 `Location` 中设置不进行脚本的解析。
 
 > 上面的 media 路径是指向 Django 在 Python 上的安装目录。你完全可以将其拷贝出来，这样可能要方便得多。另外在 linux 下使用 ln 也相当的方便。
 
-同时可以注意到 `settings` 我改为了 `settings_apache` 了。一方面将要把其中的内容有关相对路径的东西改为绝对路径，另一方面我还想保持现在的 `settings.py` 。
-
-### 6.3 复制 settings.py 到 settings_apache.py
-
-### 6.4 修改 settings_apache.py
-
-将相对路径改为绝对路径。主要有：
-
-- DATABASE_NAME 
-- MEDIA_ROOT 
-- TEMPLATE_DIRS 
-- STATIC_PATH 
-
-将 `DEBUG` 和 `TEMPLATE_DEBUG` 改为 `False` 。这样静态文件 serverview 就无效了。这就是为什么上面的 Apache 的配置中要配置 `site_media` 的原因。
-
-### 6.5 测试
+### 6.3 测试
 
 [http://localhost:8888/address]()
 
