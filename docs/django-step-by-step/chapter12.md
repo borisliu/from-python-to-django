@@ -194,7 +194,7 @@ Require all granted
 
 [http://localhost:8888/address]()
 
-更详细的内容请参见 mod_python 文档。关于 admin 的 media 和 template 好象并不需要配置，大家有什么结果可以告诉我。
+更详细的内容请参见 mod_wsgi 文档。关于 admin 的 media 和 template 好象并不需要配置，大家有什么结果可以告诉我。
 
 同时如果你不想每次重启 Apache 来进行测试，可以将:
 
