@@ -20,7 +20,7 @@
 
 ## 2 下载 HTMLCalendar 模块并安装
 
-不想全部自已做，因此找了一个现成的模块。去 [HTMLCalender](http://freespace.virgin.net/hamish.sanderson/htmlcalendar.html) 的主页下载这个模块。
+不想全部自已做，因此找了一个现成的模块。去 [HTMLCalender](https://sourceforge.net/projects/py-templates/) 的主页下载这个模块。
 
 然后解压到一个目录下，执行安装:
 
@@ -36,7 +36,7 @@ python setup.py install
 python setup.py install
 ```
 
-因为上面的 HTMLCalender 需要它才可以运行。去 [HTMLCalender](http://freespace.virgin.net/hamish.sanderson/htmlcalendar.html) 主页下载这个模块。
+因为上面的 HTMLCalender 需要它才可以运行。去 [HTMLCalender](https://sourceforge.net/projects/py-templates/) 主页下载这个模块。
 
 ## 4 创建 my_alendar 应用
 
