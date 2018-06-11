@@ -87,13 +87,13 @@ register.tag('calendar', do_calendar)
 
   * `render()` 方法接受一个 `context` 参数。这个参数就是在执行模板的渲染时由 View 传入的。不过更复杂的例子是你可以修改 `context` ，这样达到注入新变量的目的。不过本例没有演示。
 
-  * `do_calendar()` 是一个由模板处理引擎在发现一个 Tag 的名字之后，将进行调用的方法。那么我们的 Tag 可能在模板中写为 `{% calendar %}` 。这个方法将在下面通过注册过程与一个名字相对应，这里我们想使用 `calendar` 。
+  * `do_calendar()` 是一个由模板处理引擎在发现一个 Tag 的名字之后，将进行调用的方法。那么我们的 Tag 可能在模板中写为 {% raw %}`{% calendar %}`{% endraw %} 。这个方法将在下面通过注册过程与一个名字相对应，这里我们想使用 `calendar` 。
 
     它接受两个参数：
 
     - `parser` 这是模板处理引擎对象，我们没有用到。 
 
-    - `token` 表示 Tag 的原始文本。如果在模板中我们定义 Tag 为 `{% calendar 2006 1 %}`, 那么 `token` 就为 `calendar 2006 1` 。因此你需要对它进一步地处理。 
+    - `token` 表示 Tag 的原始文本。如果在模板中我们定义 Tag 为 {% raw %}`{% calendar 2006 1 %}`{% endraw %}, 那么 `token` 就为 `calendar 2006 1` 。因此你需要对它进一步地处理。 
 
     它将返回一个 Node 的实例，在本例中就是 `CalendarNode` 实例。
 
@@ -105,10 +105,12 @@ register.tag('calendar', do_calendar)
 
 ## 9 创建 templates/my_calendar/calendar.html 文件
 
+{% raw %}
 ```Python
 {% load my_calendar %}
 {% calendar 2006 1 %}
 ```
+{% endraw %}
 
 ## 10 修改 usls.py
 
