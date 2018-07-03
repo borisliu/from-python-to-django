@@ -6,9 +6,15 @@
 
 随着对于web的了解越来越多，我对于 web 上的开发也越来越有兴趣。的确，在实际的工作中我也发现，现在越来越强调团队的管理，许多事情单纯搞一两个人是很困难的，因此如何提高团队工作的一致性和方便性越来越重要，比如：在我所在的项目组，有一些统计信息需要每个人提供，然后进行汇总。目前还是采用手工的方式，这种方式的确简单，但不能自动地进行管理，也不利于以后的归档处理。因此我很希望做成 web 的应用，让每个人可以自由创建项目，提交数据。但就是这样的一个简单的工作，也不是非常简单的事情。如何快速对 Django 加深了解，如何提高开发效率，如何更有效地利用 web 是我更关心的，而不仅仅是做出一个可用的应用来。这包括一系列的 NewEdit 的扩展，及其关知识的积累。
 
-特别让我感兴趣，并且可以极大的提高用户体验的一种 web 技术就是 [Ajax](https://zh.wikipedia.org/wiki/AJAX) 了。它是什么？它是一种技术的总称，包括了 Html, CSS, XML, Javascript 等与 web 相关技术的合集，在我以前的 Blog 也有一些涉及，但那时关注的焦点不在 web 上。现在有机会和时间好好地了解了一下，特别是在 Django 中已经做为实现的目标正在逐步地开展起来，只不过目前还没有可用的东西呈现出来。那么在 Django 的 community 的 blog 上，有人发表了一篇关于使用 [dojo](http://dojotoolkit.org/) (一个 Ajax 的库)来实现在搜索栏中实时输入信息时，可以动态显示与输入信息相匹配的blog列表的一个例子。他利用 dojo 实现了一个自定义的 widget ，但我感到这种技术对于我这种对于dojo框架不熟悉的人非常有困难。从 blog 上看，实现的过程还是有些复杂。我喜欢先从简单的东西入手。 [MochiKit](https://mochi.github.io/mochikit/) 在 Django 的 Ajax 的讨论中是另一个为大家关注的东西，最大的好处是它的文档最齐全，而且从本人的理解来说，它更简单。而 dojo 则更是提供了很多的 web UI 的控件， MochiKit 基本上没有。不过，在目前情况下我也只是希望体验一下 Ajax 技术，并且做一些简单的应用，而在简单的情况下，我认为 MochiKit 做为入门，作为简单的应用也足够了。
+特别让我感兴趣，并且可以极大的提高用户体验的一种 web 技术就是 [Ajax](https://zh.wikipedia.org/wiki/AJAX) 了。它是什么？它是一种技术的总称，包括了 Html, CSS, XML, Javascript 等与 web 相关技术的合集，在我以前的 Blog 也有一些涉及，但那时关注的焦点不在 web 上。现在有机会和时间好好地了解了一下，特别是在 Django 中已经做为实现的目标正在逐步地开展起来，只不过目前还没有可用的东西呈现出来。
 
-下面就让我以 MochiKit 为基础来向大家介绍一下如何在 Django 中使用它，使用一些简单的 Ajax 技术。
+[Ajax](https://zh.wikipedia.org/wiki/AJAX)技术实际上就是利用了浏览器提供的XMLHttpRequest函数(XHR)，在不重新加载网页的情况下，可以异步从后台读取数据改变网页内容的一项技术。AJAX即Asynchronous JavaScript and XML（异步JavaScript和XML）
+
+随着近些年前端技术的不断发展，JavaScript也在不断进化。现在我们使用前端库和React、Angular、Vue等框架构建了动态的网站。AJAX的概念也经历了重大变化，因为现代异步JavaScript调用涉及检索JSON而不是XML。有很多库允许你从客户端应用程序对服务器进行异步调用。有些进入到浏览器标准，有些则有很大的用户基础，因为它们不但灵活而且易于使用。有些支持promises，有些则使用回调。
+
+Vue2.0之后，尤雨溪推荐大家用axios替换JQuery ajax，让Axios进入了很多人的目光中。Axios本质上也是对原生XHR的封装，只不过它是Promise的实现版本，符合最新的ES规范。
+
+下面就让我以 axios 为基础来向大家介绍一下如何在 Django 中使用它，使用一些简单的 Ajax 技术。
 
 首先让我们关心一下 Ajax 与 Django 的关系。其实 Ajax 本身包含许多的内容，它有浏览器端的显示技术，有与后台通讯的处理，因此与 Django 有关系的其实只有与后台交互那块东西。这样，更多的关于前端显示的技术，如：显示特效，这些都属于 CSS, Javascript的内容，而这些与 [Python](https://www.python.org/) 本身的关系也不大，因此你还需要掌握这些东西才可以做得更好。也许有机会会有专题和学习和介绍这些方面的东西。
 
@@ -21,7 +27,7 @@
 ## 2 创建 Ajax 应用
 
 ```bash
-manage.py startapp ajax
+python manage.py startapp ajax
 ```
 
 ## 3 修改 ajax/views.py
