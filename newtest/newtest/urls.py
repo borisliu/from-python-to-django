@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^logout/$', login.logout),
     url(r'^wiki/', include('wiki.urls')),
     url(r'^address/', include('address.urls')),
+    url(r'^ajax/', include('ajax.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

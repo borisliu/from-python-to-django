@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'newtest',
     'wiki.apps.WikiConfig',
     'address.apps.AddressConfig',
+    'ajax.apps.AjaxConfig',
 ]
 
 MIDDLEWARE = [
