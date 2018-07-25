@@ -2,5 +2,5 @@
 from django.http import HttpResponse
 
 def input(request):
-    input = request.REQUEST["input"]
+    input = request.GET["input"]
     return HttpResponse('<p>You input is "%s"</p>' % input)

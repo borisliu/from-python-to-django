@@ -3,8 +3,9 @@
 <html>
     <head>
         <title>Ajax Test</title>
-        <script type="text/javascript" src="/site_media/MochiKit.js"></script>
-        <script type="text/javascript" src="/site_media/ajax_test.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.js"></script>
+        <script src="/static/ajax_test.js"></script>
     </head>
     <body>
         <h1>
@@ -12,7 +13,7 @@
         </h1>
         <div>
         <form id="form">
-        输入：<input type="text" name="input"/>
+        输入：<input type="text" id="name" name="input"/>
         <input id="submit" type="button" value="提交" />
         </form>
         </div>

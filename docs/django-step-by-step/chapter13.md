@@ -12,9 +12,9 @@
 
 随着近些年前端技术的不断发展，JavaScript也在不断进化。现在我们使用前端库和React、Angular、Vue等框架构建了动态的网站。AJAX的概念也经历了重大变化，因为现代异步JavaScript调用涉及检索JSON而不是XML。有很多库允许你从客户端应用程序对服务器进行异步调用。有些进入到浏览器标准，有些则有很大的用户基础，因为它们不但灵活而且易于使用。有些支持promises，有些则使用回调。
 
-Vue2.0之后，尤雨溪推荐大家用axios替换JQuery ajax，让Axios进入了很多人的目光中。Axios本质上也是对原生XHR的封装，只不过它是Promise的实现版本，符合最新的ES规范。
+Vue2.0之后，尤雨溪推荐大家用[axios](https://github.com/axios/axios)替换JQuery ajax，让[axios](https://github.com/axios/axios)进入了很多人的目光中。[axios](https://github.com/axios/axios)本质上也是对原生XHR的封装，只不过它是Promise的实现版本，符合最新的ES规范。
 
-下面就让我以 axios 为基础来向大家介绍一下如何在 Django 中使用它，使用一些简单的 Ajax 技术。
+下面就让我以 [axios](https://github.com/axios/axios) 为基础来向大家介绍一下如何在 Django 中使用它，使用一些简单的 Ajax 技术。
 
 首先让我们关心一下 Ajax 与 Django 的关系。其实 Ajax 本身包含许多的内容，它有浏览器端的显示技术，有与后台通讯的处理，因此与 Django 有关系的其实只有与后台交互那块东西。这样，更多的关于前端显示的技术，如：显示特效，这些都属于 CSS, Javascript的内容，而这些与 [Python](https://www.python.org/) 本身的关系也不大，因此你还需要掌握这些东西才可以做得更好。也许有机会会有专题和学习和介绍这些方面的东西。
 
@@ -53,8 +53,9 @@ def input(request):
 <html>
     <head>
         <title>Ajax Test</title>
-        <script type="text/javascript" src="/site_media/MochiKit.js"></script>
-        <script type="text/javascript" src="/site_media/ajax_test.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.js"></script>
+        <script src="/static/ajax_test.js"></script>
     </head>
     <body>
         <h1>
@@ -62,7 +63,7 @@ def input(request):
         </h1>
         <div>
         <form id="form">
-        输入：<input type="text" name="input"/>
+        输入：<input type="text" id="name" name="input"/>
         <input id="submit" type="button" value="提交" />
         </form>
         </div>
@@ -73,9 +74,9 @@ def input(request):
 
 这个模板将作为初始页面，它用来处理向后台发起请求。在这里它没有需要特殊处理的模板变量，只需要显示即可。但在这里的确有许多要说明的东西。
 
-这是一个标准的 html 的页面，在 head 标签中，它将引入两个 js 文件： MochiKit.js 和 ajax_test.js 。从 url 上可以看出，我将会把它们放在 site_media 下，这个地址就是 media 目录。 MochiKit.js 你需要从 MochiKit 网站下载(最新版本为 1.2)。 MochiKit 下载后有两种格式，一种是单个文件，另一种是分散的文件。我这里使用的是单个文件。
+这是一个标准的 html 的页面，在 head 标签中，它将引入三个 js 文件： jquery.js 、 axios.js 和 ajax_test.js 。我们采用[jsdelivr](https://www.jsdelivr.com)所提供的CDN服务加载jquery.js和axios.js，这样有两个好处，一来可以保持我们始终采用最新的版本，二来也可以分担我们服务器的流量压力。从 url 上可以看出，我将会ajax_test.js放在 static 下，这个地址就是 static 目录。 
 
-在 html 文件中有一个 form ，它的 id 是 form ，我将用它来查找 form 对象。它有一个文本输入框，还有一个按钮，但这个按钮并不是 submit 按钮。这里有许多与标准的 form 不一样的地方，没有 action, 没有 method ，而且没有 submit 按钮。为什么要这样，为了简单，而且我发现这是 MochiKit 的开发方式。以前写 HTML，CSS, Javascript 和事件之类的处理，我们一般可能会写在一起，但这样的确很乱。在学习了一段 MochiKit 之后，我发现它的代码分离做得非常棒，而这也是目前可能流行的做法。它会在独立的 Javascript 中编写代码，在装载页面时动态地查找相应的元素，然后设置元素的一些属性，如 style ，事件代码等。而在 Html 文档中，你看到的元素中一般就只有 id , class 等内容。这样的好处可以使得处理为以后重用及优化带来方便，同时可以通过编程的方式实现批量的处理，而且也使得 Html 页面更简单和清晰。因为我要使用 Ajax 去动态提交信息，不需要真正的 form 的提交机制，我只是需要用到 form 元素中的数据而已，因此象 action, method 等内容都没有用。 id 是必须的，我需要根据它找到我想要处理的元素对象。
+在 html 文件中有一个 form ，它的 id 是 form ，我将用它来查找 form 对象。它有一个文本输入框，还有一个按钮，但这个按钮并不是 submit 按钮。这里有许多与标准的 form 不一样的地方，没有 action, 没有 method ，而且没有 submit 按钮。为什么要这样，为了简单。以前写 HTML，CSS, Javascript 和事件之类的处理，我们一般可能会写在一起，但这样的确很乱。我们在这里尝试使用代码分离技术，而这也是目前可能流行的做法。我们在独立的 Javascript 中编写代码，在装载页面时动态地查找相应的元素，然后设置元素的一些属性，如 style ，事件代码等。而在 Html 文档中，你看到的元素中一般就只有 id , class 等内容。这样的好处可以使得处理为以后重用及优化带来方便，同时可以通过编程的方式实现批量的处理，而且也使得 Html 页面更简单和清晰。因为我要使用 Ajax 去动态提交信息，不需要真正的 form 的提交机制，我只是需要用到 form 元素中的数据而已，因此象 action, method 等内容都没有用。 id 是必须的，我需要根据它找到我想要处理的元素对象。
 
 > 不过分离的作法是你的文件将增多，也可能不如放在一个文件中便于部署吧。这是一个仁者见仁，智者见智的作法。
 
@@ -85,67 +86,76 @@ def input(request):
 
   在装载 html 页面时，会对按钮进行初始化处理，即增加一个 `onclick` 的事件处理，它将完成 Ajax 的请求及结果返回后的处理。然后用户在页面显示出来后，可以输入文本，点击按钮后，将调用 `onclick` 方法，然后提交信息到 Django ，由 Django 返回信息，再由 Ajax 的 deferred 对象(后面会介绍)调用显示处理。
 
-## 6 创建 media/ajax_test.js
+## 6 创建 static/ajax_test.js
 
 ```Javascript
 function submit(){
-    var form = $("form");
-    var d = doSimpleXMLHttpRequest('/ajax/input/', form);
-    d.addCallbacks(onSuccess, onFail);
-}
-onSuccess = function (data){
-    var output = $("output");
-    output.innerHTML = data.responseText;
-    showElement(output);
-}
-onFail = function (data){
-    alert(data);
-}
-function init() {
-    var btn = $("submit");
-    btn.onclick = submit;
-    var output = $("output");
-    hideElement(output);
+    axios.get('/ajax/input/', {
+            params: {
+                input: $("#name").val()
+            }
+        })
+        .then(function (response) {
+            // handle success
+            console.log(response);
+            $("#output").html(response.data);
+            $("#output").show();
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+            alert(error);
+        });
 }
 
-addLoadEvent(init);
+function init() {
+    $("#submit").click(function(){
+        submit();
+    });
+    $("#output").hide();
+}
+
+$(function(){
+    init();
+});
 ```
 
-这里有许多是 MochiKit 的方法。
+这里有许多是 [jQuery](https://jquery.com/)和[axios](https://github.com/axios/axios) 的方法。
 
-首先让我们看 `addLoadEvent(init);` 它表示将 `init()` 函数加到 `onload` 的响应事件对列中。浏览器在装载完一个页面后，会自动调用 `onload` 事件处理。因此在这里是进行初始化的最好的地方。
+首先让我们看 `$(function(){});` 它表示将 `init()` 函数加到 `window.onload` 的响应事件对列中。浏览器在装载完一个页面后，会自动调用 `onload` 事件处理。因此在这里是进行初始化的最好的地方。
 
 `init()` 方法一方面完成对 id 名为 `submit` 的按钮 `onclick` 处理函数的绑定工作，另一个是将 id 为 `output` 的元素隐藏。其实不隐藏也无所谓，因为它本来就是空的，因此你也看不到东西。不过如果有其它的东西这样的处理却也不错。
 
-`$()` 是 MochiKit 提供的一个 `getElement()` 函数别名，它将根据元素的 id 来得到某个对象。
+`$()` 是 jQuery 提供的一个 `getElement()` 函数别名，它将根据元素的 id 来得到某个对象。
 
-`hideElement()` 是隐藏某个元素。想要显示某个元素可以使用 `showElement()` 。
+`hide()` 是隐藏某个元素。想要显示某个元素可以使用 `show()` 。
 
-最重要的工作都在 `submit()` 这个函数中。它首先得到 id 为 `form` 的对象，然后调用 MochiKit 提供的 `doSimpleXMLHttpRequest()` 函数提交一个 Ajax 请求到后台。第一个参数是请求的 url ，第二个如果有的话，应该是 Query String ，即一个 url 的 ? 后面的东西。这里我只是将 form 传给它， `doSimpleXMLHttpRequest()` 会自动调用 `queryString()` (也是 MochiKit 的一个方法)来取得 `form` 中的字段信息。比如你输入了 `aaa` ，那么最终在 Django 你会看到的是:
+最重要的工作都在 `submit()` 这个函数中。它通过调用 axios 提供的 `get()` 函数提交一个 Ajax 请求到后台。第一个参数是请求的 url ，第二个如果有的话，应该是 Query String ，即一个 url 的 ? 后面的东西。
 
-```
-/ajax/input/?input=aaa
-```
+在执行了 `get()` 之后，结果可能当时并没有返回回来，因为这是一个异步调用。因此为了在结果回来之后做后续的处理，我还需要挂接两个异步函数，一个用来处理成功的情况，一个是用来处理失败的情况。 `then()`和`catch()` 就是做这件事的。
 
-`doSimpleXMLHttpRequest()` 会返回一个 deferred 对象，它是一个延迟执行对象，在执行了 `doSimpleXMLHttpRequest()` 之后，结果可能当时并没有返回回来，因为这是一个异步调用。因此为了在结果回来之后做后续的处理，我还需要挂接两个异步函数，一个用来处理成功的情况，一个是用来处理失败的情况。 `d.addCallbacks(onSuccess, onFail);` 就是做这件事的。
+`then()` 在 HTTP GET请求正确返回后会被调用。 `response` 是一个对象，它有一个 `data` 属性可以使用。这里因为 Django 返回的是 Html 片段，因此我只是简单地将 `output` 对象(用于显示的 div 层)的内容进行了设置。然后调用 `show()` 来将层显示出来。
 
-`onSuccess()` 在 deferred 正确返回后会被调用。 `data` 是 `XMLHttpRequest` 对象本身，它有一个 `responseText` 属性可以使用。这里因为 Django 返回的是 Html 片段，因此我只是简单地将 `output` 对象(用于显示的 div 层)的内容进行了设置。然后调用 `showElement()` 来将层显示出来。
+`catch()` 则只是调用 `alert()` 显示出错而已。
 
-`onFail()` 则只是调用 `alert()` 显示出错而已。
+这里有许多 Javascript 、jQuery、axios 的东西，如果大家不了解则需要补补课了。
 
-这里有许多 Javascript 和 MochiKit 的东西，如果大家不了解则需要补补课了。其中 MochiKit 的内容在它自带的例子和文档中可以查阅，特别是 MochiKit 自带了一个象 Python shell 一样的命令行解释环境可以进行测试，非常的方便。具体的看 MochiKit 网站上的 [ScreenCast](http://www.archive.org/download/MochiKit_Intro-1/MochiKit_Intro-1.mov) 可以了解。
-
-## 7 修改 urls.py
+## 7 创建 ajax/urls.py
 
 增加两行:
 
 ```Python
-(r'^ajax/$', 'django.views.generic.simple.direct_to_template',
-    {'template': 'ajax/ajax.html'}),
-(r'^ajax/input/$', 'newtest.ajax.views.input'),
+from django.conf.urls import url
+from django.views.generic import TemplateView
+from . import views
+
+urlpatterns = [
+    url(r'^$', TemplateView.as_view(template_name="ajax/ajax.html")),
+    url(r'^input/$', views.input),
+]
 ```
 
-前一个使用了 generic view 所提供的 `direct_to_template()` 方法可以直接显示一个模板。后一个则指向了 `views.index()` 方法，它用于在前一个页面点击按钮后与后台交互的处理。
+前一个使用了 generic view 所提供的 `TemplateView.as_View` 方法可以直接显示一个模板。后一个则指向了 `views.input()` 方法，它用于在前一个页面点击按钮后与后台交互的处理。
 
 ## 8 安装 ajax 应用
 
@@ -153,14 +163,17 @@ addLoadEvent(init);
 
 ```Python
 INSTALLED_APPS = (
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
-    'newtest.wiki',
-    'newtest.address',
-    'newtest.ajax',
-    'django.contrib.admin',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'debug_toolbar',
+    'newtest',
+    'wiki.apps.WikiConfig',
+    'address.apps.AddressConfig',
+    'ajax.apps.AjaxConfig',
 )
 ```
 
