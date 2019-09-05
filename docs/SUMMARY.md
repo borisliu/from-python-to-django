@@ -3,7 +3,7 @@
 * [封面](README.md)
 
 * [开始学习](introduction/preface.md)
-    * [搭建Python开发环境](introduction/index.md)
+    * [搭建Python开发环境](introduction/env.md)
 
 * [简明Python教程](a-byte-of-python3/index.md)
     * [简介](a-byte-of-python3/introduction.md)
