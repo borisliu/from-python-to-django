@@ -1,14 +1,20 @@
 # 搭建Python开发环境
 ---
 
-## 安装Python
+## 选择哪个版本
+
+当前Python最高版本是3.8.x，Django最高版本是3.0.x。
+
+通常情况下，最新版本的前一个小版本号的程序是比较稳定的，而且也添加了绝大部分的最新特性，因此本文选择的Python版本是3.7.x，Django版本是2.2.x。
+
+## 安装Python 3.7.x
 
 Win10下面安装Python的开发环境，需要到[https://www.python.org/downloads/](https://www.python.org/downloads/)下载对应的Python安装包，安装的时候勾选上修改PATH的选项，然后完成安装就是了。本文使用的是Python 3.7.3。
 
-在Windows开始菜单选择“命令提示符”，就进入到命令行模式，它的提示符类似C:\>，之后输入
+在Windows开始菜单选择“命令提示符”，就进入到命令行模式，它的提示符类似`C:\>`，之后输入
 
 ```shell
-    python
+    C:\>python
 ```
 
 就看到类似如下的一堆文本输出，然后就进入到Python交互模式，它的提示符是`>>>`
@@ -57,26 +63,26 @@ pip和virtualenv可以很好的协同工作，同时使用这两个工具非常�
 
 接下来我们要用这个工具创建我们自己的开发环境。
 
-## 安装Django1.11
+## 安装Django 2.2.x
 
-为了能够使用Django的命令行，我们把Django安装到系统的环境中，在命令行中输入：
+为了能够使用Django的命令行，我们把Django安装到系统的环境中，在命令行模式中输入：
 
-```
-    pip instal django
+```shell
+    C:\>pip instal django==2.2.11
 ```
 
 就可以完成安装。
 
 ## 创建第一个Django项目
 
-为了能够统一的管理工程的代码等信息，我们将工程代码和virtualenv环境都放在同一个目录中，这样无论这个目录拷贝到哪里，都可以直接加载环境之后开始运行，首先输入下面的命令创建第一个django项目：
+为了能够统一地管理Django项目的代码等信息，我们将代码和virtualenv环境都放在同一个目录中，这样无论这个目录拷贝到哪里，都可以直接加载环境之后开始运行，首先输入下面的命令创建第一个django项目：
 
 ```
     C:\>django-admin startproject helloworld
     C:\>cd helloworld
 ```
 
-然后我们在helloworld目录下面创建一个venv的目录，保存这个Django项目的虚拟环境，之后我们在这个虚拟环境中安装Django1.10
+然后我们在helloworld目录下面创建一个venv的目录，作为这个Django项目的虚拟环境，之后我们在这个虚拟环境中安装Django
 
 ```
     C:\helloworld\>virtualenv venv
@@ -89,16 +95,15 @@ pip和virtualenv可以很好的协同工作，同时使用这两个工具非常�
 
 ![](./virtualenv.png)
 
-这个时候你的virtualenv就已经激活了，如果你再输入`python`命令：
-的时候，就会使用这个虚拟环境下面的Python。请注意，下面的教程我么都是在这个环境下面运行的。
+这个命令行模式就已经处于`venv`这个虚拟的Python环境下面了，如果你再输入`python`命令的时候，就会使用这个虚拟环境下面的Python。请注意，下面的教程我们都是在这个环境下面运行的。
 
-下面让我们运行一下我们的第一个Django项目。如果你运行了`python`命令，输入`exit()`退出。在命令行下面输入：
+下面让我们运行一下我们的第一个Django项目。如果你处于Python交互模式，使用`exit()`命令可以退出到命令行模式。在命令行模式下面输入：
 
 ```
     (venv) C:\helloworld\>python manage.py runserver
 ```
 
-然后使用浏览器打开这个地址[http://localhost:8000/](http://localhost:8000/)就可以看到一个欢迎页面了。
+然后我们使用浏览器打开这个地址[http://localhost:8000/](http://localhost:8000/)就可以看到一个欢迎页面了。
 
 ![](./first_django.png)
 
@@ -129,7 +134,7 @@ pip和virtualenv可以很好的协同工作，同时使用这两个工具非常�
     (venv) C:\helloworld\>code .
 ```
 
-即可使用VS Code打开helloworld工程。VS Code没有工程描述文件，一个目录就是一个工程，后面的例子我们都用这个开发工具完成。
+即可使用VS Code打开helloworld项目。VS Code没有项目描述文件，一个目录就是一个项目，后面的例子我们都用这个开发工具完成。
 
 ## 完结！ 
 
