@@ -73,7 +73,7 @@ response.write(t.render(c))
 这几行就是最原始的模板使用方法。先通过 `loader` 来找到需要的模板，然后生成一个 template 对象，再生成一个 `Context` 对象，它就是一个字典集。然后 `t.render(c)` 这个用来对模板和提供的变量进行合并处理，生成最终的结果。最后调用 `response.write()` 将内容写入。
 
 ## 4   增加 templates/xls.html
-{% raw %}
+
 ```html
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -95,7 +95,7 @@ response.write(t.render(c))
 使用了一个 for 循环。这里 `data` 与上面的 `Context` 的 `data` 相对应。因为 `data` 是一个列表，它的每行是一个 tuple ，因此 `row.0`, `row.1` 就是取 tuple 的第一个和第二个元素。`|` 是一个过滤符，它表示将前一个的处理结果作为输入传入下一个处理。因此 Django 的模板很强大，使用起来也非常直观和方便。 `addslashes` 是 Django 模板内置的过滤 Tag ，它用来将结果中的特殊字符加上反斜线。
 
 同时我们注意到，每个 `{{}}` 前后都有一个双引号，这样就保证每个字符串使用双引号引起来。然后在第一个与第二个元素之间还使用了逗号分隔。最后 `endfor` 在下一行，表示上面每行模板后有一个回车。
-{% endraw %}
+
 Django 还允许你自定义 Tag ，在 The Django template language: For Python programmers 文档中有描述，其实是很简单的。
 
 ## 5   修改 urls.py
