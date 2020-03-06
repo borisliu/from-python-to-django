@@ -1,0 +1,20 @@
+# This is a comment
+
+# Ignore the file test.md
+test.md
+
+# Ignore everything in the directory "bin"
+bin/*
+
+# Book build output
+_book
+
+# Visual Studio Code
+.vscode
+
+# MAC OS files
+.DS_Store
+
+# Python Virtualenv
+venv
+*.pyc
