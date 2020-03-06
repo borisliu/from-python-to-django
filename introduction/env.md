@@ -1,39 +1,60 @@
 # 搭建Python开发环境
---------------------------------------------------
+---
 
 ## 安装Python
 
-Python的开发环境是比较简单的，到[https://www.python.org/downloads/](https://www.python.org/downloads/)去下载对应的Python3安装包，安装的时候勾选上修改PATH的选项，然后完成安装就是了。本文使用的是Python 3.6.3。
+Win10下面安装Python的开发环境，需要到[https://www.python.org/downloads/](https://www.python.org/downloads/)下载对应的Python安装包，安装的时候勾选上修改PATH的选项，然后完成安装就是了。本文使用的是Python 3.7.3。
 
-调出你的终端（cmd），输入
+在Windows开始菜单选择“命令提示符”，就进入到命令行模式，它的提示符类似C:\>，之后输入
 
-```
+```shell
     python
 ```
 
-如果出现下面的提示，那么说明你已经安装成功了。
+就看到类似如下的一堆文本输出，然后就进入到Python交互模式，它的提示符是`>>>`
+
+如果你看到下面的提示，那么说明你已经安装成功了。
 
 ![](./installpython.png)
 
-Python环境搭好之后首先要做的就是这个：
+Python环境搭好之后我们写下第一行代码，输出一个"Hello world!"：
 
-```
+```python
     print('hello world!')
 ```
 
-恭喜你！
+你会看到在终端输出了`hello world!`的字符串
+
+![](./hello-world.png)
+
+恭喜你，完成安装！
 
 ## 安装virtualenv
 
-virtualenv可以建立多个独立的虚拟环境，各个环境中拥有自己的python解释器和各自的package包，互不影响。
+Python程序在运行过程中可能会使用到很多第三方的包(package)，如果你的电脑上有很多个Python的程序，而每个程序依赖的第三方包又都不太一样，那么我们需要为每一个Python程序创建一个独立的Python运行环境。
+
+virtualenv就是用来为每一个Python程序创建一套“隔离”的Python运行环境。virtualenv可以建立多个独立的虚拟环境，各个环境中拥有自己的python解释器和各自的package包，互不影响。
+
 使用Python自带的pip工具可以很方便的安装、卸载和管理Python的包。
 
+首先使用
+
+```python
+    exit()
 ```
+
+命令退出Python交互模式，进入命令行模式，之后输入
+
+```shell
     pip install virtualenv
 ```
 
+就完成了virtualenv工具的安装。
+
 pip和virtualenv可以很好的协同工作，同时使用这两个工具非常方便。
+
 用virtualenv env1就可以创建一个名为env1的虚拟环境了，进入这个虚拟环境后，再使用pip install安装其它的package就只会安装到这个虚拟环境里，不会影响其它虚拟环境或系统环境。
+
 接下来我们要用这个工具创建我们自己的开发环境。
 
 ## 安装Django1.11
