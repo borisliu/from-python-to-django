@@ -36,5 +36,17 @@ Django的主要目标是使得开发复杂的、数据库驱动的网站变得�
 ### 2. [简明Python教程](https://borisliu.gitbooks.io/from-python-to-django/content/a-byte-of-python3/)
 ### 3. [Django Step By Step](https://borisliu.gitbooks.io/from-python-to-django/content/django-step-by-step/)
 
+---
+
+![人生苦短，我用Python](./introduction/using_python.jpg)
+
+### by <boris_cn@263.net>
+
+### 废话少说，开始吧！
+
+更多关于Python以及Django的讨论，尤其是使用Django开发微信相关应用的技术，请使用微信扫描二维码加群。
+
+![](./wechat.jpg)
+
 本书托管在[GitHub](https://github.com/borisliu/from-python-to-django)，
 如果有问题请在线[提交](https://github.com/borisliu/from-python-to-django/issues)。
