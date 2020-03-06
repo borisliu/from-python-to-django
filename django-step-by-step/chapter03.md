@@ -66,11 +66,11 @@ Django会自动搜索newtest/templates目录下的模板文件。
 {% endfor %}
 </table>
 ```
-{% raw %}
+
 很简单，就是生成了一个两列的表格。在 Django 模板中 `{{}}` 表示引用一个变量， `{%%}` 表示代码调用。在变量引用中， Django 还支持对变量属性的访问，同时它还有一定的策略，详细的建议查看 The Django template language 文档。这里我也使用了汉字，因此它也需要使用 utf-8 编码。
 
 这里使用 for .. in 的模板 Tag 处理。因此 address 需要是一个集合。在我们的 View 代码中， address 为一个 list 值。每个 list 又是一个字典。因此 `{{ user.name }}` 和 `{{ user.address }}` 就是将这个字典中的元素取出来。
-{% endraw %}
+
 
 ## 6   修改 urls.py
 
