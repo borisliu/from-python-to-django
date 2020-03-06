@@ -1,10 +1,5 @@
-# Summary
-
-* [封面](README.md)
-
 * [开始学习](introduction/preface.md)
     * [搭建Python开发环境](introduction/env.md)
-
 * [简明Python教程](a-byte-of-python3/index.md)
     * [简介](a-byte-of-python3/introduction.md)
     * [致敬](a-byte-of-python3/dedication.md)
@@ -31,7 +26,6 @@
     * [附录: 翻译](a-byte-of-python3/translations.md)
     * [附录: 参与翻译工作](a-byte-of-python3/translation_howto.md)
     * [反馈](a-byte-of-python3/feedback.md)
-
 * [Django Step Sy Step](django-step-by-step/index.md)
     * [第一讲 从简单到复杂](django-step-by-step/chapter01.md)
     * [第二讲 做加法的例子](django-step-by-step/chapter02.md)
@@ -50,18 +44,15 @@
     * [第十五讲 i18n的一个简单实现](django-step-by-step/chapter15.md)
     * [第十六讲 自定义Calendar Tag](django-step-by-step/chapter16.md)
     * [第十七讲 View,Template和Tag](django-step-by-step/chapter17.md)
-
-* [Django开发经验汇总](django-tips/index.md)
-    * [Python开发规范](django-tips/vue.md)
+* [Django开发实战](django-tips/index.md)
+    * [Python开发规范](django-tips/python_rules.md)
     * [Django项目的gitignore](django-tips/gitignore.md)
     * [怎样配置开发环境的settings](django-tips/settings.md)
     * [如何使用Django和Vue.js构建项目](django-tips/vue.md)
-    * [使用WebSocket开发网页聊天室](django-tips/vue.md)
-    * [怎样使Django Admin显示中文](django-tips/admin.md)
-    * [怎样使Model在Admin界面中显示中文](django-tips/admin.md)
-    * [使用Django Admin怎样上传并显示图片](django-tips/upload_img.md)
+    * [使用WebSocket开发网页聊天室](django-tips/websocket.md)
+    * [怎样使Django Admin显示中文](django-tips/admin_chinese.md)
+    * [怎样使Model在Admin界面中显示中文](django-tips/model_chinese.md)
+    * [使用Django Admin怎样上传并显示图片](django-tips/admin_upload_img.md)
     * [解决Django模板和Vue指令花括号冲突的问题](django-tips/braces_conflict.md)
     * [使用Django和Vue开发微信公众号](django-tips/wechat_h5.md)
     * [使用Django和Vue调用微信JSSDK开发微信支付](django-tips/wechat_pay.md)
-
-----
