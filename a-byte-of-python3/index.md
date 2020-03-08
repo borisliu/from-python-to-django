@@ -1,34 +1,10 @@
+# 简介
+---
+
 # 简明Python教程
---------------------------------------------------
 
-## 目录
+简明Python教程(A Byte of Python)十一本免费的Python编程入门教程，为初学者学习Python语言提供一个由浅入深的教程。如果你对于计算机的了解仅限于它可以保存文件，那么你可以阅读本书学习Python编程。
 
-### [简介](introduction.md)
-### [致敬](dedication.md)
-### [前言](preface.md)
-### [关于Python](about_python.md)
-### [安装](installation.md)
-### [第一步](first_steps.md)
-### [基础](basics.md)
-### [操作符和表达式](op_exp.md)
-### [控制流](control_flow.md)
-### [函数](functions.md)
-### [模块](modules.md)
-### [数据结构](data_structures.md)
-### [解决问题](problem_solving.md)
-### [面向对象编程](oop.md)
-### [输入/输出](io.md)
-### [异常处理](exceptions.md)
-### [标准库](stdlib.md)
-### [更多](more.md)
-### [继续学习](what_next.md)
-### [附录:免费/自由和开放源码软件](floss.md)
-### [附录:关于](about.md)
-### [附录:版本历史](revision_history.md)
-### [附录:翻译](translations.md)
-### [附录:参与翻译工作](translation_howto.md)
-### [反馈](feedback.md)
+## 基于Python 3
 
---------------------------------------------------
-
-### 继续阅读[简介](introduction.md)
+本书教给你怎样使用Python 3。还将通过一系列的讲解，帮助您适应更加古老但更为常见的 Python 2。
