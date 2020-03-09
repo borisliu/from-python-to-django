@@ -4,7 +4,6 @@
     * [致敬](a-byte-of-python3/dedication.md)
     * [前言](a-byte-of-python3/preface.md)
     * [关于Python](a-byte-of-python3/about_python.md)
-    * [简介](a-byte-of-python3/introduction.md)
     * [安装](a-byte-of-python3/installation.md)
     * [第一步](a-byte-of-python3/first_steps.md)
     * [基础](a-byte-of-python3/basics.md)
