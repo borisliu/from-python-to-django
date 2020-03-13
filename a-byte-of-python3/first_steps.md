@@ -8,7 +8,7 @@
 
 在您的操作系统中打开终端(如前面[安装](a-byte-of-python3/install.md)所述),然后，输入`python3`按回车键，打开Python提示符。
 
-一旦你启动python 3,您应该看到'>>>”,这被称为_Python解释器提示符_，你可以开始输入Python程序。
+一旦你启动python 3,您应该看到`>>>`,这被称为 _Python解释器提示符_，你可以开始输入Python程序。
 
 在Python解释器提示符下，输入
 
@@ -16,42 +16,42 @@
 print("Hello World")
 ```
 
-然后按回车键。您应该看到输出了单词“Hello World”。
+然后按回车键。您应该看到输出了单词`Hello World`。
 
-当使用一个Mac OS X计算机，下面是你将看到的一个例子。Python软件的细节会根据你的电脑不同而有所不同，但从提示符(即从“>>>”开始)与操作系统无关，应该是相同。
+下面我们使用Win10电脑举个例子。不同的电脑上Python软件会有一些细节的差异，但从提示符(即从`>>>`开始)，各个操作系统显示一致。
 
 ```python
-> python3
-Python 3.5.2 (default, Jan 14 2016, 06:54:11)
-[GCC 4.2.1 Compatible Apple LLVM 7.0.2 (clang-700.1.81)] on darwin
+C:\>python
+Python 3.7.6 (tags/v3.7.6:43364a7ae0, Dec 19 2019, 00:42:30) [MSC v.1916 64 bit (AMD64)] on win32
 Type "help", "copyright", "credits" or "license" for more information.
->>> print("Hello World")
+>>> print('Hello World')
 Hello World
+>>>
 ```
 
-注意,Python让你的代码行立即输出了!你刚才输入的是一个Python_语句_。我们使用`print`输出(不出所料)你提供给它的任何值。在这里,我们提供的是文本“Hello World”,并立即打印到屏幕上。
+注意,Python让你的代码行立即输出了!你刚才输入的是一个Python _语句_。我们使用`print`输出你提供给它的任何值。在这里，我们提供的是文本`Hello World`，并立即打印到屏幕上。
 
 ### 如何退出解释器提示符
 
-如果你正在使用一个Linux或Unix shell,您可以通过按下`[ctrl - d]`或输入`exit()`(注意:记得包含括号,`()`)，然后输入回车键。
+如果你正在使用一个GNU/Linux或MaxOS shell，您可以通过按下`[ctrl + d]`或输入`exit()`(注意:记得包含括号,`()`)，然后输入回车键。
 
-如果您使用的是Windows命令行提示符,按`[ctrl - z]`键再按回车键，退出解释器提示符。
+如果您使用的是Windows命令行提示符,按`[ctrl + z]`键再按回车键，退出解释器提示符。
 
 ## 选择一个编辑器
 
-我们不能在每次想要运行一些东西的时候都要在解释器提示符下输入我们的程序，所以我们必须把它们保存为文件，这样我们可以任意次地运行我们的程序。
+我们不能在每次想要运行一些东西的时候都要在解释器提示符下输入我们的程序，所以我们必须把它们保存为文件，这样我们可以任意地运行我们的程序。
 
-要创建我们的Python源文件,我们需要一个可以输入并保存它们的编辑软件。一个优秀的程序员的编辑器将使你写源代码文件的生活更容易。因此，选择一个编辑器确实至关重要。你必须选择一个编辑器，就像你选择要买的汽车一样。一个好的编辑器会帮助您很容易地编写Python程序，（就像一辆车可以让你）以一个更快和更安全的方式，让你的旅程更舒适，并且可以帮助你实现你的目标。
+要创建我们的Python源文件,我们需要一个可以输入并保存它们的编辑软件。一个优秀的程序员的编辑器将使你写源代码文件变得更容易。因此，选择一个编辑器确实至关重要。你必须选择一个编辑器，就像你选择要买的汽车一样。一个好的编辑器会使您编写Python程序更加容易。就像一辆好车，在旅途中可以让你更快、更安全、更舒适地到达目的地。
 
-一个非常基本的需求是_语法高亮显示_，分别以不同的彩色显示你的Python程序所有的不同部分，以便您可以看到你的程序且使其运行可视化。
+一个非常基本的需求是 _语法高亮显示_，分别以不同的颜色显示你Python程序的不同部分，以便您可以看到你的程序且使其运行可视化。
 
 如果你不知道从哪里开始，我推荐可以在Windows、Mac OS X和GNU/Linux上使用的[Visual Studio Code](https://code.visualstudio.com/)(简称VSCode)免费软件与Python插件(ext install python)。
 
 如果您使用的是Windows，*不要使用记事本*——这是一个糟糕的选择，因为它不做语法高亮显示，而且更重要的是它不支持文字的缩进——之后我们在我们的例子中会看到，缩进是非常重要的。好的编辑器如Komodo Edit会自动地做到这一点。
 
-如果你是一名有经验的程序员，那么你一定已经使用[Vim](http://www.vim.org/)或[Emacs](http://www.gnu.org/software/emacs/)了。不用说，这是两个最强大的编辑器，使用它们来写你的Python程序，你会从中受益。就我自己而言，在我的大多数项目,甚至写一[整本书都在用Vim](http://www.swaroopch.com/notes/vim)。
+如果你是一名有经验的程序员，那么你一定已经使用过[Vim](http://www.vim.org/)或[Emacs](http://www.gnu.org/software/emacs/)了。不用说，这是两个最强大的编辑器，使用它们来写你的Python程序，你会从中受益。就我自己而言，在我的大多数项目,甚至写一[整本书都在用Vim](http://www.swaroopch.com/notes/vim)。
 
-从长远来看Vim或者Emacs是非常有用的，如果你愿意花时间去学习，那么我强烈建议你使用它们。然而,正如我之前提到的,初学者可以从PyCharm开始学习Python而不是编辑器。
+从长远来看Vim或者Emacs是非常有用的，如果你愿意花时间去学习，那么我强烈建议你使用它们。然而，正如我之前提到的，初学者可以从VSCode开始学习Python而不是编辑器。
 
 再次重申，请选择一个适当的编辑器，它可以使编写Python程序更有趣和更容易。
 
@@ -59,7 +59,7 @@ Hello World
 
 [Visual Studio Code](https://code.visualstudio.com/)是一个免费的集成开发环境（IDE），你可以用它开发Python程序。
 
-下载安装之后，在菜单中选择“查看”->“扩展”，然后输入`python`，选择由`Don Jayamanne`开发的Python扩展安装即可。
+下载安装之后，在菜单中选择`查看`->`扩展`，然后输入`python`，选择由`Don Jayamanne`开发的Python扩展安装即可。
 
 ![VSCode安装Python扩展](./firststep01.png)
 
@@ -68,6 +68,34 @@ Hello World
 打开文件夹之后，在左侧的资源管理器中右键单击，在弹出菜单中选择“新建文件”，然后输入`helloworld.py`，点击回车即可。
 
 输入以下代码：
+
+When you open PyCharm, you'll see this, click on `Create New Project`:
+
+![When you open PyCharm](./img/pycharm_open.png)
+
+Select `Pure Python`:
+
+![PyCharm New Project](./img/pycharm_create_new_project.png)
+
+Change `untitled` to `helloworld` as the location of the project, you should see details similar to this:
+
+![PyCharm project details](./img/pycharm_create_new_project_pure_python.png)
+
+Click the `Create` button.
+
+Right-click on the `helloworld` in the sidebar and select `New` -> `Python File`:
+
+![PyCharm -> New -> Python File](./img/pycharm_new_python_file.png)
+
+You will be asked to type the name, type `hello`:
+
+![PyCharm New File dialog box](./img/pycharm_new_file_input.png)
+
+You can now see a file opened for you:
+
+![PyCharm hello.py file](./img/pycharm_hello_open.png)
+
+Delete the lines that are already present, and now type the following:
 
 ```python
 print("hello world!")
