@@ -7,7 +7,7 @@
     * [安装](a-byte-of-python3/installation.md)
     * [第一步](a-byte-of-python3/first_steps.md)
     * [基础](a-byte-of-python3/basics.md)
-    * [操作符和表达式](a-byte-of-python3/op_exp.md)
+    * [运算符和表达式](a-byte-of-python3/op_exp.md)
     * [控制流](a-byte-of-python3/control_flow.md)
     * [函数](a-byte-of-python3/functions.md)
     * [模块](a-byte-of-python3/modules.md)
