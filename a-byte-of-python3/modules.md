@@ -1,14 +1,14 @@
 # 模块
 
-您已经看到如何通过一次定义函数在程序中重用代码。如果你想在其它程序中重用一定数量的函数，你将写什么？正如你可能已经猜到了，答案是模块。
+您已经看到如何通过定义函数在程序中重用代码。如果你想在其它程序中重用一组函数，怎么办？你可能已经猜到了，答案就是模块。
 
-编写模块有各种各样的方法，但是最简单的方法是创建一个以.py 为扩展名、包含函数和变量的文件。
+编写模块有各种各样的方法，但是最简单的方法是创建一个以`.py`为扩展名，包含函数和变量的文件。
 
-编写模块的另一种方式是使用编写Python解释器本身的本机语言，例如，你可以使用[C 编程语言](http://docs.python.org/3/extending/index.html)编写模块，当它们被编译后，当使用标准的Python解释器时，在你Python代码中可以使用这些模块。
+编写模块的另一种方式就像是编写Python解释器一样，可以使用[C 编程语言](http://docs.python.org/3/extending/index.html)编写模块。当它们被编译后，当使用标准的Python解释器时，你可以在Python代码中使用这些模块。
 
-一个模块可以因另一个程序使用其功能而被*imported(导入)*。同样，我们可以使用Python标准库。首先 ,我们将看到如何使用标准库模块。
+一个模块可以通过**imported(导入)**另一个程序而使用其功能。我们可以通过同样的方法使用Python标准库。首先 ,我们看一下如何使用标准库模块。
 
-例子 (保存为 using_sys.py):
+例子 (保存为module_using_sys.py):
 
 ```python
 import sys
@@ -17,46 +17,48 @@ print('命令行参数是：')
 for i in sys.argv:
     print(i)
 
-print('\n\nPYTHONPATH在', sys.path, '\n')
+print('\n\nPYTHONPATH是', sys.path, '\n')
 ```
 
 输出:
 
 ```
-$ python using_sys.py we are arguments
-命令行参数是
-using_sys.py
+$ python module_using_sys.py we are arguments
+命令行参数是：
+module_using_sys.py
 we
 are
 arguments
 
-PYTHONPATH在['/tmp/py',
+
+PYTHONPATH是 ['d:\\KanCloud\\from-python-to-django\\a-byte-of-python3', 'C:\\Users\\boris\\AppData\\Local\\Programs\\Python\\Python37\\python37.zip', 
 # 还有很多，这里不一一列出
-'/Library/Python/2.7/site-packages',
-'/usr/local/lib/python2.7/site-packages']
+'C:\\Users\\boris\\AppData\\Local\\Programs\\Python\\Python37\\lib\\site-packages']
+
+
 ```
 
 **它是如何工作的:**
 
-首先,我们使用`import`语句*import*导入`sys`（系统）模块。基本上，这意味着我们我们想告诉Python，我们想使用这个模块。`sys`模块包含了与Python解释器和其环境即system系统有关的函数。
+首先，我们使用`import`语句**import(导入)**`sys`（系统）模块。通常情况下，这意味着我们告诉Python，我们想使用这个模块。`sys`模块包含了与Python解释器和其运行环境（如操作系统）有关的函数。
 
-当Python执行`import sys`语句时，它查找`sys`模块。在这里，它是一个内建模块，因此，Python知道到去哪里找到它。
+当Python执行`import sys`语句时，它会查找`sys`模块。在这里，它是一个内建模块，因此，Python知道到去哪里找到它。
 
-如果它不是一个编译的，也就是用Python写的模块，那么，Python解释器将在`sys.path`变量列表中的目录中搜索。如果模块被发现，那么，模块中的代码将运行，对你来说，使用模块变为*有效*。注意，初始化只有在我们*第一次*导入一个模块时完成。
+如果它还没有被编译，也就是Python的源代码，那么，Python解释器将在`sys.path`目录列表中搜索。如果找到了这个模块，那么就执行模块中的代码，对你的程序来说，这个模块就变成**有效**的。注意，初始化只有在我们**第一次**导入一个模块时完成。
 
-在`sys`模块中的`argv`变量是通过点符号访问的，例如，例如，`sys.argv`。它清楚地表明，这个名字是`sys`模块的一部分。这种方法的另一个优点是，这个名字与你的程序中使用的任何`argv`变量都不冲突。
+我们通过点符号访问`sys`模块中的`argv`变量，就像这样`sys.argv`。它表明，`argv`这个名字是`sys`模块的一部分。这种方法的另一个优点是，如果你的程序中使用了名为`argv`的变量，那么他们不会冲突。
 
-`sys.argv`变量一个字符串*list*(列表)。具体来说，`sys.argv`包含*命令行参数*，也就是使用命令行向你的程序传递参数的列表。
+`sys.argv`变量一个字符串**list(列表)**（我们会在[后面的章节](./data_structures.md)详细介绍）。具体来说，`sys.argv`包含**命令行参数**的列表，也就是使用命令行向你的程序传递的参数清单。
 
 如果您正在使用IDE编写并运行这些程序，在菜单中寻找一种方法来指定命令行参数传递给你的程序。
 
-这里，当我们执行`python using_sys.py we are arguments`时，我们使用 `python`命令和其后的传递给程序的参数运行`using_sys.py`模块。Python把命令行参数存储在`sys.argv`变量中供我们使用。
+这里，当我们执行`python module_using_sys.py we are arguments`时，我们使用 `python`命令和后面的参数运行`module_using_sys.py`模块。Python把命令行参数存储在`sys.argv`变量中供我们使用。
 
-记住，运行脚本的名字通常是`sys.argv`列表中的第一个参数。因此，在这里将有`'using_sys.py'`作为`sys.argv[0]`，`'we'`作为`sys.argv[1]`，`'are'`作为`sys.argv[2]`和`'arguments'`作为`sys.argv[3]`。注意，Python从0而不是1开始数数。
+记住，运行脚本的名字通常是`sys.argv`列表中的第一个参数。因此，这里的`sys.argv[0]`是`'module_using_sys.py'`，`sys.argv[1]`是`'we'`，`sys.argv[2]`是`'are'`和`sys.argv[3]`是`'arguments'`。注意，Python从0而不是1开始计数。
 
-`sys.path`包含被导入的模块所在的目录名列表。我们发现`sys.path`的第一个字符串是空的——这个空字符串表示当前目录是和PYTHONPATH环境变量相同的，同时也是`sys.path`变量的一部分。这意味着你可以直接导入位于当前目录中的模块。否则，你将不得不把你的模块存放在`sys.path`列表中的一个目录中。
+`sys.path`包含可以被导入的模块所在的目录名列表。我们注意到`sys.path`的第一个字符串就是程序的当前路径。这意味着你可以直接导入位于当前目录中的模块。否则，你必须把你的模块放在`sys.path`列表中的一个目录中。
 
-请注意，,当前目录是程序启动的目录。运行`import os; print(os.getcwd())`找到你的程序的当前目录。
+请注意，当前目录是程序启动的目录。运行`import os; print(os.getcwd())`找到你的程序的当前目录。
 
 ## 字节编译的.pyc文件
 
