@@ -62,15 +62,15 @@ PYTHONPATH是 ['d:\\KanCloud\\from-python-to-django\\a-byte-of-python3', 'C:\\Us
 
 ## 字节编译的.pyc文件
 
-导入一个模块是一个相对昂贵的事情，所以Python做了一些技巧使它更快。一种方法是创建扩展名为`.pyc`的字节编译文件，是Python将程序转换成的一种中间形式。(记得在Python如何工作的[简介](introduction.md)。当你下次从一个不同程序导入模块时，这种`.pyc`文件是有很用的--它将快得多，因为导入模块一部分需要的处理已经完成。同时，这些字节编译的文件是独立于平台的。
+导入整个模块是一个代价相对较高的事情，所以Python提供了一些技巧使它可以效率更高。一种方法是创建扩展名为`.pyc`的**字节编译**文件，这是Python将程序转换成的一种中间形式(我们在[简介](introduction.md)中介绍过Python是如何工作的。当你下次从一个不同程序导入模块时，这种`.pyc`文件是有很用的--它将快得多，因为导入模块一部分需要处理的工作已经完成了。同时，这些字节编译的文件是与操作系统平台无关的。
 
-注意：这些`.pyc`文件通常在与之相应的`.py`文件的同一个目录中创建。如果Python在那个目录中没有写入权限，那么`.pyc`文件将不会创建。
+注意：这些`.pyc`文件通常在与之相应的`.py`文件的同一个目录中创建。如果Python在那个目录中没有写入权限，那么就**无法**创建`.pyc`文件。
 
 ## from ... import语句
 
-如果你想直接导入`argv`变量到程序中(为了避免每次为它键入`sys.`)，那么您可以使用`from sys import argv`语句。
+如果你想直接导入`argv`变量到程序中(为了避免每次为它键入`sys.`)，可以使用`from sys import argv`语句。
 
-> 一般来说，你应该避免使用这个语句，而应该使用`import`语句，因为你的程序将避免名称冲突，将更具可读性。
+> 一般来说，应该**避免**使用这个语句，尽量使用`import`语句，这样可以在程序中避免名称冲突，使你的程序更具有可读性。
 
 例如：
 
@@ -81,9 +81,9 @@ print("16的平方根是", sqrt(16))
 
 ## 模块的`__name__`
 
-每个模块都有一个名字，在模块中的语句能够找出它所在的模块的名字。这对于搞清楚模块是否正在运行或被导入这样的特殊用途是很方便的。正如前面提到的，当一个模块被第一次导入时，其所包含的代码被执行。我们可以通过使用这个，根据模块是否被自己使用或从另一个模块被导入，使模块以不同的方式起作用，这些可以通过使用模块的`__name__`属性来实现。
+每个模块都有一个名字，在模块内部的语句可以获得它所在的模块的名字。当我们想搞清楚模块是直接运行还是被导入的时候，这种设计很方便。前面提到过，当一个模块被第一次导入时，其所包含的代码被执行。我们可以通过使用这个特性，根据模块是直接运行还是从另一个模块被导入，执行不同的操作。我们可以通过使用模块的`__name__`属性来实现上述功能。
 
-例子 (保存为 using_name.py):
+例子 (保存为 module_using_name.py):
 
 ```python
 if __name__ == '__main__':
@@ -94,69 +94,70 @@ else:
 
 输出：
 
-```
-$ python using_name.py
-这个程序正在被自己运行
-$ python3
+```shell
+C:\> python module_using_name.py
+这个程序是直接运行的
+C:\> python3
 >>> import using_name
-我从别的模块被导入
+我从被别的模块导入
 >>>
 ```
 
 **它是如何工作的：**
 
-每个Python模块有其`__name__`定义，如果是`'__name__'`，这意味着模块在被用户独立的运行，我们可以采取适当的行动。
+每个Python模块都会定义自己的`__name__`，如果是`'__main__'`，这意味着模块在被用户直接运行，我们可以执行相应的操作。
 
 ## 制作属于你自己的模块
 
-创建自己的模块是很容易的，你一直在这样做，始终都是！这是因为每个Python程序也是一个模块。 你只需要确保它有一个`.py`扩展名。下面的例子会让你明白。
+创建自己的模块是很容易的，就像你一直在这样的那样。因为每个Python程序就是一个模块。你只需要确保它有一个`.py`扩展名。下面的例子会让你明白这一点。
 
 例子 (保存为mymodule.py):
 
 ```python
-def sayhi():
-    print('嗨，这是我的模块在讲话。')
+def say_hi():
+    print('嗨，这就是我的模块。')
 
 __version__ = '0.1'
 ```
 
-上面的是模块的一个示例。正如您可以看到的，和我们通过的Python程序相比，没有什么特别的。接下来我们要看如何在我们的其它程序中使用这个模块。
+上面的是**模块**的一个例子。正如您看到的，和我们通常的Python程序相比，没有什么特别的。接下来我们看一下如何在我们其它的程序中使用这个模块。
 
-记住,该模块要么放置在我们导入它的程序相同的目录中，要么放置在`sys.path`目录列表中的一个目录中。
+记住，该模块要么放置在我们导入它的程序同一个目录中，要么放置在`sys.path`目录列表中的一个目录中。
 
 另一个模块(保存为mymodule_demo.py):
 
 ```python
 import mymodule
 
-mymodule.sayhi()
+mymodule.say_hi()
 print('版本', mymodule.__version__)
 ```
 
 输出：
 
-```
-$ python mymodule_demo.py
-嗨，这是我的模块在讲话。
+```shell
+C:\> python mymodule_demo.py
+嗨，这就是我的模块。
 版本 0.1
+
 ```
 
 **它是如何工作的：**
 
-注意，我们使用相同的点符号来访问模块的成员。Python充分重用相同的符号产生了独特的'Pythonic'的感觉，这样我们不需要不断学习新的方法来做事情。
+注意，我们使用相同的点符号来访问模块的成员。Python充分重用相同的符号产生了独特的'Pythonic'的感觉，这样我们不需要总是学习新的方法来做事情。
 
 这是使用`from..import`语法的一个版本(保存为mymodule_demo2.py):
 
 ```python
-from mymodule import sayhi, __version__
+from mymodule import say_hi, __version__
 
-sayhi()
+say_hi()
 print('版本', __version__)
 ```
 
 `mymodule_demo2.py`和`mymodule_demo.py`的输出相同。
 
-注意，如果在导入模块中已经有一个__version__名字的声明，这里会有一个冲突。这也可能是因为它是常见的做法--对于每个模块使用这个名字声明它的版本号。因此，总是推荐选择`import`语句，虽然它可能让你的程序有点长。
+注意，如果在导入模块中已经有一个`__version__`名字的声明，这里会有一个冲突。这也可能是因为它是常见的做法--对于每个模块使用这个名字声明它的版本号。因此，我们推荐使用`import`语句，虽然它可能让你的程序有点长。
 
 你还可以使用：
 
@@ -164,79 +165,71 @@ print('版本', __version__)
 from mymodule import *
 ```
 
-这将导入所有的公共名称如 sayhi，但不会导入__version__，因为它始于双下划线。
+这将导入所有的公共名称如 say_hi，但不会导入__version__，因为它始于双下划线。
 
 > 注意：尽量不要使用`import *`这种方式，诸如`from mymodule import *`等
 
 <!-- -->
 
-> **Python的禅**
-> Python的一个指导原则是"显式优于隐式"。运行import this去学习更多相关的信息。
+> **Python之禅**
+> 
+> Python的一个指导原则是"显式优于隐式"。运行`import this`去学习更多相关的信息。
 
 ## `dir`函数
 
-您可以使用内置的`dir`函数列出一个定义对象的标识符。例如,对于一个模块，包括在模块中定义的函数，类和变量。
+您可以使用内置的`dir()`函数列出一个对象定义的标识符。例如，对于一个模块，包括在模块中已经定义的函数、类和变量。
 
-当你给dir()提供一个模块名字时，它返回在那个模块中定义的名字的列表。当没有为其提供参数时, 它返回当前模块中定义的名字的列表。
+`dir()`函数有参数。当你给`dir()`提供一个模块名字时，它返回在那个模块中定义的名字的列表。当没有为其提供参数时, 它返回当前模块中定义的名字的列表。
 
 例如：
 
-```
-$ python
+```shell
+C:\>python
 
 >>> import sys 
 
 # 获得属性列表，在这里是sys模块的属性列表
 >>> dir(sys)
-['__displayhook__', '__doc__', '__excepthook__', '__name__', '__package__', '__s
-tderr__', '__stdin__', '__stdout__', '_clear_type_cache', '_compact_freelists',
-'_current_frames', '_getframe', 'api_version', 'argv', 'builtin_module_names', '
-byteorder', 'call_tracing', 'callstats', 'copyright', 'displayhook', 'dllhandle'
-, 'dont_write_bytecode', 'exc_info', 'excepthook', 'exec_prefix', 'executable',
-'exit', 'flags', 'float_info', 'getcheckinterval', 'getdefaultencoding', 'getfil
-esystemencoding', 'getprofile', 'getrecursionlimit', 'getrefcount', 'getsizeof',
-'gettrace', 'getwindowsversion', 'hexversion', 'intern', 'maxsize', 'maxunicode
-', 'meta_path', 'modules', 'path', 'path_hooks', 'path_importer_cache', 'platfor
-m', 'prefix', 'ps1', 'ps2', 'setcheckinterval', 'setprofile', 'setrecursionlimit
-', 'settrace', 'stderr', 'stdin', 'stdout', 'subversion', 'version', 'version_in
-fo', 'warnoptions', 'winver']
+['__breakpointhook__', '__displayhook__', '__doc__', '__excepthook__', '__interactivehook__', '__loader__', '__name__', '__package__', '__spec__', '__stderr__', '__stdin__', '__stdout__', '_base_executable', '_clear_type_cache', '_current_frames', '_debugmallocstats', '_enablelegacywindowsfsencoding', '_framework', '_getframe', '_git', '_home', '_xoptions', 'api_version', 'argv', 'base_exec_prefix', 'base_prefix', 'breakpointhook', 'builtin_module_names', 'byteorder', 'call_tracing', 'callstats', 'copyright', 'displayhook', 'dllhandle', 'dont_write_bytecode', 'exc_info', 'excepthook', 'exec_prefix', 'executable', 'exit', 'flags', 'float_info', 'float_repr_style', 'get_asyncgen_hooks', 'get_coroutine_origin_tracking_depth', 'get_coroutine_wrapper', 'getallocatedblocks', 'getcheckinterval', 'getdefaultencoding', 'getfilesystemencodeerrors', 'getfilesystemencoding', 'getprofile', 'getrecursionlimit', 'getrefcount', 'getsizeof', 'getswitchinterval', 'gettrace', 'getwindowsversion', 'hash_info', 'hexversion', 'implementation', 'int_info', 'intern', 'is_finalizing', 'maxsize', 'maxunicode', 'meta_path', 'modules', 'path', 'path_hooks', 'path_importer_cache', 'platform', 'prefix', 'ps1', 'ps2', 'set_asyncgen_hooks', 'set_coroutine_origin_tracking_depth', 'set_coroutine_wrapper', 'setcheckinterval', 'setprofile', 'setrecursionlimit', 'setswitchinterval', 'settrace', 'stderr', 'stdin', 'stdout', 'thread_info', 'version', 'version_info', 'warnoptions', 'winver']
 
 # 获得当前模块的属性列表
 >>> dir() 
-['__builtins__', '__doc__', '__name__', '__package__', 'sys']
+['__annotations__', '__builtins__', '__doc__', '__loader__', '__name__', '__package__', '__spec__', 'sys']
 
 # 创建了一个新变量 'a'
 >>> a = 5 
 
 >>> dir()
-['__builtins__', '__doc__', '__name__', '__package__', 'a', 'sys']
+['__annotations__', '__builtins__', '__doc__', '__loader__', '__name__', '__package__', '__spec__', 'a', 'sys']
 
 # 删除/移除一个名字
 >>> del a 
 
 >>> dir()
-['__builtins__', '__doc__', '__name__', '__package__', 'sys']
+['__annotations__', '__builtins__', '__doc__', '__loader__', '__name__', '__package__', '__spec__', 'sys']
 
 >>>
 ```
 
 **它是如何工作的：**
 
-首先，我们看到在导入`sys`模块上使用使用`dir`。我们能看到模块包含的巨大的属性列表。
+首先，我们在导入的`sys`模块上使用`dir`。我们能看到模块包含的巨大的属性列表。
 
-然后，我们使用没有传递参数的`dir`函数。默认情况下，它返回模块的属性的列表。注意，导入模块的列表仍然是这个列表的一部分。
+然后，我们使用没有传递参数的`dir`函数。默认情况下，它返回当前模块的属性列表。注意，导入的模块仍然是这个列表的一部分。
 
-为了看到`dir`在起作用，我们定义了一个新的变量，并为其赋值，然后检查`dir`，我们发现列表中添加了一个同名变量。我们使用`del`语句移除当前模块的变量或属性，在`del`函数的输出中变化再次得到体现。
+为了看到`dir`在起作用，我们定义了一个新的变量`a`，并为其赋值，然后检查`dir`，我们发现列表中添加了一个同名变量。我们使用`del`语句移除当前模块的变量或属性，在`dir`函数的输出中变化再次得到体现。
 
-关于`del`的一点注意事项--这个语句用于删除一个变量/属性，语句运行后，这里是`del a`，你不能再访问变量`a`--就像它从来根本没有存在过。
+关于`del`的一点注意事项--这个语句用于**删除**一个变量/属性，语句运行后（这里是`del a`），你不能再访问变量`a`--就像它从来根本没有存在过。
 
-注意，`dir()`函数对任何对象都起作用。例如，运行`dir('str')`来学习`str`(string)类型的更多知识。
+注意，`dir()`函数对**任何**对象都起作用。例如，运行`dir('str')`来学习`str`(string)类型的更多知识。
 
-## 打包（Packages）
+还有一个[`vars()`](http://docs.python.org/3/library/functions.html#vars)函数可以列出所有的属性及其值，但并不是在所有情况下都起作用。
 
-现在，你必须开始观察组织你的程序的层次结构。变量通常在函数内部。函数和全局变量通常在模块内部。如果你想组织模块？这就到了牵涉到打包的地方了。
+## 包（Packages）
 
-包只是模块的文件夹，使用一个特殊的`__init__.py`文件，指示Python，这个文件夹是特殊的，因为它包含Python模块。
+现在，你必须开始观察组织你的程序的层次结构。变量通常在函数内部。函数和全局变量通常在模块内部。如果你想组织模块？这就涉及到打包了。
+
+包只是模块的文件夹，使用一个特殊的`__init__.py`文件，告诉Python这个文件夹是特殊的，因为它包含Python模块。
 
 假设你想创建一个叫做'世界'的程序包，分装'亚洲'、'非洲'等等，分包按序包含'印度'、'马达加斯加'等等。
 
@@ -258,16 +251,12 @@ fo', 'warnoptions', 'winver']
                 - bar.py
 ```
 
-包只是为了分层次组织模块的方便。在标准库中，你会看到包的许多实例。
+包只是为了方便按照层次组织模块。在[Python标准库](./stdlib.md)中，你会看到包的许多实例。
 
 ## 小结
 
-就像函数是可重用的部分的程序一样，模块也是可重用的程序。包是组织模块的另一个层次结构。来自Python的标准库，是包和模块的集合中的一个例子。
+就像函数是可重用的一部分程序一样，模块也是可重用的程序。包是组织模块的更高一级的层次结构。Python自带的标准库是一系列包和模块的例子。
 
 我们已经看到了如何使用这些模块和创建我们自己的模块。
 
 接下来，我们将学习一些有趣的称为数据结构的概念。 
-
---------------------------------------------------
-
-### 继续阅读[数据结构](data_structures.md)
