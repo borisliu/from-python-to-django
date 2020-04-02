@@ -1,4 +1,11 @@
-import mymodule
+# 我推荐使用括号表示元组的开始和结束，尽管括号是可选的。
+# 毕竟显式声明比隐式声明更加直观
+zoo = ('蟒蛇', '大象', '企鹅') # 记住圆括号是可选的
+print('动物园中动物有数量有', len(zoo))
 
-mymodule.say_hi()
-print('版本', mymodule.__version__)
+new_zoo = '猴子', '骆驼', zoo # 括号是可选的，最好加上
+print('在新动物园中笼子的数量是', len(new_zoo))
+print('在新动物园所有的动物是', new_zoo)
+print('从老动物园中带来的动物是', new_zoo[2])
+print('从老动物园带来最后的动物是', new_zoo[2][2])
+print('在新动物园中动物的数量有', len(new_zoo)-1+len(new_zoo[2]))
