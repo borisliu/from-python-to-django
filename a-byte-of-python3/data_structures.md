@@ -16,9 +16,9 @@
 
 列表是使用对象和类的一个例子。当我们使用一个变量`i`，为它分配一个值，例如把整数`5`赋值给它，你可以认为它是创建了一个类为`int`（即类型）的对象(即实例)`i`。你还可以通过阅读`help(int)`更好地理解这一点。
 
-类也有**方法**，也就是我们定义的只在类中生效的函数。只有当你有那个类的对象时，你才可以使用这些函数。例如，Python为`list`（列表）类提供了一个`append`方法，它允许你在列表的末尾添加一个数据。例如，`mylist.append('an item')`将给列表`mylist`添加一个字符串。注意，我们使用点操作符访问对象的方法。
+类也有**方法**，也就是我们定义的只在类中生效的函数。只有当你有那个类的对象时，你才可以使用这些函数。例如，Python为`list`（列表）类提供了一个`append`方法，它允许你在列表的末尾添加一个数据。例如，`mylist.append('an item')`将给列表`mylist`添加一个字符串。注意，我们使用点运算符访问对象的方法。
 
-类也有**字段**，也就是我们定义的只在类中生效的变量。只有当你有那个类的对象时，你才可以使用那些变量。字段是通过点操作符访问的。例如，`mylist.field`。
+类也有**字段**，也就是我们定义的只在类中生效的变量。只有当你有那个类的对象时，你才可以使用那些变量。字段是通过点运算符访问的。例如，`mylist.field`。
 
 例子 (保存为ds_using_list.py):
 
@@ -134,9 +134,9 @@ C:\> python ds_using_tuple.py
 
 ## 字典
 
-字典就像一个地址簿，在那里你只通过知道他/她的名字，就可以找到地址或联系人详细信息。也就是说，我们使用*键*(姓名)与*值*(细节)相联系。注意，键必须是独一无二的，就像如果有两个完全相同的名字的人，你无法找到正确的信息。
+字典就像一个地址簿，在那里你可以通过他/她的名字，找到地址或联系人详细信息。也就是说，我们使用**键**(姓名)与**值**(细节)相联系。注意，键必须是独一无二的，就好像如果有两个完全重名的人，你会困惑找不到正确的信息一样。
 
-注意，字典的关键字你只能使用不可变的对象(比如字符串)，你可以使用不可变或可变的对象作为字典的值。这基本上意味着，简单地说，对于键你只能使用简单对象。
+注意，字典的键你只能使用不可变的对象(比如字符串)，字典的值可以使用不可变或可变的对象。这意味着，对于键你只能使用简单对象。
 
 在字典中的一对键和值是通过使用冒号指定的，如，`d = {key1 : value1, key2 : value2 }`。注意，键值对用冒号分隔，彼此之间以逗号分隔，所有这些都是包含在一对大括号中。
 
@@ -144,26 +144,27 @@ C:\> python ds_using_tuple.py
 
 你将要使用的字典是`dict`类的对象或实例。
 
-例子 (保存为 using_dict.py):
+例子 (保存为 ds_using_dict.py):
 
 ```python
 # 'ab'是英文address　book(地址簿)的首个字母
 
-ab = {  'Swaroop'   : 'swaroop@swaroopch.com',
-        'Larry'     : 'larry@wall.org',
-        'Matsumoto' : 'matz@ruby-lang.org',
-        'Spammer'   : 'spammer@hotmail.com'
-    }
+ab = {
+    'Swaroop': 'swaroop@swaroopch.com',
+    'Larry': 'larry@wall.org',
+    'Matsumoto': 'matz@ruby-lang.org',
+    'Spammer': 'spammer@hotmail.com'
+}
 
 print("Swaroop的地址是", ab['Swaroop'])
 
 # 删除一个键-值对
 del ab['Spammer']
 
-print('\n地址薄中有 {0} 个联系人\n'.format(len(ab)))
+print('\n地址薄中有 {} 个联系人\n'.format(len(ab)))
 
 for name, address in ab.items():
-    print('联系人 {0} 的地址是 {1}'.format(name, address))
+    print('联系人 {} 的地址是 {}'.format(name, address))
 
 # 添加一个键-值对
 ab['Guido'] = 'guido@python.org'
@@ -174,70 +175,52 @@ if 'Guido' in ab:
 
 输出：
 
-```
-$ python using_dict.py
+```shell
+C:\> python ds_using_dict.py
 Swaroop的地址是 swaroop@swaroopch.com
 
 地址薄中有 3 个联系人
 
-联系人 Larry 的地址是 larry@wall.org
-联系人 Matsumoto 的地址是 matz@ruby-lang.org
 联系人 Swaroop 的地址是 swaroop@swaroopch.com
+联系人 Larry 的地址是 larry@wall.org
+联系人 Matsumoto 的地址是 matz@ruby-lang.org 
 
 Guido的地址是 guido@python.org
 ```
 
-A dictionary is like an address-book where you can find the address or contact details of a person by knowing only his/her name i.e. we associate *keys* (name) with *values* (details). Note that the key must be unique just like you cannot find out the correct information if you have two persons with the exact same name.
-
-Note that you can use only immutable objects (like strings) for the keys of a dictionary but you can use either immutable or mutable objects for the values of the dictionary.  This basically translates to say that you should use only simple objects for keys.
-
-Pairs of keys and values are specified in a dictionary by using the notation `d = {key1 : value1, key2 : value2 }`. Notice that the key-value pairs are separated by a colon and the pairs are separated themselves by commas and all this is enclosed in a pair of curly braces.
-
-Remember that key-value pairs in a dictionary are not ordered in any manner. If you want a particular order, then you will have to sort them yourself before using it.
-
-The dictionaries that you will be using are instances/objects of the `dict` class.
-
-Example (save as `ds_using_dict.py`):
-
-<pre><code class="lang-python">{% include "./programs/ds_using_dict.py" %}</code></pre>
-
-Output:
-
-<pre><code>{% include "./programs/ds_using_dict.txt" %}</code></pre>
-
 **它是如何工作的：**
 
-我们使用已经讨论过的符号创建字典`ab`。然后我们通过使用在列表和元组中讨论过的索引操作符－－指定关键字来访问键-值对，遵守简单的语法。
+我们使用已经讨论过的符号创建字典`ab`。然后我们通过使用在列表和元组中讨论过的索引运算符－－指定关键字来访问键-值对，遵守语法简洁原则。
 
-我们可以使用我们的老朋友——`del`语句删除键值对，我们简单地指定字典和要删除的关键字的索引操作符，并将它传递给`del`语句。对于这个操作，没有必要知道对应于关键字的值。
+我们可以使用我们的老朋友——`del`语句删除键值对，我们使用索引运算符，指定字典和要删除的键，将它传递给`del`语句。对于这个操作，我们没有必要知道对应于键的值。
 
-接下来，我们我们使用字典的`items`方法，访问字典的每个键-值对的。它返回一个元组的列表，每个元组包含一对值--关键字及紧随其后的值。我们检索这对值并使用for..in循环为每一对分配给相应的变量`name`和`address`，然后在`for..in`块中打印这些值。
+接下来，我们使用字典的`items`方法，访问字典的每个键-值对的。它返回一个元组的列表，每个元组包含一个键-值对。我们获取这对值并使用`for..in`循环把每一个键值对分配给相应的变量`name`和`address`，然后在for代码块中打印这些值。
 
-我们可以通过简单地使用索引操作符来访问一个键并分配值的方式添加新的键值对，像上面的例子中我们所做的添加Guido。
+我们可以通过简单地使用索引运算符来访问一个键并分配值的方式添加新的键值对，像上面的例子中我们所做的添加Guido。
 
-我们可以使用`in`操作符来检查一个键值对是否存在。
+我们可以使用`in`运算符来检查一个键值对是否存在。
 
-字典`dict`类的列表方法，请看`help(dict)`。
+想要查看字典`dict`类的全部方法，请参考`help(dict)`。
 
 > **关键字参数和字典**
 >
-> 如果你已经在函数中使用过了关键字参数，那么你已经接触过字典了。想象一下，这个键值对是在函数定义的参数列表中指定的，而当你在函数中访问变量，它只是访问字典的一个键(在编译器设计术语中称为符号表)。
+> 如果你已经在函数中使用过了关键字参数，那么你已经接触过字典了。想象一下，这个键值对是在函数定义的参数列表中指定的，而当你在函数中访问变量，它只是访问字典的一个键(在编译器设计术语中称为**符号表**)。
 
 ## 序列
 
-列表、元组和字符串都序列的一个实例，但是什么是序列，它们为什么如此特殊呢 ？
+列表、元组和字符串都是序列。那么什么是序列，它为什么如此特殊呢？
 
-主要特点是*成员测试*，即in(在)和not in(不在)表达式中和*索引操作*，这使我们在一个序列中能够直接获取一个特定的对象。
+序列的主要特点是**成员测试**，即`in`（在）和`not in`（不在）表达式中和**索引操作**，这使我们在一个序列中能够获取一个特定的对象。
 
-上面提到的——列表、元组和字符串这三种类型的序列，也有允许我们找回一彼序列即序列的一部分的*切片*操作。
+上面提到的——列表、元组和字符串这三种类型的序列，也有允许我们从一个序列中获取其一部分的**切片**操作。
 
-例子 (保存为seq.py):
+例子 (保存为ds_seq.py):
 
 ```python
 shoplist = ['苹果', '芒果', '胡萝卜', '香蕉']
 name = 'swaroop'
 
-# Indexing or 'Subscription' operation
+# 索引或下标运算 #
 print('第0项是', shoplist[0])
 print('第1项是', shoplist[1])
 print('第2项是', shoplist[2])
@@ -246,13 +229,13 @@ print('第-1项是', shoplist[-1])
 print('第-2项是', shoplist[-2])
 print('第0个字符是', name[0])
 
-# 一个列表的切片
+# 一个列表的切片 #
 print('第1项到第3项是', shoplist[1:3])
 print('第2项到末尾是', shoplist[2:])
 print('第1到-1项是', shoplist[1:-1])
 print('开头到结尾是', shoplist[:])
 
-# 字符串的切片
+# 字符串的切片 #
 print('第1到第3个字符是', name[1:3])
 print('第2到末尾的字符是', name[2:])
 print('第1到-1的字符是', name[1:-1])
@@ -261,8 +244,8 @@ print('从头到尾的字符是', name[:])
 
 输出：
 
-```
-$ python seq.py
+```shell
+C:\> python ds_seq.py
 第0项是 苹果
 第1项是 芒果
 第2项是 胡萝卜
@@ -278,23 +261,24 @@ $ python seq.py
 第2到末尾的字符是 aroop
 第1到-1的字符是 waroo
 从头到尾的字符是 swaroop
+
 ```
 
 **它是如何工作的：**
 
-首先，我们看看如何使用索引来获得一个序列的个别项，这也称为_订阅操作_。当你在方括号中指定一个数字对应一个序列中的某项，如上所示，Python会为你取得序列中相对应位置的项。记住，Python从0开始数数。因此，在序列`shoplist`中， `shoplist[0]`取第一项和`shoplist[3]`获取第四项。
+首先，我们看看如何使用索引来获得一个序列的个别项，这也称为**下标运算**。如上所示，当你在方括号中为序列指定一个数字的时候，Python会为你取得序列中相应位置的值。记住，Python从0开始计数。因此，在序列`shoplist`中， `shoplist[0]`获取第一项，`shoplist[3]`获取第四项。
 
 索引也可以是负数，在这种情况下，这个位置从序列的结尾开始计算。因此， `shoplist[-1]`指的是序列的最后一项， `shoplist[-2]`取倒数第二个项。
 
-这个切片操作是通过指定序列的名称后面加上一个方括号，方括号中有一对可选的用冒号分隔的数。注意，这非常类似于你到现在一直使用的索引操作，记住这些数字是可选的但冒号不是。
+切片操作是通过指定序列的名称后面加上一个方括号，方括号中有一对用冒号分隔的数。这非常类似于你到现在一直在使用的索引操作，记住这些数字是可选的，但冒号必须有。
 
-在切片操作中的第一个数字(在冒号前)是切片开始的位置，第二个数字(在冒号后)是切片停止的位置。如果第一个数字没有指定，Python会从序列开头开始，如果第二个数字被冷落，Python会在序列的末尾停止。注意，返回的切片在开始位置开始，在结束位置前结束，也就是说，返回的切片包含开始位置，但不包含结束位置。
+在切片操作中的第一个数字（在冒号前）是切片开始的位置，第二个数字（在冒号后）是切片停止的位置。如果第一个数字没有指定，Python会从序列开头开始，如果没有第二个数字，Python会在序列的末尾停止。注意，返回的切片在**开始位置**开始，在**结束位置前**结束。也就是说，返回的切片包含开始位置，但不包含结束位置。
 
-因此， `shoplist[1:3]` 返回序列的切片从位置1开始，包括位置2，但是在位置3停止，因此，返回两个项目的切片。同样，`shoplist[:]`返回整个序列的一个副本。
+因此， `shoplist[1:3]` 返回序列的切片从位置1开始，包括位置2，但是在位置3停止，因此，返回两个元素的切片。同样，`shoplist[:]`返回整个序列的一个副本。
 
-你也可以使用负位置做切片。负数用于从序列的结尾开始。例如，`shoplist[:-1]` 将返回一个不包括序列最后一项，但包含了其它一切的切片。
+你也可以使用负值做切片。负数用于从序列的结尾开始。例如，`shoplist[:-1]` 将返回一个不包括序列最后一项，但包含了其它一切的切片。
 
-你也可以为切片提供第三个参数，这是切片的步长(默认情况下，步长为1)：
+你也可以为切片提供第三个参数，这是切片的**步长**（默认情况下，步长为1）：
 
 ```python
 >>> shoplist = ['苹果', '芒果', '胡萝卜', '香蕉']
@@ -308,9 +292,9 @@ $ python seq.py
 ['香蕉', '胡萝卜', '芒果', '苹果']
 ```
 
-注意，当步长是2时，我们获得位置0、2、……的项目，当步长是3晨，我们获得位置是0、3、等等的项目。
+注意，当步长是2时，我们获得位置0、2、……的元素，当步长是3时，我们获得位置是0、3等元素。
 
-使用Python解释器的交互式提示，尝试指定切片的不同组合，以便你可以立刻看到结果。序列的一大好处是，你可以以同样的方式访问元组、列表和字符串！
+使用Python解释器提示符，尝试指定切片的不同组合，以便你可以立刻看到结果。序列的一大好处是，你可以以同样的方式访问元组、列表和字符串！
 
 ## 集合
 
@@ -430,7 +414,7 @@ $ python str_methods.py
 
 **它是如何工作的：**
 
-在这里，我们看到字符串的很多方法在起作用。`startswith`方法是用来找出字符串是否以给定的字符串开始的。`in`操作符是用来检查一个给定的字符串是否是一个字符串的一部分。
+在这里，我们看到字符串的很多方法在起作用。`startswith`方法是用来找出字符串是否以给定的字符串开始的。`in`运算符是用来检查一个给定的字符串是否是一个字符串的一部分。
 
 `find`方法用于定位给定的子字符串在字符串内的位置，如果不能成功找到子字符串它返回-1。str类也有一个整洁的方法来`join`(连接)一个序列的字符串，用充当分隔符的字符串连接序列中每个条目，返回一个由它生成的巨大的字符串。
 

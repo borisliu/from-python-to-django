@@ -1,11 +1,23 @@
-# 我推荐使用括号表示元组的开始和结束，尽管括号是可选的。
-# 毕竟显式声明比隐式声明更加直观
-zoo = ('蟒蛇', '大象', '企鹅') # 记住圆括号是可选的
-print('动物园中动物有数量有', len(zoo))
+shoplist = ['苹果', '芒果', '胡萝卜', '香蕉']
+name = 'swaroop'
 
-new_zoo = '猴子', '骆驼', zoo # 括号是可选的，最好加上
-print('在新动物园中笼子的数量是', len(new_zoo))
-print('在新动物园所有的动物是', new_zoo)
-print('从老动物园中带来的动物是', new_zoo[2])
-print('从老动物园带来最后的动物是', new_zoo[2][2])
-print('在新动物园中动物的数量有', len(new_zoo)-1+len(new_zoo[2]))
+# 索引或下标运算 #
+print('第0项是', shoplist[0])
+print('第1项是', shoplist[1])
+print('第2项是', shoplist[2])
+print('第3项是', shoplist[3])
+print('第-1项是', shoplist[-1])
+print('第-2项是', shoplist[-2])
+print('第0个字符是', name[0])
+
+# 一个列表的切片 #
+print('第1项到第3项是', shoplist[1:3])
+print('第2项到末尾是', shoplist[2:])
+print('第1到-1项是', shoplist[1:-1])
+print('开头到结尾是', shoplist[:])
+
+# 字符串的切片 #
+print('第1到第3个字符是', name[1:3])
+print('第2到末尾的字符是', name[2:])
+print('第1到-1的字符是', name[1:-1])
+print('从头到尾的字符是', name[:])
