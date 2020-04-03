@@ -1,23 +1,15 @@
-shoplist = ['苹果', '芒果', '胡萝卜', '香蕉']
-name = 'swaroop'
+# 这是一个字符串对象
+name = 'Swaroop' 
 
-# 索引或下标运算 #
-print('第0项是', shoplist[0])
-print('第1项是', shoplist[1])
-print('第2项是', shoplist[2])
-print('第3项是', shoplist[3])
-print('第-1项是', shoplist[-1])
-print('第-2项是', shoplist[-2])
-print('第0个字符是', name[0])
+if name.startswith('Swa'):
+    print('是的，字符串以"Swa"开始')
 
-# 一个列表的切片 #
-print('第1项到第3项是', shoplist[1:3])
-print('第2项到末尾是', shoplist[2:])
-print('第1到-1项是', shoplist[1:-1])
-print('开头到结尾是', shoplist[:])
+if 'a' in name:
+    print('是的，它包含字符串"a"')
 
-# 字符串的切片 #
-print('第1到第3个字符是', name[1:3])
-print('第2到末尾的字符是', name[2:])
-print('第1到-1的字符是', name[1:-1])
-print('从头到尾的字符是', name[:])
+if name.find('war') != -1:
+    print('是的，它包含字符串"war"')
+
+delimiter = '_*_'
+mylist = ['巴西', '俄罗斯', '印度', '中国']
+print(delimiter.join(mylist))
