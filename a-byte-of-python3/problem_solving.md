@@ -1,6 +1,6 @@
-# 解决问题
+# 实战案例
 
-我们已经探索过了Python语言的各种部分，现在我们通过设计和编写一个做有用事情的程序，看一看如何将所有这些组合在一起，学习如何自己编写一个Python脚本可以实现这个想法。
+我们已经了解了Python语言的各个方面，现在我们要通过设计和编写一个实用的程序，看一看如何将所有这些组合在一起。我们要学习如何自己编写一个Python脚本实现这个想法。
 
 ## 问题
 
@@ -8,25 +8,23 @@
 
 > 我需要一个为我所有重要的程序创建备份的一个程序。
 
-尽管这是一个简单的问题，但是我们没有着手解决这个问题的足够的信息。多一点的分析是必需的，例如，我们如何指定哪一个文件需要备份？他们是怎样存储的？
+尽管这是一个简单的问题，但是我们没有着手解决这个问题的足够的信息。多一点的**分析**是必需的，例如，我们如何指定**哪一个**文件需要备份？他们是**怎样**存储的？存储在**什么位置**？
 
-在得当的问题分析后，我们设计我们的程序。我们为程序如何工作列一个列表，在本例中，我创建了我希望它如何工作的以下列表。如果你做这个设计，你可能不会拿出同样的分析，因为每个人都有自己做事的方式，这是非常好的。
+当我们完成问题的分析之后，我们要开始**设计**我们的程序。我们为程序如何工作列了一个清单。在本例中，我创建了**我**希望它如何工作的以下清单。如果你来做这个设计，你可能会拿出不一样的分析，因为每个人都有自己做事的方式，事实本该如此。
 
 * 在列表中指出需要备份的文件和目录。
 * 备份必须存储在一个主备份目录中。
-* 备份的文件压缩到一个压缩文件中。
-* 压缩文件的名称是当前的日期和时间。
-* 在标准的 Linux/Unix 发行版上，我们默认使用标准的zip命令。注意，只要它有一个命令行，你可以使用任何你想要归档的命令。
-
-，Windows用户可以从GnuWin32项目页 安装，并向你的系统环境变量 PATH追加C:\Program Files\GnuWin32\bin，这和为识别Python命令我们所做的类似
+* 备份的文件压缩到一个zip文件中。
+* zip文件的名称是当前的日期和时间。
+* 在标准的 Linux/Unix 发行版上，我们默认使用标准的`zip`命令。注意，只要它有一个命令行，你可以使用任何你想要归档的命令。
 
 > **Windows用户**
 > 
-> Windows用户可以[安装](http://gnuwin32.sourceforge.net/downlinks/zip.php)在[GnuWin32项目主页](http://gnuwin32.sourceforge.net/packages/zip.htm)安装 `zip`命令并且将`C:\Program Files\GnuWin32\bin`添加到你的环境变量`PATH`中，就好像我们配置python命令行一样。
+> Windows用户可以在[GnuWin32项目主页](http://gnuwin32.sourceforge.net/packages/zip.htm)[下载](http://gnuwin32.sourceforge.net/downlinks/zip.php)并安装 `zip`命令，记得要将`C:\Program Files (x86)\GnuWin32\bin`添加到你的环境变量`PATH`中，就好像我们[配置python命令行](installation.md)一样。
 
 ## 解决方案
 
-由于我们的程序的设计现在相当稳定，我们可以写实现解决方案的代码。
+由于我们程序的设计已经完成，现在可以编写**实现**解决方案的代码。
 
 保存为backup_ver1.py:
 
@@ -35,17 +33,18 @@ import os
 import time
 
 # 1. 在列表中指出需要备份的文件和目录。
-# 在Windows中的例子:
-# source = ['"C:\\My Documents"', 'C:\\Code']
 # 在Mac OS X和Linux中的列子:
+# source = ['/Users/swa/notes']
+# 在Windows中的例子:
 source = ['"C:\\My Documents"', 'C:\\Code']
-# 注意我们在有空格的名字的字符串内不得不使用双引号。
+# 注意我们在有空格的名字的字符串内必须使用双引号。
+# 我们也可以使用原始字符串[r'C:\My Documents']。
 
 # 2. 备份必须存储在一个主备份目录中。
-# 在Windows中的例子:
-# target_dir = 'E:\\Backup'
 # 在Mac OS X和Linux中的例子:
-target_dir = 'E:\\Backup' 
+# target_dir = '/Users/swa/backup'
+# 在Windows中的例子:
+target_dir = 'D:\\Backup' 
 # 记住把它改为你要使用的目录
 
 # 3. 备份的文件压缩到一个压缩文件中。
@@ -73,21 +72,17 @@ else:
 
 输出:
 
-```
-$ python backup_ver1.py
+```shell
+C:\> python backup_ver1.py
 Zip命令为:
-zip -r /Users/swa/backup/20140328084844.zip /Users/swa/notes
+zip -qr D:\Backup\20200407113117.zip "C:\My Documents" C:\Code
 运行:
-  adding: Users/swa/notes/ (stored 0%)
-  adding: Users/swa/notes/blah1.txt (stored 0%)
-  adding: Users/swa/notes/blah2.txt (stored 0%)
-  adding: Users/swa/notes/blah3.txt (stored 0%)
-成功备份到 E:\Backup\20080702185040.zip
+成功备份到 D:\Backup\20200407113117.zip
 ```
 
-现在，我们是在测试我们的程序能否正常工作的*测试*阶段。如果它不像预期的那样,则我们必须*调试*我们的程序，也就是从程序中去掉*bug*(错误)。
+现在，我们处于**测试**阶段，也就是说我们要测试一下我们的程序能否正常工作。如果它不像预期的那样运行，我们就必须**调试**我们的程序，也就是从程序中去掉**bug**（错误）。
 
-如果上面的程序不为你工作，将打印出来的`Zip命令为:`下面那一行拷贝一下，然后在shell(GNU/Linux和Mac OS X中)/`cmd`(Windows中)里面粘贴，看看有哪些报错，然后尝试修复它。如果这个命令失败,检查压缩命令手册，是什么可能是错的。如果这个命令成功，然后检查Python程序是否和上面的程序完全匹配。
+如果上面的程序不为你工作，将打印出来的`Zip命令为:`下面那一行拷贝一下，然后在`cmd`(Windows中)/shell(GNU/Linux和Mac OS X中)里面粘贴，看看有哪些报错，然后尝试修复它。如果这个命令无法执行，查阅一下压缩命令手册，看看错在哪里。如果这个命令成功执行，那么就检查Python程序是否和上面的程序完全匹配。
 
 **它是如何工作的：**
 

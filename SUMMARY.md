@@ -12,7 +12,7 @@
     * [函数](a-byte-of-python3/functions.md)
     * [模块](a-byte-of-python3/modules.md)
     * [数据结构](a-byte-of-python3/data_structures.md)
-    * [解决问题](a-byte-of-python3/problem_solving.md)
+    * [实战案例](a-byte-of-python3/problem_solving.md)
     * [面向对象编程](a-byte-of-python3/oop.md)
     * [输入/输出](a-byte-of-python3/io.md)
     * [异常处理](a-byte-of-python3/exceptions.md)
