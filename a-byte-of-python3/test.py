@@ -13,20 +13,29 @@ source = ['"C:\\My Documents"', 'C:\\Code']
 # 在Mac OS X和Linux中的例子:
 # target_dir = '/Users/swa/backup'
 # 在Windows中的例子:
-target_dir = 'D:\\Backup' 
+target_dir = 'D:\\Backup'
 # 记住把它改为你要使用的目录
-
-# 3. 备份的文件压缩到一个压缩文件中。
-# 4. 压缩文件的名称是当前的日期和时间。
-target = target_dir + os.sep + \
-         time.strftime('%Y%m%d%H%M%S') + '.zip'
 
 # 如果目录不存在就创建
 if not os.path.exists(target_dir):
     os.mkdir(target_dir)  # 创建目录
 
+# 3. 备份的文件压缩到一个压缩文件中。
+# 4. 在主备份目录中创建一个子目录，名字是当前的日期。
+today = target_dir + os.sep + time.strftime('%Y%m%d')
+# zip文件的名字是当前的时间。
+now = time.strftime('%H%M%S')
+
+# zip文件的完整路径
+target = today + os.sep + now + '.zip'
+
+# 如果子目录不存在就创建它
+if not os.path.exists(today):
+    os.mkdir(today)
+    print('成功创建子目录：', today)
+
 # 5. 我们使用zip命令把文件压缩到一个压缩文件中
-zip_command = "zip -qr {0} {1}".format(target, 
+zip_command = "zip -qr {0} {1}".format(target,
                                        ' '.join(source))
 
 # 运行备份

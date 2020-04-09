@@ -114,9 +114,9 @@ zip -qr D:\Backup\20200407113117.zip "C:\My Documents" C:\Code
 
 ## 第二版
 
-第一个版本的脚本工作了。然而，我们还可以做一些改进，以便每天工作得更好。这被称为软件的维护阶段。
+第一个版本的脚本工作了。然而，我们还可以做一些改进，以便满足我们的日常需求。这被称为软件的**维护**阶段。
 
-我觉得有用的改进之一是有一个更好的文件命名机制——在一个目录中，使用时间作为文件的名称，使用当前日期作为主备份目录中的一个目录。第一个优势是，你的备份以分层以方式存储，因此它更容易管理。第二个优势是，文件名短得多。第三个优势是单独的目录将帮助你检查每天是否创建了一个备份，如果某一天你备份了，将会创建一个目录。
+我觉得有用的改进之一是有一个更好的文件命名机制——在一个目录中，使用**时间**作为文件的名称，使用当前**日期**作为主备份目录中的一个目录。这样做的第一个优点是备份文件分层存放，便于管理管理；第二个优点是文件名更短了；第三个优点是每天独立的目录让你很容易就能知道今天是否进行了备份。因为只有完成了今天的备份，目录才会被建立。
 
 保存为 backup_ver2.py:
 
@@ -125,17 +125,18 @@ import os
 import time
 
 # 1. 在列表中指出需要备份的文件和目录。
-# 在Windows中的例子:
-# source = ['"C:\\My Documents"', 'C:\\Code']
 # 在Mac OS X和Linux中的列子:
+# source = ['/Users/swa/notes']
+# 在Windows中的例子:
 source = ['"C:\\My Documents"', 'C:\\Code']
-# 注意我们在有空格的名字的字符串内不得不使用双引号。
+# 注意我们在有空格的名字的字符串内必须使用双引号。
+# 我们也可以使用原始字符串[r'C:\My Documents']。
 
 # 2. 备份必须存储在一个主备份目录中。
-# 在Windows中的例子:
-# target_dir = 'E:\\Backup'
 # 在Mac OS X和Linux中的例子:
-target_dir = 'E:\\Backup' 
+# target_dir = '/Users/swa/backup'
+# 在Windows中的例子:
+target_dir = 'D:\\Backup'
 # 记住把它改为你要使用的目录
 
 # 如果目录不存在就创建
@@ -157,7 +158,7 @@ if not os.path.exists(today):
     print('成功创建子目录：', today)
 
 # 5. 我们使用zip命令把文件压缩到一个压缩文件中
-zip_command = "zip -qr {0} {1}".format(target, 
+zip_command = "zip -qr {0} {1}".format(target,
                                        ' '.join(source))
 
 # 运行备份
@@ -172,22 +173,18 @@ else:
 
 输出：
 
-```
-$ python backup_ver2.py
-成功创建子目录：/Users/swa/backup/20140329
+```shell
+C:\> python backup_ver2.py
+成功创建子目录： D:\Backup\20200409
 Zip命令为:
-zip -r /Users/swa/backup/20140328084844.zip /Users/swa/notes
+zip -qr D:\Backup\20200409\151018.zip "C:\My Documents" C:\Code
 运行:
-  adding: Users/swa/notes/ (stored 0%)
-  adding: Users/swa/notes/blah1.txt (stored 0%)
-  adding: Users/swa/notes/blah2.txt (stored 0%)
-  adding: Users/swa/notes/blah3.txt (stored 0%)
-成功备份到 E:\Backup\20080702185040.zip
+成功备份到 D:\Backup\20200409\151018.zip
 ```
 
 **它是如何工作的:**
 
-大部分程序还保留了原样，变化是，我们使用`os.path.exists`函数检查在主备份目录中是否存在以当前日期为名字的目录，如果不存在，我们使用`os.mkdir`函数创建它。
+第二版的大部分代码都是一样的。主要的改进之处是使用`os.path.exists`函数检查主备份目录下有没有以当前日期命名的文件夹，如果没有，则通过`os.mkdir` 函数创建一个。
 
 ## 第三版
 
