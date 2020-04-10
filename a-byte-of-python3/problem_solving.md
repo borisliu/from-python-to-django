@@ -199,17 +199,18 @@ import os
 import time
 
 # 1. 在列表中指出需要备份的文件和目录。
-# 在Windows中的例子:
-# source = ['"C:\\My Documents"', 'C:\\Code']
 # 在Mac OS X和Linux中的列子:
+# source = ['/Users/swa/notes']
+# 在Windows中的例子:
 source = ['"C:\\My Documents"', 'C:\\Code']
-# 注意我们在有空格的名字的字符串内不得不使用双引号。
+# 注意我们在有空格的名字的字符串内必须使用双引号。
+# 我们也可以使用原始字符串[r'C:\My Documents']。
 
 # 2. 备份必须存储在一个主备份目录中。
-# 在Windows中的例子:
-# target_dir = 'E:\\Backup'
 # 在Mac OS X和Linux中的例子:
-target_dir = 'E:\\Backup' 
+# target_dir = '/Users/swa/backup'
+# 在Windows中的例子:
+target_dir = 'D:\\Backup'
 # 记住把它改为你要使用的目录
 
 # 如果目录不存在就创建
@@ -237,7 +238,7 @@ if not os.path.exists(today):
     print('成功创建子目录：', today)
 
 # 5. 我们使用zip命令把文件压缩到一个压缩文件中
-zip_command = "zip -qr {0} {1}".format(target, 
+zip_command = "zip -qr {0} {1}".format(target,
                                        ' '.join(source))
 
 # 运行备份
@@ -252,19 +253,19 @@ else:
 
 输出：
 
-```
-$ python backup_ver3.py
-  File "backup_ver3.py", line 25
-    target = today + os.sep + now + '_' +
-                                        ^
+```shell
+C:\> python backup_ver3.py
+  File "backup_ver3.py", line 35
+    target = today + os.sep + now + '_' + 
+                                         ^
 SyntaxError: invalid syntax
 ```
 
-**这怎么（不）工作：**
+**它是如何（不）工作的：**
 
-**这个程序不工作！**Python说有语法错误这意味着脚本不满足Python预计的结构。当我们观察Python给出的错误，它还告诉我们它检测到错误的地方。所以我们从那一行开始调试我们的程序。
+**这个程序不工作！**Python报告了一个语法错误，表示脚本中存在Python无法识别的语法结构。当我们审视Python给出的错误提示时，就会发现它已经给出错误发生的地方。所以我们从那一行开始**调试**我们的程序。
 
-在仔细观察后，我们发现单一的逻辑行被分成两个物理行，但我们没有指定这两个物理行属于同一个逻辑行。基本上，Python发现在那个逻辑行添加操作符(+)没有任何操作对象，因此不知道如何继续。记住，我们可以通过在物理行的结束位置使用反斜杠指定当前行与下一物理行是连续的。所以，我们要改正我们的程序。我们找到错误时的这样修正叫做修复bug。
+在仔细观察后，我们发现单一的逻辑行被分成两个物理行，但我们没有指定这两个物理行属于同一个逻辑行。实际上，Python发现在那个逻辑行末尾有一个加号运算符(`+`)，但没有任何操作对象，因此不知道如何继续。记住，如果我们要指定一个逻辑行需要与下一个逻辑行是连续的，我们可以在第一行的末尾添加一个反斜杠。所以，我们要修订我们的程序。我们找到错误并改正它叫做**修复bug**。
 
 ## 第四版
 
@@ -275,17 +276,18 @@ import os
 import time
 
 # 1. 在列表中指出需要备份的文件和目录。
-# 在Windows中的例子:
-# source = ['"C:\\My Documents"', 'C:\\Code']
 # 在Mac OS X和Linux中的列子:
+# source = ['/Users/swa/notes']
+# 在Windows中的例子:
 source = ['"C:\\My Documents"', 'C:\\Code']
-# 注意我们在有空格的名字的字符串内不得不使用双引号。
+# 注意我们在有空格的名字的字符串内必须使用双引号。
+# 我们也可以使用原始字符串[r'C:\My Documents']。
 
 # 2. 备份必须存储在一个主备份目录中。
-# 在Windows中的例子:
-# target_dir = 'E:\\Backup'
 # 在Mac OS X和Linux中的例子:
-target_dir = 'E:\\Backup' 
+# target_dir = '/Users/swa/backup'
+# 在Windows中的例子:
+target_dir = 'D:\\Backup'
 # 记住把它改为你要使用的目录
 
 # 如果目录不存在就创建
@@ -313,7 +315,7 @@ if not os.path.exists(today):
     print('成功创建子目录：', today)
 
 # 5. 我们使用zip命令把文件压缩到一个压缩文件中
-zip_command = "zip -qr {0} {1}".format(target, 
+zip_command = "zip -qr {0} {1}".format(target,
                                        ' '.join(source))
 
 # 运行备份
@@ -328,57 +330,54 @@ else:
 
 输出：
 
-```
-$ python3 backup_ver4.py
-输入注释--> added new examples
-成功备份到 E:\Backup\20080702\202836_added_new_examples.zip
-
-$ python3 backup_ver4.py
-输入注释-->
-成功备份到 E:\Backup\20080702\202839.zip
+```shell
+C:\> python3 backup_ver4.py
+输入注释 --> added new examples
+成功创建子目录： D:\Backup\20200410
+Zip命令为:
+zip -qr D:\Backup\20200410\173214_added_new_examples.zip "C:\My Documents" C:\Code
+运行:
+成功备份到 D:\Backup\20200410\173214_added_new_examples.zip
 ```
 
 **它是如何工作的：**
 
-这个程序现在工作了！让我们仔细检查第三版的实际增强，我们使用`input`函数获取 用户的注解，然后通过使用`len`函数找到输入的长度检查用户确实输入了一些东西。如果用户只是按`enter`（回车键），没有输入任何东西(也许这只是一个常规备份或没有特殊的改变)，那么，我们按照我们之前所做的处理。
+这个程序现在工作了！让我们回顾一下我们在第三版中做了什么实质性的改进：我们用`input`函数获得用户输入的注释，并通过`len`函数获得用户输入的长度，以确定用户真的输入了注释。如果用户什么都没有输入，只是按下了`enter`键，可能这只是一次日常的备份、没什么特别的，那么我们就像之前一样产生文件名。
 
-然而，如果提供了一个注释，那么，它将附加到压缩文档名字中、 `.zip`扩展名前。请注意，我们将注释中的空格用开线正在取代空间在评论中用下划线——这是因为管理没有空格的文件名容易得多。
+而当用户输入了注释时，注释会被用作 zip 存档的文件名，放在`.zip`扩展名之前。请注意，我们把文件名中的空格替换为下划线了，这是因为以后处理没有空格的文件名更简单。
 
-## 更细化
+## 更多改进
 
-第四版对于大多数用户来说是一个令人满意的工作脚本，但总有改进的余地。例如，您可以为程序包括一个冗长级别，在那里你可以指定一个`-v`选项，从而使你的程序变得更加健谈。
+第四版的程序对大多数用户来说足够了，但程序总有改进的余地。举个例子：你可以通过指定`-v`选项使zip命令输出更丰富的信息，让你的程序更有交互性；或者增加一个`-q`选项，让程序能**静默**运行。
 
-另一个可能的优化处理是将允许额外的文件和目录被传递给该脚本的命令行。我们可从`sys.argv`列表得到这些文件名，我们可以使用`list`类提供的`extend`方法将它们添加到我们的`source`列表中。
+另一个可能的改进是允许通过命令行指定额外需要备份的文件和目录。我们可以通过`sys.argv`列表获得这些名字，然后用`list`类的`extend`方法把他们加到`source`列表里。
 
-最重要的改进是不使用的创建文档的`os.system` 方式，而是使用转而使用内建的 [zipfile](http://docs.python.org/3/library/zipfile.html) 或 [tarfile](http://docs.python.org/3/library/tarfile.html)模块创建文档。他们是标准库的一部分，在你的计算机上已经为您提供使用没有外部依赖的压缩程序。
+最重要的改进可能是不使用`os.system`来创建备份，而用内置的 [zipfile](http://docs.python.org/3/library/zipfile.html) 或 [tarfile](http://docs.python.org/3/library/tarfile.html) 模块来创建备份。它们是标准库的一部分，你可以直接使用它们，而不需要额外的 zip 程序依赖。
 
-然而，在上面的例子中，纯粹是为教学的目的，我一直使用 `os.system`的方式创建一个备份，这样的例子对每个人的理解足够简单，但不是真正足够的有效。
+我在上面的示例程序中使用`os.system`纯粹是出于教学需要，因为这样示例足够简单，每个人都能理解，同时也足够真实有用。
 
-你能使用[zipfile](http://docs.python.org/3/library/zipfile.html)模块，而不是`os.system`调用尝试写第五版吗？
+你可以尝试编写使用[zipfile](http://docs.python.org/3/library/zipfile.html)模块而不是`os.system`调用的第五版程序吗？
 
 ## 软件开发过程
 
-我们已经经历了编写一个软件过程中的各种阶段。这些阶段可以概括如下：
+现在我们已经经历了编写软件的不同**阶段**。这些阶段可以概括成以下环节：
 
-1. 什么 (分析)
-2. 怎样 (设计)
-3. 做 (实现)
+1. 需求 (分析需求)
+2. 设计 (确定方法)
+3. 编码 (编写代码)
 4. 测试 (测试和调试)
-5. 使用 (操作和部署)
-6. 维护 (优化)
-编写程序的推荐方法是我们创建备份脚本的过程：做了分析和设计，开始实现用一个简单的版本，测试和调试它，来确保它能按预期工作。现在，添加你想要的任何功能，继续重复需要次数的做－试验循环。
+5. 运行 (运行和部署)
+6. 维护 (优化与重构)
+
+我们推荐参考上面编写备份脚本的过程来编写你的程序：一开始进行需求分析和系统设计，然后实现一个简单的版本，对它进行测试，有bug就进行调试。接着运行它，确保它能像设计的那样正常工作。再增加你想要的新功能，并继续重复编码 - 测试 - 运行的循环，直到软件实现预期的功能。
 
 记住：
 
-> 软件是在成长，而不是建立。
+> 好的软件是改出来的，不是做出来的
 > -- [Bill de hÓra](http://97things.oreilly.com/wiki/index.php/Great_software_is_not_built,_it_is_grown)
 
 ## 小结
 
-我们已经看到了如何创建我们自己的Python程序/脚本和编写这种程序的不同阶段。你可能会发现创建你自己的程序就像我们在这一章做的是有用的，以便你熟悉Python以及解决问题。
+我们已经学会了如何编写自己的 Python 脚本程序，并知道了编写程序的不同阶段。你可能已经发现使用本章的方法编写程序非常方便，你也因此能更加熟练的使用 Python 去解决问题。
 
-接下来，我们将讨论面向对象编程。 
-
---------------------------------------------------
-
-### 继续阅读[面向对象编程](oop.md)
+接下来我们会讨论面向对象编程。

@@ -26,8 +26,14 @@ today = target_dir + os.sep + time.strftime('%Y%m%d')
 # zip文件的名字是当前的时间。
 now = time.strftime('%H%M%S')
 
-# zip文件的完整路径
-target = today + os.sep + now + '.zip'
+# 提示用户输入zip文件名中附加的注释
+comment = input('输入注释 --> ')
+# Check if a comment was entered
+if len(comment) == 0:
+    target = today + os.sep + now + '.zip'
+else:
+    target = today + os.sep + now + '_' + \
+        comment.replace(' ', '_') + '.zip'
 
 # 如果子目录不存在就创建它
 if not os.path.exists(today):
