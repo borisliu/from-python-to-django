@@ -1,54 +1,46 @@
-class Robot:
-    """Represents a robot, with a name."""
-
-    # A class variable, counting the number of robots
-    population = 0
-
-    def __init__(self, name):
-        """Initializes the data."""
+class SchoolMember:
+    '''代表学校的任何成员。'''
+    def __init__(self, name, age):
         self.name = name
-        print("(Initializing {})".format(self.name))
+        self.age = age
+        print('(初始化学校成员：{})'.format(self.name))
 
-        # When this person is created, the robot
-        # adds to the population
-        Robot.population += 1
-
-    def die(self):
-        """I am dying."""
-        print("{} is being destroyed!".format(self.name))
-
-        Robot.population -= 1
-
-        if Robot.population == 0:
-            print("{} was the last one.".format(self.name))
-        else:
-            print("There are still {:d} robots working.".format(
-                Robot.population))
-
-    def say_hi(self):
-        """Greeting by the robot.
-
-        Yeah, they can do that."""
-        print("Greetings, my masters call me {}.".format(self.name))
-
-    @classmethod
-    def how_many(cls):
-        """Prints the current population."""
-        print("We have {:d} robots.".format(cls.population))
+    def tell(self):
+        '''告诉我细节。'''
+        print('Name:"{}" Age:"{}"'.format(self.name, self.age), end=' ')
 
 
-droid1 = Robot("R2-D2")
-droid1.say_hi()
-Robot.how_many()
+class Teacher(SchoolMember):
+    '''代表老师。'''
+    def __init__(self, name, age, salary):
+        SchoolMember.__init__(self, name, age)
+        self.salary = salary
+        print('(初始化老师：{})'.format(self.name))
 
-droid2 = Robot("C-3PO")
-droid2.say_hi()
-Robot.how_many()
+    def tell(self):
+        SchoolMember.tell(self)
+        print('Salary: "{0:d}"'.format(self.salary))
 
-print("\nRobots can do some work here.\n")
 
-print("Robots have finished their work. So let's destroy them.")
-droid1.die()
-droid2.die()
+class Student(SchoolMember):
+    '''代表学生。'''
+    def __init__(self, name, age, marks):
+        SchoolMember.__init__(self, name, age)
+        self.marks = marks
+        print('(初始化学生：{})'.format(self.name))
 
-Robot.how_many()
+    def tell(self):
+        SchoolMember.tell(self)
+        print('Marks: "{:d}"'.format(self.marks))
+
+
+t = Teacher('Mrs. Shrividya', 40, 30000)
+s = Student('Swaroop', 25, 75)
+
+# 打印一个空行
+print()
+
+members = [t, s]
+for member in members:
+    # 为Teachers和Students工作
+    member.tell()

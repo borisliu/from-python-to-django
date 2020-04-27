@@ -250,96 +250,100 @@ how_many = classmethod(how_many)
 
 ## 继承
 
-面向对象编程的一个好处是代码的**重用**，一种方式是通过**继承**机制实现，继承可以被想像为实现类之间的一种**类型和子类型**的关系。
+面向对象编程的主要优势之一就是代码的**重用**，一种方式是通过**继承**机制实现。继承可以被想象成为类之间的一种**类型和子类型**的关系的实现。
 
-假设您想编写一个大学里教师和学生记录的程序，他们有一些共同的特性，如姓名、年龄和地址。他们也有特定的特性，如老师的工资、课程和树叶和学生的学费、分数。
+假设你想要写一个程序来跟踪一所大学之中的老师和同学。他们有一些共同的特征，比如名字、年龄、地址等。他们还有一些独有的特征，比如对老师来说有薪水、课程、离开等，对学生来说有成绩和学费。
 
-您可以为每个类型创建两个独立的类，并且处理它们，但要添加一个新的共同特征意味着要在这两种独立的类中都要添加，很快就会变得难以处理。
+你当然可以为这两种类型构建两种独立的类，并且处理它们。但是当需要添加一个共同的属性的时候，意味着需要在这两个独立的类中同时添加。这很快就会变得非常笨拙。
 
-一个更好的方法是创建一个共同的类称为`SchoolMember`，然后从这个类_继承_老师类和学生类，也就是说它们成为这个类的子类，可以对这些子类添加特定的特征。
+一个更好的办法就是构造一个共同的类`SchoolMember`，然后在让老师和学生分别**继承**这个类。换句话说，他们都是这个类型（类）的子类型，之后我们也可以为这些子类型添加独有的属性。
 
-这种方式有很多优点，如果我们在`SchoolMember`中添加/更改任何功能，在子类中会自动反映出来。例如，您可以为学生和老师添加一个新的身份证字段，可能通过直接把它们添加到SchoolMember类中来实现。然而，子类中的变化不影响其他子类。另一个优点是，如果你引用SchoolMember类的一个老师或学生对象，在某些情况下如计算学校成员的数量时会很有用。这就是所谓的**多态性**，如果父类是预期的，子类在任何情况下可以被取代，即对象可以当做父类的一个实例。
+这种方式有很多优点，如果我们在`SchoolMember`中添加/更改任何功能，在子类中会自动反映出来。举个例子，你可以通过简单的修改`SchoolMember`类的方式来为学生和老师添加新的 ID 卡的字段。然而，子类中的变化不影响其他子类。另外一个好处就是你可以使用一个`SchoolMember`对象来指向任意一个老师或者学生的对象。这将会在某些情况下非常有用，比如统计学校中人的总数。这被称作**多态**：如果程序的某个地方期望出现的是父类型的对象，那么可以用它的子类型的对象来替代。也就是说，一个子类型的对象可以被当作父类型的对象。
 
-还观察到，我们重用父类的代码，在不同的类中我们不需要重复，而在使用独立的类的情况下我们不得不重复。
+此外，我们还重用了父类的代码。我们不需要在不同的类中重复这些代码，除非我们使用独立类的方式来实现。
 
-在这种情况下，`SchoolMember`类被称为**基类**或**超类**。`Teacher`和`Student`类被称为**派生类**或**子类**。
+`SchoolMember`类在这种情况下被称为**基类**或者**超类**。而`Teacher`和`Student`类被成为**派生类**或者**子类**。
 
-现在，我们将看到作为程序的这个例子(保存为 oop_subclass.py)：
+我们来看看这个例子（保存为`oop_subclass.py`）：
 
 ```python
 class SchoolMember:
-    '''代表任何学校成员。'''
+    '''代表学校的任何成员。'''
     def __init__(self, name, age):
         self.name = name
         self.age = age
-        print("(初始化学校成员： {})".format(self.name))
-    
+        print('(初始化学校成员：{})'.format(self.name))
+
     def tell(self):
         '''告诉我细节。'''
-        print("Name:'{}' Age:'{}'".format(self.name, self.age), end=" ")
+        print('Name:"{}" Age:"{}"'.format(self.name, self.age), end=' ')
+
 
 class Teacher(SchoolMember):
     '''代表老师。'''
     def __init__(self, name, age, salary):
         SchoolMember.__init__(self, name, age)
         self.salary = salary
-        print("(初始化老师： {})".format(self.name))
+        print('(初始化老师：{})'.format(self.name))
 
     def tell(self):
         SchoolMember.tell(self)
-        print("Salary: '{0:d}'".format(self.salary))
+        print('Salary: "{0:d}"'.format(self.salary))
+
 
 class Student(SchoolMember):
     '''代表学生。'''
     def __init__(self, name, age, marks):
         SchoolMember.__init__(self, name, age)
         self.marks = marks
-        print("(初始化学生： {})".format(self.name))
-    
+        print('(初始化学生：{})'.format(self.name))
+
     def tell(self):
         SchoolMember.tell(self)
-        print("Marks: '{:d}'".format(self.marks))
+        print('Marks: "{:d}"'.format(self.marks))
 
-t = Teacher("Mrs. Shrividya", 40, 30000)
-s = Student("Swaroop", 25, 75)
+
+t = Teacher('Mrs. Shrividya', 40, 30000)
+s = Student('Swaroop', 25, 75)
 
 # 打印一个空行
-print() 
+print()
 
 members = [t, s]
 for member in members:
-    # 为Teachers和Students工作
-    member.tell() 
+    # 所有的老师和学生都可用
+    member.tell()
+
 ```
 
 输出：
 
-```
-$ python inherit.py
-(初始化学校成员： Mrs. Shrividya)
-(初始化老师： Mrs. Shrividya)
-(初始化学校成员： Swaroop)
-(初始化学生： Swaroop)
+```shell
+C:\> python oop_subclass.py
+(初始化学校成员：Mrs. Shrividya)
+(初始化老师：Mrs. Shrividya)
+(初始化学校成员：Swaroop)
+(初始化学生：Swaroop)
 
-Name:"Mrs. Shrividya" Age:"40" Salary: "30000" Name:"Swaroop" Age:"25" Marks: "75"~
+Name:"Mrs. Shrividya" Age:"40" Salary: "30000"
+Name:"Swaroop" Age:"25" Marks: "75"
+
 ```
 
 **它是如何工作的：**
 
-使用继承，在类定义中，在类的名称后，我们在元组中指定基类名称，接下来，我们观察到使用`self`变量，显式地调用基类的`__init__`方法，这样我们可以初始化对象的基类部分。这是非常重要的，记住——Python不会自动调用基类的构造函数，您自己必须显式地调用它。
+为了使用继承，我们在类名之后的元祖中指明父类的类名。例如：`class Teacher(SchoolMember)`。之后我们可以看到在`__init__`方法中，通过`self`变量显式的调用了父类的`__init__`方法来初始化子类对象中属于父类的部分。这非常重要，请记住 -- 既然我们在`Teacher`和`Student`子类中定义了`__init__`方法，Python不会自动的调用父类`SchoolMember`中的构造方法，你必须显式的调用。
 
-我们还观察到，我们可以在类名前加前缀调用基类的方法，然后和其它参数一道传递给 `self`变量值。
+相反的，如果我们不定义子类的`__init__`方法，Python 将会自动地调用父类中的构造方法。
 
-注意，当我们使用`SchoolMember`类的`tell`方法时，我们可以把`Teacher`或`Student`的实例作为`SchoolMember`的实例。
+我们可以把`Teacher`或者`Student`的实例当作`SchoolMember`的实例，当我们想调用父类`SchoolMember`的`tell`方法的时候，只需要简单的输入`Teacher.tell`或者`Student.tell`即可。本例中我们没有这么做，我们在每个子类之中定义了另一个新的`tell`方法（ 父类`SchoolMember`的`tell`方法作为其中的一部分）来定制子类的功能。因为我们已经做了这样的工作，当我们调用`Teacher.tell`的时候， Python 将会使用子类中`tell`方法，而非父类的。然而，如果我们没有在子类中定义`tell`方法，Python 将使用父类中的方法。Python 总是首先在子类中寻找方法，如果不存在，将会按照子类声明语句中的顺序，依次在父类之中寻找（在这里我们只有一个父类，但是你可以声明多个父类）。
 
-同时，观察到子类的tell方法的调用，不是`SchoolMember`类的`tell`方法。要理解这一点的一种方法是，Python 总是在实际的类型中开始寻找方法，如本例。如果它不能找到方法，它开始按在类定义中元组中指定的顺序一个接一个地查找属于它的基类的方法。
+注意术语 -- 如果有多个类被列在继承元组之中，这就叫做**多重继承**。
 
-术语提示--如果在继承元组中不止列出一个类，那么它被称为**多重继承**。
-
-在`tell()`方法中，`end`参数是用于来将换行变为在 `print()`调用结束后以空格开始。
+在父类`tell()`方法中的`print`函数中我们使用了`end`参数，这样在打印完一句话之后，下一次打印紧接在第一句话之后，而不换行。这个技巧可以使得`print`函数在输出结束时不打印`\n`符号（换行）。
 
 ## 小结
 
-我们已经探讨了类和对象的各个方面以及与之关联的各种术语。我们也看到了面向对象编程的好处和缺陷。Python是高度面向对象，从长远看仔细理解这些概念仔细将对你很有帮助。
+我们已经探讨了类和对象的各个方面以及相关的术语。我们也已经领略到了面向对象编程的优势和陷阱。Python是高度面向对象，从长远看仔细理解这些概念将对你很有帮助。
 
 接下，我们将学习如何处理输入/输出和如何在Python中访问文件。
