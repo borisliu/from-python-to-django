@@ -14,7 +14,7 @@
     * [数据结构](a-byte-of-python3/data_structures.md)
     * [实战案例](a-byte-of-python3/problem_solving.md)
     * [面向对象编程](a-byte-of-python3/oop.md)
-    * [输入/输出](a-byte-of-python3/io.md)
+    * [输入与输出](a-byte-of-python3/io.md)
     * [异常处理](a-byte-of-python3/exceptions.md)
     * [标准库](a-byte-of-python3/stdlib.md)
     * [更多](a-byte-of-python3/more.md)
