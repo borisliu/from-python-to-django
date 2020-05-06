@@ -54,99 +54,156 @@ C:\> python io_input.py
 
 ## 文件
 
-为了读写，你可以通过创建一个file类的对象，分别使用read、readline或 write方法来，打开和使用文件。能够读取或写入文件取决于文件打开时指定的模式。最后，当你完成对文件的操作时，你要调用close方法告诉Python，文件我们使用完了。
+为了读写文件，你可以通过创建一个`file`类的对象，然后使用`read`、`readline`或`write`方法来打开和使用文件。对文件的读写能力取决于你打开文件时选择的模式。当你处理完文件后，你可以使用`close`方法告诉 Python 你已经使用完文件了。
 
-例子 (保存为 using_file.py):
+例子 (保存为 io_using_file.py):
 
-```
+```python
 poem = '''\
-当工作完成时
-编程是有趣的
-如果想让你的工作有趣
-    使用Python！
+Programming is fun
+When the work is done
+if you wanna make your work also fun:
+    use Python!
 '''
- 
-f = open('poem.txt', 'w') # 为'写w'打开文件
-f.write(poem) # 文本写入文件
-f.close() # 关闭文件
- 
-f = open('poem.txt') # 如果不指定打开模式，默认为'读'
+
+# 打开文件进行 'w'riting 写操作
+f = open('poem.txt', 'w')
+# 将文本写入到文件
+f.write(poem)
+# 关闭文件
+f.close()
+
+# 如果没有指定文件打开方式
+# 默认使用 'r'ead 读模式
+f = open('poem.txt')
 while True:
     line = f.readline()
-    if len(line) == 0: # 0长度表示文件结尾
+    # 零行意味着 EOF 文件结尾
+    if len(line) == 0:
         break
+    # `line` 中已经自带换行了
+    # 因为它是从文件中读取出来的
     print(line, end='')
-f.close() # 关闭文件
-```
-
-输出：
-
-```
-D:> python using_file.py
-当工作完成时
-编程是有趣的
-如果想让你的工作有趣
-    使用Python！
-```
-
-它是如何工作的：
-
-首先，通过内置的函数open，指定文件名和我们要打开的模式，打开一个文件。模式可以是读模式('r'), 写模式('w')或追加模式('a')。我们也可以指定是否以文本格式('t') 或二进制格式('b')读,写或追加。实际上有更多可用的模式，help(open) 会给你更多的细节。默认情况下，open()认为是一个以读方式打开的文本格式的文件。
-
-在我们的例子中，我们首先以写文本格式打开文件，使用文件对象的write方法写文件，然后,我们最后 close(关闭)文件。
-
-接下来，为再次阅读，我们打开同一个文件。我们不需要指定一个模式,因为 '读文本文件' 是默认的模式。我们使用readline方法在一个循环中每次读文件的一行。该方法返回一个完整的行，包括换行符结束时的行。当返回一个空字符串时，这意味着我们已经到达文件的末尾，我们'打破'循环。
-
-在默认情况下，print()函数在屏幕上自动换行打印文本。我们是通过指定end=''禁止产生新行，因为从文件读取的行在结尾已经包含一个换行符。然后，我们最终close文件。
-
-现在，检查poem.txt的内容，确认程序确实写入和从那个文件读取。
-
-## 拾取
-
-Python提供了一个标准的模块称为pickle，使用它你可以在一个文件中存储**任何**的Python对象，然后把它弄回来后，这就是所谓的持续的存储对象。
-
-例子 (保存为 pickling.py):
-
-```
-import pickle
- 
-# 我们将要存储对象的文件名
-shoplistfile = 'shoplist.data'
-# 购物清单
-shoplist = ['苹果', '芒果', '胡萝卜']
- 
-# 定到文件
-f = open(shoplistfile, 'wb')
-pickle.dump(shoplist, f) # 把对象倒入一个文件
+# 关闭文件
 f.close()
- 
-del shoplist # 释放shoplist变量
- 
-# 从仓库读回
-f = open(shoplistfile, 'rb')
-storedlist = pickle.load(f) # 从文件载入对象
-print(storedlist)
 ```
 
 输出：
 
 ```
-D:> python pickling.py
+C:\> python io_using_file.py
+Programming is fun
+When the work is done
+if you wanna make your work also fun:
+    use Python!
+```
+
+**它是如何工作的：**
+
+通过`open`方法我们很容易就能创建一个新的文件对象。我们指定文件名和打开方式，通过内置的`open`函数打开文件，当文件不存在时则创建文件。文件有很多种打开模式，可以是：读模式（`'r'`），写模式（`'w'`）或追加模式（`'a'`）。我们也可以指定以什么方式进行读、写和追加，是文本模式（`'t'`）还是二进制模式（`'b'`）。还有很多打开模式的组合，你可以通过`help(open)`命令来查看详细的说明。默认情况下`open()`认为文件以文本模式打开进行读取操作。
+
+在我们的例子里，第一次我们用`write`方法打开/创建了这个文件，并把字符串变量`poem`写入文件里，之后我们用`close`关闭了文件。
+
+接下来我们再次打开同一个文件用于读取。我们不需要指定模式，因为默认的读取文件模式已经足够了。我们使用`readline`方法在一个循环中每次读取文件的一行。这个方法每次会返回包括换行符在内的一整行。当读到**空**字符时，就说明已经到了文件的结尾，我们就可以跳出（break）循环了。
+
+最后，我们用`close`关闭了文件。
+
+从`readline`的输出中我们可以得知：这个程序已经成功地把小诗写入了`poem.txt`文件，并可以从中读取出来，打印到屏幕上。
+
+## 序列化
+
+我们把变量从内存中变成可存储或传输的过程称之为序列化，在Python中叫pickling，在其他语言中也被称之为serialization，marshalling，flattening等等。
+
+Python提供了一个标准模块`pickle`，你可以使用该模块将**任何**简单的Python对象存储在文件中，然后可再次取回。这个过程也被称为**持久化存储对象**。
+
+例子 (保存为`io_pickle.py`):
+
+```python
+import pickle
+
+# 这是我们将存储对象的文件名
+shoplistfile = 'shoplist.data'
+# 购物的清单
+shoplist = ['苹果', '芒果', '胡萝卜']
+
+# 写入文件
+f = open(shoplistfile, 'wb')
+# 将对象存储到文件
+pickle.dump(shoplist, f)
+f.close()
+
+# 销毁 shoplist 变量
+del shoplist
+
+# 从存储中读回
+f = open(shoplistfile, 'rb')
+# 从文件加载对象
+storedlist = pickle.load(f)
+print(storedlist)
+f.close()
+```
+
+输出：
+
+```shell
+C:\> python pickling.py
 ['苹果', '芒果', '胡萝卜']
 ```
 
-它是如何工作的：
+**它是如何工作的：**
 
-要在文件中存储一个对象，我们首先必须以'w'rite写'b'inary 二进制格式的方式open打开文件，然后调用pickle模块的dump函数，这个过程叫拾取。
+要将对象存储在文件中，必须先以二进制写入模式`open`文件，然后调用`pickle`模块的`dump`函数将对象保存到文件 file 中去，这个过程叫做**pickling**。
 
-接下来，我们使用pickle模块的load函数取回对象，这个过程叫做拆开。
+之后，我们可使用`pickle`模块的`load`函数来获取并返回这个对象。此过程称为**unpickling**。
+
+## Unicode
+
+到目前为止，当我们编写和使用字符串或者读取和写入文件时，我们只使用了简单的英文字符。 英语和非英语字符都可以用 Unicode 码表示（请参阅本节末尾的文章了解更多信息），默认情况下 Python 3 使用 Unicode 存储字符串变量（想想所有我们用单或双或三重引号包裹的文本）。
+
+> 注意：如果你使用的是Python 2，并且我们希望能够读取和编写其他非英语语言，我们需要使用`unicode`类型，所有内容都以字符`u`开头，例如：`u"hello world"`。
+
+```python
+>>> "hello world"
+'hello world'
+>>> type("hello world")
+<class 'str'>
+>>> u"hello world"
+'hello world'
+>>> type(u"hello world")
+<class 'str'>
+```
+
+当通过互联网发送数据时，我们需要以字节为单位发送数据，这是计算机易于理解的方式。将 Unicode 码（这是 Python 在存储字符串时使用的）转换为字节的规则称为编码。一种流行的编码方式是 UTF-8 。我们可以通过在`open`函数中使用一个简单的关键字参数来读写 UTF-8 。
+
+```python
+# encoding=utf-8
+import io
+
+f = io.open("abc.txt", "wt", encoding="utf-8")
+f.write(u"Imagine non-English language here")
+f.close()
+
+text = io.open("abc.txt", encoding="utf-8").read()
+print(text)
+```
+
+**它是如何工作的：**
+
+我们使用 `io.open` 然后在第一个 open 语句中使用 `encoding` 参数对信息进行编码，然后在解码信息时再在第二个 open 语句中使用该参数。 请注意，我们应该只在文本模式下使用 open 语句时的使用编码。
+
+每当我们编写一个使用 Unicode 文字的程序（通过在字符串之前放置一个 `u` ）就像我们上面使用的那样，我们必须确保 Python 本身被告知我们的程序使用 UTF-8，我们必须把 `# encoding=utf-8` 注释在我们程序的顶部。
+
+想要详细了解此主题，请阅读以下内容：
+
+- ["The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets"](http://www.joelonsoftware.com/articles/Unicode.html)
+- [Python Unicode Howto](http://docs.python.org/3/howto/unicode.html)
+- [Pragmatic Unicode talk by Nat Batchelder](http://nedbatchelder.com/text/unipain.html)
 
 ## 小结
 
-我们已经讨论了各种类型的输入/输出，文件处理和使用pickle模块。
+我们已经讨论了各种类型的输入 / 输出操作，包括：文件处理、pickle 模块和 Unicode。
 
 接下来，我们将探讨索异常的概念。
-
 
 ### 家庭作业提示
 

@@ -1,13 +1,22 @@
-def reverse(text):
-    return text[::-1]
+import pickle
 
+# 这是我们将存储对象的文件名
+shoplistfile = 'shoplist.data'
+# 购物的清单
+shoplist = ['苹果', '芒果', '胡萝卜']
 
-def is_palindrome(text):
-    return text == reverse(text)
+# 写入文件
+f = open(shoplistfile, 'wb')
+# 将对象存储到文件
+pickle.dump(shoplist, f)
+f.close()
 
+# 销毁 shoplist 变量
+del shoplist
 
-something = input('输入文本：')
-if (is_palindrome(something)):
-    print("是的，这是回文")
-else:
-    print("不，这不是回文")
+# 从存储中读回
+f = open(shoplistfile, 'rb')
+# 从文件加载对象
+storedlist = pickle.load(f)
+print(storedlist)
+f.close()
