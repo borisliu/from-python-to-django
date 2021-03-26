@@ -34,7 +34,7 @@ Python抛出了一个名为`EOFError`的错误信息，他的是*end of file*的
 
 ## 异常处理
 
-我们可以用`try..except`语句处理异常。我们将正常执行的语句放在try语句块中，然后将错误处理程序放到except语句块中。
+我们可以用`try..except`语句来处理异常。我们将正常执行的语句放入 try 代码块中，然后将异常处理程序放入 except 代码块中。
 
 例如 (保存为 `exceptions_handle.py`):
 
@@ -51,12 +51,12 @@ else:
 
 输出为:
 
-```
-# 按下 ctrl + d
+```shell
+# 按下 Ctrl + d
 $ python exceptions_handle.py
 请输入 --> 为什么你按下了EOF？
 
-# Press ctrl + c
+# Press Ctrl + c
 $ python exceptions_handle.py
 请输入 --> ^C你取消了操作
 
@@ -67,37 +67,37 @@ $ python exceptions_handle.py
 
 **它是如何工作的：**
 
-我们将所有的可能会抛出异常/错误的语句写在`try`块中，然后将对应的处理程序写在`except`块中。每个`except`语句可以处理一个特定的异常/错误，或者是一个异常/错误的列表（用括号表示）。如果没有指明异常/错误的名字，那么他会处理_所有的_错误/异常。
+我们将所有的可能会引发异常或错误的语句写在 `try` 代码块中，然后将对应的异常处理程序写在 `except` 代码块中。每个`except`语句可以处理一个特定的异常或错误，也可以是一个异常或错误的列表（用括号表示）。如果没有提供异常或错误的名字，那么它会处理 _所有的_ 异常和错误。
 
-注意，每一个`try`语句至少应该有一个与之匹配的`except`语句，否则try语句就没有意义了。
+请注意，每一个 `try` 语句至少应该有一个与之匹配的 `except` 语句，否则 try 语句就没有意义了。
 
-如果你的程序发生了异常/错误，但是没有被处理，那么Python语言就会启动默认的异常处理程序，它会中止程序的运行，打印出错误的信息，这些内容我们已经看到了。
+如果你的程序发生了异常或错误，但是没有被处理，那么 Python 语言就会启动默认的异常处理程序，它会中止程序的运行，并且打印出一条异常信息。我们在之前的操作中已经见过了。
 
-你也可以给你的`try..except`写上一个`else`语句块，当没有任何异常发生的时候就会执行`else`语句的内容。
+你也可以给你的 `try..except` 写上一个 `else` 代码块，当没有任何异常发生的时候就会执行 `else` 语句的内容。
 
-在下面的例子中，我们将会学习如何获得异常对象，以便于我们能够得到关于异常的更多的信息。
+在下面的例子中，我们将会学习如何获得异常对象，以便于我们能够得到关于异常额外的信息。
 
 ## 抛出异常
 
-你可以使用`raise`语句_抛出_一个异常，在语句中你需要提供异常/错误的名称以及抛出的异常对象。
+你可以使用 `raise` 语句 _抛出_ 一个异常。在语句中你需要提供异常或错误的名称，以及被抛出（_thrown_）的异常对象。
 
-你抛出的异常/错误必须是一个从`Exception`派生的类。
+你抛出的异常或错误应该是一个直接或间接地从 `Exception` 派生的类。
 
-例如： (保存为`exceptions_raise.py`)：
+例如：（保存为`exceptions_raise.py`）：
 
 ```python
 class ShortInputException(Exception):
-    '''用户自定义的异常类。'''
+    '''用户自定义的异常类'''
     def __init__(self, length, atleast):
         Exception.__init__(self)
         self.length = length
         self.atleast = atleast
 
 try:
-    text = input('请输入 --> ')
+    text = input('Enter something --> ')
     if len(text) < 3:
         raise ShortInputException(len(text), 3)
-    # Other work can continue as usual here
+    # 其他代码在这里可以正常执行
 except EOFError:
     print('Why did you do an EOF on me?')
 except ShortInputException as ex:
@@ -110,21 +110,21 @@ else:
 
 输出为：
 
-```
+```shell
 $ python exceptions_raise.py
-请输入 --> a
+Enter something --> a
 ShortInputException: The input was 1 long, expected at least 3
 
 $ python exceptions_raise.py
-请输入 --> abc
+Enter something --> abc
 No exception was raised.
 ```
 
 **它是如何工作的：**
 
-在这里我们创建了我们自己的异常类。新的异常类为`ShortInputException`。他有两个字段：`length`表示输入内容的长度，`atleast`表示程序期望的最小长度。
+在这里我们创建了我们自己的异常类，新的异常类被命名为 `ShortInputException` 。它有两个字段： `length` 表示输入内容的长度， `atleast` 表示程序期望的最小长度。
 
-在`except`语句中，我们制定由`as`变量保存弹出的异常/错误的对象。这很类似函数参数在函数调用中的作用。在这个特殊的`except`语句中，我们使用异常对象的`length`和`atleast`字段构造了一个异常提示信息，让用户了解为什么会抛出这个异常。
+在 `except` 语句中，我们通过 `as` 指定一个变量保存抛出的异常或错误的对象。这类似于函数调用中的变量和参数。在这个特定的 `except` 语句中，我们使用异常对象的 `length` 和 `atleast` 字段构造了一个异常提示信息，让用户了解为什么会抛出这个异常。
 
 ## Try ... Finally
 
