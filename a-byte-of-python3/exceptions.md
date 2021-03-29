@@ -128,9 +128,9 @@ No exception was raised.
 
 ## Try ... Finally
 
-设想一下你的程序需要读取一个文件，你怎样保证无论是否有异常抛出，文件对象都被正确的关闭呢？我们可以使用`finally`语句块做到这一点。
+假设你要在你的程序中读取一个文件，你怎样保证无论是否有异常抛出，文件对象都被正确的关闭呢？我们可以使用 `finally` 语句块做到这一点。
 
-例如：（保存为`exceptions_finally.py`）
+例如：（保存为 `exceptions_finally.py` ）
 
 ```python
 import sys
@@ -139,7 +139,7 @@ import time
 f = None
 try:
     f = open("poem.txt")
-    # Our usual file-reading idiom
+    # 通常我们读取文件会采取这种形式
     while True:
         line = f.readline()
         if len(line) == 0:
@@ -147,7 +147,7 @@ try:
         print(line, end='')
         sys.stdout.flush()
         print("Press ctrl+c now")
-        # To make sure it runs for a while
+        # 使得程序停顿一下在继续运行
         time.sleep(2)
 except IOError:
     print("Could not find file poem.txt")
@@ -161,7 +161,7 @@ finally:
 
 输出为：
 
-```
+```shell
 $ python exceptions_finally.py
 Programming is fun
 Press ctrl+c now
@@ -171,15 +171,17 @@ Press ctrl+c now
 
 **它是如何工作的：**
 
-我们读取文件的内容，只是每读一行就让系统休息2秒，我们使用`time.sleep`函数让程序运行慢一点（正常情况下Python程序运行的飞快）。当程序还在运行的时候，按下`ctrl + c`键中止程序的运行。
+我们读取文件的内容，每读一行就让系统休息2秒，我们使用 `time.sleep` 函数让程序运行慢一点（通常情况下Python程序运行的飞快）。当程序还在运行的时候，按下 `ctrl + c` 键中止程序的运行。
 
-我们注意到当程序退出的时候抛出了`KeyboardInterrupt`异常。然而，在程序退出之前，执行了finally语句块，并且文件对象被正确的关闭了。
+我们注意到当程序退出的时候抛出了 `KeyboardInterrupt` 异常。然而，在程序退出之前，执行了 finally 代码块，并且文件对象被正确的关闭了。
 
-注意，我们在`print`函数后面调用`sys.stdout.flush()`函数，这样可以及时输出结果。
+请注意， Python 将变量中的 0 、 `None` 、空数组和空集合都视为 `False` 。这就是为什么我们可以在上面的代码中使用 `if f:` 。
+
+还要注意，我们在 `print` 函数后面调用 `sys.stdout.flush()` 函数，这样可以及时输出结果。
 
 ## with语句
 
-在`try`语句块中获取资源，然后再`finally`语句块中释放资源是一个非常常用的程序段，我们可以使用`with`简化一下程序的书写。
+在 `try` 语句块中获取资源，然后再 `finally` 代码块中释放资源是一种常见做法，我们可以使用 `with` 简化一下程序的书写。
 
 例如：（保存为`exceptions_using_with.py`）
 
@@ -191,19 +193,19 @@ with open("poem.txt") as f:
 
 **它是如何工作的：**
 
-这段程序的输出应该和之前的例子是一模一样的。唯一的区别在与我们在`with`语句中使用`open`函数打开文件，这样的话系统会自动关闭这个文件。
+这段程序的输出应该和之前的例子是一模一样的。唯一的区别在与我们在 `with` 语句中使用 `open` 函数打开文件，通过使用 `with open` 系统会自动关闭这个文件。
 
-实际的处理过程是这样的，`with`语句会获取`open`函数返回的对象，我们假定这个对象名称是"thefile"。
+实际的处理过程是这样的，`with` 语句会获取 `open` 函数返回的对象，我们假定这个对象名称是 “thefile”。
 
-它_总是会_在进入`with`语句块之前调用`thefile.__enter__`函数，并且_总是会_在语句块的最后调用`thefile.__exit__`函数。
+它 _总是会_ 在进入 `with` 代码块之前调用 `thefile.__enter__` 函数，并且 _总是会_ 在语句块的最后调用 `thefile.__exit__` 函数。
 
-这样的话我们之前在`finally`语句块中写的程序就会自动的在`__exit__`方法中被执行，这种方式可以防止我们频繁使用`try..finally`语句。
+这样的话我们之前在 `finally` 代码块中写的程序就会自动的在 `__exit__` 方法中被执行，这种方式可以防止我们频繁使用 `try..finally` 语句。
 
 关于这个主题更多的讨论已经超出了本书的范畴，请参考[PEP 343](http://www.python.org/dev/peps/pep-0343/)。
 
 ## 总结
 
-本章我们讨论了`try..except`和`try..finally`语句，我们还自己定义了一个我们自己的异常类型，并且在程序中将其抛出。
+本章我们讨论了 `try..except` 和 `try..finally` 语句，我们还自定义了一个我们自己的异常类型，并且在程序中将其抛出。
 
 下一步，我们将会浏览一下Python标准库。
 
