@@ -10,8 +10,6 @@
 * 可以很容易的支持人工智能的应用。
 * 可以很容易的迁移到IoT平台，开发物联网应用。
 
-因此我们选择Python做为[goPyVue全栈开发网](https://borisliu.gitee.io/)的基础语言。
-
 Django是一个开放源代码的Web应用框架，由Python写成。采用了MVC(模型M，视图V和控制器C)的软件设计模式。Django在实践中主要有以下优点：
 
 * 在Python各种web框架中，Django的文档最完善、市场占有率最高、招聘职位最多！
@@ -19,13 +17,10 @@ Django是一个开放源代码的Web应用框架，由Python写成。采用了MV
 * 有完整的开发体系，包括Web开发、REST接口开发、SQL数据库ORM、NoSQL数据库。
 * ORM模型可以自动修改数据库结构，方便进行快速迭代。
 
-因此我们选择Django作为[goPyVue全栈开发网](https://borisliu.gitee.io/)的Web应用框架。
-
-
 本文是从Python到Django的入门教程，给零起点的程序员一个完整的学习路径
 
 ```
-  	Python 3.7--->Django 2.2
+  	Python 3.11--->Django 5.0
 ```
 
 ## 开发环境
@@ -51,10 +46,6 @@ Django是一个开放源代码的Web应用框架，由Python写成。采用了MV
 ![人生苦短，我用Python](./introduction/using_python.jpg)
 
 ### by <boris_cn@263.net>
-
-更多关于Python以及Django的讨论，尤其是使用Django开发微信相关应用的技术，请使用微信扫描二维码加群。
-
-![](./wechat.jpg)
 
 本书托管在[GitHub](https://github.com/borisliu/from-python-to-django)，
 如果有问题请在线[提交](https://github.com/borisliu/from-python-to-django/issues)。
