@@ -117,12 +117,10 @@ virtualenv就是用来为每一个Python程序创建一套“隔离”的Python�
 
 ![](./home-screenshot-win.png)
 
-由于我们的virtualenv目录会放到Python项目的venv子目录下，所以我们要对Python扩展进行一点设置。在VS Code菜单中选择“文件”->“首选项”->“用户设置”，就会打开用户设置的文件`settings.json`，输入如下信息指定我们的Python环境路径：
+由于我们的virtualenv目录会放到Python项目的venv子目录下，所以我们要对Python扩展进行一点设置。在VS Code菜单中选择“文件”->“首选项”->“设置”，就会打开用户设置的文件`settings.json`，将`Python: Default Interpreter Path`修改为我们的Python环境路径：
 
 ```
-{
-    "python.pythonPath": "${workspaceRoot}/.venv/scripts/python.exe",
-}
+${workspaceRoot}/.venv/scripts/python.exe
 ```
 
 ## 使用VS Code打开helloworld
@@ -130,7 +128,7 @@ virtualenv就是用来为每一个Python程序创建一套“隔离”的Python�
 在helloworld目录下输入：
 
 ```
-    (venv) C:\helloworld\>code .
+    (.venv) C:\helloworld\>code .
 ```
 
 即可使用VS Code打开helloworld项目。VS Code没有项目描述文件，一个目录就是一个项目，后面的例子我们都用这个开发工具完成。
