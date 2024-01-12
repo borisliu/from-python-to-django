@@ -10,7 +10,7 @@
 
 如果你已经完成安装，可以跳过剩余内容直接阅读下一章节。
 
-## 在Windows上安装
+## 在Windows 8或更早的版本上安装
 
 
 访问[[https://www.python.org/downloads/](https://www.python.org/downloads/)下载最新版本，在撰写本文时，最新版为3.11.4，我们以此为范例进行安装。安装过程和其它基于Windows的软件类似。
