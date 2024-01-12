@@ -1,10 +1,10 @@
 # 安装
 
-本书所描述的"Python 3"，指的是[Python 3.6](https://www.python.org/downloads/)或更高的版本。
+本书所描述的"Python 3"，指的是[Python 3.10](https://www.python.org/downloads/)或更高的版本。
 
 ## 在Windows 10 或 11上安装
 
-在`Microsoft Store`应用商店中搜索`python3`，可以看到不同版本的`Python 3`软件，选择一个高于`Python 3.6`的安装即可，参见下图：
+在`Microsoft Store`应用商店中搜索`python3`，可以看到不同版本的`Python 3`软件，选择一个高于`Python 3.10`的安装即可，参见下图：
 
 ![install-on-win10](install-on-win10.jpg)
 
@@ -85,7 +85,7 @@ To verify, open the terminal by pressing `[Command + Space]` keys (to open Spotl
 
 ```shell
 $ python3 -V
-Python 3.6.0
+Python 3.11.4
 ```
 
 提示：`$`是shell的提示符，根据你电脑上的操作系统设置会有所不同，这里我简单的使用`$`符号表示。
