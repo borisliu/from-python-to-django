@@ -17,4 +17,5 @@ _book
 
 # Python Virtualenv
 venv
+.venv
 *.pyc
