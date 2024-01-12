@@ -8,13 +8,13 @@ Python可能是少数的几个既简单易学又功能强大的编程语言之�
 
 本书目的是，如果对于计算机，你只知道如何保存文本文件，那么你可以从本书学习Python。如果之前你有编程经验，那么你同样可以从本书学习Python。
 
-如果您之前有过编程经验，你将对Python和你喜欢的编程语言之间的区别感兴趣——我高亮显示了这些区别。然而要提醒一点，Python将很快成为你最喜爱的编程语言！
+如果您之前有过编程经验，你将对Python和你喜欢的编程语言之间的区别感兴趣——这些区别在文中会高亮显示。可以预见的是，Python将很快成为你最喜爱的编程语言！
 
 ## 官方网站
 
-本书中文版的官方网站为[从Python到Django入门教程](https://www.kancloud.cn/borisliu/from-python-to-django)，英文版的官方网站为[http://python.swaroopch.com/](http://python.swaroopch.com/)，你可以在线阅读全部的内容，下载最新的版本，或者[购买英文版纸质印刷书籍](http://www.swaroopch.com/buybook)，也可以给我反馈。
+本书中文版的官方网站为[简明Python教程](https://www.kancloud.cn/borisliu/byte-of-python-zh)，英文版的官方网站为[https://python.swaroopch.com/](https://python.swaroopch.com/)，你可以在线阅读全部的内容，下载最新的版本，或者[购买英文版纸质印刷书籍](https://swaroopch.com/buybook)，也可以给我反馈。
 
-## 要思考的一些事情
+## 分享一些发人深省的金句
 
 > 构建软件设计有两种途径：一种是足够简单以致明显没有缺陷，另一种是足够复杂以致没有明显缺陷。
 
