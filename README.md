@@ -20,7 +20,7 @@ Django是一个开放源代码的Web应用框架，由Python写成。采用了MV
 本文是从Python到Django的入门教程，给零起点的程序员一个完整的学习路径
 
 ```
-  	Python 3.11--->Django 5.0
+  	Python 3.9--->Django 4.2
 ```
 
 ## 开发环境
@@ -47,7 +47,7 @@ Django是一个开放源代码的Web应用框架，由Python写成。采用了MV
 
 ### by <boris_cn@263.net>
 
-本书托管在[GitHub](https://github.com/borisliu/from-python-to-django)，
-如果有问题请在线[提交](https://github.com/borisliu/from-python-to-django/issues)。
+本书托管在[GitHub](https://gitee.com/borisliu/from-python-to-django)，
+如果有问题请在线[提交](https://gitee.com/borisliu/from-python-to-django/issues)。
 
 ### 废话少说，开始吧！

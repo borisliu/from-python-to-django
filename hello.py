@@ -1,3 +1,4 @@
-print('a', end=' ')
-print('b', end=' ')
-print('c')
+i = 5
+print(i)
+i = i + 5
+print(i)

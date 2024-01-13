@@ -4,7 +4,7 @@
 
 ## 在Windows 10 或 11上安装
 
-在`Microsoft Store`应用商店中搜索`python3`，可以看到不同版本的`Python 3`软件，选择一个高于`Python 3.10`的安装即可，参见下图：
+在`Microsoft Store`应用商店中搜索`python3`，可以看到不同版本的`Python 3`软件，选择一个高于`Python 3.9`的安装即可，参见下图：
 
 ![install-on-win10](install-on-win10.jpg)
 
