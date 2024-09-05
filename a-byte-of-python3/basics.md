@@ -279,7 +279,7 @@ r"Newlines are indicated by \n"
 3. 将示例代码输入到文件中。
 4. 点击右上角的绿色小三角按钮运行程序。
 
-注意：如果你需要指定命令行参数，使用菜单项`查看`->`运行`，点击`创建 launch.json 文件`，然后在弹出的对话框里选择`Python 文件`，就可以创建一个`launch.json`文件。通常情况下文件看其实是这样的：
+注意：如果你需要指定命令行参数，使用菜单项`查看`->`运行`，点击`create a launch.json file`，然后在弹出的对话框里选择`Python File`，就可以创建一个`launch.json`文件。通常情况下文件看其实是这样的：
 
 ```json
 {
@@ -293,8 +293,7 @@ r"Newlines are indicated by \n"
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "console": "integratedTerminal",
-            "justMyCode": true
+            "console": "integratedTerminal"
         }
     ]
 }
@@ -315,7 +314,6 @@ r"Newlines are indicated by \n"
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "justMyCode": true,
             "args": ["-d", "test.py"]
         }
     ]
